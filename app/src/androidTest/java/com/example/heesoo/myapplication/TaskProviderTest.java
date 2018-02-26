@@ -1,5 +1,6 @@
 package com.example.heesoo.myapplication;
 
+import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.ArrayList;
@@ -18,7 +19,12 @@ public class TaskProviderTest extends ActivityInstrumentationTestCase2 {
     private String TaskDescription = "task description";
 
     public void testGetTasks(){
-        TaskProvider taskprovider = new TaskProvider();
+        String username = "provider1";
+        String password = "providerpassword";
+        String emailAddress = "provideremailAddress";
+        String address = "provideraddress";
+        Image profilePicture = null;
+        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address, profilePicture);
 
         Task task = new Task(taskRequester, TaskName, TaskDescription, "Requested");
         taskprovider.MyTasks.add(task);
@@ -27,14 +33,19 @@ public class TaskProviderTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testGetAssignedTasks(){
-        TaskProvider taskprovider = new TaskProvider();
+        String username = "provider1";
+        String password = "providerpassword";
+        String emailAddress = "provideremailAddress";
+        String address = "provideraddress";
+        Image profilePicture = null;
+        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address, profilePicture);
 
         Task task = new Task(taskRequester, TaskName, TaskDescription, "Assigned");
         taskprovider.MyTasks.add(task);
 
-        ArrayList<Task> assignedList = new ArrayList<Task>;
+        ArrayList<Task> assignedList = new ArrayList<Task>();
         for(Task tasks : taskprovider.MyTasks){
-            if (tasks.status = "Assigned"){
+            if (tasks.status.equals("Assigned")){
                 assignedList.add(tasks);
             }
         }
@@ -42,14 +53,19 @@ public class TaskProviderTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testGetBiddedTasks(){
-        TaskProvider taskprovider = new TaskProvider();
+        String username = "provider1";
+        String password = "providerpassword";
+        String emailAddress = "provideremailAddress";
+        String address = "provideraddress";
+        Image profilePicture = null;
+        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address, profilePicture);
 
-        ask task = new Task(taskRequester, TaskName, TaskDescription, "Bidded");
+        Task task = new Task(taskRequester, TaskName, TaskDescription, "Bidded");
         taskprovider.MyTasks.add(task);
 
-        ArrayList<Task> biddedList = new ArrayList<Task>;
+        ArrayList<Task> biddedList = new ArrayList<Task>();
         for(Task tasks : taskprovider.MyTasks) {
-            if (tasks.status = "Bidded") {
+            if (tasks.status.equals("Bidded")) {
                 biddedList.add(tasks);
             }
         }

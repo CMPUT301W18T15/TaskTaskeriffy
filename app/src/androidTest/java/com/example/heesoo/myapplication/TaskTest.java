@@ -17,7 +17,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
     private String taskRequester = "requester1";
     private String TaskName = "task1";
     private String TaskDescription = "task description";
-    private String status = "requested";
+    public String status = "requested";
 
     //private String TaskName = "task1";
     private String TaskDetail = "This is task detail";
@@ -29,15 +29,23 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         Task task = new Task(taskRequester, TaskName, TaskDescription, status);
         Bid bid = new Bid(TaskName, TaskDetail, Description, Status, LowestBid);
         task.addBid(bid);
-        assertTrue(task.bids.contains(bid));
+        assertTrue(task.getBid().contains(bid));
     }
 
     public void testDeleteBid(){
         Task task = new Task(taskRequester, TaskName, TaskDescription, status);
         Bid bid = new Bid(TaskName, TaskDetail, Description, Status, LowestBid);
         task.addBid(bid);
-        assertTrue(task.bids.contains(bid));
+        assertTrue(task.getBid().contains(bid));
         task.deleteBid(bid);
-        assertFalse(task.bids.contains(bid));
+        assertFalse(task.getBid().contains(bid));
     }
+
+    public void testGetBid(){
+        Task task = new Task(taskRequester, TaskName, TaskDescription, status);
+        Bid bid = new Bid(TaskName, TaskDetail, Description, Status, LowestBid);
+        task.addBid(bid);
+        assertEquals(bid, task.getBid());
+    }
+
 }
