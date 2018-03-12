@@ -47,4 +47,12 @@ public class User {
     public void setAddress(String address){
         this.address = address;
     }
+
+    // The profilePicture would be displayed in other views so we need a method to get the image or change it.
+    public Image getPicture(){
+        return profilePicture;
+    }
+    public void setPicture(Image image){
+        this.profilePicture = image;
+    }
 }
