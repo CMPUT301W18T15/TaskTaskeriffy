@@ -7,18 +7,18 @@ import android.media.Image;
  */
 
 public class User {
+
     private String username;
     private String password;
     private String emailAddress;
     private String address;
-    private Image profilePicture;
+    private Image profilePicture; //MAKE DEFAULT PICTURE
 
-    public User(String username, String password, String emailAddress, String address, Image profilePicture){
+    public User(String username, String password, String emailAddress, String address) {
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
         this.address = address;
-        this.profilePicture = profilePicture;
     }
 
     public String getUsername(){
@@ -47,4 +47,6 @@ public class User {
     public void setAddress(String address){
         this.address = address;
     }
+    public Image getProfilePicture() { return profilePicture; }
+    public void setProfilePicture(Image p) { profilePicture = p; }
 }

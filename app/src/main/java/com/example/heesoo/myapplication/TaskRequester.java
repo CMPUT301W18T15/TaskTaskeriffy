@@ -9,33 +9,37 @@ import java.util.ArrayList;
  */
 
 public class TaskRequester extends User {
-    public ArrayList<Task> MyTasks;
+    private TaskList myTasks;
 
-    public TaskRequester(String username, String password, String emailAddress, String address, Image profilePicture){
-        super(username, password, emailAddress, address, profilePicture);
+    public TaskRequester(String Username, String Password, String emailAddress, String Address) {
+        super(Username, Password, emailAddress, Address);
     }
 
-    public ArrayList<Task> getTasks(){
-        return MyTasks;
+    public void addTask(Task t) {
+        myTasks.addTask(t);
     }
 
-    public ArrayList<Task> getAssignedTasks(){
-        ArrayList<Task> assignedList = new ArrayList<Task>();
-        for(Task tasks : MyTasks){
-            if (tasks.status.equals("Assigned")){
-                assignedList.add(tasks);
-            }
-        }
-        return assignedList;
+    public void removeTask(Task t) {
+        myTasks.removeTask(t);
     }
 
-    public ArrayList<Task> getBiddedTasks(){
-        ArrayList<Task> biddedList = new ArrayList<Task>();
-        for(Task tasks : MyTasks) {
-            if (tasks.status.equals("Bidded")) {
-                biddedList.add(tasks);
-            }
-        }
-        return biddedList;
+    public Task getTask(int i) {
+        return myTasks.getTask(i);
+    }
+
+    public TaskList getTasks() {
+        return myTasks;
+    }
+
+    public TaskList getAssignedTasks() {
+        return myTasks.getAssignedTasks();
+    }
+
+    public TaskList getBiddedTasks() {
+        return myTasks.getBiddedTasks();
+    }
+
+    public TaskList getAcceptedTasks() {
+        return myTasks.getAcceptedTasks();
     }
 }
