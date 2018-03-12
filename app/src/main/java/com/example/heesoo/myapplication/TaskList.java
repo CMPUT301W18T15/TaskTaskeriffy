@@ -11,22 +11,27 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList() {
+
         tasks = new ArrayList<Task>();
     }
 
     public void addTask(Task t) {
+
         tasks.add(t);
     }
 
     public void removeTask(Task t) {
+
         tasks.remove(t);
     }
 
     public Task getTask(int i) {
+
         return tasks.get(i);
     }
 
     public TaskList getBiddedTasks() {
+
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -38,6 +43,7 @@ public class TaskList {
     }
 
     public TaskList getAssignedTasks() {
+
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -49,6 +55,7 @@ public class TaskList {
     }
 
     public TaskList getCompletedTasks() {
+
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -60,6 +67,7 @@ public class TaskList {
     }
 
     public TaskList getAcceptedTasks() {
+
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {

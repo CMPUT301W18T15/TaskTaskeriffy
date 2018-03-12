@@ -13,33 +13,41 @@ public class TaskProvider extends User {
 
     public TaskProvider(String Username, String Password, String emailAddress, String Address) {
         super(Username, Password, emailAddress, Address);
+        myTasks = new TaskList();
     }
 
     public void addTask(Task t) {
+
         myTasks.addTask(t);
     }
 
     public void removeTask(Task t) {
+
         myTasks.removeTask(t);
     }
 
     public Task getTask(int i) {
+
         return myTasks.getTask(i);
     }
 
     public TaskList getTasks() {
+
         return myTasks;
     }
 
     public TaskList getAssignedTasks() {
+
         return myTasks.getAssignedTasks();
     }
 
     public TaskList getBiddedTasks() {
+
         return myTasks.getBiddedTasks();
     }
 
     public TaskList getCompletedTasks() {
+
         return myTasks.getCompletedTasks();
     }
 }

@@ -4,40 +4,55 @@ import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import android.media.Image;
+
 
 /**
  * Created by chengze on 2018/2/26.
  */
 
 public class Task {
-    private String taskRequester;
+    private TaskRequester taskRequester;
     private String taskName;
     private String taskDescription;
+    private TaskProvider assignedTaskProvider;
     public String status;
-    private ContactsContract.Contacts.Photo picture;
+    private Image picture;
     private ArrayList<Bid> bids;
-    private Collection<User> assignedProvider;
+    private ArrayList<User> taskBidders;
 
-    public Task(String taskRequester, String taskName, String taskDescription, String status){
+    public Task(TaskRequester taskRequester, String taskName, String taskDescription, String status) {
         this.taskRequester = taskRequester;
+        this.assignedTaskProvider = NULL;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.status = status;
     }
 
-    public void addBid(Bid bid){
+    public void addBid(Bid bid, User taskProvider){
+
         bids.add(bid);
+        taskBidders.add(taskProvider);
     }
 
-    public void deleteBid(Bid bid){
+    public void deleteBid(Bid bid, User taskProvider){
+
         bids.remove(bid);
+        taskBidders.remove(taskProvider);
     }
 
-    public Collection<Bid> getBid(){
+    public ArrayList<Bid> getBids(){
+
         return bids;
     }
 
+    public void acceptBid(TaskProvider taskProvider) {
+
+        assignedTaskProvider = taskProvider;
+    }
+
     public String getStatus(){
+
         return status;
     }
 }

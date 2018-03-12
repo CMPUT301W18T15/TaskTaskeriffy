@@ -21,38 +21,51 @@ public class User {
         this.address = address;
     }
 
-    public String getUsername(){
+    public String getUsername() {
+
         return username;
     }
 
-    public void setUsername(String username){
+    public void setUsername(String username) {
+
         this.username = username;
     }
 
-    public String getPassword(){
+    public String getPassword() {
+
         return password;
     }
+
     public void setPassword(String password){
+
         this.password = password;
     }
+
     public String getEmail(){
+
         return emailAddress;
     }
+
     public void setEmail(String emailAddress){
+
         this.emailAddress = emailAddress;
     }
     public String getAddress(){
+
         return address;
     }
     public void setAddress(String address){
+
         this.address = address;
     }
 
-    // The profilePicture would be displayed in other views so we need a method to get the image or change it.
     public Image getPicture(){
+
         return profilePicture;
     }
+
     public void setPicture(Image image){
+
         this.profilePicture = image;
     }
 }

@@ -24,12 +24,12 @@ public class TaskProviderTest extends ActivityInstrumentationTestCase2 {
         String emailAddress = "provideremailAddress";
         String address = "provideraddress";
         Image profilePicture = null;
-        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address, profilePicture);
+        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address);
 
         Task task = new Task(taskRequester, TaskName, TaskDescription, "Requested");
-        taskprovider.MyTasks.add(task);
+        taskprovider.addTask(task);
 
-        assertEquals(taskprovider.MyTasks, taskprovider.getTasks());
+        assertEquals(taskprovider.getTasks(), taskprovider.getTasks());
     }
 
     public void testGetAssignedTasks(){
@@ -38,10 +38,10 @@ public class TaskProviderTest extends ActivityInstrumentationTestCase2 {
         String emailAddress = "provideremailAddress";
         String address = "provideraddress";
         Image profilePicture = null;
-        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address, profilePicture);
+        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address);
 
         Task task = new Task(taskRequester, TaskName, TaskDescription, "Assigned");
-        taskprovider.MyTasks.add(task);
+        taskprovider.myTask.add(task);
 
         ArrayList<Task> assignedList = new ArrayList<Task>();
         for(Task tasks : taskprovider.MyTasks){
@@ -58,7 +58,7 @@ public class TaskProviderTest extends ActivityInstrumentationTestCase2 {
         String emailAddress = "provideremailAddress";
         String address = "provideraddress";
         Image profilePicture = null;
-        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address, profilePicture);
+        TaskProvider taskprovider = new TaskProvider(username, password, emailAddress, address);
 
         Task task = new Task(taskRequester, TaskName, TaskDescription, "Bidded");
         taskprovider.MyTasks.add(task);
