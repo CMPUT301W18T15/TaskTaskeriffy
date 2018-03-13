@@ -1,71 +1,53 @@
 package com.example.heesoo.myapplication;
 
-import android.media.Image;
+import android.support.annotation.NonNull;
+
+import io.searchbox.annotations.JestId;
 
 /**
- * Created by chengze on 2018/2/25.
+ * Created by heesoopark on 2018-03-12.
  */
 
-public class User {
+public class User implements Comparable<User> {
 
-    private String username;
-    private String password;
-    private String emailAddress;
-    private String address;
-    private Image profilePicture; //MAKE DEFAULT PICTURE
+    private String name, username;
 
-    public User(String username, String password, String emailAddress, String address) {
+    @JestId
+    private String id;
+
+    public User(String name, String username, String id) {
+        this.name = name;
         this.username = username;
-        this.password = password;
-        this.emailAddress = emailAddress;
-        this.address = address;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
-
         return username;
     }
 
     public void setUsername(String username) {
-
         this.username = username;
     }
 
-    public String getPassword() {
 
-        return password;
-    }
-
-    public void setPassword(String password){
-
-        this.password = password;
-    }
-
-    public String getEmail(){
-
-        return emailAddress;
-    }
-
-    public void setEmail(String emailAddress){
-
-        this.emailAddress = emailAddress;
-    }
-    public String getAddress(){
-
-        return address;
-    }
-    public void setAddress(String address){
-
-        this.address = address;
-    }
-
-    public Image getPicture(){
-
-        return profilePicture;
-    }
-
-    public void setPicture(Image image){
-
-        this.profilePicture = image;
+    @Override
+    public int compareTo(@NonNull User user) {
+        return this.getName().toLowerCase().compareTo(user.getName().toLowerCase());
     }
 }
