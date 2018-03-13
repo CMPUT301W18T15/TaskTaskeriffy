@@ -1,4 +1,4 @@
-package com.example.heesoo;
+package com.example.heesoo.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.heesoo.myapplication.ElasticSearchController;
+import com.example.heesoo.myapplication.MainActivity;
+import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.User;
 
 import java.util.concurrent.ExecutionException;
 
@@ -24,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr;
 
-    private UserLoginTask mAuthTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (checkEmpty(nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr)) {
                     if(pwdMatch(passwordStr, repeat_passwordStr)){
-                        //mAuthTask = new UserLoginTask(userStr, nameStr);
+                        User user = new User(nameStr,userStr, emailStr, addressStr);
+                        LoginTask(user);
                         Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     }else{
@@ -80,45 +85,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private class UserLoginTask {
-        //private ElasticSearchController.addUserTask addUserTask = new ElasticSearchController.addUserTask();
-        private ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
-
-        private final String mUsername;
-        private final String mName;
-        private User user;
-
-
-        UserLoginTask(String username, String name) {
-            mUsername = username;
-            mName = name;
-        }
-
-        UserLoginTask(String username){
-            mUsername = username;
-            mName = null;
-        }
-
-        private boolean usernameExists(String username) {
-            User user = null;
-            //addUserTask.execute(username);
-            getUserTask.execute(username);
-
-            try {
-                user = getUserTask.get();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (user == null) {
-                return false;
-            }
-            return true;
-        }
-
-
-
-
+    private void LoginTask(User user) {
+        ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
+        addUserTask.execute(user);
     }
+
 
 
     private boolean pwdMatch(String pwd, String repeat_pwd) {

@@ -10,15 +10,16 @@ import io.searchbox.annotations.JestId;
 
 public class User implements Comparable<User> {
 
-    private String name, username;
+    private String name, username, email, address;
 
     @JestId
     private String id;
 
-    public User(String name, String username, String id) {
+    public User(String name, String username, String email, String address) {
         this.name = name;
         this.username = username;
-        this.id = id;
+        this.email = email;
+        this.address = address;
     }
 
     public String getId() {
