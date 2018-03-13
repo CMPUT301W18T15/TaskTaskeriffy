@@ -14,7 +14,6 @@ public class User implements Comparable<User> {
     private String name, username, email, address;
     Image picture;
 
-
     @JestId
     private String id;
 

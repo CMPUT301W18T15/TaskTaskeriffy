@@ -1,6 +1,8 @@
 package com.example.heesoo.myapplication;
 
 import android.app.ActivityManager;
+import io.searchbox.annotations.JestId;
+
 
 /**
  * Created by chengze on 2018/2/26.
@@ -12,6 +14,8 @@ public class Bid {
     private String description;
     private String status;
     private Float bidPrice;
+    @JestId
+    private String id;
 
     public Bid(String TaskName, String TaskDetail, String Description, String Status, Float BidPrice) {
         this.taskName = TaskName;
@@ -49,6 +53,15 @@ public class Bid {
     public void setStatus(String status) {
 
         this.status = status;
+    }
+    public String getId(){
+        
+        return id;
+    }
+    
+    public void setId(String id) {
+        
+        this.id = id;
     }
 
     public String getTaskDetail(){
