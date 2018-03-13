@@ -25,9 +25,14 @@ public class TaskList {
         tasks.remove(t);
     }
 
-    public Task getTask(int i) {
+    public Task getTask(Task t) {
 
-        return tasks.get(i);
+        int index = tasks.indexOf(t);
+
+        if(index == -1) {
+            return null;
+        }
+        return tasks.get(index);
     }
 
     public TaskList getBiddedTasks() {

@@ -23,10 +23,11 @@ public class Task {
 
     public Task(TaskRequester taskRequester, String taskName, String taskDescription, String status) {
         this.taskRequester = taskRequester;
-        this.assignedTaskProvider = NULL;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.status = status;
+        this.bids = new ArrayList<Bid>();
+        this.taskBidders = new ArrayList<User>();
     }
 
     public void addBid(Bid bid, User taskProvider){

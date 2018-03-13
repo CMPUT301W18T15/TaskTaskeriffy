@@ -20,56 +20,56 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     private Image newPicture;
 
     public void testGetUsername(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         assertEquals(username, user.getUsername());
     }
 
     public void testSetUsername(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         user.setUsername("newUserName");
         assertEquals("newUserName", user.getUsername());
     }
 
     public void testGetPassword(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         assertEquals(password, user.getPassword());
     }
 
     public void testSetPassword(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         user.setPassword("newPassword");
         assertEquals("newPassword", user.getPassword());
     }
 
     public void testGetEmail(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         assertEquals(emailAddress, user.getEmail());
     }
 
     public void testSetEmail(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         user.setEmail("newemail@example.com");
         assertEquals("newemail@example.com", user.getEmail());
     }
 
     public void testGetAddress(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         assertEquals(address, user.getAddress());
     }
 
     public void testSetAddress(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         user.setAddress("newAddress");
         assertEquals("newAddress", user.getAddress());
     }
 
     public void testGetPicture(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         assertEquals(profilePicture, user.getPicture());
     }
 
     public void testSetPicture(){
-        User user = new User(username, password, emailAddress, address, profilePicture);
+        User user = new User(username, password, emailAddress, address);
         user.setPicture(newPicture);
         assertEquals(newPicture, user.getPicture());
     }

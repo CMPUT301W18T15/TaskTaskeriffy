@@ -26,9 +26,9 @@ public class TaskRequester extends User {
         myTasks.removeTask(t);
     }
 
-    public Task getTask(int i) {
+    public Task getTask(Task t) {
 
-        return myTasks.getTask(i);
+        return myTasks.getTask(t);
     }
 
     public TaskList getTasks() {

@@ -15,61 +15,29 @@ public class TaskRequesterTest extends ActivityInstrumentationTestCase2 {
         super(TaskRequester.class);
     }
 
-    private String taskRequester = "requester1";
+    TaskRequester tp = new TaskRequester("username1", "password", "emailaddress@email.com", "Home Address");
     private String TaskName = "task1";
-    private String TaskDescription = "task description";
+    private String Description = "This is task description";
+    private String Status = "Requested";
+    Task t = new Task(tp, TaskName, Description, Status);
 
-    public void testGetTasks(){
-        String username = "provider1";
-        String password = "providerpassword";
-        String emailAddress = "provideremailAddress";
-        String address = "provideraddress";
-        Image profilePicture = null;
-        TaskRequester taskrequester = new TaskRequester(username, password, emailAddress, address, profilePicture);
+    TaskRequester tp2 = new TaskRequester("username2", "password2", "emailaddress@email.com2", "Home Address2");
+    private String TaskName2 = "task2";
+    private String Description2 = "This is task description2";
+    private String Status2 = "Requested2";
+    Task t2 = new Task(tp2, TaskName2, Description2, Status2);
 
-        Task task = new Task(taskRequester, TaskName, TaskDescription, "Requested");
-        taskrequester.MyTasks.add(task);
+    public void testAddTask(){
 
-        assertEquals(taskrequester.MyTasks, taskrequester.getTasks());
+        tp.addTask(t);
+        assertEquals(tp.getTask(t), t);
+
     }
 
-    public void testGetAssignedTasks(){
-        String username = "provider1";
-        String password = "providerpassword";
-        String emailAddress = "provideremailAddress";
-        String address = "provideraddress";
-        Image profilePicture = null;
-        TaskRequester taskrequester = new TaskRequester(username, password, emailAddress, address, profilePicture);
+    public void testRemoveTask() {
 
-        Task task = new Task(taskRequester, TaskName, TaskDescription, "Assigned");
-        taskrequester.MyTasks.add(task);
-
-        ArrayList<Task> assignedList = new ArrayList<Task>();
-        for(Task tasks : taskrequester.MyTasks){
-            if (tasks.status.equals("Assigned")){
-                assignedList.add(tasks);
-            }
-        }
-        assertEquals(assignedList, taskrequester.getAssignedTasks());
-    }
-
-    public void testGetBiddedTasks(){
-        String username = "provider1";
-        String password = "providerpassword";
-        String emailAddress = "provideremailAddress";
-        String address = "provideraddress";
-        Image profilePicture = null;
-        TaskRequester taskrequester = new TaskRequester(username, password, emailAddress, address, profilePicture);
-
-        Task task = new Task(taskRequester, TaskName, TaskDescription, "Bidded");
-        taskrequester.MyTasks.add(task);
-
-        ArrayList<Task> biddedList = new ArrayList<Task>();
-        for(Task tasks : taskrequester.MyTasks) {
-            if (tasks.status.equals("Bidded")) {
-                biddedList.add(tasks);
-            }
-        }
-        assertEquals(biddedList, taskrequester.getBiddedTasks());
+        tp.addTask(t);
+        tp.removeTask(t);
+        assertNull(tp.getTask(t));
     }
 }
