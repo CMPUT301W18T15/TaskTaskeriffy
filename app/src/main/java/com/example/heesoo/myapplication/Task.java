@@ -5,6 +5,8 @@ import android.provider.ContactsContract;
 import java.util.ArrayList;
 import java.util.Collection;
 import android.media.Image;
+import io.searchbox.annotations.JestId;
+
 
 
 /**
@@ -16,7 +18,9 @@ public class Task {
     private String taskName;
     private String taskDescription;
     private TaskProvider assignedTaskProvider;
-    public String status;
+    private String status;
+    @JestId
+    private String Id;
     private Image picture;
     private ArrayList<Bid> bids;
     private ArrayList<User> taskBidders;
@@ -55,5 +59,14 @@ public class Task {
     public String getStatus(){
 
         return status;
+    }
+    public String getId(){
+        
+        return id;
+    }
+    
+    public void setId(String id) {
+        
+        this.id = id;
     }
 }
