@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (checkEmpty(nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr)) {
                     if(pwdMatch(passwordStr, repeat_passwordStr)){
                         User user = new User(nameStr,userStr, emailStr, addressStr);
-                        LoginTask(user);
+                        RegisterTask(user);
                         Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     }else{
@@ -85,9 +85,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void LoginTask(User user) {
+    private void RegisterTask(User user) {
+        MyApplication.setCurrentUser(user.getUsername());
         ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
         addUserTask.execute(user);
+
     }
 
 

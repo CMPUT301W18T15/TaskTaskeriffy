@@ -14,4 +14,8 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
 
+    <string name="request_a_task">Request A Task</string>
+    <string name="provide_a_task">Provide A Task</string>
+
+
 </resources>
