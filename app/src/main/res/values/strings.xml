@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">TaskTaskeriffy</string>
+    <string name="app_name">heesoo</string>
+    <string name="register_text">Register New User</string>
+    <string name="enter_name">Please Enter your name</string>
+    <string name="enter_username">Please Enter User Name</string>
+    <string name="enter_password">Please Enter Password</string>
+    <string name="enter_repeat_password">Please re-enter Password</string>
+    <string name="enter_email">Please Enter Email address</string>
+    <string name="enter_address">Please enter Address</string>
+    <string name="register_submit">Submit</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
 </resources>
