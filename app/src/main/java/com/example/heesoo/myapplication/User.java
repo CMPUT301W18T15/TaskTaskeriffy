@@ -1,5 +1,6 @@
 package com.example.heesoo.myapplication;
 
+import android.media.Image;
 import android.support.annotation.NonNull;
 
 import io.searchbox.annotations.JestId;
@@ -10,15 +11,18 @@ import io.searchbox.annotations.JestId;
 
 public class User implements Comparable<User> {
 
-    private String name, username;
+    private String name, username, email, address;
+    Image picture;
+
 
     @JestId
     private String id;
 
-    public User(String name, String username, String id) {
+    public User(String name, String username, String email, String address) {
         this.name = name;
         this.username = username;
-        this.id = id;
+        this.email = email;
+        this.address = address;
     }
 
     public String getId() {
@@ -37,13 +41,32 @@ public class User implements Comparable<User> {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAddress() {
+        return address;
     }
+
+    public void setAddress(String ad) {
+        this.address = ad;
+    }
+
+    public String getEmail() {
+        return address;
+    }
+
+    public void setEmail(String ad) {
+        this.address = ad;
+    }
+
+
+    public String getUsername() {
+        return username; }
 
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public Image getPicture() { return picture; }
+    public void setPicture(Image picture) { this.picture = picture; }
 
 
     @Override
