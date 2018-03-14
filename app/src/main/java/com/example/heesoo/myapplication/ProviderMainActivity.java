@@ -24,7 +24,7 @@ public class ProviderMainActivity extends AppCompatActivity {
     private TextView taskLabel;
     private ArrayList<Task> taskList;
     private ArrayAdapter<Task> taskAdapter;
-    private ListView availablelist;
+    private ListView clickableList;
 
 
     @Override
@@ -88,8 +88,8 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // when click on list
-        availablelist = (ListView) findViewById(R.id.provider_assigned_task_list);
-//        availablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        clickableList = (ListView) findViewById(R.id.provider_assigned_task_list);
+//        clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
 //                Intent taskinfo = new Intent(ProviderMainActivity.this, ProviderShowTaskDetail.class);
@@ -98,11 +98,22 @@ public class ProviderMainActivity extends AppCompatActivity {
 //                startActivity(taskinfo);
 //            }
 //        });
-
-
-
-
-
-
     }
+
+    @Override
+    protected void onStart() {
+
+//        super.onStart();
+//        String[] providerAssigendTasksName = //@todo need to pull all the tasks assigned this user
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_list_item_1, providerAssigendTasksName);
+//        clickableList.setAdapter(adapter);
+    }
+
+
+
+
+
+
 }
