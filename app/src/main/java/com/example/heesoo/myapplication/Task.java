@@ -6,22 +6,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import android.media.Image;
 
+import io.searchbox.annotations.JestId;
+
 
 /**
  * Created by chengze on 2018/2/26.
  */
 
 public class Task {
-    private TaskRequester taskRequester;
+    private String taskRequester; // Changing to just attach the username for making MainActivity getCurrentUser work in the constructor for task in ElasticSearchTaskController.
     private String taskName;
     private String taskDescription;
-    private TaskProvider assignedTaskProvider;
-    public String status;
+    private String assignedTaskProvider;
+    private String status;
+    @JestId
+    private String id;
     private Image picture;
     private ArrayList<Bid> bids;
     private ArrayList<User> taskBidders;
 
-    public Task(TaskRequester taskRequester, String taskName, String taskDescription, String status) {
+    public Task(String taskRequester, String taskName, String taskDescription, String status) {
         this.taskRequester = taskRequester;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -52,6 +56,13 @@ public class Task {
     public void setStatus(String status){
         this.status = status;
     }
+    public String getId(){
+        return id;
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
 
     public ArrayList<Bid> getBid(){
         return bids;
@@ -71,7 +82,7 @@ public class Task {
         return bids;
     }
 
-    public void acceptBid(TaskProvider taskProvider) {
+    public void acceptBid(String taskProvider) {
         assignedTaskProvider = taskProvider;
     }
 
