@@ -31,7 +31,7 @@ public class ChooseModeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyApplication.setCurrentMode("Requestor");
-                //startActivity(new Intent(ChooseModeActivity.this, ViewRequestorTasksListMainActivity.class ));
+                startActivity(new Intent(ChooseModeActivity.this, RequesterMainActivity.class ));
             }
         });
 
@@ -40,7 +40,7 @@ public class ChooseModeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyApplication.setCurrentMode("Provider");
-                //startActivity(new Intent(ChooseModeActivity.this, ViewProviderTasksListMainActivity.class));
+                startActivity(new Intent(ChooseModeActivity.this, ProviderMainActivity.class));
             }
         });
 

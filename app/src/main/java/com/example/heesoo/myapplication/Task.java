@@ -17,7 +17,6 @@ public class Task {
     private String taskDescription;
     private TaskProvider assignedTaskProvider;
     public String status;
-    private Image picture;
     private ArrayList<Bid> bids;
     private ArrayList<User> taskBidders;
 
