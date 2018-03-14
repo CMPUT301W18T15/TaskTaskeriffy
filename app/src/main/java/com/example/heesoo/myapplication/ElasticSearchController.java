@@ -38,7 +38,10 @@ public class ElasticSearchController {
             for (User user : users) {
 
                 String source = "{ \"username\" : \"" + user.getUsername() + "\"," +
-                        " \"password\" : \"" + user.getPassword() + "\" }";
+                        " \"password\" : \"" + user.getPassword() + "\", " +
+                        " \"email\" : \"" + user.getEmailAddress() + "\", " +
+                        " \"phonenumber\" : \"" + user.getPhoneNumber() + "\"}";
+
                 Log.d("DATABASE SAVING", source);
                 Gson gson = new Gson();
                 String serializedUser = gson.toJson(user);
@@ -46,6 +49,7 @@ public class ElasticSearchController {
                 try {
                     Log.d("DATABASE SAVING" ,"Before execution");
                     DocumentResult result = jestClient.execute(index);
+                    Log.d("EXECUTE_RESULT", ""+result);
                     Log.d("DATABASE SAVING" ,"After execution");
                     if (result.isSucceeded()) {
                         user.setId(result.getId());
@@ -73,21 +77,16 @@ public class ElasticSearchController {
 
             User user = null;
 
-            String query = "{\n" +
-                    "           \"query\" : {\n" +
-                    "               \"constant_score\" : {\n" +
-                    "                   \"filter\" : {\n" +
-                    "                       \"terms\" : {\"username\": \"" + parameters[0] + "\"}\n" +
-                    "                   }\n" +
-                    "               }\n" +
-                    "           }\n" +
-                    "}";
 
-            Log.d("ESC.GetUserTask", query);
+            //TODO query not working
+            String query = "{ \"query\": {" +
+                    " \"bool\": {" +
+                    "\"must\": [ " +
+                    "{\"match\": {\"username\": \"" + parameters[0] + "\"}}}}";
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t15")
-                    .addType("User")
+                    .addType("user")
                     .build();
 
             try {
@@ -96,11 +95,11 @@ public class ElasticSearchController {
                 if (result.isSucceeded()) {
                     if (hits.get("total").getAsInt() == 1) {
                         JsonObject userInfo = hits.getAsJsonArray("hits").get(0).getAsJsonObject();
-                        JsonObject userInfoSouce = userInfo.get("_source").getAsJsonObject();
+                        JsonObject userInfoSource = userInfo.get("_source").getAsJsonObject();
 
                         String id = userInfo.get("_id").getAsString();
 
-                        user = new Gson().fromJson(userInfoSouce, User.class);
+                        user = new Gson().fromJson(userInfoSource, User.class);
                         user.setId(id);
 
                         Log.i("ESC.GetUserTask", "Unique user was found.");

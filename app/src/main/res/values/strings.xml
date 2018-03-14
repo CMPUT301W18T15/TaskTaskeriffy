@@ -8,6 +8,7 @@
     <string name="enter_email">Please Enter Email address</string>
     <string name="enter_address">Please enter Address</string>
     <string name="register_submit">Submit</string>
+    <string name="enter_phone">Enter Phonenumber</string>
 
     <string name="username">Username</string>
     <string name="password">Password</string>

@@ -7,15 +7,31 @@
     tools:context="com.example.heesoo.myapplication.RegisterActivity">
 
     <EditText
+        android:id="@+id/enter_phone"
+        android:layout_width="320dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/enter_phone"
+        android:inputType="phone"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_address" />
+
+    <EditText
         android:id="@+id/enter_address"
         android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_address"
         android:inputType="textPersonName"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_email" />
@@ -23,13 +39,14 @@
     <EditText
         android:id="@+id/enter_email"
         android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_email"
         android:inputType="textPersonName"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_repeat_password" />
@@ -37,13 +54,14 @@
     <EditText
         android:id="@+id/enter_password"
         android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_password"
         android:inputType="textPassword"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_username" />
@@ -51,13 +69,14 @@
     <EditText
         android:id="@+id/enter_username"
         android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_username"
         android:inputType="textPersonName"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_name" />
@@ -65,13 +84,14 @@
     <EditText
         android:id="@+id/enter_name"
         android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="27dp"
         android:ems="10"
         android:hint="@string/enter_name"
         android:inputType="textPersonName"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_text" />
@@ -79,13 +99,14 @@
     <EditText
         android:id="@+id/enter_repeat_password"
         android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_repeat_password"
         android:inputType="textPassword"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_password" />
@@ -109,11 +130,11 @@
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="148dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="65dp"
         android:text="@string/register_submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_address" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_phone" />
 
 </android.support.constraint.ConstraintLayout>

@@ -45,6 +45,11 @@ public class Task {
         return taskDescription;
     }
 
+    public String getTaskRequester() {return taskRequester; }
+
+    public void setTaskRequester() {this.taskRequester = taskRequester; }
+
+
     public void setTaskDescription(String taskDescription){
         this.taskDescription = taskDescription;
     }

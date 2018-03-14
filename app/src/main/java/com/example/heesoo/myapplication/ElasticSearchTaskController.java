@@ -30,6 +30,13 @@ public class ElasticSearchTaskController {
             verifySettings();
 
             for (Task task : tasks) {
+
+                String source = "{ \"requester\" : \"" + task.getTaskRequester() + "\"," +
+                        " \"taskname\" : \"" + task.getTaskName()+ "\", " +
+                        " \"description\" : \"" + task.getTaskDescription() + "\", " +
+                        " \"status\" : \"" + task.getStatus() + "\"}";
+
+
                 Index index = new Index.Builder(task).index("cmput301w18t15")
                         .type("task")
                         .build();
@@ -50,7 +57,6 @@ public class ElasticSearchTaskController {
             return null;
         }
     }
-
 
     public static void verifySettings() {
         if (client == null) {

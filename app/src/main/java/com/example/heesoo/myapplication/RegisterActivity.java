@@ -24,11 +24,12 @@ import java.util.concurrent.ExecutionException;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText nameTxt, userTxt, passwordTxt, repeat_passwordTxt, emailTxt, addressTxt;
+    private EditText nameTxt, userTxt, passwordTxt, repeat_passwordTxt, emailTxt, phoneTxt;
 
     private Button submit_button;
+    private User tmp_user, user;
 
-    private String nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr;
+    private String nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, phoneStr;
 
 
     @Override
@@ -42,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordTxt = findViewById(R.id.enter_password);
         repeat_passwordTxt = findViewById(R.id.enter_repeat_password);
         emailTxt = findViewById(R.id.enter_email);
-        addressTxt = findViewById(R.id.enter_address);
+        phoneTxt = findViewById(R.id.enter_phone);
 
         init();
 
@@ -59,11 +60,11 @@ public class RegisterActivity extends AppCompatActivity {
                 passwordStr = passwordTxt.getText().toString();
                 repeat_passwordStr = repeat_passwordTxt.getText().toString();
                 emailStr = emailTxt.getText().toString();
-                addressStr = addressTxt.getText().toString();
+                phoneStr = phoneTxt.getText().toString();
 
-                if (checkEmpty(nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr)) {
+                if (checkEmpty(nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, phoneStr)) {
                     if(pwdMatch(passwordStr, repeat_passwordStr)){
-                        User user = new User(nameStr,userStr, emailStr, addressStr);
+                        User user = new User(userStr, passwordStr, emailStr, phoneStr);
                         RegisterTask(user);
                         Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
@@ -80,22 +81,56 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d("password:", passwordStr);
                 Log.d("repeat:", repeat_passwordStr);
                 Log.d("email:", emailStr);
-                Log.d("address:", addressStr);
+                Log.d("phonenumber:", phoneStr);
             }
         });
 
     }
 
+    private void LoginTask(User user) {
+        ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+
+        getUserTask.execute(userStr);
+
+        try{
+            tmp_user = getUserTask.get();
+        }catch(Exception e) {
+            Log.i("","");
+        }
+
+        if (tmp_user.equals(userStr)) {
+
+        }
+
+
+
+    }
+
     private void RegisterTask(User user) {
+
         MyApplication.setCurrentUser(user.getUsername());
         ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
-        addUserTask.execute(user);
+        ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+
+        getUserTask.execute(user.getUsername());
+        try {
+            tmp_user = getUserTask.get();
+            Log.d("TESTING", ""+ tmp_user);
+        }catch(Exception e){
+            Log.i("","");
+        }
+        if (tmp_user == null){
+            addUserTask.execute(user);
+        } else {
+            Toast.makeText(getApplicationContext(), "Username Exists", Toast.LENGTH_SHORT).show();
+        }
+
+
+
         //ElasticSearchController EC = new ElasticSearchController();
         //EC.AddUser(user);
 
     }
-
-
 
     private boolean pwdMatch(String pwd, String repeat_pwd) {
         return pwd.equals(repeat_pwd);
