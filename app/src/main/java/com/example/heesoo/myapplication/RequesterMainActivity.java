@@ -35,18 +35,18 @@ public class RequesterMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_requester_main);
 
         //add new task button
-        Button addNewTaskButton = (Button) findViewById(R.id.add_new_task_button);
-//        addNewTaskButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(RequesterMainActivity.this, AddTaskActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        addNewTaskButton = (Button) findViewById(R.id.add_new_task_button);
+        addNewTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RequesterMainActivity.this, AddTaskActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // show my Account Button
-        Button myAccountButton = (Button) findViewById(R.id.my_account_button);
+        myAccountButton = (Button) findViewById(R.id.my_account_button);
         myAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +60,8 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         // view requester's bidded button
-        Button showBidedButton = (Button) findViewById(R.id.show_bidded_button);
-//        showBidedButton.setOnClickListener(new View.OnClickListener() {
+//        showBiddedButton = (Button) findViewById(R.id.show_bidded_button);
+//        showBiddedButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                //setResult(RESULT_OK);
@@ -72,7 +72,7 @@ public class RequesterMainActivity extends AppCompatActivity {
 //        });
 
         // requestor show assigned task button
-        Button showAssignedTaskButton = (Button) findViewById(R.id.show_assigned_task_button);
+//        showAssignedTaskButton = (Button) findViewById(R.id.show_assigned_task_button);
 //        showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -86,7 +86,7 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         // when click on list
-        clickablelist = (ListView) findViewById(R.id.provider_assigned_task_list);
+        //  clickablelist = (ListView) findViewById(R.id.provider_assigned_task_list);
 //        clickablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {

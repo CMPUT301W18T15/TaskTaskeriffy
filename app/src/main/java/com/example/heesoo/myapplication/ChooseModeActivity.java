@@ -14,6 +14,9 @@ import android.widget.Button;
 public class ChooseModeActivity extends AppCompatActivity {
 
     private String testing;
+    private Button request_button;
+    private Button provide_button;
+
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,7 +29,7 @@ public class ChooseModeActivity extends AppCompatActivity {
 
         Log.d("TESTING USER", testing);
 
-        Button request_button = findViewById(R.id.request_mode_button);
+        request_button = findViewById(R.id.request_mode_button);
         request_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,7 +38,7 @@ public class ChooseModeActivity extends AppCompatActivity {
             }
         });
 
-        Button provide_button = findViewById(R.id.provide_mode_button);
+        provide_button = findViewById(R.id.provide_mode_button);
         provide_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

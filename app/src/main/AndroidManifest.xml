@@ -20,5 +20,12 @@
         </activity>
     <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".ChooseModeActivity"></activity>
+        <activity android:name=".ProviderMainActivity"></activity>
+        <activity android:name=".RequesterMainActivity"></activity>
+        <activity android:name=".ViewProfileActivity"></activity>
+        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".AddTaskActivity"></activity>
+
+
     </application>
 </manifest>

@@ -4,21 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.heesoo.myapplication.ProviderMainActivity">
-
-
-
+    tools:context="com.example.heesoo.myapplication.RequesterMainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/provider_task_list"
+            android:id="@+id/requester_task_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="Provider: My Assigned Task List"
+            android:text="Requester: My Posted Task List"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
@@ -33,26 +30,12 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
-            <Button
-                android:id="@+id/my_history_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="My History" />
-
-            <Button
-                android:id="@+id/my_account_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="My Account" />
-
 
         </LinearLayout>
 
 
         <ListView
-            android:id="@+id/provider_assigned_task_list"
+            android:id="@+id/requester_assigned_task_list"
             android:layout_width="match_parent"
             android:layout_height="331dp">
 
@@ -65,25 +48,32 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/find_nearby_task_button"
+                android:id="@+id/add_new_task_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Find Nearby task" />
+                android:text="Add new task" />
 
             <Button
-                android:id="@+id/view_bidded_list_button"
+                android:id="@+id/show_bidded_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="View bidded list" />
+                android:text="show bidded" />
 
             <Button
-                android:id="@+id/search_new_task_button"
+                android:id="@+id/show_assigned_task_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="search new task" />
+                android:text="show assigned task" />
+
+            <Button
+                android:id="@+id/my_account_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="My Account" />
         </LinearLayout>
 
     </LinearLayout>
