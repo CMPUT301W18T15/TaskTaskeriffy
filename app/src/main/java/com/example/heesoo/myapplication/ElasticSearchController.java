@@ -42,7 +42,7 @@ public class ElasticSearchController {
                 Log.d("DATABASE SAVING", source);
                 Gson gson = new Gson();
                 String serializedUser = gson.toJson(user);
-                Index index = new Index.Builder(user).index("cmput301w18t15").type("user").build();
+                Index index = new Index.Builder(source).index("cmput301w18t15").type("user").build();
                 try {
                     Log.d("DATABASE SAVING" ,"Before execution");
                     DocumentResult result = jestClient.execute(index);
@@ -74,20 +74,20 @@ public class ElasticSearchController {
             User user = null;
 
             String query = "{\n" +
-                    "           \"query\" : {\n" +
-                    "               \"constant_score\" : {\n" +
-                    "                   \"filter\" : {\n" +
-                    "                       \"terms\" : {\"username\": \"" + parameters[0] + "\"}\n" +
-                    "                   }\n" +
-                    "               }\n" +
-                    "           }\n" +
+                    "    \"query\" : {\n" +
+                    "       \"constant_score\" : {\n" +
+                    "           \"filter\" : {\n" +
+                    "               \"term\" : {\"name\": \"" + parameters[0] + "\"}\n" +
+                    "             }\n" +
+                    "         }\n" +
+                    "    }\n" +
                     "}";
 
             Log.d("ESC.GetUserTask", query);
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t15")
-                    .addType("User")
+                    .addType("user")
                     .build();
 
             try {
@@ -96,11 +96,11 @@ public class ElasticSearchController {
                 if (result.isSucceeded()) {
                     if (hits.get("total").getAsInt() == 1) {
                         JsonObject userInfo = hits.getAsJsonArray("hits").get(0).getAsJsonObject();
-                        JsonObject userInfoSouce = userInfo.get("_source").getAsJsonObject();
+                        JsonObject userInfoSource = userInfo.get("_source").getAsJsonObject();
 
                         String id = userInfo.get("_id").getAsString();
 
-                        user = new Gson().fromJson(userInfoSouce, User.class);
+                        user = new Gson().fromJson(userInfoSource, User.class);
                         user.setId(id);
 
                         Log.i("ESC.GetUserTask", "Unique user was found.");

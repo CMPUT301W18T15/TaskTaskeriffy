@@ -30,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (checkEmpty(nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr)) {
                     if(pwdMatch(passwordStr, repeat_passwordStr)){
                         User user = new User(nameStr,userStr, emailStr, addressStr);
+
                         RegisterTask(user);
                         Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
@@ -89,9 +89,11 @@ public class RegisterActivity extends AppCompatActivity {
     private void RegisterTask(User user) {
         MyApplication.setCurrentUser(user.getUsername());
         ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
+        ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+
         addUserTask.execute(user);
-        //ElasticSearchController EC = new ElasticSearchController();
-        //EC.AddUser(user);
+        getUserTask.execute(user.getName());
+
 
     }
 
