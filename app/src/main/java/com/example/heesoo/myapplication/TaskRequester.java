@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class TaskRequester extends User {
     private TaskList myTasks;
 
-    public TaskRequester(String Username, String Password, String emailAddress, String Address) {
-        super(Username, Password, emailAddress, Address);
+    public TaskRequester(String Username, String Password, String emailAddress, String phoneNumber) {
+        super(Username, Password, emailAddress, phoneNumber);
         myTasks = new TaskList();
     }
 

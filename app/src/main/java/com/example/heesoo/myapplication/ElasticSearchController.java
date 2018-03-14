@@ -37,8 +37,8 @@ public class ElasticSearchController {
 
             for (User user : users) {
 
-                String source = "{ \"name\" : \"" + user.getName() + "\"," +
-                        " \"username\" : \"" + user.getUsername() + "\" }";
+                String source = "{ \"username\" : \"" + user.getUsername() + "\"," +
+                        " \"password\" : \"" + user.getPassword() + "\" }";
                 Log.d("DATABASE SAVING", source);
                 Gson gson = new Gson();
                 String serializedUser = gson.toJson(user);

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class TaskProvider extends User {
     private TaskList myTasks;
 
-    public TaskProvider(String Username, String Password, String emailAddress, String Address) {
-        super(Username, Password, emailAddress, Address);
+    public TaskProvider(String Username, String Password, String emailAddress, String phoneNumber) {
+        super(Username, Password, emailAddress, phoneNumber);
         myTasks = new TaskList();
     }
 
