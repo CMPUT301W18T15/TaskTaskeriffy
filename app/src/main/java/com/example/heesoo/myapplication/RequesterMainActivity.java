@@ -34,13 +34,13 @@ public class RequesterMainActivity extends AppCompatActivity {
 
         //add new task button
         Button addNewTaskButton = (Button) findViewById(R.id.add_new_task_button);
-        addNewTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RequesterMainActivity.this, AddTaskActivity.class);
-                startActivity(intent);
-            }
-        });
+//        addNewTaskButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(RequesterMainActivity.this, AddTaskActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         // show my Account Button
@@ -59,41 +59,41 @@ public class RequesterMainActivity extends AppCompatActivity {
 
         // view requester's bidded button
         Button showBidedButton = (Button) findViewById(R.id.show_bidded_button);
-        showBidedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //setResult(RESULT_OK);
-                Intent intent = new Intent(RequesterMainActivity.this, ViewRequesterBiddedTasksListActivity.class);
-                startActivity(intent);
-            }
-
-        });
+//        showBidedButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //setResult(RESULT_OK);
+//                Intent intent = new Intent(RequesterMainActivity.this, ViewRequesterBiddedTasksListActivity.class);
+//                startActivity(intent);
+//            }
+//
+//        });
 
         // requestor show assigned task button
         Button showAssignedTaskButton = (Button) findViewById(R.id.show_assigned_task_button);
-        showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //setResult(RESULT_OK);
-                Intent intent = new Intent(RequesterMainActivity.this, ViewRequestorAssignedTasksListActivity.class);
-                startActivity(intent);
-            }
-
-        });
+//        showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //setResult(RESULT_OK);
+//                Intent intent = new Intent(RequesterMainActivity.this, ViewRequestorAssignedTasksListActivity.class);
+//                startActivity(intent);
+//            }
+//
+//        });
 
 
 
         // when click on list
         clickablelist = (ListView) findViewById(R.id.provider_assigned_task_list);
-        clickablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
-                Task task = taskList.get(index);
-                taskinfo.putExtra("task", (Serializable)task);
-                startActivity(taskinfo);
-            }
-        });
+//        clickablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
+//                Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
+//                Task task = taskList.get(index);
+//                taskinfo.putExtra("task", (Serializable)task);
+//                startActivity(taskinfo);
+//            }
+//        });
 
 
 
