@@ -12,7 +12,7 @@ import io.searchbox.annotations.JestId;
 public class User implements Comparable<User> {
 
     private String name, username, email, address;
-    Image picture;
+    transient Image picture;
 
     @JestId
     private String id;

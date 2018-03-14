@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         edit_username = (EditText) findViewById(R.id.login_username);
-        login_username_str = edit_username.getText().toString();
 
         Button register_button = (Button) findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                login_username_str = edit_username.getText().toString();
                 MyApplication.setCurrentUser(login_username_str);
                 startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
             }

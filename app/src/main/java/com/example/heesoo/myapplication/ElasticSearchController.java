@@ -40,10 +40,9 @@ public class ElasticSearchController {
                 String source = "{ \"name\" : \"" + user.getName() + "\"," +
                         " \"username\" : \"" + user.getUsername() + "\" }";
                 Log.d("DATABASE SAVING", source);
-
+                Gson gson = new Gson();
+                String serializedUser = gson.toJson(user);
                 Index index = new Index.Builder(user).index("cmput301w18t15").type("user").build();
-//                index.
-//                Log.d("Database saving", index.());
                 try {
                     Log.d("DATABASE SAVING" ,"Before execution");
                     DocumentResult result = jestClient.execute(index);
