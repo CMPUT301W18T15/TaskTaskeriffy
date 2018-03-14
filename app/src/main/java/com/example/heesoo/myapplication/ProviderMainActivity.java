@@ -1,5 +1,7 @@
 package com.example.heesoo.myapplication;
 
+// Harry
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -103,8 +105,8 @@ public class ProviderMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
 
-//        super.onStart();
-//        String[] providerAssigendTasksName = //@todo need to pull all the tasks assigned this user
+        super.onStart();
+//        String[] providerAssigendTasksName = //@todo need to pull all the tasks assigned to this provider
 //
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 //                android.R.layout.simple_list_item_1, providerAssigendTasksName);

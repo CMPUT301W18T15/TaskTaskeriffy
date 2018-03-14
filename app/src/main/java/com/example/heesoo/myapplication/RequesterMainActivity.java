@@ -1,5 +1,7 @@
 package com.example.heesoo.myapplication;
 
+// Harry
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -96,6 +98,15 @@ public class RequesterMainActivity extends AppCompatActivity {
 //        });
 
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        String[] requesterPostTasksNames = //@todo need to pull all the tasks posted by this requester
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_list_item_1, requesterPostTasksNames);
+//        clickableList.setAdapter(adapter);
     }
 }
