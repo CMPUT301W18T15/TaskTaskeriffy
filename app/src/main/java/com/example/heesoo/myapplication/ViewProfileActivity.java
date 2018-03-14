@@ -23,10 +23,10 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_profile);
-        usernameView = (TextView) findViewById(R.id.UsernameView);
-        EmailAddressView = (TextView) findViewById(R.id.EmailAddressView);
-        PhoneNumberView = (TextView) findViewById(R.id.phoneNumberView);
-        editButton = (Button) findViewById(R.id.editInfoButton);
+        usernameView = findViewById(R.id.UsernameView);
+        EmailAddressView = findViewById(R.id.EmailAddressView);
+        PhoneNumberView = findViewById(R.id.phoneNumberView);
+        editButton = findViewById(R.id.editInfoButton);
 
         // TAKE CURRENT USER INFORMATION.
         user = new User("ManuelaKM", "123","manuela@manuela.com", "0000000000");

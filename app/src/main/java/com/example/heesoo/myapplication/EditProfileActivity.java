@@ -23,9 +23,9 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        emailAddressEdit = (EditText) findViewById(R.id.emailAddressEdit);
-        phoneNumberEdit = (EditText) findViewById(R.id.phoneNumberEdit);
-        saveButton = (Button) findViewById(R.id.saveInfoButton);
+        emailAddressEdit = findViewById(R.id.emailAddressEdit);
+        phoneNumberEdit = findViewById(R.id.phoneNumberEdit);
+        saveButton = findViewById(R.id.saveInfoButton);
 
         Intent i = getIntent();
         user = (User)i.getSerializableExtra("UserToEdit");

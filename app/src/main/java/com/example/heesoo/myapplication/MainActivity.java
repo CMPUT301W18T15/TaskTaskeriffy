@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        edit_username = (EditText) findViewById(R.id.login_username);
+        edit_username = findViewById(R.id.login_username);
 
-        Button register_button = (Button) findViewById(R.id.register_button);
+        Button register_button = findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button login_button = (Button) findViewById(R.id.login_button);
+        Button login_button = findViewById(R.id.login_button);
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -36,13 +36,13 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        submit_button = (Button) findViewById(R.id.register_submit);
-        nameTxt = (EditText) findViewById(R.id.enter_name);
-        userTxt = (EditText) findViewById(R.id.enter_username);
-        passwordTxt = (EditText) findViewById(R.id.enter_password);
-        repeat_passwordTxt = (EditText) findViewById(R.id.enter_repeat_password);
-        emailTxt = (EditText) findViewById(R.id.enter_email);
-        addressTxt = (EditText) findViewById(R.id.enter_address);
+        submit_button = findViewById(R.id.register_submit);
+        nameTxt = findViewById(R.id.enter_name);
+        userTxt = findViewById(R.id.enter_username);
+        passwordTxt = findViewById(R.id.enter_password);
+        repeat_passwordTxt = findViewById(R.id.enter_repeat_password);
+        emailTxt = findViewById(R.id.enter_email);
+        addressTxt = findViewById(R.id.enter_address);
 
         init();
 
@@ -102,10 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean checkEmpty(String name, String username, String password, String repeat_password, String email, String address) {
-        if(name.equals("") || username.equals("") || password.equals("") || repeat_password.equals("") || email.equals("") || address.equals("")){
-            return false;
-        }
-        return true;
+        return !(name.equals("") || username.equals("") || password.equals("") || repeat_password.equals("") || email.equals("") || address.equals(""));
     }
 
 }
