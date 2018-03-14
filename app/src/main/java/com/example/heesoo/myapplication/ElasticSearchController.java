@@ -3,9 +3,13 @@ package com.example.heesoo.myapplication;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
+import io.searchbox.client.config.ClientConfig;
+import io.searchbox.client.config.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -22,7 +26,7 @@ import io.searchbox.core.SearchResult;
  * Created by romansky on 10/20/16.
  */
 public class ElasticSearchController {
-    private static JestDroidClient jestClient;
+    private static JestDroidClient jestClient = null;
 
     // TODO we need a function which adds tweets to elastic search
     public static class AddUserTask extends AsyncTask<User, Void, Void> {
@@ -33,27 +37,28 @@ public class ElasticSearchController {
 
             for (User user : users) {
 
-                /*String source = "{\"name\": \"" + user.getName() + "\"," +
-                        "\"username\": \"" + user.getUsername() + "\" }";*/
+                String source = "{ \"name\" : \"" + user.getName() + "\"," +
+                        " \"username\" : \"" + user.getUsername() + "\" }";
+                Log.d("DATABASE SAVING", source);
 
-//                Map<String, String> addUser = new LinkedHashMap<String, String>();
-//                addUser.put("username", user.getUsername());
-//                addUser.put("name", user.getName());
-
-                Index index = new Index.Builder(user).index("cmput301w18t15").type("User").build();
-
+                Index index = new Index.Builder(user).index("cmput301w18t15").type("user").build();
+//                index.
+//                Log.d("Database saving", index.());
                 try {
-                    // where is the client?
+                    Log.d("DATABASE SAVING" ,"Before execution");
                     DocumentResult result = jestClient.execute(index);
-                    Log.d("EROOR TESTING" ,"HERRRRRRREE");
+                    Log.d("DATABASE SAVING" ,"After execution");
                     if (result.isSucceeded()) {
                         user.setId(result.getId());
+                        Log.d("DATABASE SAVING" ,"Successfully saved");
+
                     }else{
-                        Log.i("Error", "Same error");
+                        Log.d("DATABASE SAVING" ,"User not entered");
                     }
                 }
                 catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the users");
+                    e.printStackTrace();
+                    Log.d("DATABASE SAVING" ,"The program failed to save to database");
                 }
 
             }
@@ -61,13 +66,63 @@ public class ElasticSearchController {
         }
     }
 
+    public static class GetUserTask extends AsyncTask<String, Void, User> {
 
+        @Override
+        protected User doInBackground(String... parameters) {
+            verifySettings();
 
+            User user = null;
 
+            String query = "{\n" +
+                    "           \"query\" : {\n" +
+                    "               \"constant_score\" : {\n" +
+                    "                   \"filter\" : {\n" +
+                    "                       \"terms\" : {\"username\": \"" + parameters[0] + "\"}\n" +
+                    "                   }\n" +
+                    "               }\n" +
+                    "           }\n" +
+                    "}";
 
+            Log.d("ESC.GetUserTask", query);
+
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t15")
+                    .addType("User")
+                    .build();
+
+            try {
+                SearchResult result = jestClient.execute(search);
+                JsonObject hits = result.getJsonObject().getAsJsonObject("hits");
+                if (result.isSucceeded()) {
+                    if (hits.get("total").getAsInt() == 1) {
+                        JsonObject userInfo = hits.getAsJsonArray("hits").get(0).getAsJsonObject();
+                        JsonObject userInfoSouce = userInfo.get("_source").getAsJsonObject();
+
+                        String id = userInfo.get("_id").getAsString();
+
+                        user = new Gson().fromJson(userInfoSouce, User.class);
+                        user.setId(id);
+
+                        Log.i("ESC.GetUserTask", "Unique user was found.");
+                    } else {
+                        Log.i("ESC.GetUserTask", "User does not exist or is not unique.");
+                    }
+                } else {
+                    Log.i("ESC.getUserTask", "The search query failed.");
+                }
+
+            }
+            catch (Exception e) {
+                Log.e("ESC.GetUserTask", "Something went wrong");
+            }
+            return user;
+        }
+    }
 
     public static void verifySettings() {
         if (jestClient == null) {
+            Log.d("DATABASE SAVING", "Setting droid client");
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();
 

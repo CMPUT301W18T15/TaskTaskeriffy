@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.example.heesoo.myapplication.ElasticSearchController;
 import com.example.heesoo.myapplication.MainActivity;
 import com.example.heesoo.myapplication.R;
@@ -89,6 +90,8 @@ public class RegisterActivity extends AppCompatActivity {
         MyApplication.setCurrentUser(user.getUsername());
         ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
         addUserTask.execute(user);
+        //ElasticSearchController EC = new ElasticSearchController();
+        //EC.AddUser(user);
 
     }
 
