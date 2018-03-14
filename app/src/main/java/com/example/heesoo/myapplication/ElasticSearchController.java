@@ -11,6 +11,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import io.searchbox.client.config.ClientConfig;
 import io.searchbox.client.config.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -65,10 +66,10 @@ public class ElasticSearchController {
         }
     }
 
-    public static class GetUserTask extends AsyncTask<String, Void, User> {
+    public static class GetUserTask extends AsyncTask<ArrayList<String>, Void, User> {
 
         @Override
-        protected User doInBackground(String... parameters) {
+        protected User doInBackground(ArrayList<String>... parameters) {
             verifySettings();
 
             User user = null;

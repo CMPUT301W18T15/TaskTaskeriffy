@@ -51,7 +51,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 }
                 // Save all the fields
                 else{
-                    Task task = new Task(MyApplication.getCurrentUser(), name, description, "Requested");
+                    Task task = new Task(MyApplication.getCurrentUser().getUsername(), name, description, "Requested");
                     ElasticSearchTaskController.AddTasksTask addTasksTask = new ElasticSearchTaskController.AddTasksTask();
                     addTasksTask.execute(task);
                     CharSequence text = "Saving Task";

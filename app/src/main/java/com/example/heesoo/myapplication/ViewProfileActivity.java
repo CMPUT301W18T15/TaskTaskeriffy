@@ -29,8 +29,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         editButton = findViewById(R.id.editInfoButton);
 
         // TAKE CURRENT USER INFORMATION.
-        user = new User("ManuelaKM", "123","manuela@manuela.com", "0000000000");
+        //user = new User("ManuelaKM", "123","manuela@manuela.com", "0000000000");
         // THIS IS JUST FOR TESTING PURPOSES
+        user = MyApplication.getCurrentUser();
 
         usernameView.setText(user.getUsername());
         EmailAddressView.setText(user.getEmailAddress());

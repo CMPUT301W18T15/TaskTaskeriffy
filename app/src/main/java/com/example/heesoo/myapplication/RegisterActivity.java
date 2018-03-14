@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void RegisterTask(User user) {
-        MyApplication.setCurrentUser(user.getUsername());
+        MyApplication.setCurrentUser(user);
         ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
         addUserTask.execute(user);
         //ElasticSearchController EC = new ElasticSearchController();
