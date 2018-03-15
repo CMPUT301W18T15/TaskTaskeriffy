@@ -28,14 +28,17 @@ public class ViewProfileActivity extends AppCompatActivity {
         PhoneNumberView = findViewById(R.id.phoneNumberView);
         editButton = findViewById(R.id.editInfoButton);
 
-        // TAKE CURRENT USER INFORMATION.
-        //user = new User("ManuelaKM", "123","manuela@manuela.com", "0000000000");
-        // THIS IS JUST FOR TESTING PURPOSES
-        //user = MyApplication.getCurrentUser();
+        User user_recieved = (User) getIntent().getSerializableExtra("USER");
+        if(user_recieved == null){
+            user = MyApplication.getCurrentUser();
+            editButton.setVisibility(View.VISIBLE);
+        }else{
+           user  = user_recieved;
+        }
 
-        usernameView.setText(MyApplication.getCurrentUser().getUsername());
-        EmailAddressView.setText(MyApplication.getCurrentUser().getEmailAddress());
-        PhoneNumberView.setText(MyApplication.getCurrentUser().getPhoneNumber());
+        usernameView.setText(user.getUsername());
+        EmailAddressView.setText(user.getEmailAddress());
+        PhoneNumberView.setText(user.getPhoneNumber());
 
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

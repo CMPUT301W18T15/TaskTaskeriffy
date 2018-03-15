@@ -12,6 +12,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
     private Button deleteTask;
     private Button acceptBid;
     private Button declineBid;
+    private Button viewBidderProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,16 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 //                task.deleteBid(bid);
 //            }
 //        });
+
+        viewBidderProfile = (Button) findViewById(R.id.viewBidderProfile);
+        viewBidderProfile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO find user in elasticsearch user table by userame.equals(bid.getTaskProvider())
+                Intent intent = new Intent(BiddedTaskDetailActivity.this, ViewProfileActivity.class);
+//                intent.putExtra("USER", user);
+//                startActivity(intent);
+            }
+        });
 
     }
 }
