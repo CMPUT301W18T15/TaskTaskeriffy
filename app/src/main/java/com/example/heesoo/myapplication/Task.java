@@ -37,6 +37,13 @@ public class Task implements Serializable{
     public String getUserName(){
         return taskRequester;
     }
+    public String getTaskProvider(){
+        return assignedTaskProvider;
+    }
+    public void setTaskProvider(String taskProvider){
+        this.assignedTaskProvider = taskProvider;
+    }
+
 
     public String getTaskName(){
         return taskName;
