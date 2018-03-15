@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 public class RequestorShowTaskDetailActivity extends AppCompatActivity {
 
+    private Button editTask;
+    private Button deleteTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +29,10 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         taskDescription.setText(task.getTaskDescription());
         TextView taskStatus = (TextView)findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
-//        TextView taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
-        // TODO convert float to string
-//        taskLowestBid.setText(findLowestBid(task.getBids()).toString());
+        TextView taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
+        taskLowestBid.setText(findLowestBid(task.getBids()));
 
-        Button editTask = (Button) findViewById(R.id.editTask);
+        editTask = (Button) findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 /*
@@ -41,7 +43,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             }
         });
 
-        Button deleteTask = (Button) findViewById(R.id.deleteTask);
+        deleteTask = (Button) findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO delete the task by elastic search
@@ -50,16 +52,21 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
 
 
     }
-//
-//    public Float findLowestBid(ArrayList<Bid> bids){
-//        Float maxValue = bids.get(0).getBidPrice();
-//        for (Bid bid:bids){
-//            if (bid.getBidPrice() < maxValue){
-//                maxValue = bid.getBidPrice();
-//            }
-//        }
-//        return maxValue;
-//    }
+
+    public String findLowestBid(ArrayList<Bid> bids){
+        if (bids.isEmpty()){
+            return "NA";
+        }
+        else{
+            Float maxValue = bids.get(0).getBidPrice();
+            for (Bid bid:bids){
+                if (bid.getBidPrice() < maxValue){
+                    maxValue = bid.getBidPrice();
+                }
+            }
+            return maxValue.toString();
+        }
+    }
 
 
 }

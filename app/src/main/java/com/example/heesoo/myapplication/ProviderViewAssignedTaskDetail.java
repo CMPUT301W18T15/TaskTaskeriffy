@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
     private Button finishTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +24,9 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         taskDescription.setText(task.getTaskDescription());
         TextView taskStatus = (TextView)findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
-//        TextView taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
-        // TODO convert float to string
-//        taskLowestBid.setText(findLowestBid(task.getBids()).toString());
+        TextView taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
+
+        taskLowestBid.setText(findLowestBid(task.getBids()));
 
         finishTask = (Button) findViewById(R.id.finishTask);
         finishTask.setOnClickListener(new View.OnClickListener() {
@@ -36,14 +37,19 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         });
     }
 
-//    public Float findLowestBid(ArrayList<Bid> bids){
-//        Float maxValue = bids.get(0).getBidPrice();
-//        for (Bid bid:bids){
-//            if (bid.getBidPrice() < maxValue){
-//                maxValue = bid.getBidPrice();
-//            }
-//        }
-//        return maxValue;
-//    }
+    public String findLowestBid(ArrayList<Bid> bids){
+        if (bids.isEmpty()){
+            return "NA";
+        }
+        else{
+            Float maxValue = bids.get(0).getBidPrice();
+            for (Bid bid:bids){
+                if (bid.getBidPrice() < maxValue){
+                    maxValue = bid.getBidPrice();
+                }
+            }
+            return maxValue.toString();
+        }
+    }
 
 }
