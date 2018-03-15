@@ -61,16 +61,16 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         // view requester's bidded button
-//        showBiddedButton = (Button) findViewById(R.id.show_bidded_button);
-//        showBiddedButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //setResult(RESULT_OK);
-//                Intent intent = new Intent(RequesterMainActivity.this, ViewRequesterBiddedTasksListActivity.class);
-//                startActivity(intent);
-//            }
-//
-//        });
+        showBiddedButton = (Button) findViewById(R.id.show_bidded_button);
+        showBiddedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setResult(RESULT_OK);
+                Intent intent = new Intent(RequesterMainActivity.this, RequesterBiddedTasksListActivity.class);
+                startActivity(intent);
+            }
+
+        });
 
         // requestor show assigned task button
 //        showAssignedTaskButton = (Button) findViewById(R.id.show_assigned_task_button);
