@@ -53,9 +53,9 @@ public class FindNewTaskActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 setResult(RESULT_OK);
-                                //Intent intent = new Intent(getApplicationContext(), ViewTaskActivity.class);
-                                //intent.putExtra("TaskToBidOn", selectedTask);
-                                //startActivityForResult(intent, 1);
+                                Intent intent = new Intent(getApplicationContext(), PlaceBidActivity.class);
+                                intent.putExtra("TaskToBidOn", selectedTask);
+                                startActivityForResult(intent, 1);
                             }
                         });
 
@@ -94,6 +94,15 @@ public class FindNewTaskActivity extends AppCompatActivity {
         tempTaskList.add(dTask12);
         tempTaskList.add(dTask13);
         tempTaskList.add(dTask123);
+
+        Bid newBid = new Bid("dTask", "dTask1Description", "Assigned", 100f);
+        Bid newBid2 = new Bid("dTask", "dTask1Description", "Assigned", 120f);
+        Bid newBid3 = new Bid("dTask", "dTask1Description", "Assigned", 80f);
+        dTask13.addBid(newBid, MyApplication.getCurrentUser());
+        dTask13.addBid(newBid2, MyApplication.getCurrentUser());
+        dTask13.addBid(newBid3, MyApplication.getCurrentUser());
+
+
 
         // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
 

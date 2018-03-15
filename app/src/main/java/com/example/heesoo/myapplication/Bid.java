@@ -1,6 +1,9 @@
 package com.example.heesoo.myapplication;
 
 import android.app.ActivityManager;
+
+import java.io.Serializable;
+
 import io.searchbox.annotations.JestId;
 
 
@@ -8,18 +11,18 @@ import io.searchbox.annotations.JestId;
  * Created by chengze on 2018/2/26.
  */
 
-public class Bid {
+public class Bid implements Serializable{
     private String taskName;
-    private String taskDetails;
+    //private String taskDetails;
     private String description;
     private String status;
     private Float bidPrice;
     @JestId
     private String id;
 
-    public Bid(String TaskName, String TaskDetail, String Description, String Status, Float BidPrice) {
+    public Bid(String TaskName, String Description, String Status, Float BidPrice) {
         this.taskName = TaskName;
-        this.taskDetails = TaskDetail;
+        //this.taskDetails = TaskDetail;
         this.description = Description;
         this.status = Status;
         this.bidPrice = BidPrice;
@@ -64,7 +67,7 @@ public class Bid {
         this.id = id;
     }
 
-    public String getTaskDetail(){
+    /* public String getTaskDetail(){
 
         return taskDetails;
     }
@@ -72,7 +75,7 @@ public class Bid {
     public void setTaskDetail(String TaskDetail){
 
         this.taskDetails = TaskDetail;
-    }
+    } */
 
     public Float getBidPrice(){
 

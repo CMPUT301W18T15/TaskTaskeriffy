@@ -105,4 +105,14 @@ public class Task implements Serializable{
         return  "Name: " + taskName +" \n Status: " + status;
     }
 
+    public Bid getLowestBid() {
+        Bid minBid = bids.get(0);
+        for (int i = 1; i < bids.size(); i++) {
+            if (bids.get(i).getBidPrice() < minBid.getBidPrice() ) {
+                minBid = bids.get(i);
+            }
+
+        }
+        return minBid;
+    }
 }

@@ -76,7 +76,7 @@
         tools:layout_editor_absoluteY="209dp" />
 
     <Button
-        android:id="@+id/task_view_Button_edit"
+        android:id="@+id/place_bid_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
