@@ -21,27 +21,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:text="bidAmount"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintTop_toBottomOf="@+id/bidderName" />
 
     <TextView
         android:id="@+id/taskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:text="taskName"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="73dp" />
+        app:layout_constraintTop_toBottomOf="@+id/bidAmount" />
 
     <TextView
         android:id="@+id/taskStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:text="taskStatus"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="102dp" />
+        app:layout_constraintTop_toBottomOf="@+id/taskName" />
 
     <Button
         android:id="@+id/deleteTask"

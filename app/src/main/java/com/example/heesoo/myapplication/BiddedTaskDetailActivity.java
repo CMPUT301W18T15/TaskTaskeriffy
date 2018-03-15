@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class BiddedTaskDetailActivity extends AppCompatActivity {
+    private Button editTask;
+    private Button deleteTask;
+    private Button acceptBid;
+    private Button declineBid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,38 +32,37 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         TextView taskStatus = (TextView)findViewById(R.id.taskStatus);
         taskStatus.setText(bid.getStatus());
 
-        Button editTask = (Button) findViewById(R.id.editTask);
-        editTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                /*
-                Intent intent = new Intent(getApplicationContext(), AddEditTaskActivity.class);
-                intent.putExtra("task", task);
-                finish();
-                */
-            }
-        });
+//        editTask = (Button) findViewById(R.id.editTask);
+//        editTask.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), AddEditTaskActivity.class);
+//                intent.putExtra("task", task);
+//                finish();
+//            }
+//        });
 
-        Button deleteTask = (Button) findViewById(R.id.deleteTask);
-        deleteTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO delete the task by elastic search
-            }
-        });
+//        deleteTask = (Button) findViewById(R.id.deleteTask);
+//        deleteTask.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // TODO delete the task by elastic search
+//            }
+//        });
 
-        Button acceptBid = (Button) findViewById(R.id.acceptBid);
-        acceptBid.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO accept the bid and change the status of the task
-                task.acceptBid(taskProvider.getUsername());
-            }
-        });
+//        acceptBid = (Button) findViewById(R.id.acceptBid);
+//        acceptBid.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // TODO accept the bid and change the status of the task
+//                task.acceptBid(taskProvider.getUsername());
+//            }
+//        });
 
-        Button declineBid = (Button) findViewById(R.id.declineBid);
-        declineBid.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO delete this bid by elastic search
-                task.deleteBid(bid, taskProvider);
-            }
-        });
+//        declineBid = (Button) findViewById(R.id.declineBid);
+//        declineBid.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // TODO delete this bid by elastic search
+//                task.deleteBid(bid, taskProvider);
+//            }
+//        });
+
     }
 }
