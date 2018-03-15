@@ -49,10 +49,10 @@ public class PlaceBidActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 newBidPrice = placeBidView.getText().toString();
                 float bidPrice = Float.parseFloat(newBidPrice);
-                Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), task.getStatus(), bidPrice);
+                Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), task.getStatus(), bidPrice, MyApplication.getCurrentUser().getUsername());
                 ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
                 addBidsTask.execute(newBid);
-                task.addBid(newBid, MyApplication.getCurrentUser());
+                task.addBid(newBid);
                 Intent new_bid = new Intent(getApplicationContext(), FindNewTaskActivity.class);
                 new_bid.putExtra("bidPlaced", newBid);
                 setResult(Activity.RESULT_OK, new_bid);

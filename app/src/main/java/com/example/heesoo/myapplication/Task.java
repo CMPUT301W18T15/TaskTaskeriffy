@@ -83,14 +83,12 @@ public class Task implements Serializable{
         return bids;
     }
 
-    public void addBid(Bid bid, User taskProvider){
+    public void addBid(Bid bid){
         bids.add(bid);
-        taskBidders.add(taskProvider);
     }
 
     public void deleteBid(Bid bid, User taskProvider){
         bids.remove(bid);
-        taskBidders.remove(taskProvider);
     }
 
     public ArrayList<Bid> getBids(){

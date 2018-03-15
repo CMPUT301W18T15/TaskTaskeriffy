@@ -95,12 +95,12 @@ public class FindNewTaskActivity extends AppCompatActivity {
         tempTaskList.add(dTask13);
         tempTaskList.add(dTask123);
 
-        Bid newBid = new Bid("dTask", "dTask1Description", "Assigned", 100f);
-        Bid newBid2 = new Bid("dTask", "dTask1Description", "Assigned", 120f);
-        Bid newBid3 = new Bid("dTask", "dTask1Description", "Assigned", 80f);
-        dTask13.addBid(newBid, MyApplication.getCurrentUser());
-        dTask13.addBid(newBid2, MyApplication.getCurrentUser());
-        dTask13.addBid(newBid3, MyApplication.getCurrentUser());
+        Bid newBid = new Bid("dTask", "dTask1Description", "Assigned", 100f,MyApplication.getCurrentUser().getUsername());
+        Bid newBid2 = new Bid("dTask", "dTask1Description", "Assigned", 120f, MyApplication.getCurrentUser().getUsername());
+        Bid newBid3 = new Bid("dTask", "dTask1Description", "Assigned", 80f, MyApplication.getCurrentUser().getUsername());
+        dTask13.addBid(newBid);
+        dTask13.addBid(newBid2);
+        dTask13.addBid(newBid3);
 
 
 

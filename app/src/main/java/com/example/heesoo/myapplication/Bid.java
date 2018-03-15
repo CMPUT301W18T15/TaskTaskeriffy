@@ -16,12 +16,14 @@ public class Bid implements Serializable{
     //private String taskDetails;
     private String description;
     private String status;
+    private String taskProvider;
     private Float bidPrice;
     @JestId
     private String id;
 
-    public Bid(String TaskName, String Description, String Status, Float BidPrice) {
+    public Bid(String TaskName, String Description, String Status, Float BidPrice, String TaskProvider) {
         this.taskName = TaskName;
+        this.taskProvider = TaskProvider;
         //this.taskDetails = TaskDetail;
         this.description = Description;
         this.status = Status;
@@ -57,6 +59,17 @@ public class Bid implements Serializable{
 
         this.status = status;
     }
+
+    public String getTaskProvider(){
+
+        return taskProvider;
+    }
+
+    public void setTaskProvider(String taskProvider) {
+
+        this.taskProvider = taskProvider;
+    }
+
     public String getId(){
         
         return id;
