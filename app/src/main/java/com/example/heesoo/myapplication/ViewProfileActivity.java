@@ -31,18 +31,18 @@ public class ViewProfileActivity extends AppCompatActivity {
         // TAKE CURRENT USER INFORMATION.
         //user = new User("ManuelaKM", "123","manuela@manuela.com", "0000000000");
         // THIS IS JUST FOR TESTING PURPOSES
-        user = MyApplication.getCurrentUser();
+        //user = MyApplication.getCurrentUser();
 
-        usernameView.setText(user.getUsername());
-        EmailAddressView.setText(user.getEmailAddress());
-        PhoneNumberView.setText(user.getPhoneNumber());
+        usernameView.setText(MyApplication.getCurrentUser().getUsername());
+        EmailAddressView.setText(MyApplication.getCurrentUser().getEmailAddress());
+        PhoneNumberView.setText(MyApplication.getCurrentUser().getPhoneNumber());
 
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setResult(RESULT_OK);
 
                 Intent edit_information = new Intent(getApplicationContext(), EditProfileActivity.class);
-                edit_information.putExtra("UserToEdit", user);
+                //edit_information.putExtra("UserToEdit", user);
                 startActivity(edit_information);
                 finish();
             }

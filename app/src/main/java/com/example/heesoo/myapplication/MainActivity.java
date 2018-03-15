@@ -44,19 +44,21 @@ public class MainActivity extends AppCompatActivity {
                     user_information.add(enter_username.getText().toString());
                     user_information.add(enter_password.getText().toString());
 
-                    ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
-                    getUserTask.execute(user_information);
+                    //UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
+                    //ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+                    //getUserTask.execute(user_information);
 
-                    //User user = new User("RiyaRiya", "123","manuela@manuela.com", "0000000000");
-                    //MyApplication.setCurrentUser(user);
+                    User user = new User("RiyaRiya", "123","manuela@manuela.com", "0000000000");
+                    MyApplication.setCurrentUser(user);
 
-                    try{
+                    // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
+                    /* try{
                         User user = getUserTask.get();
                         MyApplication.setCurrentUser(user);
                         startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
                     } catch(Exception e){
                         Log.i("ERROR", "Failed to pull account from Database");
-                    }
+                    } */
                     startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
 
                 }
