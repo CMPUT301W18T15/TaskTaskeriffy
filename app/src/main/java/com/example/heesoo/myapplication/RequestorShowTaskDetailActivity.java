@@ -14,6 +14,11 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
 
     private Button editTask;
     private Button deleteTask;
+    private Button viewBidsButton;
+    private TextView taskName;
+    private TextView taskDescription;
+    private TextView taskStatus;
+    private TextView taskLowestBid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +28,13 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         String lowestBid;
         final Task task = (Task) getIntent().getSerializableExtra("task");
 
-        TextView taskName = (TextView)findViewById(R.id.taskName);
+        taskName = (TextView)findViewById(R.id.taskName);
         taskName.setText(task.getTaskName());
-        TextView taskDescription = (TextView)findViewById(R.id.taskDescription);
+        taskDescription = (TextView)findViewById(R.id.taskDescription);
         taskDescription.setText(task.getTaskDescription());
-        TextView taskStatus = (TextView)findViewById(R.id.taskStatus);
+        taskStatus = (TextView)findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
-        TextView taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
+        taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
         taskLowestBid.setText(findLowestBid(task.getBids()));
 
         editTask = (Button) findViewById(R.id.editTask);
@@ -49,6 +54,20 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 // TODO delete the task by elastic search
             }
         });
+
+        if (task.getStatus() == "Bidded"){
+            viewBidsButton = (Button) findViewById(R.id.view_bids);
+            viewBidsButton.setVisibility(View.VISIBLE);
+            viewBidsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), ViewBidListActivity.class);
+                    intent.putExtra("task", task);
+                    finish();
+                }
+            });
+        }
+
 
 
     }

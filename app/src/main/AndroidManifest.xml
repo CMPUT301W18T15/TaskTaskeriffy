@@ -30,6 +30,8 @@
         <activity android:name=".RequesterBiddedTasksListActivity"></activity>
         <activity android:name=".RequestorAssignedTaskListActivity"></activity>
         <activity android:name=".FindNewTaskActivity"></activity>
+        <activity android:name=".PlaceBidActivity"></activity>
+
 
 
     </application>
