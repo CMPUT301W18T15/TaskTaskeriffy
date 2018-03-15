@@ -26,8 +26,11 @@ public class User implements Comparable<User>, Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUsername() {
-        return username; }
+    public User() {
+
+    }
+
+    public String getUsername() { return username; }
 
     public void setUsername(String username) {
         this.username = username;
