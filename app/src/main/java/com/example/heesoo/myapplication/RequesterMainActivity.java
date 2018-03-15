@@ -73,16 +73,16 @@ public class RequesterMainActivity extends AppCompatActivity {
         });
 
         // requestor show assigned task button
-//        showAssignedTaskButton = (Button) findViewById(R.id.show_assigned_task_button);
-//        showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //setResult(RESULT_OK);
-//                Intent intent = new Intent(RequesterMainActivity.this, ViewRequestorAssignedTasksListActivity.class);
-//                startActivity(intent);
-//            }
-//
-//        });
+        showAssignedTaskButton = (Button) findViewById(R.id.show_assigned_task_button);
+        showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setResult(RESULT_OK);
+                Intent intent = new Intent(RequesterMainActivity.this, RequestorAssignedTaskListActivity.class);
+                startActivity(intent);
+            }
+
+        });
 
 
 

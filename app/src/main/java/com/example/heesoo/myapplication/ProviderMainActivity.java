@@ -111,13 +111,18 @@ public class ProviderMainActivity extends AppCompatActivity {
         taskList = new ArrayList<Task>();
 
         // dummy tasks:
-        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
+        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
         Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
         Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Assigned");
+        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
         // dummy user's name
 
-        String thisRequesterName = "Requestname2";
+        dTask1.setTaskProvider("Requestname3");
+        dTask12.setTaskProvider("Requestname3");
+        dTask13.setTaskProvider("Requestname3");
+
+
+        String thisTaskProvider = "Requestname3";
         String status ="Assigned";
 
         taskList.add(dTask1);
@@ -130,7 +135,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
         for(int i = 0; i < taskList.size(); i++){
-            if(thisRequesterName == taskList.get(i).getUserName() && status == taskList.get(i).getStatus() ){
+            if(thisTaskProvider == taskList.get(i).getTaskProvider() && status == taskList.get(i).getStatus() ){
                 requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
             }
         }
@@ -141,10 +146,5 @@ public class ProviderMainActivity extends AppCompatActivity {
         clickableList.setAdapter(adapter);
 
     }
-
-
-
-
-
 
 }
