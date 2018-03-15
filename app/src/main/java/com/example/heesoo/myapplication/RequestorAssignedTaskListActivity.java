@@ -20,6 +20,8 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
 
     private ArrayList<Task> taskList; // the list of tasks that requester posted
     private ListView clickableList;
+    private ArrayList<Task> allTasks;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
         // @todo get user's name
         //String thisRequesterName = getCurrentUser
         taskList = new ArrayList<Task>();
+        allTasks = new ArrayList<Task>();
+
 
         // dummy tasks:
         Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
@@ -62,21 +66,20 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
         String thisStatus = "Assigned";
 
 
-        taskList.add(dTask1);
-        taskList.add(dTask12);
-        taskList.add(dTask13);
-        taskList.add(dTask123);
-
-
+        allTasks.add(dTask1);
+        allTasks.add(dTask12);
+        allTasks.add(dTask13);
+        allTasks.add(dTask123);
 
         ArrayList<String> requesterAssignedTasksNames = new ArrayList<String>();
 
-        for(int i = 0; i < taskList.size(); i++){
-            if(thisRequesterName == taskList.get(i).getUserName() && thisStatus == taskList.get(i).getStatus()){
-                requesterAssignedTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
+        for (Task task:allTasks){
+            if (thisRequesterName == task.getUserName() && thisStatus == task.getStatus()){
+                taskList.add(task);
+                requesterAssignedTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
+
             }
         }
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, requesterAssignedTasksNames);

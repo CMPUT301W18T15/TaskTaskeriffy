@@ -36,6 +36,8 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         taskStatus.setText(task.getStatus());
         taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
         taskLowestBid.setText(findLowestBid(task.getBids()));
+        viewBidsButton = (Button) findViewById(R.id.view_bids);
+
 
         editTask = (Button) findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +57,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             }
         });
 
-        if (task.getStatus() == "Bidded"){
-            viewBidsButton = (Button) findViewById(R.id.view_bids);
+        if (task.getStatus().equals("Bidded")){
             viewBidsButton.setVisibility(View.VISIBLE);
             viewBidsButton.setOnClickListener(new View.OnClickListener() {
                 @Override

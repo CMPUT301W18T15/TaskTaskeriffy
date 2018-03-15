@@ -129,19 +129,14 @@ public class RequesterMainActivity extends AppCompatActivity {
         allTasks.add(dTask13);
         allTasks.add(dTask123);
 
+        ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
+
         for (Task task:allTasks){
             if (thisRequesterName == task.getUserName()){
                 taskList.add(task);
+                requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
             }
         }
-
-
-        ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
-
-        for(int i = 0; i < taskList.size(); i++){
-            requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
-        }
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, requesterPostTasksNames);
