@@ -5,6 +5,7 @@ package com.example.heesoo.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ public class ProviderMainActivity extends AppCompatActivity {
     private Button searchNewTaskButton;
     private ListView myAssignedTasklist;
     private TextView taskLabel;
+    private ArrayList<Task> tempTaskList;
     private ArrayList<Task> taskList;
     private ArrayAdapter<Task> taskAdapter;
     private ListView clickableList;
@@ -33,6 +35,8 @@ public class ProviderMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_main);
+        searchNewTaskButton = (Button) findViewById(R.id.search_new_task_button);
+
 
         //show my History button
         Button myHistoryButton = (Button) findViewById(R.id.my_history_button);
@@ -76,12 +80,11 @@ public class ProviderMainActivity extends AppCompatActivity {
 
         // provider search new task button
 
-        Button searchNewTaskButton = (Button) findViewById(R.id.search_new_task_button);
         searchNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
-                Intent intent = new Intent(ProviderMainActivity.this, FindNewTaskActivity.class);
+                setResult(RESULT_OK);
+                Intent intent = new Intent(getApplicationContext(), FindNewTaskActivity.class);
                 startActivity(intent);
             }
         });
@@ -108,12 +111,32 @@ public class ProviderMainActivity extends AppCompatActivity {
         // will return an arraylist of tasks,
         // @todo get user's name
         //String thisRequesterName = getCurrentUser
+
+        tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
 
         // dummy tasks:
         Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
         Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
         Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
+        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
+
+        dTask1.setTaskProvider("RiyaRiya");
+        dTask12.setTaskProvider("Requestname3");
+        dTask13.setTaskProvider("RiyaRiya");
+
+        tempTaskList.add(dTask1);
+        tempTaskList.add(dTask12);
+        tempTaskList.add(dTask13);
+        tempTaskList.add(dTask123);
+
+
+        /* taskList = new ArrayList<Task>();
+
+        // dummy tasks:
+        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
+        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Requested");
+        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Assigned");
         Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
         // dummy user's name
 
@@ -138,11 +161,20 @@ public class ProviderMainActivity extends AppCompatActivity {
             if(thisTaskProvider == taskList.get(i).getTaskProvider() && status == taskList.get(i).getStatus() ){
                 requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
             }
+        } */
+
+        Log.d("HEREEEE", MyApplication.getCurrentUser().getUsername());
+        for(int i = 0; i < tempTaskList.size(); i++){
+            Log.d("HEREEEE", tempTaskList.get(i).getTaskProvider());
+            if ( tempTaskList.get(i).getTaskProvider().equals(MyApplication.getCurrentUser().getUsername())
+                    && tempTaskList.get(i).getStatus().equals("Assigned")) {
+                Log.d("HEREEEE", "IHATE");
+                taskList.add(tempTaskList.get(i));
+            }
         }
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, requesterPostTasksNames);
+        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         clickableList.setAdapter(adapter);
 
     }

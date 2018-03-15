@@ -33,13 +33,16 @@ public class Task implements Serializable{
         this.status = status;
         this.bids = new ArrayList<Bid>();
         this.taskBidders = new ArrayList<User>();
+        this.assignedTaskProvider = "";
     }
     public String getUserName(){
         return taskRequester;
     }
+
     public String getTaskProvider(){
         return assignedTaskProvider;
     }
+
     public void setTaskProvider(String taskProvider){
         this.assignedTaskProvider = taskProvider;
     }
@@ -96,6 +99,10 @@ public class Task implements Serializable{
 
     public void acceptBid(String taskProvider) {
         assignedTaskProvider = taskProvider;
+    }
+
+    public String toString() {
+        return  "Name: " + taskName +" \n Status: " + status;
     }
 
 }

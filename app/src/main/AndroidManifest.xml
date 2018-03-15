@@ -29,6 +29,8 @@
         <activity android:name=".ProviderViewAssignedTaskDetail"></activity>
         <activity android:name=".RequesterBiddedTasksListActivity"></activity>
         <activity android:name=".RequestorAssignedTaskListActivity"></activity>
+        <activity android:name=".FindNewTaskActivity"></activity>
+
 
     </application>
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,16 +19,17 @@ import java.util.List;
  */
 
 public class FindNewTaskActivity extends AppCompatActivity {
-    ArrayList<String> tasksToPrint;
-    private TaskList taskList;
+    private ArrayList<Task> tempTaskList;
+    private ArrayList<Task> taskList;
     private ListView listView;
     private Task selectedTask;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Task> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_find_new_tasks);
+        //taskList = new TaskList();
 
         listView = (ListView) findViewById(R.id.avaliableTasksList);
         listView.setClickable(true);
@@ -37,6 +39,9 @@ public class FindNewTaskActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Object t = listView.getItemAtPosition(i);
                 selectedTask = (Task) t;
+
+                Log.d("PRINTING", selectedTask.getTaskName());
+
 
                 AlertDialog.Builder popUp = new AlertDialog.Builder(FindNewTaskActivity.this);
                 popUp.setMessage("Would you like to see details about '"  + selectedTask.getTaskName() + "' ?");
@@ -72,7 +77,23 @@ public class FindNewTaskActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        taskList = new TaskList();
+        tempTaskList = new ArrayList<Task>();
+        taskList = new ArrayList<Task>();
+
+        // dummy tasks:
+        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
+        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
+        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
+        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
+
+        dTask1.setTaskProvider("Requestname3");
+        dTask12.setTaskProvider("Requestname3");
+        dTask13.setTaskProvider("Requestname3");
+
+        tempTaskList.add(dTask1);
+        tempTaskList.add(dTask12);
+        tempTaskList.add(dTask13);
+        tempTaskList.add(dTask123);
 
         // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
 
@@ -87,12 +108,16 @@ public class FindNewTaskActivity extends AppCompatActivity {
 
         //String task = "";
 
-        for(int i = 0; i < taskList.getSize(); i++){
-            tasksToPrint.add("Task Name: " + taskList.getTask(i).getTaskName() + " Status: " + taskList.getTask(i).getStatus());
+        for(int i = 0; i < tempTaskList.size(); i++){
+            if (tempTaskList.get(i).getUserName() != MyApplication.getCurrentUser().getUsername()
+                    && tempTaskList.get(i).getStatus() != "Assigned") {
+                taskList.add(tempTaskList.get(i));
+            }
         }
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasksToPrint);
+        Log.d("IN TASKLIST", taskList.get(0).getTaskName());
+        adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         listView.setAdapter(adapter);
+
     }
 
     @Override
