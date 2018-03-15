@@ -135,7 +135,7 @@ public class RequesterMainActivity extends AppCompatActivity {
             }
         }
 
-        
+
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
         for(int i = 0; i < taskList.size(); i++){
