@@ -26,6 +26,7 @@ public class RequesterMainActivity extends AppCompatActivity {
     private ListView myPostTasklist;
 
     private ArrayList<Task> taskList; // the list of tasks that requester posted
+    private ArrayList<Task> allTasks;
     private ArrayAdapter<Task> taskAdapter;
     private ListView clickableList;
 
@@ -109,6 +110,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         // @todo get user's name
         //String thisRequesterName = getCurrentUser
         taskList = new ArrayList<Task>();
+        allTasks = new ArrayList<Task>();
 
         // dummy tasks:
         Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
@@ -119,19 +121,25 @@ public class RequesterMainActivity extends AppCompatActivity {
 
         String thisRequesterName = "Requestname2";
 
-        taskList.add(dTask1);
-        taskList.add(dTask12);
-        taskList.add(dTask13);
-        taskList.add(dTask123);
+        // TODO use elastic search to get the Task Table
+        // I suppose the name of arraylist that get from database is allTasks
 
+        allTasks.add(dTask1);
+        allTasks.add(dTask12);
+        allTasks.add(dTask13);
+        allTasks.add(dTask123);
 
+        for (Task task:allTasks){
+            if (thisRequesterName == task.getUserName()){
+                taskList.add(task);
+            }
+        }
 
+        
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
         for(int i = 0; i < taskList.size(); i++){
-            if(thisRequesterName == taskList.get(i).getUserName()){
-                requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
-            }
+            requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
         }
 
 
