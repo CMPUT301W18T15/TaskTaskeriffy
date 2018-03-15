@@ -25,14 +25,15 @@ public class RequesterMainActivity extends AppCompatActivity {
 
     private ListView myPostTasklist;
 
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> taskList; // the list of tasks that requester posted
     private ArrayAdapter<Task> taskAdapter;
-    private ListView clickablelist;
+    private ListView clickableList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requester_main);
+
 
         //add new task button
         addNewTaskButton = (Button) findViewById(R.id.add_new_task_button);
@@ -86,16 +87,16 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         // when click on list
-        //  clickablelist = (ListView) findViewById(R.id.provider_assigned_task_list);
-//        clickablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-//                Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
-//                Task task = taskList.get(index);
-//                taskinfo.putExtra("task", (Serializable)task);
-//                startActivity(taskinfo);
-//            }
-//        });
+        clickableList = (ListView) findViewById(R.id.requester_posted_task_list);
+        clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
+                Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
+                Task task = taskList.get(index);
+                taskinfo.putExtra("task", (Serializable)task);
+                startActivity(taskinfo);
+            }
+        });
 
 
     }
@@ -103,10 +104,40 @@ public class RequesterMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        String[] requesterPostTasksNames = //@todo need to pull all the tasks posted by this requester
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_list_item_1, requesterPostTasksNames);
-//        clickableList.setAdapter(adapter);
+        //@todo need to pull all the tasks posted by this requester
+        // will return an arraylist of tasks,
+        // @todo get user's name
+        //String thisRequesterName = getCurrentUser
+        taskList = new ArrayList<Task>();
+
+        // dummy tasks:
+        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
+        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
+        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
+        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Bidded");
+        // dummy user's name
+
+        String thisRequesterName = "Requestname2";
+
+        taskList.add(dTask1);
+        taskList.add(dTask12);
+        taskList.add(dTask13);
+        taskList.add(dTask123);
+
+
+
+        ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
+
+        for(int i = 0; i < taskList.size(); i++){
+            if(thisRequesterName == taskList.get(i).getUserName()){
+                requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
+            }
+        }
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, requesterPostTasksNames);
+        clickableList.setAdapter(adapter);
+
     }
 }

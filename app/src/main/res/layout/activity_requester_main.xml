@@ -35,7 +35,7 @@
 
 
         <ListView
-            android:id="@+id/requester_assigned_task_list"
+            android:id="@+id/requester_posted_task_list"
             android:layout_width="match_parent"
             android:layout_height="331dp">
 

@@ -91,26 +91,55 @@ public class ProviderMainActivity extends AppCompatActivity {
 
         // when click on list
         clickableList = (ListView) findViewById(R.id.provider_assigned_task_list);
-//        clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-//                Intent taskinfo = new Intent(ProviderMainActivity.this, ProviderShowTaskDetail.class);
-//                Task task = taskList.get(index);
-//                taskinfo.putExtra("task", (Serializable)task);
-//                startActivity(taskinfo);
-//            }
-//        });
+        clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
+                Intent taskinfo = new Intent(ProviderMainActivity.this, ProviderViewAssignedTaskDetail.class);
+                Task task = taskList.get(index);
+                taskinfo.putExtra("task", (Serializable)task);
+                startActivity(taskinfo);
+            }
+        });
     }
-
     @Override
     protected void onStart() {
-
         super.onStart();
-//        String[] providerAssignedTasksName = //@todo need to pull all the tasks assigned to this provider
+        //@todo need to pull all the tasks posted by this requester
+        // will return an arraylist of tasks,
+        // @todo get user's name
+        //String thisRequesterName = getCurrentUser
+        taskList = new ArrayList<Task>();
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_list_item_1, providerAssignedTasksName);
-//        clickableList.setAdapter(adapter);
+        // dummy tasks:
+        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
+        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
+        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
+        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Assigned");
+        // dummy user's name
+
+        String thisRequesterName = "Requestname2";
+        String status ="Assigned";
+
+        taskList.add(dTask1);
+        taskList.add(dTask12);
+        taskList.add(dTask13);
+        taskList.add(dTask123);
+
+
+
+        ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
+
+        for(int i = 0; i < taskList.size(); i++){
+            if(thisRequesterName == taskList.get(i).getUserName() && status == taskList.get(i).getStatus() ){
+                requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
+            }
+        }
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, requesterPostTasksNames);
+        clickableList.setAdapter(adapter);
+
     }
 
 

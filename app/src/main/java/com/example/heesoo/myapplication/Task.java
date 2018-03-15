@@ -2,6 +2,7 @@ package com.example.heesoo.myapplication;
 
 import android.provider.ContactsContract;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import android.media.Image;
@@ -13,7 +14,7 @@ import io.searchbox.annotations.JestId;
  * Created by chengze on 2018/2/26.
  */
 
-public class Task {
+public class Task implements Serializable{
     private String taskRequester; // Changing to just attach the username for making MainActivity getCurrentUser work in the constructor for task in ElasticSearchTaskController.
     private String taskName;
     private String taskDescription;
@@ -33,6 +34,10 @@ public class Task {
         this.bids = new ArrayList<Bid>();
         this.taskBidders = new ArrayList<User>();
     }
+    public String getUserName(){
+        return taskRequester;
+    }
+
     public String getTaskName(){
         return taskName;
     }
