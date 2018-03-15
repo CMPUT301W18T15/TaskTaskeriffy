@@ -17,6 +17,8 @@ import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.User;
 
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -66,20 +68,34 @@ public class RegisterActivity extends AppCompatActivity {
                 emailStr = emailTxt.getText().toString();
                 phoneStr = phoneTxt.getText().toString();
 
+                Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+                Matcher mat = pattern.matcher(emailStr);
+
+
                 if (checkEmpty(usernameStr, passwordStr, repeat_passwordStr, emailStr, phoneStr)) {
-                    if(pwdMatch(passwordStr, repeat_passwordStr)){
-                        if (elasticSearchController.profileExists(usernameStr)) {
-                            Toast.makeText(getApplicationContext(),"Username already exists", Toast.LENGTH_SHORT).show();
-                        }else{
-                            User user = new User(usernameStr, passwordStr, emailStr, phoneStr);
-                            RegisterTask(user);
-                            Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    if (usernameStr.length() < 8) {
+                        Toast.makeText(getApplicationContext(), "Username must be at least 8 characters", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (mat.matches()) {
+                            if (pwdMatch(passwordStr, repeat_passwordStr)) {
+                                if (elasticSearchController.profileExists(usernameStr)) {
+                                    Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    User user = new User(usernameStr, passwordStr, emailStr, phoneStr);
+                                    RegisterTask(user);
+                                    Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Password Does Not Match", Toast.LENGTH_SHORT).show();
+                            }                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Not a valid email address", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Password Does Not Match", Toast.LENGTH_SHORT).show();
+
                     }
-                }else{
+
+                } else {
                     Toast.makeText(getApplicationContext(), "All fields must be filled", Toast.LENGTH_SHORT).show();
 
                 }
@@ -93,6 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
 
 
     private void RegisterTask(User user) {
