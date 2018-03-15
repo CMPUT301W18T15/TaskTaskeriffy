@@ -77,14 +77,14 @@ public class ProviderMainActivity extends AppCompatActivity {
         // provider search new task button
 
         Button searchNewTaskButton = (Button) findViewById(R.id.search_new_task_button);
-//        searchNewTaskButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //setResult(RESULT_OK);
-//                Intent intent = new Intent(ProviderMainActivity.this, ProviderFindNewTaskActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        searchNewTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setResult(RESULT_OK);
+                Intent intent = new Intent(ProviderMainActivity.this, FindNewTaskActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
