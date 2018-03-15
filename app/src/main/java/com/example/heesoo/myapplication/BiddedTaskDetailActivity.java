@@ -20,9 +20,11 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 
         final Task task = (Task) getIntent().getSerializableExtra("task");
         final Bid bid = (Bid) getIntent().getSerializableExtra("bid");
-        final TaskProvider taskProvider= (TaskProvider) getIntent().getSerializableExtra("TaskProvider");
+        //final TaskProvider taskProvider= (TaskProvider) getIntent().getSerializableExtra("TaskProvider");
 
-        // TODO how to get bidder name?
+        TextView bidderName = (TextView)findViewById(R.id.bidderName);
+        bidderName.setText(bid.getTaskProvider());
+
         TextView bidAmount = (TextView)findViewById(R.id.bidAmount);
         bidAmount.setText(bid.getBidPrice().toString());
 
@@ -51,8 +53,8 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 //        acceptBid = (Button) findViewById(R.id.acceptBid);
 //        acceptBid.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
-//                // TODO accept the bid and change the status of the task
-//                task.acceptBid(taskProvider.getUsername());
+//                // TODO change the status of the task
+//                task.acceptBid(bid.getTaskProvider());
 //            }
 //        });
 
@@ -60,7 +62,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 //        declineBid.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //                // TODO delete this bid by elastic search
-//                task.deleteBid(bid, taskProvider);
+//                task.deleteBid(bid);
 //            }
 //        });
 

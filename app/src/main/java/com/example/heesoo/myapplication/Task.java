@@ -87,7 +87,7 @@ public class Task implements Serializable{
         bids.add(bid);
     }
 
-    public void deleteBid(Bid bid, User taskProvider){
+    public void deleteBid(Bid bid){
         bids.remove(bid);
     }
 
