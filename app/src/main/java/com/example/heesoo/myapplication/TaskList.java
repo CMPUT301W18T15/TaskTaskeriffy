@@ -35,6 +35,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public Task getTask(int i) {
+
+        return tasks.get(i);
+
+    }
+
     public TaskList getBiddedTasks() {
 
         TaskList tl = new TaskList();
@@ -81,5 +87,9 @@ public class TaskList {
             }
         }
         return tl;
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }
