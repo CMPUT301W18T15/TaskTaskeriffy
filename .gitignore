@@ -1,3 +1,5 @@
+# Gitignore file taken from George Antonious at https://github.com/CMPUT301F16T12/CloudyCar/blob/master/.gitignore
+
 .DS_Store
 
 # Built application files
