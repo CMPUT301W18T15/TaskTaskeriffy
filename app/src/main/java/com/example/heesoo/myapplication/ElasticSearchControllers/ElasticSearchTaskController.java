@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.heesoo.myapplication.Entities.Task;
-import com.example.heesoo.myapplication.Entities.User;
 import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -58,7 +57,7 @@ public class ElasticSearchTaskController {
     }
 
 
-    public static class GetTask extends AsyncTask<String, Void, Task> {
+    public static class GetTasksTask extends AsyncTask<String, Void, Task> {
         @Override
         protected Task doInBackground(String... id) {
             verifySettings();
@@ -83,7 +82,7 @@ public class ElasticSearchTaskController {
 
     }
 
-    public static class EditUserTask extends AsyncTask<Task, Void, Void> {
+    public static class EditTasksTask extends AsyncTask<Task, Void, Void> {
 
         @Override
         protected Void doInBackground(Task... tasks) {
@@ -122,7 +121,7 @@ public class ElasticSearchTaskController {
         }
     }
 
-    public static class DeleteTask extends AsyncTask<Task, Void, Void> {
+    public static class DeleteTasksTask extends AsyncTask<Task, Void, Void> {
 
         @Override
         protected Void doInBackground(Task... tasks) {
@@ -146,7 +145,7 @@ public class ElasticSearchTaskController {
     }
 
     public void deleteTasks(Task task) {
-        ElasticSearchTaskController.DeleteTask deletetask = new ElasticSearchTaskController.DeleteTask();
+        DeleteTasksTask deletetask = new DeleteTasksTask();
         deletetask.execute(task);
     }
 

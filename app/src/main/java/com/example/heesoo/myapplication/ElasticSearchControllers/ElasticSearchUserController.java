@@ -3,7 +3,6 @@ package com.example.heesoo.myapplication.ElasticSearchControllers;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
 import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
@@ -77,7 +76,7 @@ public class ElasticSearchUserController {
         }
     }
 
-    public static class GetProfile extends AsyncTask<String, Void, User> {
+    public static class GetUserTask extends AsyncTask<String, Void, User> {
         @Override
         protected User doInBackground(String... id) {
             verifySettings();
@@ -105,10 +104,10 @@ public class ElasticSearchUserController {
 
     public Boolean profileExists(String username) {
         boolean result = true;
-        ElasticSearchUserController.GetProfile getProfile = new ElasticSearchUserController.GetProfile();
-        getProfile.execute(username);
+        GetUserTask getUserTask = new GetUserTask();
+        getUserTask.execute(username);
         try {
-            User profile = getProfile.get();
+            User profile = getUserTask.get();
             Log.d("XXX",""+profile);
             // return false if no profile found
             if (profile == null || username.isEmpty()) {

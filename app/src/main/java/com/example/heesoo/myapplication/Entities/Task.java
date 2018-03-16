@@ -97,6 +97,7 @@ public class Task implements Serializable{
 
     public void acceptBid(String taskProvider) {
         assignedTaskProvider = taskProvider;
+        this.setStatus("Assigned");
     }
 
     public String toString() {
