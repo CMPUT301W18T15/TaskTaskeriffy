@@ -1,6 +1,7 @@
 package com.example.heesoo.myapplication;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.User;
 
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -24,25 +27,30 @@ import java.util.concurrent.ExecutionException;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText nameTxt, userTxt, passwordTxt, repeat_passwordTxt, emailTxt, addressTxt;
+    private EditText usernameTxt, passwordTxt, repeat_passwordTxt, emailTxt, phoneTxt;
 
     private Button submit_button;
 
-    private String nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr;
+    private String usernameStr, passwordStr, repeat_passwordStr, emailStr, phoneStr;
 
+    private AsyncTask<String, Void, User> profile;
+
+    private ElasticSearchController elasticSearchController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        elasticSearchController = new ElasticSearchController();
+
+
         submit_button = findViewById(R.id.register_submit);
-        nameTxt = findViewById(R.id.enter_name);
-        userTxt = findViewById(R.id.enter_username);
+        usernameTxt = findViewById(R.id.enter_username);
         passwordTxt = findViewById(R.id.enter_password);
         repeat_passwordTxt = findViewById(R.id.enter_repeat_password);
         emailTxt = findViewById(R.id.enter_email);
-        addressTxt = findViewById(R.id.enter_address);
+        phoneTxt = findViewById(R.id.enter_phone);
 
         init();
 
@@ -54,42 +62,66 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                nameStr = nameTxt.getText().toString();
-                userStr = userTxt.getText().toString();
+                usernameStr = usernameTxt.getText().toString();
                 passwordStr = passwordTxt.getText().toString();
                 repeat_passwordStr = repeat_passwordTxt.getText().toString();
                 emailStr = emailTxt.getText().toString();
-                addressStr = addressTxt.getText().toString();
+                phoneStr = phoneTxt.getText().toString();
 
-                if (checkEmpty(nameStr, userStr, passwordStr, repeat_passwordStr, emailStr, addressStr)) {
-                    if(pwdMatch(passwordStr, repeat_passwordStr)){
-                        User user = new User(nameStr,userStr, emailStr, addressStr);
-                        RegisterTask(user);
-                        Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Password Does Not Match", Toast.LENGTH_SHORT).show();
+                Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+                Matcher mat = pattern.matcher(emailStr);
+
+
+                if (checkEmpty(usernameStr, passwordStr, repeat_passwordStr, emailStr, phoneStr)) {
+                    if (usernameStr.length() < 8) {
+                        Toast.makeText(getApplicationContext(), "Username must be at least 8 characters", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (mat.matches()) {
+                            if (pwdMatch(passwordStr, repeat_passwordStr)) {
+                                if (elasticSearchController.profileExists(usernameStr)) {
+                                    Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    User user = new User(usernameStr, passwordStr, emailStr, phoneStr);
+                                    RegisterTask(user);
+                                    Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Password Does Not Match", Toast.LENGTH_SHORT).show();
+                            }                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Not a valid email address", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
-                }else{
+
+                } else {
                     Toast.makeText(getApplicationContext(), "All fields must be filled", Toast.LENGTH_SHORT).show();
 
                 }
 
-                Log.d("NAME:", nameStr);
-                Log.d("username:", userStr);
+                Log.d("username:", usernameStr);
                 Log.d("password:", passwordStr);
                 Log.d("repeat:", repeat_passwordStr);
                 Log.d("email:", emailStr);
-                Log.d("address:", addressStr);
+                Log.d("phone:", phoneStr);
             }
         });
 
     }
 
+
+
     private void RegisterTask(User user) {
         MyApplication.setCurrentUser(user);
         ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
         addUserTask.execute(user);
+
+        //ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+        //getUserTask.execute(usernameStr);
+
+
+
         //ElasticSearchController EC = new ElasticSearchController();
         //EC.AddUser(user);
 
@@ -101,8 +133,8 @@ public class RegisterActivity extends AppCompatActivity {
         return pwd.equals(repeat_pwd);
     }
 
-    private boolean checkEmpty(String name, String username, String password, String repeat_password, String email, String address) {
-        return !(name.equals("") || username.equals("") || password.equals("") || repeat_password.equals("") || email.equals("") || address.equals(""));
+    private boolean checkEmpty(String username, String password, String repeat_password, String email, String phone) {
+        return !(username.equals("") || password.equals("") || repeat_password.equals("") || email.equals("") || phone.equals(""));
     }
 
 }
