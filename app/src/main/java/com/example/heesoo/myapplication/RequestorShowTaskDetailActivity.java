@@ -52,11 +52,9 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*
-                Intent intent = new Intent(getApplicationContext(), AddEditTaskActivity.class);
-                intent.putExtra("task", task);
-                finish();
-                */
+                Intent intent = new Intent(RequestorShowTaskDetailActivity.this, EditTaskActivity.class);
+                intent.putExtra("TaskToEdit", task);
+                startActivity(intent);
             }
         });
 
