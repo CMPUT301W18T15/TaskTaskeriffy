@@ -32,16 +32,16 @@ public class PlaceBidActivity extends AppCompatActivity {
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("TaskToBidOn");
 
-        titleView = (TextView) findViewById(R.id.task_view_Title_content);
+        titleView = findViewById(R.id.task_view_Title_content);
         titleView.setText(task.getTaskName());
-        descriptionView = (TextView) findViewById(R.id.task_view_Description_content);
+        descriptionView = findViewById(R.id.task_view_Description_content);
         descriptionView.setText(task.getTaskDescription());
-        statusView = (TextView) findViewById(R.id.task_view_Status_content);
+        statusView = findViewById(R.id.task_view_Status_content);
         statusView.setText(task.getStatus());
-        lowestBidView = (TextView) findViewById(R.id.task_view_lowest_bid_content);
+        lowestBidView = findViewById(R.id.task_view_lowest_bid_content);
         lowestBidView.setText(task.getLowestBid().getBidPrice().toString());
-        placeBidView = (EditText) findViewById(R.id.placeBid);
-        placeBidButton = (Button) findViewById(R.id.place_bid_button);
+        placeBidView = findViewById(R.id.placeBid);
+        placeBidButton = findViewById(R.id.place_bid_button);
 
         placeBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +62,4 @@ public class PlaceBidActivity extends AppCompatActivity {
     }
 
 
-        @Override
-        protected void onStart() {
-            super.onStart();
-        }
 }

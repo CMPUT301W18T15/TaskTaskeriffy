@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by manuelakm on 2018-03-14.
@@ -31,7 +32,7 @@ public class FindNewTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find_new_tasks);
         //taskList = new TaskList();
 
-        listView = (ListView) findViewById(R.id.avaliableTasksList);
+        listView = findViewById(R.id.avaliableTasksList);
         listView.setClickable(true);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -118,8 +119,8 @@ public class FindNewTaskActivity extends AppCompatActivity {
         //String task = "";
 
         for(int i = 0; i < tempTaskList.size(); i++){
-            if (tempTaskList.get(i).getUserName() != MyApplication.getCurrentUser().getUsername()
-                    && tempTaskList.get(i).getStatus() != "Assigned") {
+            if (!Objects.equals(tempTaskList.get(i).getUserName(), MyApplication.getCurrentUser().getUsername())
+                    && !Objects.equals(tempTaskList.get(i).getStatus(), "Assigned")) {
                 taskList.add(tempTaskList.get(i));
             }
         }

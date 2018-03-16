@@ -23,16 +23,16 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         final Bid bid = (Bid) getIntent().getSerializableExtra("bid");
         //final TaskProvider taskProvider= (TaskProvider) getIntent().getSerializableExtra("TaskProvider");
 
-        TextView bidderName = (TextView)findViewById(R.id.bidderName);
+        TextView bidderName = findViewById(R.id.bidderName);
         bidderName.setText(bid.getTaskProvider());
 
-        TextView bidAmount = (TextView)findViewById(R.id.bidAmount);
+        TextView bidAmount = findViewById(R.id.bidAmount);
         bidAmount.setText(bid.getBidPrice().toString());
 
-        TextView taskName = (TextView)findViewById(R.id.taskName);
+        TextView taskName = findViewById(R.id.taskName);
         taskName.setText(bid.getTaskName());
 
-        TextView taskStatus = (TextView)findViewById(R.id.taskStatus);
+        TextView taskStatus = findViewById(R.id.taskStatus);
         taskStatus.setText(bid.getStatus());
 
 //        editTask = (Button) findViewById(R.id.editTask);
@@ -67,7 +67,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 //            }
 //        });
 
-        viewBidderProfile = (Button) findViewById(R.id.viewBidderProfile);
+        viewBidderProfile = findViewById(R.id.viewBidderProfile);
         viewBidderProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO find user in elasticsearch user table by userame.equals(bid.getTaskProvider())

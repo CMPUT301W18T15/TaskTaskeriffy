@@ -11,6 +11,7 @@ package com.example.heesoo.myapplication;
 
         import java.io.Serializable;
         import java.util.ArrayList;
+        import java.util.Objects;
 
 /**
  * Created by riyariya on 2018-03-14.
@@ -30,13 +31,13 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
 
 
         // when click on list
-        clickableList = (ListView) findViewById(R.id.requester_assigned_task_list);
+        clickableList = findViewById(R.id.requester_assigned_task_list);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent taskinfo = new Intent(com.example.heesoo.myapplication.RequestorAssignedTaskListActivity.this, RequestorShowTaskDetailActivity.class);
                 Task task = taskList.get(index);
-                taskinfo.putExtra("task", (Serializable)task);
+                taskinfo.putExtra("task", task);
                 startActivity(taskinfo);
             }
         });
@@ -74,7 +75,7 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
         ArrayList<String> requesterAssignedTasksNames = new ArrayList<String>();
 
         for (Task task:allTasks){
-            if (thisRequesterName == task.getUserName() && thisStatus == task.getStatus()){
+            if (Objects.equals(thisRequesterName, task.getUserName()) && Objects.equals(thisStatus, task.getStatus())){
                 taskList.add(task);
                 requesterAssignedTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
 

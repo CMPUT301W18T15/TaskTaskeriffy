@@ -18,17 +18,17 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         setContentView(R.layout.activity_provider_view_assigned_task_detail);
         final Task task = (Task) getIntent().getSerializableExtra("task");
 
-        TextView taskName = (TextView)findViewById(R.id.taskName);
+        TextView taskName = findViewById(R.id.taskName);
         taskName.setText(task.getTaskName());
-        TextView taskDescription = (TextView)findViewById(R.id.taskDescription);
+        TextView taskDescription = findViewById(R.id.taskDescription);
         taskDescription.setText(task.getTaskDescription());
-        TextView taskStatus = (TextView)findViewById(R.id.taskStatus);
+        TextView taskStatus = findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
-        TextView taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
+        TextView taskLowestBid = findViewById(R.id.taskLowestBid);
 
         taskLowestBid.setText(findLowestBid(task.getBids()));
 
-        finishTask = (Button) findViewById(R.id.finishTask);
+        finishTask = findViewById(R.id.finishTask);
         finishTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO use elastic search to update the task status

@@ -35,11 +35,11 @@ public class ProviderMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_main);
-        searchNewTaskButton = (Button) findViewById(R.id.search_new_task_button);
+        searchNewTaskButton = findViewById(R.id.search_new_task_button);
 
 
         //show my History button
-        Button myHistoryButton = (Button) findViewById(R.id.my_history_button);
+        Button myHistoryButton = findViewById(R.id.my_history_button);
 //        myHistoryButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -50,7 +50,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // show my Account Button
-        Button myAccountButton = (Button) findViewById(R.id.my_account_button);
+        Button myAccountButton = findViewById(R.id.my_account_button);
         myAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +67,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // view provider's bidded list button
-        Button viewBiddedListButton = (Button) findViewById(R.id.view_bidded_list_button);
+        Button viewBiddedListButton = findViewById(R.id.view_bidded_list_button);
 //        viewBiddedListButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -93,13 +93,13 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // when click on list
-        clickableList = (ListView) findViewById(R.id.provider_assigned_task_list);
+        clickableList = findViewById(R.id.provider_assigned_task_list);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent taskinfo = new Intent(ProviderMainActivity.this, ProviderViewAssignedTaskDetail.class);
                 Task task = taskList.get(index);
-                taskinfo.putExtra("task", (Serializable)task);
+                taskinfo.putExtra("task", task);
                 startActivity(taskinfo);
             }
         });

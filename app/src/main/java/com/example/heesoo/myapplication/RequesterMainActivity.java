@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RequesterMainActivity extends AppCompatActivity {
 
@@ -37,7 +38,7 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         //add new task button
-        addNewTaskButton = (Button) findViewById(R.id.add_new_task_button);
+        addNewTaskButton = findViewById(R.id.add_new_task_button);
         addNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         // show my Account Button
-        myAccountButton = (Button) findViewById(R.id.my_account_button);
+        myAccountButton = findViewById(R.id.my_account_button);
         myAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +63,7 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         // view requester's bidded button
-        showBiddedButton = (Button) findViewById(R.id.show_bidded_button);
+        showBiddedButton = findViewById(R.id.show_bidded_button);
         showBiddedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +75,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         });
 
         // requestor show assigned task button
-        showAssignedTaskButton = (Button) findViewById(R.id.show_assigned_task_button);
+        showAssignedTaskButton = findViewById(R.id.show_assigned_task_button);
         showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,13 +89,13 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
         // when click on list
-        clickableList = (ListView) findViewById(R.id.requester_posted_task_list);
+        clickableList = findViewById(R.id.requester_posted_task_list);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
                 Task task = taskList.get(index);
-                taskinfo.putExtra("task", (Serializable)task);
+                taskinfo.putExtra("task", task);
                 startActivity(taskinfo);
             }
         });
@@ -132,7 +133,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
         for (Task task:allTasks){
-            if (thisRequesterName == task.getUserName()){
+            if (Objects.equals(thisRequesterName, task.getUserName())){
                 taskList.add(task);
                 requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
             }

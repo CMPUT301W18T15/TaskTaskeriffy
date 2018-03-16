@@ -28,18 +28,18 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         String lowestBid;
         final Task task = (Task) getIntent().getSerializableExtra("task");
 
-        taskName = (TextView)findViewById(R.id.taskName);
+        taskName = findViewById(R.id.taskName);
         taskName.setText(task.getTaskName());
-        taskDescription = (TextView)findViewById(R.id.taskDescription);
+        taskDescription = findViewById(R.id.taskDescription);
         taskDescription.setText(task.getTaskDescription());
-        taskStatus = (TextView)findViewById(R.id.taskStatus);
+        taskStatus = findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
-        taskLowestBid = (TextView)findViewById(R.id.taskLowestBid);
+        taskLowestBid = findViewById(R.id.taskLowestBid);
         taskLowestBid.setText(findLowestBid(task.getBids()));
-        viewBidsButton = (Button) findViewById(R.id.view_bids);
+        viewBidsButton = findViewById(R.id.view_bids);
 
 
-        editTask = (Button) findViewById(R.id.editTask);
+        editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 /*
@@ -50,7 +50,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             }
         });
 
-        deleteTask = (Button) findViewById(R.id.deleteTask);
+        deleteTask = findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO delete the task by elastic search

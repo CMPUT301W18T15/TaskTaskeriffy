@@ -1,6 +1,7 @@
 package com.example.heesoo.myapplication;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by manuelakm on 2018-03-12.
@@ -46,7 +47,7 @@ public class TaskList {
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getStatus() == "Bidded") {
+            if (Objects.equals(tasks.get(i).getStatus(), "Bidded")) {
                 tl.addTask(tasks.get(i));
             }
         }
@@ -58,7 +59,7 @@ public class TaskList {
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getStatus() == "Assigned") {
+            if (Objects.equals(tasks.get(i).getStatus(), "Assigned")) {
                 tl.addTask(tasks.get(i));
             }
         }
@@ -70,7 +71,7 @@ public class TaskList {
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getStatus() == "Completed") {
+            if (Objects.equals(tasks.get(i).getStatus(), "Completed")) {
                 tl.addTask(tasks.get(i));
             }
         }
@@ -82,7 +83,7 @@ public class TaskList {
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getStatus() == "Accepted") {
+            if (Objects.equals(tasks.get(i).getStatus(), "Accepted")) {
                 tl.addTask(tasks.get(i));
             }
         }

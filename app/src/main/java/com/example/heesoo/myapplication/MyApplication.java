@@ -32,8 +32,7 @@ public class MyApplication extends Application {
     public static User getCurrentUser(){
         Gson gson = new Gson();
         String json = sharedPreferences.getString("MyUser", "");
-        User user = gson.fromJson(json, User.class);
-        return user;
+        return gson.fromJson(json, User.class);
     }
 
     public static void setCurrentUser(User currentUser){

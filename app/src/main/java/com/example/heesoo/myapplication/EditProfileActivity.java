@@ -19,7 +19,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText emailAddressEdit;
     private EditText phoneNumberEdit;
     private Button saveButton;
-    User user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
