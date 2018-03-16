@@ -54,7 +54,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RequestorShowTaskDetailActivity.this, EditTaskActivity.class);
+                Intent intent = new Intent(RequestorShowTaskDetailActivity.this, RequestorEditTaskActivity.class);
                 intent.putExtra("TaskToEdit", task);
                 startActivity(intent);
             }
@@ -82,7 +82,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             viewBidsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), ViewBidsOnTaskActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), RequestorViewBidsOnTaskActivity.class);
                     intent.putExtra("task", task);
                     startActivity(intent);
                 }

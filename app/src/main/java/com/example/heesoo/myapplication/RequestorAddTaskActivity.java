@@ -19,7 +19,7 @@ import com.example.heesoo.myapplication.Entities.Task;
  */
 
 
-public class AddTaskActivity extends AppCompatActivity {
+public class RequestorAddTaskActivity extends AppCompatActivity {
     private EditText taskName;
     private EditText taskDescription;
     private Button saveButton;
@@ -58,7 +58,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     CharSequence text = "Saving Task";
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    Intent intent = new Intent(AddTaskActivity.this, RequesterMainActivity.class);
+                    Intent intent = new Intent(RequestorAddTaskActivity.this, RequesterMainActivity.class);
                     startActivity(intent);
 
                     //Clear all the views

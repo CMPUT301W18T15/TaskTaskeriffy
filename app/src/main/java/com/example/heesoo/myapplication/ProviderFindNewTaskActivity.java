@@ -12,18 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by manuelakm on 2018-03-14.
  */
 
-public class FindNewTaskActivity extends AppCompatActivity {
+public class ProviderFindNewTaskActivity extends AppCompatActivity {
     private ArrayList<Task> tempTaskList;
     private ArrayList<Task> taskList;
     private ListView listView;
@@ -48,7 +46,7 @@ public class FindNewTaskActivity extends AppCompatActivity {
                 Log.d("PRINTING", selectedTask.getTaskName());
 
 
-                AlertDialog.Builder popUp = new AlertDialog.Builder(FindNewTaskActivity.this);
+                AlertDialog.Builder popUp = new AlertDialog.Builder(ProviderFindNewTaskActivity.this);
                 popUp.setMessage("Would you like to see details about '"  + selectedTask.getTaskName() + "' ?");
                 popUp.setCancelable(true);
 
@@ -58,7 +56,7 @@ public class FindNewTaskActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 setResult(RESULT_OK);
-                                Intent intent = new Intent(getApplicationContext(), PlaceBidActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), ProviderPlaceBidActivity.class);
                                 intent.putExtra("TaskToBidOn", selectedTask);
                                 startActivityForResult(intent, 1);
                             }

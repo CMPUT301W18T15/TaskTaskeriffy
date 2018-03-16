@@ -15,7 +15,7 @@ import com.example.heesoo.myapplication.Entities.Task;
  * Created by manuelakm on 2018-03-15.
  */
 
-public class EditTaskActivity extends AppCompatActivity {
+public class RequestorEditTaskActivity extends AppCompatActivity {
     private EditText taskNameEdit;
     private EditText descriptionEdit;
     private Button saveChangesButton;

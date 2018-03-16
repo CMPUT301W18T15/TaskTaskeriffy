@@ -15,7 +15,7 @@ import com.example.heesoo.myapplication.Entities.User;
 import java.util.ArrayList;
 
 
-public class BiddedTaskDetailActivity extends AppCompatActivity {
+public class RequestorBidDetailActivity extends AppCompatActivity {
     private Button editTask;
     private Button deleteTask;
     private Button acceptBid;
@@ -48,7 +48,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(BiddedTaskDetailActivity.this, EditTaskActivity.class);
+                Intent intent = new Intent(RequestorBidDetailActivity.this, RequestorEditTaskActivity.class);
                 intent.putExtra("TaskToEdit", task);
                 startActivity(intent);
             }
@@ -108,7 +108,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
                 catch (Exception e){
                     //Log.d
                 }
-                Intent intent = new Intent(BiddedTaskDetailActivity.this, ViewProfileActivity.class);
+                Intent intent = new Intent(RequestorBidDetailActivity.this, ViewProfileActivity.class);
                 intent.putExtra("USER", user);
                 startActivity(intent);
             }

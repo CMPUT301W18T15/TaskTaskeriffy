@@ -19,7 +19,7 @@ import java.util.Objects;
  * Created by manuelakm on 2018-03-15.
  */
 
-public class ViewBidsOnTaskActivity extends AppCompatActivity {
+public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
     private ListView bidsView;
     private ArrayList<Bid> tempBidList;
     private ArrayList<Bid> bidList;

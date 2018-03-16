@@ -18,7 +18,7 @@ import com.example.heesoo.myapplication.Entities.Task;
  * Created by manuelakm on 2018-03-15.
  */
 
-public class PlaceBidActivity extends AppCompatActivity {
+public class ProviderPlaceBidActivity extends AppCompatActivity {
     private TextView titleView;
     private TextView descriptionView;
     private TextView statusView;
@@ -57,7 +57,7 @@ public class PlaceBidActivity extends AppCompatActivity {
                 ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
                 addBidsTask.execute(newBid);
                 task.addBid(newBid);
-                Intent new_bid = new Intent(getApplicationContext(), FindNewTaskActivity.class);
+                Intent new_bid = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
                 new_bid.putExtra("bidPlaced", newBid);
                 setResult(Activity.RESULT_OK, new_bid);
                 finish();

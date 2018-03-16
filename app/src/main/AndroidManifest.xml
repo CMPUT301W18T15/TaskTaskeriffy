@@ -24,15 +24,15 @@
         <activity android:name=".RequesterMainActivity"></activity>
         <activity android:name=".ViewProfileActivity"></activity>
         <activity android:name=".EditProfileActivity"></activity>
-        <activity android:name=".AddTaskActivity"></activity>
+        <activity android:name=".RequestorAddTaskActivity"></activity>
         <activity android:name=".RequestorShowTaskDetailActivity"></activity>
         <activity android:name=".ProviderViewAssignedTaskDetail"></activity>
         <activity android:name=".RequesterBiddedTasksListActivity"></activity>
         <activity android:name=".RequestorAssignedTaskListActivity"></activity>
-        <activity android:name=".FindNewTaskActivity"></activity>
-        <activity android:name=".PlaceBidActivity"></activity>
-        <activity android:name=".BiddedTaskDetailActivity"></activity>
-        <activity android:name="EditTaskActivity"></activity>
+        <activity android:name=".ProviderFindNewTaskActivity"></activity>
+        <activity android:name=".ProviderPlaceBidActivity"></activity>
+        <activity android:name=".RequestorBidDetailActivity"></activity>
+        <activity android:name=".RequestorEditTaskActivity"></activity>
         <activity android:name=".ProviderViewBiddedTaskList"></activity>
 
 

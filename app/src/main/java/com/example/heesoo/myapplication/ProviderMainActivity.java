@@ -86,7 +86,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                Intent intent = new Intent(getApplicationContext(), FindNewTaskActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
                 startActivity(intent);
             }
         });

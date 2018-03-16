@@ -17,7 +17,6 @@ import com.example.heesoo.myapplication.Entities.Task;
 
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class RequesterMainActivity extends AppCompatActivity {
 
@@ -46,7 +45,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         addNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RequesterMainActivity.this, AddTaskActivity.class);
+                Intent intent = new Intent(RequesterMainActivity.this, RequestorAddTaskActivity.class);
                 startActivity(intent);
             }
         });
