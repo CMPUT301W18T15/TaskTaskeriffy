@@ -45,10 +45,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.setEmailAddress(emailAddress);
                 user.setPhoneNumber(phoneNumber);
 
-                MyApplication.setCurrentUser(user);
                 ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
                 editUser.execute(user);
                 finish();
+                MyApplication.setCurrentUser(user);
+
             }
         });
     }

@@ -32,7 +32,6 @@
         <activity android:name=".FindNewTaskActivity"></activity>
         <activity android:name=".PlaceBidActivity"></activity>
         <activity android:name=".BiddedTaskDetailActivity"></activity>
-        <activity android:name=".ViewBidListActivity"></activity>
         <activity android:name="EditTaskActivity"></activity>
         <activity android:name=".ViewHistoryActivity"></activity>
 

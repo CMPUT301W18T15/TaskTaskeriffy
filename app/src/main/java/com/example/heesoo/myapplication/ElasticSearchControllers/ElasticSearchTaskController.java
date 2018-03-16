@@ -149,17 +149,23 @@ public class ElasticSearchTaskController {
         }
     }
 
-    public static class GetAllTasks extends AsyncTask<Void, Void, ArrayList<Task>> {
+    public static class GetAllTasks extends AsyncTask<String, Void, ArrayList<Task>> {
 
         @Override
-        protected ArrayList<Task> doInBackground(Void... voids) {
+        protected ArrayList<Task> doInBackground(String... search_parameters) {
             verifySettings();
 
             ArrayList<Task> tasks = new ArrayList<Task>();
 
-            String query = ("{ \"query\": { \" match_all \" : {} } }");
+            //TODO: Try this commented stuff if older implementation does not work
+            //String query = ("{ \"query\": { \" match_all \" : {} } }");
+            //Search search = new Search.Builder(query).addIndex(index_team).addType(type_task).build();
 
-            Search search = new Search.Builder(query).addIndex(index_team).addType(type_task).build();
+            Search search = new Search.Builder(search_parameters[0])
+                    .addIndex(index_team)
+                    .addType(type_task)
+                    .build();
+
 
             try {
                 // TODO get the results of the query

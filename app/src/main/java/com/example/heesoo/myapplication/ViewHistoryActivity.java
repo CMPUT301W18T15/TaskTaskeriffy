@@ -22,6 +22,8 @@ import java.util.Objects;
  * Created by manuelakm on 2018-03-15.
  */
 
+
+//TODO: IMPORTANT::: Using this class as Provider View Bidded List. Different from Requester view Bidded List
 public class ViewHistoryActivity extends AppCompatActivity {
 
     private ArrayList<Task> tempTaskList;

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
@@ -61,11 +62,16 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         deleteTask = findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                elasticSearchTaskController.deleteTasks(task);
+                ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
+                deleteTask.execute(task);
+
+                ArrayList<Bid> allBids = task.getBids();
+                for (int i = 0; i < allBids.size(); i++ ) {
+                    ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
+                    deleteBidTask.execute(allBids.get(i));
+                }
                 Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
                 finish();
-                // TODO delete the task by elastic search
-
             }
         });
 
@@ -74,7 +80,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             viewBidsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), ViewBidListActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ViewBidsOnTaskActivity.class);
                     intent.putExtra("task", task);
                     finish();
                 }

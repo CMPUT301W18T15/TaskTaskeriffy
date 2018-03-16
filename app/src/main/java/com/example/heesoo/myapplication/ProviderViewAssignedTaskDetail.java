@@ -31,13 +31,13 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
 
         taskLowestBid.setText(findLowestBid(task.getBids()));
 
-        finishTask = findViewById(R.id.finishTask);
-        finishTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO use elastic search to update the task status
-                task.setStatus("Finished");
-            }
-        });
+        //TODO: provider should not be able to change status of task.
+//        finishTask = findViewById(R.id.finishTask);
+//        finishTask.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                task.setStatus("Finished");
+//            }
+//        });
     }
 
     public String findLowestBid(ArrayList<Bid> bids){

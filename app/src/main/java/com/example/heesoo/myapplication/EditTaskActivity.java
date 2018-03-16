@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
 
 
@@ -42,10 +43,8 @@ public class EditTaskActivity extends AppCompatActivity {
                 task.setTaskName(newTaskName);
                 task.setTaskDescription(newTaskDescription);
 
-                //UNCOMMENT WHEN ELASTIC SEARCH IS INSTALLED
-                com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController.EditUserTask editTask =
-                        new com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController.EditUserTask();
-                ElasticSearchTaskController.EditUserTask editTask = new ElasticSearchTaskController.EditUserTask();
+                ElasticSearchTaskController.EditTask editTask =
+                        new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
                 finish();
 

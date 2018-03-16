@@ -131,23 +131,22 @@ public class ElasticSearchUserController {
 
                 // Create body for PUT API of ElasticSearch
                 // Need to extract fields separately since some of the fields are transient
-                String source = "{\"username\": \"" + user.getUsername() + "\"," +
-                        "\"email\": \"" + user.getEmailAddress() + "\"," +
-                        "\"password\": " + user.getPassword() + "," +
-                        "\"phoneNumber\": " + user.getPhoneNumber() + "}";
+//                String source = "{\"username\": \"" + user.getUsername() + "\"," +
+//                        "\"email\": \"" + user.getEmailAddress() + "\"," +
+//                        "\"password\": " + user.getPassword() + "," +
+//                        "\"phoneNumber\": " + user.getPhoneNumber() + "}";
+//
+//                String doc = "{" + "\"doc\": " + source + "}";
+//                Log.d("ESC.UpdateUserTask", doc);
 
-                String doc = "{" + "\"doc\": " + source + "}";
-                Log.d("ESC.UpdateUserTask", doc);
-
-                Update update = new Update.Builder(doc)
-                        .index(index_team).type(type_user)
-                        .id(user.getId())
+                Index index = new Index.Builder(user)
+                        .index(index_team)
+                        .type(type_user)
+                        .id(user.getUsername())
                         .build();
 
-                Log.d("ESC.UpdateUserTask", user.getId());
-
                 try {
-                    DocumentResult execute = client.execute(update);
+                    DocumentResult execute = client.execute(index);
                     if (execute.isSucceeded()) {
                         Log.i("ESC.UpdateUserTask", "User has been updated.");
                     }

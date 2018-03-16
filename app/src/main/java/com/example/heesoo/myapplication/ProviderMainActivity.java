@@ -41,11 +41,11 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         //show my History button
-        Button myHistoryButton = findViewById(R.id.my_history_button);
+//        Button myHistoryButton = findViewById(R.id.my_history_button);
 //        myHistoryButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(ProviderMainActivity.this, ViewProviderHistoryActivity.class);
+//                Intent intent = new Intent(ProviderMainActivity.this, ViewHistoryActivity.class);
 //                startActivity(intent);
 //            }
 //        });
@@ -70,14 +70,14 @@ public class ProviderMainActivity extends AppCompatActivity {
 
         // view provider's bidded list button
         Button viewBiddedListButton = findViewById(R.id.view_bidded_list_button);
-//        viewBiddedListButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //setResult(RESULT_OK);
-//                Intent intent = new Intent(ProviderMainActivity.this, ViewBidListActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        viewBiddedListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setResult(RESULT_OK);
+                Intent intent = new Intent(ProviderMainActivity.this, ViewHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // provider search new task button
@@ -118,52 +118,25 @@ public class ProviderMainActivity extends AppCompatActivity {
         taskList = new ArrayList<Task>();
 
         // dummy tasks:
-        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
-        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
-
-        dTask1.setTaskProvider("RiyaRiya");
-        dTask12.setTaskProvider("Requestname3");
-        dTask13.setTaskProvider("RiyaRiya");
-
-        tempTaskList.add(dTask1);
-        tempTaskList.add(dTask12);
-        tempTaskList.add(dTask13);
-        tempTaskList.add(dTask123);
-
-
-        /* taskList = new ArrayList<Task>();
-
-        // dummy tasks:
-        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
-        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Requested");
-        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Assigned");
-        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
-        // dummy user's name
-
-        dTask1.setTaskProvider("Requestname3");
-        dTask12.setTaskProvider("Requestname3");
-        dTask13.setTaskProvider("Requestname3");
-
-
-        String thisTaskProvider = "Requestname3";
-        String status ="Assigned";
-
-        taskList.add(dTask1);
-        taskList.add(dTask12);
-        taskList.add(dTask13);
-        taskList.add(dTask123);
+//        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
+//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
+//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
+//        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
+//
+//        dTask1.setTaskProvider("RiyaRiya");
+//        dTask12.setTaskProvider("Requestname3");
+//        dTask13.setTaskProvider("RiyaRiya");
+//
+//        tempTaskList.add(dTask1);
+//        tempTaskList.add(dTask12);
+//        tempTaskList.add(dTask13);
+//        tempTaskList.add(dTask123);
 
 
 
-        ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
-        for(int i = 0; i < taskList.size(); i++){
-            if(thisTaskProvider == taskList.get(i).getTaskProvider() && status == taskList.get(i).getStatus() ){
-                requesterPostTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
-            }
-        } */
+        ArrayList<String> tasksNames = new ArrayList<String>();
+
 
         Log.d("HEREEEE", MyApplication.getCurrentUser().getUsername());
         for(int i = 0; i < tempTaskList.size(); i++){
@@ -172,11 +145,13 @@ public class ProviderMainActivity extends AppCompatActivity {
                     && tempTaskList.get(i).getStatus().equals("Assigned")) {
                 Log.d("HEREEEE", "IHATE");
                 taskList.add(tempTaskList.get(i));
+                tasksNames.add("Name: "+tempTaskList.get(i).getTaskName()+" Status: " + tempTaskList.get(i).getStatus());
+
             }
         }
 
 
-        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasksNames);
         clickableList.setAdapter(adapter);
 
     }

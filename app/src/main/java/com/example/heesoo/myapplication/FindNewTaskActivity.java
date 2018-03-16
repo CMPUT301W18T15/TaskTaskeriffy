@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 
@@ -84,45 +86,44 @@ public class FindNewTaskActivity extends AppCompatActivity {
         taskList = new ArrayList<Task>();
 
         // dummy tasks:
-        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
-        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
+//        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
+//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
+//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
+//        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
+//
+//        dTask1.setTaskProvider("Requestname3");
+//        dTask12.setTaskProvider("Requestname3");
+//        dTask13.setTaskProvider("Requestname3");
+//
+//        tempTaskList.add(dTask1);
+//        tempTaskList.add(dTask12);
+//        tempTaskList.add(dTask13);
+//        tempTaskList.add(dTask123);
 
-        dTask1.setTaskProvider("Requestname3");
-        dTask12.setTaskProvider("Requestname3");
-        dTask13.setTaskProvider("Requestname3");
-
-        tempTaskList.add(dTask1);
-        tempTaskList.add(dTask12);
-        tempTaskList.add(dTask13);
-        tempTaskList.add(dTask123);
-
-        Bid newBid = new Bid("dTask", "dTask1Description", 100f,MyApplication.getCurrentUser().getUsername());
-        Bid newBid2 = new Bid("dTask", "dTask1Description", 120f, MyApplication.getCurrentUser().getUsername());
-        Bid newBid3 = new Bid("dTask", "dTask1Description", 80f, MyApplication.getCurrentUser().getUsername());
-        dTask13.addBid(newBid);
-        dTask13.addBid(newBid2);
-        dTask13.addBid(newBid3);
+//        Bid newBid = new Bid("dTask", "dTask1Description", 100f,MyApplication.getCurrentUser().getUsername());
+//        Bid newBid2 = new Bid("dTask", "dTask1Description", 120f, MyApplication.getCurrentUser().getUsername());
+//        Bid newBid3 = new Bid("dTask", "dTask1Description", 80f, MyApplication.getCurrentUser().getUsername());
+//        dTask13.addBid(newBid);
+//        dTask13.addBid(newBid2);
+//        dTask13.addBid(newBid3);
 
 
 
         // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
 
-        /* ElasticSearchUserController.GetAllTasks getAllTasks = new ElasticSearchUserController().GetAllTasks();
-        getAllTasks.execute();
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
 
         try{
-            taskList = getAllTasks.get();
+            tempTaskList = getAllTasks.get();
         } catch(Exception e){
             Log.i("ERROR", "Failed to pull tasks from Database");
-        } */
+        }
 
-        //String task = "";
 
         for(int i = 0; i < tempTaskList.size(); i++){
-            if (!Objects.equals(tempTaskList.get(i).getUserName(), MyApplication.getCurrentUser().getUsername())
-                    && !Objects.equals(tempTaskList.get(i).getStatus(), "Assigned")) {
+            if (!(tempTaskList.get(i).getUserName().equals( MyApplication.getCurrentUser().getUsername()))
+                    && !tempTaskList.get(i).getStatus().equals("Assigned")) {
                 taskList.add(tempTaskList.get(i));
             }
         }

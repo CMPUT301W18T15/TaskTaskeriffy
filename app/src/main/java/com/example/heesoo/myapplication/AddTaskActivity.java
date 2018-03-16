@@ -1,6 +1,7 @@
 package com.example.heesoo.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -57,8 +58,8 @@ public class AddTaskActivity extends AppCompatActivity {
                     CharSequence text = "Saving Task";
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    //Intent intent = new Intent(AddTaskActivity.this, RequesterMainActivity.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(AddTaskActivity.this, RequesterMainActivity.class);
+                    startActivity(intent);
 
                     //Clear all the views
                     taskName.getText().clear();

@@ -23,11 +23,7 @@ public class ChooseModeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_mode_acitivity);
-        Log.d("KEVIN", "vvv");
 
-        //User user = MyApplication.getCurrentUser();
-
-        //Log.d("TESTING USER", );
 
         request_button = findViewById(R.id.request_mode_button);
         request_button.setOnClickListener(new View.OnClickListener() {

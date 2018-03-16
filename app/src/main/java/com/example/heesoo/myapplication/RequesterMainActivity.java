@@ -5,12 +5,14 @@ package com.example.heesoo.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
 
 
@@ -114,26 +116,36 @@ public class RequesterMainActivity extends AppCompatActivity {
         allTasks = new ArrayList<Task>();
 
         // dummy tasks:
-        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
-        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Bidded");
+//        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
+//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
+//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
+//        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Bidded");
         // dummy user's name
 
-        String thisRequesterName = "Requestname2";
+ //       String thisRequesterName = "Requestname2";
 
         // TODO use elastic search to get the Task Table
         // I suppose the name of arraylist that get from database is allTasks
 
-        allTasks.add(dTask1);
-        allTasks.add(dTask12);
-        allTasks.add(dTask13);
-        allTasks.add(dTask123);
+
+//        allTasks.add(dTask1);
+//        allTasks.add(dTask12);
+//        allTasks.add(dTask13);
+//        allTasks.add(dTask123);
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
+
+        try {
+            allTasks = getAllTasks.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "The request for tweets failed in onStart");
+        }
 
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
-        for (Task task:allTasks){
-            if (Objects.equals(thisRequesterName, task.getUserName())){
+        for (Task task : allTasks){
+            if (MyApplication.getCurrentUser().getUsername().equals(task.getUserName())){
                 taskList.add(task);
                 requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
             }

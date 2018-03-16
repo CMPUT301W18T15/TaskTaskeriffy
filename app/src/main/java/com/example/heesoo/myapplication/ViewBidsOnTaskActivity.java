@@ -43,7 +43,7 @@ public class ViewBidsOnTaskActivity extends AppCompatActivity {
         tempBidList = new ArrayList<Bid>();
         bidList = new ArrayList<Bid>();
 
-        // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
+        // TODO: UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
 
         /* ElasticSearchController.GetAllBids getAllBids = new ElasticSearchController().GetAllBids();
         getAllBids.execute();
