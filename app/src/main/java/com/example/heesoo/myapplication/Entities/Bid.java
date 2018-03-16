@@ -1,7 +1,5 @@
 package com.example.heesoo.myapplication.Entities;
 
-import android.app.ActivityManager;
-
 import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
@@ -21,12 +19,12 @@ public class Bid implements Serializable{
     @JestId
     private String id;
 
-    public Bid(String TaskName, String Description, String Status, Float BidPrice, String TaskProvider) {
+    public Bid(String TaskName, String Description, Float BidPrice, String TaskProvider) {
         this.taskName = TaskName;
         this.taskProvider = TaskProvider;
         //this.taskDetails = TaskDetail;
         this.description = Description;
-        this.status = Status;
+        this.status = "Placed";
         this.bidPrice = BidPrice;
     }
 

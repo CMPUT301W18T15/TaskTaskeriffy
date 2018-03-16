@@ -4,9 +4,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.Entities.Task;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
+
+import java.util.ArrayList;
 
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
@@ -46,6 +49,29 @@ public class ElasticSearchBidController {
         }
     }
 
+    public static class EditBidTask extends AsyncTask<Bid, Void, Void> {
+        @Override
+        protected Void doInBackground(Bid... bids) {
+            verifySettings();
+            return null;
+        }
+    }
+
+    public static class DeleteBidTask extends AsyncTask<Bid, Void, Void> {
+        @Override
+        protected Void doInBackground(Bid... bids) {
+            verifySettings();
+            return null;
+        }
+    }
+
+    public static class GetAllBidsTasks extends AsyncTask<Task, Void, ArrayList<Bid>> {
+        @Override
+        protected ArrayList<Bid> doInBackground(Task... tasks) {
+            verifySettings();
+            return null;
+        }
+    }
 
     public static void verifySettings() {
         if (client == null) {

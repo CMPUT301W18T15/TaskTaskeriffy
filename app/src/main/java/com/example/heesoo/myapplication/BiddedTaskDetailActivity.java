@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.example.heesoo.myapplication.ElasticSearchControllers.*;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Entities.User;
+
+import java.util.ArrayList;
 
 
 public class BiddedTaskDetailActivity extends AppCompatActivity {
@@ -18,6 +21,8 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
     private Button acceptBid;
     private Button declineBid;
     private Button viewBidderProfile;
+    private Task task;
+    private Bid bid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +30,8 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bidded_task_detail);
 
 
-        final Task task = (Task) getIntent().getSerializableExtra("task");
-        final Bid bid = (Bid) getIntent().getSerializableExtra("bid");
+        task = (Task) getIntent().getSerializableExtra("task");
+        bid = (Bid) getIntent().getSerializableExtra("bid");
 
         TextView bidderName = findViewById(R.id.bidderName);
         bidderName.setText(bid.getTaskProvider());
@@ -40,7 +45,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         TextView taskStatus = findViewById(R.id.taskStatus);
         taskStatus.setText(bid.getStatus());
 
-        editTask = (Button) findViewById(R.id.editTask);
+        editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(BiddedTaskDetailActivity.this, EditTaskActivity.class);
@@ -49,37 +54,63 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
             }
         });
 
-//        deleteTask = (Button) findViewById(R.id.deleteTask);
-//        deleteTask.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                // TODO delete the task by elastic search
-//            }
-//        });
+        deleteTask = (Button) findViewById(R.id.deleteTask);
+        deleteTask.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO delete the task by elastic search
+                ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
+                deleteTask.execute(task);
 
-//        acceptBid = (Button) findViewById(R.id.acceptBid);
-//        acceptBid.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                // TODO change the status of the task
-//                task.acceptBid(bid.getTaskProvider());
-//
-//            }
-//        });
+                ArrayList<Bid> allBids = task.getBids();
+                for (int i = 0; i < allBids.size(); i++ ) {
+                    ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
+                    deleteBidTask.execute(allBids.get(i));
+                }
 
-//        declineBid = (Button) findViewById(R.id.declineBid);
-//        declineBid.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                // TODO delete this bid by elastic search
-//                task.deleteBid(bid);
-//            }
-//        });
+            }
+        });
+
+
+        acceptBid = findViewById(R.id.acceptBid);
+        acceptBid.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO change the status of the task
+                task.acceptBid(bid.getTaskProvider());
+                bid.setStatus("Accepted");
+                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                editTask.execute(task);
+                ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
+                editBid.execute(bid);
+
+            }
+        });
+
+        declineBid = findViewById(R.id.declineBid);
+        declineBid.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO delete this bid by elastic search
+                bid.setStatus("Declined");
+                ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
+                editBid.execute(bid);
+            }
+        });
 
         viewBidderProfile = findViewById(R.id.viewBidderProfile);
         viewBidderProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO find user in elasticsearch user table by userame.equals(bid.getTaskProvider())
+                ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
+                getUser.execute(bid.getTaskProvider());
+                User user = new User;
+                try {
+                    user = getUser.get();
+                }
+                catch (Exception e){
+                    //Log.d
+                }
                 Intent intent = new Intent(BiddedTaskDetailActivity.this, ViewProfileActivity.class);
-//                intent.putExtra("USER", user);
-//                startActivity(intent);
+                intent.putExtra("USER", user);
+                startActivity(intent);
             }
         });
 
