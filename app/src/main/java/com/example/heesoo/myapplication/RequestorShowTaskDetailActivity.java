@@ -61,7 +61,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         deleteTask = findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                elasticSearchTaskController.deleteTasks(task);
+//                elasticSearchTaskController.deleteTasks(task);
                 Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
                 finish();
                 // TODO delete the task by elastic search
@@ -76,7 +76,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ViewBidListActivity.class);
                     intent.putExtra("task", task);
-                    finish();
+                    startActivity(intent);
                 }
             });
         }

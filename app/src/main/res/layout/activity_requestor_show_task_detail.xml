@@ -99,14 +99,16 @@
 
     <Button
         android:id="@+id/view_bids"
-        android:layout_width="408dp"
+        android:layout_width="0dp"
         android:layout_height="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="View Bids"
         android:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskStatus"
+        app:layout_constraintBottom_toTopOf="@+id/seeMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
