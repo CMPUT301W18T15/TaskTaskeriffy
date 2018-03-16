@@ -9,12 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 
-import com.example.heesoo.modelclasses.Bid;
-import com.example.heesoo.modelclasses.Task;
 
 import java.util.ArrayList;
 

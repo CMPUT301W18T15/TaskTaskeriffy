@@ -8,8 +8,9 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.heesoo.modelclasses.Bid;
-import com.example.heesoo.modelclasses.Task;
+
+import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.Entities.Task;
 
 import java.util.ArrayList;
 import java.util.Objects;

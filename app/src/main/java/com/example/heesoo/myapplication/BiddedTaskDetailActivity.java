@@ -7,13 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-<<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
-=======
-import com.example.heesoo.modelclasses.Bid;
-import com.example.heesoo.modelclasses.Task;
->>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
+
 
 public class BiddedTaskDetailActivity extends AppCompatActivity {
     private Button editTask;
@@ -29,7 +25,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 
         final Task task = (Task) getIntent().getSerializableExtra("task");
         final Bid bid = (Bid) getIntent().getSerializableExtra("bid");
-        //final TaskProvider taskProvider= (TaskProvider) getIntent().getSerializableExtra("TaskProvider");
+        //final com.example.heesoo.myapplication.Entities.TaskProvider taskProvider= (com.example.heesoo.myapplication.Entities.TaskProvider) getIntent().getSerializableExtra("com.example.heesoo.myapplication.Entities.TaskProvider");
 
         TextView bidderName = findViewById(R.id.bidderName);
         bidderName.setText(bid.getTaskProvider());

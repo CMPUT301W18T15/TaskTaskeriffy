@@ -3,11 +3,7 @@ package com.example.heesoo.myapplication.ElasticSearchControllers;
 import android.os.AsyncTask;
 import android.util.Log;
 
-<<<<<<< HEAD:app/src/main/java/com/example/heesoo/myapplication/ElasticSearchControllers/ElasticSearchBidController.java
 import com.example.heesoo.myapplication.Entities.Bid;
-=======
-import com.example.heesoo.modelclasses.Bid;
->>>>>>> 44a22492f696b3ec835da725f9daf182c819c159:app/src/main/java/com/example/heesoo/myapplication/ElasticSearchBidController.java
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;

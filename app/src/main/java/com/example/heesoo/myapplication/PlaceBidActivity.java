@@ -9,14 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-<<<<<<< HEAD
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
-=======
-import com.example.heesoo.modelclasses.Bid;
-import com.example.heesoo.modelclasses.Task;
->>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
+
 
 /**
  * Created by manuelakm on 2018-03-15.

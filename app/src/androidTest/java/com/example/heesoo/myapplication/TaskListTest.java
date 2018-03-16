@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.example.heesoo.modelclasses.Task;
 import com.example.heesoo.modelclasses.TaskList;
 import com.example.heesoo.modelclasses.TaskRequester;
+import com.example.heesoo.myapplication.Entities.TaskRequester;
 
 /**
  * Created by manuelakm on 2018-03-12.

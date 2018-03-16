@@ -8,13 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.Register.RegisterActivity;
-=======
-import com.example.heesoo.modelclasses.User;
->>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
+
 
 import java.util.ArrayList;
 

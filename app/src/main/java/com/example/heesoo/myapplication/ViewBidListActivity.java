@@ -1,5 +1,4 @@
 package com.example.heesoo.myapplication;
-// Harry
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 

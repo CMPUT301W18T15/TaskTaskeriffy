@@ -3,7 +3,7 @@ package com.example.heesoo.myapplication;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.heesoo.modelclasses.User;
+import com.example.heesoo.myapplication.Entities.User;
 import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;

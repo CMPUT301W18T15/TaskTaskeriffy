@@ -12,7 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.heesoo.modelclasses.Task;
+
+import com.example.heesoo.myapplication.Entities.Task;
 
 import java.util.ArrayList;
 import java.util.Objects;

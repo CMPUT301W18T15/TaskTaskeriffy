@@ -5,6 +5,8 @@ import android.test.ActivityInstrumentationTestCase2;
 <<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Entities.TaskProvider;
+import com.example.heesoo.myapplication.Entities.TaskRequester;
 import com.example.heesoo.myapplication.user_task_bid.Bid;
 import com.example.heesoo.myapplication.user_task_bid.Task;
 =======

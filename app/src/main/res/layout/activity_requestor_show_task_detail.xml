@@ -13,7 +13,8 @@
         android:layout_marginBottom="16dp"
         android:text="taskName"
         app:layout_constraintBottom_toTopOf="@+id/taskDescription"
-        tools:layout_editor_absoluteX="172dp" />
+        tools:layout_editor_absoluteX="172dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/taskDescription"
@@ -22,7 +23,8 @@
         android:layout_marginBottom="24dp"
         android:text="taskDescription"
         app:layout_constraintBottom_toTopOf="@+id/taskStatus"
-        tools:layout_editor_absoluteX="167dp" />
+        tools:layout_editor_absoluteX="167dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/taskStatus"
@@ -30,7 +32,8 @@
         android:layout_height="39dp"
         android:text="taskStatus"
         tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="212dp" />
+        tools:layout_editor_absoluteY="212dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/taskLowestBid"
@@ -41,7 +44,8 @@
         android:text="taskLowestBid"
         app:layout_constraintBottom_toTopOf="@+id/taskName"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="169dp" />
+        tools:layout_editor_absoluteX="169dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/deleteTask"
@@ -107,6 +111,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/view_bids"
+        android:layout_width="408dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="View Bids"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="476dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
         android:id="@+id/editTask"
         android:layout_width="408dp"
         android:layout_height="52dp"
@@ -116,7 +133,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="476dp" />
+        tools:layout_editor_absoluteY="476dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/seePicture"
@@ -124,7 +142,8 @@
         android:layout_height="54dp"
         android:text="View Photo"
         app:layout_constraintBaseline_toBaselineOf="@+id/seeMap"
-        tools:layout_editor_absoluteX="5dp" />
+        tools:layout_editor_absoluteX="5dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/seeMap"
@@ -133,5 +152,6 @@
         android:layout_marginTop="168dp"
         android:text="View Map"
         app:layout_constraintTop_toBottomOf="@+id/taskStatus"
-        tools:layout_editor_absoluteX="205dp" />
+        tools:layout_editor_absoluteX="205dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
