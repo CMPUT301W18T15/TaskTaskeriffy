@@ -47,7 +47,6 @@ public class EditTaskActivity extends AppCompatActivity {
                         new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
                 finish();
-
             }
         });
 

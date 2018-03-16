@@ -33,6 +33,7 @@ public class RequesterMainActivity extends AppCompatActivity {
     private ArrayList<Task> allTasks;
     private ArrayAdapter<Task> taskAdapter;
     private ListView clickableList;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +98,7 @@ public class RequesterMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
-                Task task = taskList.get(index);
+                task = taskList.get(index);
                 taskinfo.putExtra("task", task);
                 startActivity(taskinfo);
             }

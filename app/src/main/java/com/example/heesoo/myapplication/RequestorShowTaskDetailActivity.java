@@ -27,6 +27,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
     private TextView taskLowestBid;
 
     private ElasticSearchTaskController elasticSearchTaskController;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
 
 
         String lowestBid;
-        final Task task = (Task) getIntent().getSerializableExtra("task");
+        task = (Task) getIntent().getSerializableExtra("task");
 
         taskName = findViewById(R.id.taskName);
         taskName.setText(task.getTaskName());

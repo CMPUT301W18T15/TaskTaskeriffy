@@ -45,7 +45,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 //        myHistoryButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(ProviderMainActivity.this, ViewHistoryActivity.class);
+//                Intent intent = new Intent(ProviderMainActivity.this, ProviderViewBiddedTaskList.class);
 //                startActivity(intent);
 //            }
 //        });
@@ -74,7 +74,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //setResult(RESULT_OK);
-                Intent intent = new Intent(ProviderMainActivity.this, ViewHistoryActivity.class);
+                Intent intent = new Intent(ProviderMainActivity.this, ProviderViewBiddedTaskList.class);
                 startActivity(intent);
             }
         });

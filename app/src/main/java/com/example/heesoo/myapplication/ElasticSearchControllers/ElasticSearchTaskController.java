@@ -98,27 +98,33 @@ public class ElasticSearchTaskController {
 
                 // Create body for PUT API of ElasticSearch
                 // Need to extract fields separately since some of the fields are transient
-                String source = "{\"assignedTaskProvider\": \"" + task.getTaskProvider() + "\"," +
-                        "\"bids\": \"" + task.getBids() + "\"," +
-                        "\"status\": " + task.getStatus() + "," +
-                        "\"taskBidders\": " + task.getBid() + "," +
-                        "\"taskDescription\": " +task.getTaskDescription() + "," +
-                        "\"taskName\": "+task.getTaskName() + "}";
+//                String source = "{\"assignedTaskProvider\": \"" + task.getTaskProvider() + "\"," +
+//                        "\"bids\": \"" + task.getBids() + "\"," +
+//                        "\"status\": " + task.getStatus() + "," +
+//                        "\"taskBidders\": " + task.getBid() + "," +
+//                        "\"taskDescription\": " +task.getTaskDescription() + "," +
+//                        "\"taskName\": "+task.getTaskName() + "}";
+//
+//                String doc = "{" + "\"doc\": " + source + "}";
+//                Log.d("ESC.UpdateUserTask", doc);
+//
+//                Update update = new Update.Builder(doc).index(index_team).type(type_task).id(task.getId()).build();
+//                Log.d("ESC.UpdateUserTask", task.getId());
 
-                String doc = "{" + "\"doc\": " + source + "}";
-                Log.d("ESC.UpdateUserTask", doc);
-
-                Update update = new Update.Builder(doc).index(index_team).type(type_task).id(task.getId()).build();
-                Log.d("ESC.UpdateUserTask", task.getId());
+                Index index = new Index.Builder(task)
+                        .index(index_team)
+                        .type(type_task)
+                        .id(task.getId())
+                        .build();
 
                 try {
-                    DocumentResult execute = client.execute(update);
+                    DocumentResult execute = client.execute(index);
                     if (execute.isSucceeded()) {
-                        Log.i("ESC.UpdateUserTask", "User has been updated.");
+                        Log.i("ESC.EditTask", "Task has been updated.");
                     }
                 }
                 catch (Exception e) {
-                    Log.e("ESC.UpdateUserTask", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                    Log.e("ESC.EditTask", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
 
             }

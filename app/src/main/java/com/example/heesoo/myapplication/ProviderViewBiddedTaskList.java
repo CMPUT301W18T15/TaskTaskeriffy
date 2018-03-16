@@ -24,7 +24,7 @@ import java.util.Objects;
 
 
 //TODO: IMPORTANT::: Using this class as Provider View Bidded List. Different from Requester view Bidded List
-public class ViewHistoryActivity extends AppCompatActivity {
+public class ProviderViewBiddedTaskList extends AppCompatActivity {
 
     private ArrayList<Task> tempTaskList;
     private ArrayList<Task> taskList;
@@ -45,7 +45,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
                 final Object t = listView.getItemAtPosition(i);
                 selectedTask = (Task) t;
 
-                AlertDialog.Builder popUp = new AlertDialog.Builder(ViewHistoryActivity.this);
+                AlertDialog.Builder popUp = new AlertDialog.Builder(ProviderViewBiddedTaskList.this);
                 popUp.setMessage("Would you like to see details about '" + selectedTask.getTaskName() + "' ?");
                 popUp.setCancelable(true);
 
