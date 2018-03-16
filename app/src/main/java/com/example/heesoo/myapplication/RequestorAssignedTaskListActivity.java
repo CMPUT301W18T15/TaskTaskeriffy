@@ -6,10 +6,10 @@ package com.example.heesoo.myapplication;
         import android.view.View;
         import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
-        import android.widget.Button;
         import android.widget.ListView;
 
-        import java.io.Serializable;
+        import com.example.heesoo.modelclasses.Task;
+
         import java.util.ArrayList;
         import java.util.Objects;
 

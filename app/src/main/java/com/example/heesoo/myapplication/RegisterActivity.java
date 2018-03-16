@@ -11,12 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import com.example.heesoo.myapplication.ElasticSearchController;
-import com.example.heesoo.myapplication.MainActivity;
-import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.User;
+import com.example.heesoo.modelclasses.User;
 
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

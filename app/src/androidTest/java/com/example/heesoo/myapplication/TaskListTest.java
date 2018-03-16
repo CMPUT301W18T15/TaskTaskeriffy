@@ -2,7 +2,9 @@ package com.example.heesoo.myapplication;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import java.util.ArrayList;
+import com.example.heesoo.modelclasses.Task;
+import com.example.heesoo.modelclasses.TaskList;
+import com.example.heesoo.modelclasses.TaskRequester;
 
 /**
  * Created by manuelakm on 2018-03-12.

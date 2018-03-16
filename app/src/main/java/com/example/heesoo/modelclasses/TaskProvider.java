@@ -1,8 +1,4 @@
-package com.example.heesoo.myapplication;
-
-import android.media.Image;
-
-import java.util.ArrayList;
+package com.example.heesoo.modelclasses;
 
 /**
  * Created by chengze on 2018/2/26.

@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
+import com.example.heesoo.modelclasses.User;
 import com.google.gson.Gson;
 
 /**

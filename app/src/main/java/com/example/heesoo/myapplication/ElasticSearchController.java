@@ -1,33 +1,19 @@
 package com.example.heesoo.myapplication;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.heesoo.modelclasses.User;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import io.searchbox.client.JestResult;
-import io.searchbox.client.config.ClientConfig;
-import io.searchbox.client.config.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import io.searchbox.client.JestClient;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
 
 /**
  * Created by romansky on 10/20/16.
@@ -185,7 +171,7 @@ public class ElasticSearchController {
 //import android.os.AsyncTask;
 //import android.util.Log;
 //
-//import com.example.heesoo.myapplication.User;
+//import com.example.heesoo.modelclasses.User;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonObject;
 //import com.searchly.jestdroid.DroidClientConfig;

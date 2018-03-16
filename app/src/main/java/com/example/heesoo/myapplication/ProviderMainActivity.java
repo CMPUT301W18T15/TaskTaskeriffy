@@ -13,7 +13,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.Serializable;
+import com.example.heesoo.modelclasses.Task;
+
 import java.util.ArrayList;
 
 public class ProviderMainActivity extends AppCompatActivity {

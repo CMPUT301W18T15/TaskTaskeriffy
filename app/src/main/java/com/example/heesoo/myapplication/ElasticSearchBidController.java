@@ -3,6 +3,7 @@ package com.example.heesoo.myapplication;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.heesoo.modelclasses.Bid;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;

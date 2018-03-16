@@ -1,16 +1,15 @@
 package com.example.heesoo.myapplication;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.heesoo.modelclasses.Task;
 
 /**
  * Created by riyariya on 2018-03-12.

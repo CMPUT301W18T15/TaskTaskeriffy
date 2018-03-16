@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.modelclasses;
 
 import java.util.ArrayList;
 import java.util.Objects;

@@ -1,10 +1,8 @@
-package com.example.heesoo.myapplication;
-
-import android.provider.ContactsContract;
+package com.example.heesoo.modelclasses;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import android.media.Image;
 
 import io.searchbox.annotations.JestId;
@@ -104,6 +102,10 @@ public class Task implements Serializable{
     }
 
     public Bid getLowestBid() {
+        if ( bids.size() == 0 ) {
+            Bid newBid = new Bid("", "", "", -1f, "");
+            return newBid;
+        }
         Bid minBid = bids.get(0);
         for (int i = 1; i < bids.size(); i++) {
             if (bids.get(i).getBidPrice() < minBid.getBidPrice() ) {

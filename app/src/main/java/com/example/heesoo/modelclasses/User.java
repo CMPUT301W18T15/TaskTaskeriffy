@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.modelclasses;
 
 import android.media.Image;
 import android.support.annotation.NonNull;

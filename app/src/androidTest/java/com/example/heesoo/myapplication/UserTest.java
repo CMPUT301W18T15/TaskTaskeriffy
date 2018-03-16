@@ -3,6 +3,8 @@ package com.example.heesoo.myapplication;
 import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.heesoo.modelclasses.User;
+
 /**
  * Created by chengze on 2018/2/25.
  */
