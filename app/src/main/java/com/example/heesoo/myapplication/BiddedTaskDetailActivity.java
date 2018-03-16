@@ -43,9 +43,9 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         editTask = (Button) findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EditTaskActivity.class);
-                intent.putExtra("task", task);
-                finish();
+                Intent intent = new Intent(BiddedTaskDetailActivity.this, EditTaskActivity.class);
+                intent.putExtra("TaskToEdit", task);
+                startActivity(intent);
             }
         });
 
@@ -56,16 +56,14 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 //            }
 //        });
 
-        acceptBid = (Button) findViewById(R.id.acceptBid);
-        acceptBid.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO change the status of the task
-                task.acceptBid(bid.getTaskProvider());
-
-
-
-            }
-        });
+//        acceptBid = (Button) findViewById(R.id.acceptBid);
+//        acceptBid.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // TODO change the status of the task
+//                task.acceptBid(bid.getTaskProvider());
+//
+//            }
+//        });
 
 //        declineBid = (Button) findViewById(R.id.declineBid);
 //        declineBid.setOnClickListener(new View.OnClickListener() {
