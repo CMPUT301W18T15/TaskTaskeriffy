@@ -1,8 +1,9 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.ElasticSearchControllers;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.heesoo.myapplication.Entities.Bid;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;

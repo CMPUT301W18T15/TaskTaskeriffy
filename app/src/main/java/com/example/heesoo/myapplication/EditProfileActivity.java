@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
+import com.example.heesoo.myapplication.Entities.User;
 
 /**
  * Created by manuelakm on 2018-03-13.
@@ -49,8 +49,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 MyApplication.setCurrentUser(user);
                 // UNCOMMENT OUT WHEN ELASTICSEARCH IS IMPLEMENTED
-                //ElasticSearchController.EditUserTask editUser = new ElasticSearchController.EditUserTask();
-                //editUser.execute(user);
+                ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
+                editUser.execute(user);
                 finish();
             }
         });

@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Register;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,12 +11,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import com.example.heesoo.myapplication.ElasticSearchController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.MainActivity;
+import com.example.heesoo.myapplication.MyApplication;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.User;
+import com.example.heesoo.myapplication.Entities.User;
 
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,15 +35,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     private AsyncTask<String, Void, User> profile;
 
-    private ElasticSearchController elasticSearchController;
+    private ElasticSearchUserController elasticSearchUserController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        elasticSearchController = new ElasticSearchController();
-
+        elasticSearchUserController = new ElasticSearchUserController();
 
         submit_button = findViewById(R.id.register_submit);
         usernameTxt = findViewById(R.id.enter_username);
@@ -78,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         if (mat.matches()) {
                             if (pwdMatch(passwordStr, repeat_passwordStr)) {
-                                if (elasticSearchController.profileExists(usernameStr)) {
+                                if (elasticSearchUserController.profileExists(usernameStr)) {
                                     Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
                                 } else {
                                     User user = new User(usernameStr, passwordStr, emailStr, phoneStr);
@@ -114,15 +113,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void RegisterTask(User user) {
         MyApplication.setCurrentUser(user);
-        ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
+        ElasticSearchUserController.AddUserTask addUserTask = new ElasticSearchUserController.AddUserTask();
         addUserTask.execute(user);
 
-        //ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+        //ElasticSearchUserController.GetUserTask getUserTask = new ElasticSearchUserController.GetUserTask();
         //getUserTask.execute(usernameStr);
 
 
 
-        //ElasticSearchController EC = new ElasticSearchController();
+        //ElasticSearchUserController EC = new ElasticSearchUserController();
         //EC.AddUser(user);
 
     }

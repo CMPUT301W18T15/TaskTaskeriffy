@@ -1,8 +1,8 @@
 package com.example.heesoo.myapplication;
 
-import android.media.Image;
-
-import java.util.ArrayList;
+import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Entities.TaskList;
+import com.example.heesoo.myapplication.Entities.User;
 
 /**
  * Created by chengze on 2018/2/26.

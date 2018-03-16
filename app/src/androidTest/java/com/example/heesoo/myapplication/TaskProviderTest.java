@@ -1,9 +1,9 @@
 package com.example.heesoo.myapplication;
 
-import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
 
-import java.util.ArrayList;
+import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.user_task_bid.Task;
 
 /**
  * Created by chengze on 2018/2/25.

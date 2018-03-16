@@ -3,6 +3,9 @@ package com.example.heesoo.myapplication;
 import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.user_task_bid.User;
+
 /**
  * Created by chengze on 2018/2/25.
  */

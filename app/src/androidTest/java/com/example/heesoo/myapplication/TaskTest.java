@@ -1,9 +1,11 @@
 package com.example.heesoo.myapplication;
 
-import android.provider.ContactsContract;
 import android.test.ActivityInstrumentationTestCase2;
 
-import java.util.Collection;
+import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.user_task_bid.Bid;
+import com.example.heesoo.myapplication.user_task_bid.Task;
 
 /**
  * Created by chengze on 2018/2/25.

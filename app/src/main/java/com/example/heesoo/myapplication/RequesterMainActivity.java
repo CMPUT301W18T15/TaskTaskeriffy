@@ -10,9 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.io.Serializable;
+import com.example.heesoo.myapplication.Entities.Task;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -99,7 +99,6 @@ public class RequesterMainActivity extends AppCompatActivity {
                 startActivity(taskinfo);
             }
         });
-
 
     }
 

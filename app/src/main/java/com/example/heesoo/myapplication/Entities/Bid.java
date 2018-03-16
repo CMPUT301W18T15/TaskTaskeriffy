@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Entities;
 
 import android.app.ActivityManager;
 

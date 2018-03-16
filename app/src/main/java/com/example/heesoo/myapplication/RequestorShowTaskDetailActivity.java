@@ -5,8 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
+import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.Entities.Task;
 
 import java.util.ArrayList;
 
@@ -20,10 +25,15 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
     private TextView taskStatus;
     private TextView taskLowestBid;
 
+    private ElasticSearchTaskController elasticSearchTaskController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requestor_show_task_detail);
+
+        elasticSearchTaskController = new ElasticSearchTaskController();
+
 
         String lowestBid;
         final Task task = (Task) getIntent().getSerializableExtra("task");
@@ -53,7 +63,11 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         deleteTask = findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                elasticSearchTaskController.deleteTasks(task);
+                Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
+                finish();
                 // TODO delete the task by elastic search
+
             }
         });
 

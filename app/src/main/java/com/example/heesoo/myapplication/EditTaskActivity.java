@@ -3,10 +3,11 @@ package com.example.heesoo.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.heesoo.myapplication.Entities.Task;
 
 /**
  * Created by manuelakm on 2018-03-15.
@@ -41,7 +42,7 @@ public class EditTaskActivity extends AppCompatActivity {
                 task.setTaskDescription(newTaskDescription);
 
                 //UNCOMMENT WHEN ELASTIC SEARCH IS INSTALLED
-                //ElasticSearchController.EditTaskTask editTask = new ElasticSearchController().EditTaskTask();
+                //ElasticSearchUserController.EditTaskTask editTask = new ElasticSearchUserController().EditTaskTask();
                 //editTask.execute(task);
                 finish();
 

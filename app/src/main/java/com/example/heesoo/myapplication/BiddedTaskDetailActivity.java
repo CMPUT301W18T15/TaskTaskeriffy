@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.Entities.Task;
+
 public class BiddedTaskDetailActivity extends AppCompatActivity {
     private Button editTask;
     private Button deleteTask;

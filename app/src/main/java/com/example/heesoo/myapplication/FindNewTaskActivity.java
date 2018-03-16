@@ -11,8 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.Entities.Task;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -107,7 +109,7 @@ public class FindNewTaskActivity extends AppCompatActivity {
 
         // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
 
-        /* ElasticSearchController.GetAllTasks getAllTasks = new ElasticSearchController().GetAllTasks();
+        /* ElasticSearchUserController.GetAllTasks getAllTasks = new ElasticSearchUserController().GetAllTasks();
         getAllTasks.execute();
 
         try{
@@ -140,7 +142,7 @@ public class FindNewTaskActivity extends AppCompatActivity {
 
             Bid bidPlaced = (Bid) i.getSerializableExtra("bidPlaced");
 
-            //ElasticSearchController.AddBid addBid = new ElasticSearchController.AddBid();
+            //ElasticSearchUserController.AddBid addBid = new ElasticSearchUserController.AddBid();
             //addBid.execute(bidPlaced);
 
         }

@@ -1,10 +1,8 @@
-package com.example.heesoo.myapplication;
-
-import android.provider.ContactsContract;
+package com.example.heesoo.myapplication.Entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import android.media.Image;
 
 import io.searchbox.annotations.JestId;
@@ -35,6 +33,8 @@ public class Task implements Serializable{
         this.taskBidders = new ArrayList<User>();
         this.assignedTaskProvider = "";
     }
+
+
     public String getUserName(){
         return taskRequester;
     }

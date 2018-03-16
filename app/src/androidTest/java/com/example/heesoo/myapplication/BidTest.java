@@ -1,7 +1,9 @@
 package com.example.heesoo.myapplication;
 
-import android.app.ActivityManager;
 import android.test.ActivityInstrumentationTestCase2;
+
+import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.user_task_bid.Bid;
 
 /**
  * Created by chengze on 2018/2/25.

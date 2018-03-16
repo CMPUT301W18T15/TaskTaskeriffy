@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Entities;
 
 import android.media.Image;
 import android.support.annotation.NonNull;
@@ -24,6 +24,10 @@ public class User implements Comparable<User>, Serializable {
         this.password = pwd;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User() {
+
     }
 
     public String getUsername() {
