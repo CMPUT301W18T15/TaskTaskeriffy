@@ -3,7 +3,6 @@ package com.example.heesoo.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -59,7 +58,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO delete the task by elastic search
-                ElasticSearchTaskController.DeleteTasksTask deleteTask = new ElasticSearchTaskController.DeleteTasksTask();
+                ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
                 deleteTask.execute(task);
 
                 ArrayList<Bid> allBids = task.getBids();
@@ -77,7 +76,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
                 // TODO change the status of the task
                 task.acceptBid(bid.getTaskProvider());
                 bid.setStatus("Accepted");
-                ElasticSearchTaskController.EditTasksTask editTask = new ElasticSearchTaskController.EditTasksTask();
+                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
                 ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
                 editBid.execute(bid);

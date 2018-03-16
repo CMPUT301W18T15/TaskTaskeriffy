@@ -9,11 +9,16 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
 /**
@@ -29,7 +34,7 @@ public class ElasticSearchTaskController {
 
     private static JestDroidClient client;
 
-    public static class AddTasksTask extends AsyncTask<Task, Void, Void> {
+    public static class AddTask extends AsyncTask<Task, Void, Void> {
 
         @Override
         protected Void doInBackground(Task... tasks) {
@@ -57,7 +62,7 @@ public class ElasticSearchTaskController {
     }
 
 
-    public static class GetTasksTask extends AsyncTask<String, Void, Task> {
+    public static class GetTask extends AsyncTask<String, Void, Task> {
         @Override
         protected Task doInBackground(String... id) {
             verifySettings();
@@ -82,7 +87,7 @@ public class ElasticSearchTaskController {
 
     }
 
-    public static class EditTasksTask extends AsyncTask<Task, Void, Void> {
+    public static class EditTask extends AsyncTask<Task, Void, Void> {
 
         @Override
         protected Void doInBackground(Task... tasks) {
@@ -121,7 +126,7 @@ public class ElasticSearchTaskController {
         }
     }
 
-    public static class DeleteTasksTask extends AsyncTask<Task, Void, Void> {
+    public static class DeleteTask extends AsyncTask<Task, Void, Void> {
 
         @Override
         protected Void doInBackground(Task... tasks) {
@@ -144,9 +149,38 @@ public class ElasticSearchTaskController {
         }
     }
 
-    public void deleteTasks(Task task) {
-        DeleteTasksTask deletetask = new DeleteTasksTask();
-        deletetask.execute(task);
+    public static class GetAllTasks extends AsyncTask<Void, Void, ArrayList<Task>> {
+
+        @Override
+        protected ArrayList<Task> doInBackground(Void... voids) {
+            verifySettings();
+
+            ArrayList<Task> tasks = new ArrayList<Task>();
+
+            String query = ("{ \"query\": { \" match_all \" : {} } }");
+
+            Search search = new Search.Builder(query).addIndex(index_team).addType(type_task).build();
+
+            try {
+                // TODO get the results of the query
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+                    List<Task> foundTasks;
+                    foundTasks = result.getSourceAsObjectList(Task.class);
+                    tasks.addAll(foundTasks);
+                }
+                else{
+                    Log.i("ERROR","search query failed to find anything");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return tasks;
+        }
+
+
     }
 
     public static void verifySettings() {
