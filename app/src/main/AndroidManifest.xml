@@ -33,6 +33,7 @@
         <activity android:name=".PlaceBidActivity"></activity>
         <activity android:name=".BiddedTaskDetailActivity"></activity>
         <activity android:name=".ViewBidListActivity"></activity>
+        <activity android:name="EditTaskActivity"></activity>
 
 
 
