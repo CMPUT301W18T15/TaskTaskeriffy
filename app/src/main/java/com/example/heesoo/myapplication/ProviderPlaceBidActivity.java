@@ -43,7 +43,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
         statusView = findViewById(R.id.task_view_Status_content);
         statusView.setText(task.getStatus());
         lowestBidView = findViewById(R.id.task_view_lowest_bid_content);
-        lowestBidView.setText(task.getLowestBid().getBidPrice().toString());
+        lowestBidView.setText(task.getLowestBid());
         placeBidView = findViewById(R.id.placeBid);
         placeBidButton = findViewById(R.id.place_bid_button);
 
