@@ -29,7 +29,7 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         taskStatus.setText(task.getStatus());
         TextView taskLowestBid = findViewById(R.id.taskLowestBid);
 
-        taskLowestBid.setText(findLowestBid(task.getBids()));
+        taskLowestBid.setText(task.getLowestBid());
 
         //TODO: provider should not be able to change status of task.
 //        finishTask = findViewById(R.id.finishTask);
@@ -39,7 +39,7 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
 //            }
 //        });
     }
-
+/*
     public String findLowestBid(ArrayList<Bid> bids){
         if (bids.isEmpty()){
             return "NA";
@@ -54,5 +54,5 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
             return maxValue.toString();
         }
     }
-
+*/
 }

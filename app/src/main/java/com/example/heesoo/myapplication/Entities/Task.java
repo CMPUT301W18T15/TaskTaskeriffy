@@ -104,14 +104,19 @@ public class Task implements Serializable{
         return  "Name: " + taskName +" \n Status: " + status;
     }
 
-    public Bid getLowestBid() {
-        Bid minBid = bids.get(0);
-        for (int i = 1; i < bids.size(); i++) {
-            if (bids.get(i).getBidPrice() < minBid.getBidPrice() ) {
-                minBid = bids.get(i);
-            }
-
+    public String getLowestBid() {
+        if (bids.isEmpty()){
+            return "Null";
         }
-        return minBid;
+        else {
+            Float maxValue = bids.get(0).getBidPrice();
+            for (Bid bid : bids) {
+                if (bid.getBidPrice() < maxValue) {
+                    maxValue = bid.getBidPrice();
+                }
+            }
+            return maxValue.toString();
+        }
+
     }
 }
