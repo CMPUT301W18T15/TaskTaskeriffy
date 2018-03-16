@@ -46,7 +46,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         taskStatus = findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
         taskLowestBid = findViewById(R.id.taskLowestBid);
-        taskLowestBid.setText(findLowestBid(task.getBids()));
+        taskLowestBid.setText(task.getLowestBid());
         viewBidsButton = findViewById(R.id.view_bids);
 
 
@@ -91,7 +91,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
 
 
     }
-
+/*
     public String findLowestBid(ArrayList<Bid> bids){
         if (bids.isEmpty()){
             return "NA";
@@ -106,6 +106,6 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             return maxValue.toString();
         }
     }
-
+*/
 
 }
