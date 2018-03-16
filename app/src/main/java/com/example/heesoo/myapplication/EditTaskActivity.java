@@ -43,8 +43,10 @@ public class EditTaskActivity extends AppCompatActivity {
                 task.setTaskDescription(newTaskDescription);
 
                 //UNCOMMENT WHEN ELASTIC SEARCH IS INSTALLED
-                //ElasticSearchUserController.EditTaskTask editTask = new ElasticSearchUserController().EditTaskTask();
-                //editTask.execute(task);
+                com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController.EditUserTask editTask =
+                        new com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController.EditUserTask();
+                ElasticSearchTaskController.EditUserTask editTask = new ElasticSearchTaskController.EditUserTask();
+                editTask.execute(task);
                 finish();
 
             }

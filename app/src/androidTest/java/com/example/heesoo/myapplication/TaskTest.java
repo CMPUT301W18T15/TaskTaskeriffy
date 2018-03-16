@@ -40,7 +40,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         TaskRequester taskRequester = new TaskRequester("username1", "password", "emailaddress@email.com", "Home Address");
         TaskProvider tr = new TaskProvider("username1", "password", "emailaddress@email.com", "Home Address");
         Task task = new Task(taskRequester, TaskName, TaskDescription, status);
-        Bid bid = new Bid(TaskName, TaskDetail, Description, Status, LowestBid);
+        Bid bid = new Bid(TaskName, TaskDetail, Status, LowestBid);
         task.addBid(bid, tr);
         assertTrue(task.getBids().contains(bid));
     }
@@ -49,7 +49,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         TaskRequester taskRequester = new TaskRequester("username1", "password", "emailaddress@email.com", "Home Address");
         TaskProvider tr = new TaskProvider("username1", "password", "emailaddress@email.com", "Home Address");
         Task task = new Task(taskRequester, TaskName, TaskDescription, status);
-        Bid bid = new Bid(TaskName, TaskDetail, Description, Status, LowestBid);
+        Bid bid = new Bid(TaskName, TaskDetail, Status, LowestBid);
         task.addBid(bid, tr);
         assertTrue(task.getBids().contains(bid));
         task.deleteBid(bid, tr);
@@ -60,7 +60,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         TaskRequester taskRequester = new TaskRequester("username1", "password", "emailaddress@email.com", "Home Address");
         TaskProvider tr = new TaskProvider("username1", "password", "emailaddress@email.com", "Home Address");
         Task task = new Task(taskRequester, TaskName, TaskDescription, status);
-        Bid bid = new Bid(TaskName, TaskDetail, Description, Status, LowestBid);
+        Bid bid = new Bid(TaskName, TaskDetail, Status, LowestBid);
         task.addBid(bid, tr);
         assertEquals(bid, task.getBids().get(0));
     }
