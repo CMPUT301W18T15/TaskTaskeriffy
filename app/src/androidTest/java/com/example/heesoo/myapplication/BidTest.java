@@ -2,8 +2,12 @@ package com.example.heesoo.myapplication;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+<<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.user_task_bid.Bid;
+=======
+import com.example.heesoo.modelclasses.Bid;
+>>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
 
 /**
  * Created by chengze on 2018/2/25.

@@ -1,41 +1,38 @@
-package com.example.heesoo.myapplication.ElasticSearchControllers;
+package com.example.heesoo.myapplication;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-<<<<<<< HEAD:app/src/main/java/com/example/heesoo/myapplication/ElasticSearchControllers/ElasticSearchBidController.java
-import com.example.heesoo.myapplication.Entities.Bid;
-=======
-import com.example.heesoo.modelclasses.Bid;
->>>>>>> 44a22492f696b3ec835da725f9daf182c819c159:app/src/main/java/com/example/heesoo/myapplication/ElasticSearchBidController.java
+import com.example.heesoo.modelclasses.Task;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
+import io.searchbox.core.DocumentResult;
 
 /**
- * Created by riyariya on 2018-03-15.
+ * Created by riyariya on 2018-03-12.
  */
 
-public class ElasticSearchBidController {
+public class ElasticSearchTaskController {
+
     private static JestDroidClient client;
 
-    public static class AddBidsTask extends AsyncTask<Bid, Void, Void> {
+    public static class AddTasksTask extends AsyncTask<Task, Void, Void> {
 
         @Override
-        protected Void doInBackground(Bid... bids) {
+        protected Void doInBackground(Task... tasks) {
             verifySettings();
 
-            for (Bid bid : bids) {
-                Index index = new Index.Builder(bid).index("cmput301w18t15")
-                        .type("bid")
+            for (Task task : tasks) {
+                Index index = new Index.Builder(task).index("cmput301w18t15")
+                        .type("task")
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded()) {
-                        bid.setId(result.getId());
+                        task.setId(result.getId());
                     }
                     else {
                         Log.i("Error","Some error =(");
@@ -43,7 +40,7 @@ public class ElasticSearchBidController {
 
                 }
                 catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the bids");
+                    Log.i("Error", "The application failed to build and send the tasks");
                 }
             }
             return null;

@@ -1,110 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.heesoo.myapplication.RequestorShowTaskDetailActivity">
+    tools:context="com.example.heesoo.myapplication.ProviderViewAssignedTaskDetail">
 
     <TextView
         android:id="@+id/taskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="223dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
         android:text="taskName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/taskDescription"
+        tools:layout_editor_absoluteX="172dp" />
 
     <TextView
         android:id="@+id/taskDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="228dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="24dp"
         android:text="taskDescription"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/taskStatus"
+        tools:layout_editor_absoluteX="167dp" />
 
     <TextView
         android:id="@+id/taskStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="104dp"
+        android:layout_width="224dp"
+        android:layout_height="39dp"
         android:text="taskStatus"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="212dp" />
 
     <TextView
         android:id="@+id/taskLowestBid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="160dp"
-        android:text="taskLowestBid"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/view_bids"
-        android:layout_width="187dp"
-        android:layout_height="wrap_content"
+        android:layout_width="226dp"
+        android:layout_height="37dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="View Bids"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/seeMap"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <Button
-        android:id="@+id/seePicture"
-        android:layout_width="187dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="348dp"
-        android:text="seePicture"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/seeMap"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:text="seeMap"
-        app:layout_constraintBaseline_toBaselineOf="@+id/seePicture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/seePicture" />
-
-    <Button
-        android:id="@+id/editTask"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:text="editTask"
-        app:layout_constraintBottom_toTopOf="@+id/deleteTask"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="24dp"
+        android:text="taskLowestBid"
+        app:layout_constraintBottom_toTopOf="@+id/taskName"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="169dp" />
 
     <Button
         android:id="@+id/deleteTask"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
-        android:text="deleteTask"
+        android:layout_marginTop="8dp"
+        android:text="Delete Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTask" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="125dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Task Name :"
+        app:layout_constraintBaseline_toBaselineOf="@+id/taskName"
+        app:layout_constraintEnd_toStartOf="@+id/taskName"
+        app:layout_constraintHorizontal_bias="0.296"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="127dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Task Description :"
+        app:layout_constraintBaseline_toBaselineOf="@+id/taskDescription"
+        app:layout_constraintEnd_toStartOf="@+id/taskDescription"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="125dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Task Status :"
+        app:layout_constraintBaseline_toBaselineOf="@+id/taskStatus"
+        app:layout_constraintEnd_toStartOf="@+id/taskStatus"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="126dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Lowest Bid :"
+        app:layout_constraintBaseline_toBaselineOf="@+id/taskLowestBid"
+        app:layout_constraintEnd_toStartOf="@+id/taskLowestBid"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/editTask"
+        android:layout_width="408dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Edit Task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="476dp" />
+
+    <Button
+        android:id="@+id/seePicture"
+        android:layout_width="192dp"
+        android:layout_height="54dp"
+        android:text="View Photo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/seeMap"
+        tools:layout_editor_absoluteX="5dp" />
+
+    <Button
+        android:id="@+id/seeMap"
+        android:layout_width="202dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="168dp"
+        android:text="View Map"
+        app:layout_constraintTop_toBottomOf="@+id/taskStatus"
+        tools:layout_editor_absoluteX="205dp" />
 </android.support.constraint.ConstraintLayout>

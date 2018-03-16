@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.User;
+=======
+import com.example.heesoo.modelclasses.User;
+>>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
 
 /**
  * Created by manuelakm on 2018-03-13.

@@ -5,7 +5,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+<<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.User;
+=======
+import com.example.heesoo.modelclasses.User;
+>>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
 import com.google.gson.Gson;
 
 /**

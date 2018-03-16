@@ -10,8 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+=======
+import com.example.heesoo.modelclasses.Task;
+>>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
 
 /**
  * Created by riyariya on 2018-03-12.

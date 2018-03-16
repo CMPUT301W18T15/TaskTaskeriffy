@@ -11,11 +11,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+<<<<<<< HEAD:app/src/main/java/com/example/heesoo/myapplication/Register/RegisterActivity.java
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.MainActivity;
 import com.example.heesoo.myapplication.MyApplication;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Entities.User;
+=======
+import com.example.heesoo.modelclasses.User;
+>>>>>>> 44a22492f696b3ec835da725f9daf182c819c159:app/src/main/java/com/example/heesoo/myapplication/RegisterActivity.java
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

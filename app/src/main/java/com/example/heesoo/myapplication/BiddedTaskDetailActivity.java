@@ -7,8 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+=======
+import com.example.heesoo.modelclasses.Bid;
+import com.example.heesoo.modelclasses.Task;
+>>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
 
 public class BiddedTaskDetailActivity extends AppCompatActivity {
     private Button editTask;

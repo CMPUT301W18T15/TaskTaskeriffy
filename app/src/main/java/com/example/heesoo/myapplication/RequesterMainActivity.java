@@ -11,7 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+<<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.Task;
+=======
+import com.example.heesoo.modelclasses.Task;
+>>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
 
 import java.util.ArrayList;
 import java.util.Objects;

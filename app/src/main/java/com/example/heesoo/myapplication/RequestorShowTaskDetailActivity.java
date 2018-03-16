@@ -13,6 +13,9 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUs
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 
+import com.example.heesoo.modelclasses.Bid;
+import com.example.heesoo.modelclasses.Task;
+
 import java.util.ArrayList;
 
 public class RequestorShowTaskDetailActivity extends AppCompatActivity {
