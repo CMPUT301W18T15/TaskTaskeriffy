@@ -101,7 +101,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
                 // TODO find user in elasticsearch user table by userame.equals(bid.getTaskProvider())
                 ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
                 getUser.execute(bid.getTaskProvider());
-                User user = new User;
+                User user = new User();
                 try {
                     user = getUser.get();
                 }
