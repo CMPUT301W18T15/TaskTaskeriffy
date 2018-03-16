@@ -70,6 +70,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(allBids.get(i));
                 }
+
                 Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -82,7 +83,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ViewBidsOnTaskActivity.class);
                     intent.putExtra("task", task);
-                    finish();
+                    startActivity(intent);
                 }
             });
         }

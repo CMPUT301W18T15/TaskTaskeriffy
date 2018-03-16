@@ -37,7 +37,7 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent taskinfo = new Intent(com.example.heesoo.myapplication.RequesterBiddedTasksListActivity.this, RequestorShowTaskDetailActivity.class);
+                Intent taskinfo = new Intent(com.example.heesoo.myapplication.RequesterBiddedTasksListActivity.this, ViewBidListActivity.class);
                 Task task = taskList.get(index);
                 taskinfo.putExtra("task", task);
                 startActivity(taskinfo);

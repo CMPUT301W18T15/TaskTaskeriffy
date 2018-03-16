@@ -10,50 +10,44 @@
         android:id="@+id/taskName"
         android:layout_width="223dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="taskName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="141dp" />
 
     <TextView
         android:id="@+id/taskDescription"
         android:layout_width="228dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="taskDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskName" />
+        app:layout_constraintTop_toBottomOf="@+id/taskName"
+        tools:layout_editor_absoluteX="140dp" />
 
     <TextView
         android:id="@+id/taskStatus"
         android:layout_width="224dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="taskStatus"
-        app:layout_constraintBottom_toTopOf="@+id/taskLowestBid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescription"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintTop_toBottomOf="@+id/taskLowestBid"
+        tools:layout_editor_absoluteX="144dp" />
 
     <TextView
         android:id="@+id/taskLowestBid"
         android:layout_width="226dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="308dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="taskLowestBid"
-        app:layout_constraintBottom_toTopOf="@+id/finishTask"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescription" />
 
     <Button
         android:id="@+id/finishTask"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         android:text="Done"
@@ -102,11 +96,8 @@
         android:id="@+id/textView8"
         android:layout_width="126dp"
         android:layout_height="37dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Lowest Bid :"
-        app:layout_constraintBaseline_toBaselineOf="@+id/taskLowestBid"
-        app:layout_constraintEnd_toStartOf="@+id/taskLowestBid"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="102dp" />
 </android.support.constraint.ConstraintLayout>

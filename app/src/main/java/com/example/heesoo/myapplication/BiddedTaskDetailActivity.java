@@ -48,9 +48,9 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
         editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EditTaskActivity.class);
-                intent.putExtra("task", task);
-                finish();
+                Intent intent = new Intent(BiddedTaskDetailActivity.this, EditTaskActivity.class);
+                intent.putExtra("TaskToEdit", task);
+                startActivity(intent);
             }
         });
 
@@ -69,6 +69,7 @@ public class BiddedTaskDetailActivity extends AppCompatActivity {
 
             }
         });
+
 
         acceptBid = findViewById(R.id.acceptBid);
         acceptBid.setOnClickListener(new View.OnClickListener() {
