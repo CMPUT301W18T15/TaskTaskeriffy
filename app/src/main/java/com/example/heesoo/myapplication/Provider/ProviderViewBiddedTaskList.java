@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
+import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
@@ -98,10 +99,14 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
             Log.i("ERROR", "Failed to pull tasks from Database");
         }
 
+
         for(int i = 0; i < tempTaskList.size(); i++){
-            if ( Objects.equals(tempTaskList.get(i).getUserName(), SetCurrentUser.getCurrentUser().getUsername())
-                    && Objects.equals(tempTaskList.get(i).getStatus(), "Completed") ) {
-                taskList.add(tempTaskList.get(i));
+            if (tempTaskList.get(i).getStatus().equals("Bidded")) {
+                for (Bid pbid:tempTaskList.get(i).getBids()){
+                    if (pbid.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())){
+                        taskList.add(tempTaskList.get(i));
+                    }
+                }
             }
         }
 
