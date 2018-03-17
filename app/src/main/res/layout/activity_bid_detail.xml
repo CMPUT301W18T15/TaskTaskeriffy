@@ -20,15 +20,15 @@
 
     <TextView
         android:id="@+id/bidAmount"
-        android:layout_width="0dp"
+        android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="bidAmount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/bidderName" />
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/taskName" />
 
     <TextView
         android:id="@+id/taskName"
@@ -40,19 +40,17 @@
         android:text="taskName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/bidAmount" />
+        app:layout_constraintTop_toBottomOf="@+id/taskStatus" />
 
     <TextView
         android:id="@+id/taskStatus"
-        android:layout_width="0dp"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="taskStatus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/taskName" />
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/bidderName" />
 
     <Button
         android:id="@+id/deleteTask"
@@ -119,10 +117,10 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:text="Task Status:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/bidAmount"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/taskStatus"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView11"
@@ -136,9 +134,9 @@
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="16dp"
         android:text="Bid Amount:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/taskStatus"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/bidAmount"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
