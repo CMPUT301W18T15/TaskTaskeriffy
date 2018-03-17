@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 
@@ -40,7 +41,7 @@ public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("task");
 
-        bidsView = findViewById(R.id.provider_assigned_task_list);
+        bidsView = findViewById(R.id.bidsView);
         bidsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
@@ -52,25 +53,24 @@ public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("NewApi")
     @Override
     protected void onStart() {
         super.onStart();
+        
         bidList = new ArrayList<Bid>();
-
-        // TODO: UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
-
         bidList = task.getBids();
 
         ArrayList<String> bidNames = new ArrayList<String>();
 
 
-        for(int i = 0; i < bidList.size(); i++){
-                bidNames.add("Provider Name: "+ bidList.get(i).getTaskProvider()+" Price: " + bidList.get(i).getBidPrice() + " Status: " + bidList.get(i).getStatus());
-            }
+        for (Bid bid:bidList){
+                bidNames.add("Provider Name: "+bid.getTaskProvider()+"Bid Price: "+bid.getBidPrice()+" Status: " + bid.getStatus());
         }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, bidNames);
-//        bidsView.setAdapter(adapter);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, bidNames);
+        bidsView.setAdapter(adapter);
 
     }
 }
