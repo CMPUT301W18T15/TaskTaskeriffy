@@ -134,7 +134,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 //        tempTaskList.add(dTask123);
 
 
-
+        // added elastic search here
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
 
