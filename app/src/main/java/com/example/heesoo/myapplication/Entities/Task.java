@@ -82,10 +82,6 @@ public class Task implements Serializable{
         this.id = id;
     }
 
-    public ArrayList<Bid> getBid(){
-        return bids;
-    }
-
     public void addBid(Bid bid){
         bids.add(bid);
         this.status = "Bidded";
@@ -97,7 +93,7 @@ public class Task implements Serializable{
     public void deleteBid(Bid bid){
         bids.remove(bid);
         if (bids.isEmpty()){
-            this.status = "Requested";
+            this.status = "Req  uested";
             ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
             editTask.execute(this);
         }
