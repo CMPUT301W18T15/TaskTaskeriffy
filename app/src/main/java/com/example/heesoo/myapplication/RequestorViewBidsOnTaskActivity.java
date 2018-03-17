@@ -56,7 +56,7 @@ public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        
+
         bidList = new ArrayList<Bid>();
         bidList = task.getBids();
 

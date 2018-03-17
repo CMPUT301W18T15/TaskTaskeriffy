@@ -27,7 +27,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bidded_task_detail);
+        setContentView(R.layout.activity_bid_detail);
 
 
         task = (Task) getIntent().getSerializableExtra("task");
