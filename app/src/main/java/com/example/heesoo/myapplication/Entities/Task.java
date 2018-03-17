@@ -90,13 +90,20 @@ public class Task implements Serializable{
 
     }
 
-    public void deleteBid(Bid bid){
-        bids.remove(bid);
+    public void deleteBid(Bid recieved_bid){
+        // TODO fix remove bid from task
+        for (Bid bid:bids){
+            if(bid.getId().equals(recieved_bid.getId())){
+                bids.remove(bid);
+                break;
+            }
+        }
         if (bids.isEmpty()){
-            this.status = "Req  uested";
+            this.status = "Requested";
             ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
             editTask.execute(this);
         }
+        return;
     }
 
     public ArrayList<Bid> getBids(){

@@ -47,7 +47,9 @@ public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent bidinfo = new Intent(RequestorViewBidsOnTaskActivity.this, RequestorBidDetailActivity.class);
                 Bid bid = bidList.get(index);
+
                 bidinfo.putExtra("bid", bid);
+                bidinfo.putExtra("task", task);
                 startActivity(bidinfo);
             }
         });
