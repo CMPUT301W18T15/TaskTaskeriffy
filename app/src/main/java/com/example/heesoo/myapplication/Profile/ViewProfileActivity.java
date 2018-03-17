@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.R;
 
 /**
  * Created by manuelakm on 2018-03-13.
@@ -34,7 +37,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         User user_recieved = (User) getIntent().getSerializableExtra("USER");
         if(user_recieved == null){
-            user = MyApplication.getCurrentUser();
+            user = SetCurrentUser.getCurrentUser();
             editButton.setVisibility(View.VISIBLE);
             changeModeButton.setVisibility(View.VISIBLE);
         }else{
@@ -51,7 +54,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
                 Intent edit_information = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(edit_information);
-                finish();
+                //finish();
             }
         });
 
@@ -61,7 +64,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
                 Intent change_mode = new Intent(getApplicationContext(), ChooseModeActivity.class);
                 startActivity(change_mode);
-                finish();
+                //finish();
 
             }
         });

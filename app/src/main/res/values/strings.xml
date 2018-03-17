@@ -17,6 +17,13 @@
 
     <string name="request_a_task">Request A Task</string>
     <string name="provide_a_task">Provide A Task</string>
+    <string name="enter_task_name">Enter Task Name</string>
+    <string name="add_a_task">Add A Task</string>
+    <string name="save">Save</string>
+    <string name="enter_task_description">Enter Task Description</string>
+    <string name="biddername">bidderName</string>
+    <string name="deletetask">deleteTask</string>
+    <string name="declinebid">declineBid</string>
 
 
 </resources>

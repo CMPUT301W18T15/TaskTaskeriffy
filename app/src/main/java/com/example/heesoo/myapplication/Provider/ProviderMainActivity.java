@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Provider;
 
 // Harry
 
@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 
 import java.util.ArrayList;
@@ -131,10 +134,10 @@ public class ProviderMainActivity extends AppCompatActivity {
         ArrayList<String> tasksNames = new ArrayList<String>();
 
 
-        Log.d("HEREEEE", MyApplication.getCurrentUser().getUsername());
+        Log.d("HEREEEE", SetCurrentUser.getCurrentUser().getUsername());
         for(int i = 0; i < tempTaskList.size(); i++){
             Log.d("HEREEEE", tempTaskList.get(i).getTaskProvider());
-            if ( tempTaskList.get(i).getTaskProvider().equals(MyApplication.getCurrentUser().getUsername())
+            if ( tempTaskList.get(i).getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())
                     && tempTaskList.get(i).getStatus().equals("Assigned")) {
                 Log.d("HEREEEE", "IHATE");
                 taskList.add(tempTaskList.get(i));

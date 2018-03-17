@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.SetCurrentUser;
 
 import android.app.Application;
 import android.content.Context;
@@ -13,7 +13,7 @@ import com.google.gson.Gson;
  * Created by heesoopark on 2018-03-13.
  */
 
-public class MyApplication extends Application {
+public class SetCurrentUser extends Application {
     private static Context applicationContext;
     private static User currentUser;
     private static SharedPreferences sharedPreferences;
@@ -22,7 +22,7 @@ public class MyApplication extends Application {
     public void onCreate(){
         super.onCreate();
         applicationContext = getApplicationContext();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SetCurrentUser.getContext());
 
     }
 
@@ -50,7 +50,7 @@ public class MyApplication extends Application {
 
     public static void setCurrentMode(String currentMode){
         SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(MyApplication.getContext())
+                .getDefaultSharedPreferences(SetCurrentUser.getContext())
                 .edit();
         editor.putString("CURRENT_MODE", currentMode).apply();
     }

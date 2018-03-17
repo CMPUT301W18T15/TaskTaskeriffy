@@ -1,10 +1,8 @@
 package com.example.heesoo.myapplication.Register;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,13 +10,11 @@ import android.widget.Toast;
 
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
-import com.example.heesoo.myapplication.MainActivity;
-import com.example.heesoo.myapplication.MyApplication;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Entities.User;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.example.heesoo.myapplication.Constraints.UserConstraints;
 
 
 /**
@@ -26,16 +22,12 @@ import java.util.regex.Pattern;
  */
 
 public class RegisterActivity extends AppCompatActivity {
-
     private EditText usernameTxt, passwordTxt, repeat_passwordTxt, emailTxt, phoneTxt;
-
     private Button submit_button;
-
     private String usernameStr, passwordStr, repeat_passwordStr, emailStr, phoneStr;
-
-    private AsyncTask<String, Void, User> profile;
-
+    //private AsyncTask<String, Void, User> profile;
     private ElasticSearchUserController elasticSearchUserController;
+    //private UserConstraints userConstraints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,73 +59,39 @@ public class RegisterActivity extends AppCompatActivity {
                 emailStr = emailTxt.getText().toString();
                 phoneStr = phoneTxt.getText().toString();
 
-                Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-                Matcher mat = pattern.matcher(emailStr);
+                UserConstraints userConstraints = new UserConstraints();
 
-
-                if (checkEmpty(usernameStr, passwordStr, repeat_passwordStr, emailStr, phoneStr)) {
-                    if (usernameStr.length() < 8) {
-                        Toast.makeText(getApplicationContext(), "Username must be at least 8 characters", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (mat.matches()) {
-                            if (pwdMatch(passwordStr, repeat_passwordStr)) {
-                                if (elasticSearchUserController.profileExists(usernameStr)) {
-                                    Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
-                                } else {
+                if (userConstraints.checkEmpty(usernameStr, passwordStr, repeat_passwordStr, emailStr, phoneStr)) {
+                    if (userConstraints.usernameLength(usernameStr)) {
+                        if (!(elasticSearchUserController.profileExists(usernameStr))) {
+                            if (userConstraints.PasswordMatch(passwordStr, repeat_passwordStr)) {
+                                if (userConstraints.emailFormat(emailStr)) {
                                     User user = new User(usernameStr, passwordStr, emailStr, phoneStr);
                                     RegisterTask(user);
                                     Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Not a valid email address", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(getApplicationContext(), "Password Does Not Match", Toast.LENGTH_SHORT).show();
-                            }                        } else {
-
-                            Toast.makeText(getApplicationContext(), "Not a valid email address", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
                         }
-
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Username must be at Most 8 characters", Toast.LENGTH_SHORT).show();
                     }
-
                 } else {
                     Toast.makeText(getApplicationContext(), "All fields must be filled", Toast.LENGTH_SHORT).show();
-
                 }
-
-                Log.d("username:", usernameStr);
-                Log.d("password:", passwordStr);
-                Log.d("repeat:", repeat_passwordStr);
-                Log.d("email:", emailStr);
-                Log.d("phone:", phoneStr);
             }
         });
-
     }
-
-
 
     private void RegisterTask(User user) {
-        MyApplication.setCurrentUser(user);
+        SetCurrentUser.setCurrentUser(user);
         ElasticSearchUserController.AddUserTask addUserTask = new ElasticSearchUserController.AddUserTask();
         addUserTask.execute(user);
-
-        //ElasticSearchUserController.GetUserTask getUserTask = new ElasticSearchUserController.GetUserTask();
-        //getUserTask.execute(usernameStr);
-
-
-
-        //ElasticSearchUserController EC = new ElasticSearchUserController();
-        //EC.AddUser(user);
-
     }
-
-
-
-    private boolean pwdMatch(String pwd, String repeat_pwd) {
-        return pwd.equals(repeat_pwd);
-    }
-
-    private boolean checkEmpty(String username, String password, String repeat_password, String email, String phone) {
-        return !(username.equals("") || password.equals("") || repeat_password.equals("") || email.equals("") || phone.equals(""));
-    }
-
 }

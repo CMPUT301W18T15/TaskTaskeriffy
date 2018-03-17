@@ -1,8 +1,7 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Requestor;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +13,7 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBi
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.R;
 
 
 import java.util.ArrayList;

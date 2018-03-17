@@ -5,13 +5,13 @@
 
     <application
         android:allowBackup="true"
-        android:name=".MyApplication"
+        android:name=".SetCurrentUser.SetCurrentUser"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Main_LogIn.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,22 +19,22 @@
             </intent-filter>
         </activity>
     <activity android:name=".Register.RegisterActivity"></activity>
-        <activity android:name=".ChooseModeActivity"></activity>
-        <activity android:name=".ProviderMainActivity"></activity>
-        <activity android:name=".RequesterMainActivity"></activity>
-        <activity android:name=".ViewProfileActivity"></activity>
-        <activity android:name=".EditProfileActivity"></activity>
-        <activity android:name=".RequestorAddTaskActivity"></activity>
-        <activity android:name=".RequestorShowTaskDetailActivity"></activity>
-        <activity android:name=".ProviderViewAssignedTaskDetail"></activity>
-        <activity android:name=".RequesterBiddedTasksListActivity"></activity>
-        <activity android:name=".RequestorAssignedTaskListActivity"></activity>
-        <activity android:name=".ProviderFindNewTaskActivity"></activity>
-        <activity android:name=".ProviderPlaceBidActivity"></activity>
-        <activity android:name=".RequestorBidDetailActivity"></activity>
-        <activity android:name=".RequestorEditTaskActivity"></activity>
-        <activity android:name=".ProviderViewBiddedTaskList"></activity>
-        <activity android:name=".RequestorViewBidsOnTaskActivity"></activity>
+        <activity android:name="com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity"></activity>
+        <activity android:name=".Provider.ProviderMainActivity"></activity>
+        <activity android:name=".Requestor.RequesterMainActivity"></activity>
+        <activity android:name=".Profile.ViewProfileActivity"></activity>
+        <activity android:name=".Profile.EditProfileActivity"></activity>
+        <activity android:name=".Requestor.RequestorAddTaskActivity"></activity>
+        <activity android:name=".Requestor.RequestorShowTaskDetailActivity"></activity>
+        <activity android:name=".Provider.ProviderViewAssignedTaskDetail"></activity>
+        <activity android:name=".Requestor.RequesterBiddedTasksListActivity"></activity>
+        <activity android:name=".Requestor.RequestorAssignedTaskListActivity"></activity>
+        <activity android:name=".Provider.ProviderFindNewTaskActivity"></activity>
+        <activity android:name=".Provider.ProviderPlaceBidActivity"></activity>
+        <activity android:name=".Requestor.RequestorBidDetailActivity"></activity>
+        <activity android:name=".Requestor.RequestorEditTaskActivity"></activity>
+        <activity android:name=".Provider.ProviderViewBiddedTaskList"></activity>
+        <activity android:name=".Requestor.RequestorViewBidsOnTaskActivity"></activity>
 
 
 

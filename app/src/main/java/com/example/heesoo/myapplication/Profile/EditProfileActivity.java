@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.heesoo.myapplication.Constraints.UserConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.R;
 
 
 /**
@@ -31,7 +35,7 @@ public class EditProfileActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveInfoButton);
 
         Intent i = getIntent();
-        user = MyApplication.getCurrentUser();
+        user = SetCurrentUser.getCurrentUser();
 
         emailAddressEdit.setText(user.getEmailAddress());
         phoneNumberEdit.setText(user.getPhoneNumber());
@@ -45,10 +49,16 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.setEmailAddress(emailAddress);
                 user.setPhoneNumber(phoneNumber);
 
-                ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
-                editUser.execute(user);
-                finish();
-                MyApplication.setCurrentUser(user);
+                UserConstraints userConstraints = new UserConstraints();
+
+                if(userConstraints.emailFormat(emailAddress)){
+                    ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
+                    editUser.execute(user);
+                    finish();
+                    SetCurrentUser.setCurrentUser(user);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Enter Valid Email Address", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

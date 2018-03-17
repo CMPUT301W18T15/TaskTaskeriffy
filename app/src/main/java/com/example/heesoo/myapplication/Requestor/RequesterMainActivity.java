@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Requestor;
 
 // Harry
 
@@ -14,6 +14,9 @@ import android.widget.ListView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 
 import java.util.ArrayList;
@@ -107,10 +110,12 @@ public class RequesterMainActivity extends AppCompatActivity {
         allTasks = new ArrayList<Task>();
 
         // TODO use elastic search to get the Task Table
+
         Log.d("REQUESTCODE", "UPDATING LIST FROM DATABASE");
         taskList = getUserTasksFromDatabase();
-
         taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
+        taskAdapter.notifyDataSetChanged();
+        //clickableList.invalidateViews();
         clickableList.setAdapter(taskAdapter);
 
     }
@@ -130,7 +135,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
         for (Task task : allTasks){
-            if (MyApplication.getCurrentUser().getUsername().equals(task.getUserName())){
+            if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
                 Log.d("REQUESTCODE", task.getTaskName());
                 taskList.add(task);
                 requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());

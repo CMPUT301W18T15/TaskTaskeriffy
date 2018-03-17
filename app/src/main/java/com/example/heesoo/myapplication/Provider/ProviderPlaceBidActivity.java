@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Provider;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.R;
 
 
 /**
@@ -53,7 +55,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 newBidPrice = placeBidView.getText().toString();
                 float bidPrice = Float.parseFloat(newBidPrice);
-                Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, MyApplication.getCurrentUser().getUsername());
+                Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername());
                 ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
                 addBidsTask.execute(newBid);
                 task.addBid(newBid);

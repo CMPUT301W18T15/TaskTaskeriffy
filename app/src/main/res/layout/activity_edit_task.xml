@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/taskNameEdit"
-        android:layout_width="378dp"
-        android:layout_height="46dp"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
@@ -22,16 +22,17 @@
 
     <EditText
         android:id="@+id/descriptionEdit"
-        android:layout_width="381dp"
-        android:layout_height="157dp"
-        android:layout_marginBottom="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="108dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Description"
         app:layout_constraintBottom_toTopOf="@+id/saveChangesButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

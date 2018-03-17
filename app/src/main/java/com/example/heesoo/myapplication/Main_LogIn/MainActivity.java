@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Main_LogIn;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
+import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Register.RegisterActivity;
 
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,29 +56,40 @@ public class MainActivity extends AppCompatActivity {
                 user_str = enter_username.getText().toString();
                 pwd_str = enter_password.getText().toString();
 
+                if (checkEmpty(user_str,pwd_str)){
 
-                if (elasticSearchUserController.profileExists(user_str)) {
-                    ElasticSearchUserController.GetUserTask getUserTask = new ElasticSearchUserController.GetUserTask();
-                    getUserTask.execute(user_str);
-                    User user  = null;
-                    try {
-                        user = getUserTask.get();
+                    if (elasticSearchUserController.profileExists(user_str)) {
+                        ElasticSearchUserController.GetUserTask getUserTask = new ElasticSearchUserController.GetUserTask();
+                        getUserTask.execute(user_str);
+                        User user = null;
+                        try {
+                            user = getUserTask.get();
+                        } catch (Exception e) {
+                            Log.i("Error", "The request for tweets failed in onStart");
+                        }
+                        SetCurrentUser.setCurrentUser(user);
+                        if (pwd_str.equals(user.getPassword())) {
+                            Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Password Does not Match", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Account Does not Exist", Toast.LENGTH_SHORT).show();
+
                     }
-                    catch (Exception e) {
-                        Log.i("Error", "The request for tweets failed in onStart");
-                    }
-                    MyApplication.setCurrentUser(user);
-                    Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Account Does not Exist", Toast.LENGTH_SHORT).show();
-
+            }else{
+                    Toast.makeText(getApplicationContext(), "Please fill in Username and Password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
 
+
+    }
+
+    private boolean checkEmpty(String username,String password) {
+        return !(username.equals("") || password.equals(""));
     }
 
 
