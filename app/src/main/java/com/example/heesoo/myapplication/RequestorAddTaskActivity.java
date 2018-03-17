@@ -1,8 +1,11 @@
 package com.example.heesoo.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -58,12 +61,15 @@ public class RequestorAddTaskActivity extends AppCompatActivity {
                     CharSequence text = "Saving Task";
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    Intent intent = new Intent(RequestorAddTaskActivity.this, RequesterMainActivity.class);
-                    startActivity(intent);
 
                     //Clear all the views
                     taskName.getText().clear();
                     taskDescription.getText().clear();
+
+                    final Intent intent = new Intent(RequestorAddTaskActivity.this, RequesterMainActivity.class);
+                    startActivity(intent);
+                    finish();
+
                 }
             }
         });

@@ -2,22 +2,17 @@ package com.example.heesoo.myapplication;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-<<<<<<< HEAD
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.TaskProvider;
 import com.example.heesoo.myapplication.Entities.TaskRequester;
-import com.example.heesoo.myapplication.user_task_bid.Task;
-=======
-import com.example.heesoo.modelclasses.Task;
-import com.example.heesoo.modelclasses.TaskProvider;
-import com.example.heesoo.modelclasses.TaskRequester;
->>>>>>> 44a22492f696b3ec835da725f9daf182c819c159
+
 
 /**
  * Created by chengze on 2018/2/25.
  */
 
 public class TaskProviderTest extends ActivityInstrumentationTestCase2 {
+
     public TaskProviderTest(){
         super(TaskProvider.class);
     }

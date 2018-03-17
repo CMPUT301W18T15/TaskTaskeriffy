@@ -1,5 +1,6 @@
 package com.example.heesoo.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,9 @@ public class RequestorEditTaskActivity extends AppCompatActivity {
                 ElasticSearchTaskController.EditTask editTask =
                         new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
+                Intent edited_task = new Intent(getApplicationContext(), RequestorShowTaskDetailActivity.class);
+                edited_task.putExtra("TaskEdited", task);
+                setResult(Activity.RESULT_OK, edited_task);
                 finish();
             }
         });

@@ -25,9 +25,6 @@ public class RequesterMainActivity extends AppCompatActivity {
     private Button showBiddedButton;
     private Button showAssignedTaskButton;
 
-
-    private ListView myPostTasklist;
-
     private ArrayList<Task> taskList; // the list of tasks that requester posted
     private ArrayList<Task> allTasks;
     private ArrayAdapter<Task> taskAdapter;
@@ -38,7 +35,6 @@ public class RequesterMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requester_main);
-
 
         //add new task button
         addNewTaskButton = findViewById(R.id.add_new_task_button);
@@ -56,13 +52,10 @@ public class RequesterMainActivity extends AppCompatActivity {
         myAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(RequesterMainActivity.this, ViewProfileActivity.class);
                 startActivity(intent);
             }
         });
-
-
 
 
         // view requester's bidded button
@@ -70,7 +63,6 @@ public class RequesterMainActivity extends AppCompatActivity {
         showBiddedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(RequesterMainActivity.this, RequesterBiddedTasksListActivity.class);
                 startActivity(intent);
             }
@@ -82,13 +74,11 @@ public class RequesterMainActivity extends AppCompatActivity {
         showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(RequesterMainActivity.this, RequestorAssignedTaskListActivity.class);
                 startActivity(intent);
             }
 
         });
-
 
 
         // when click on list
@@ -99,7 +89,7 @@ public class RequesterMainActivity extends AppCompatActivity {
                 Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
                 task = taskList.get(index);
                 taskinfo.putExtra("task", task);
-                startActivity(taskinfo);
+                startActivityForResult(taskinfo, 2);
             }
         });
 
@@ -108,6 +98,7 @@ public class RequesterMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         //@todo need to pull all the tasks posted by this requester
         // will return an arraylist of tasks,
         // @todo get user's name
@@ -115,25 +106,19 @@ public class RequesterMainActivity extends AppCompatActivity {
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
 
-        // dummy tasks:
-//        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
-//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-//        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Bidded");
-        // dummy user's name
-
- //       String thisRequesterName = "Requestname2";
-
         // TODO use elastic search to get the Task Table
-        // I suppose the name of arraylist that get from database is allTasks
+        Log.d("REQUESTCODE", "UPDATING LIST FROM DATABASE");
+        taskList = getUserTasksFromDatabase();
 
+        taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
+        clickableList.setAdapter(taskAdapter);
 
-//        allTasks.add(dTask1);
-//        allTasks.add(dTask12);
-//        allTasks.add(dTask13);
-//        allTasks.add(dTask123);
+    }
+
+    protected ArrayList<Task> getUserTasksFromDatabase() {
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
+        taskList.clear();
 
         try {
             allTasks = getAllTasks.get();
@@ -146,14 +131,11 @@ public class RequesterMainActivity extends AppCompatActivity {
 
         for (Task task : allTasks){
             if (MyApplication.getCurrentUser().getUsername().equals(task.getUserName())){
+                Log.d("REQUESTCODE", task.getTaskName());
                 taskList.add(task);
                 requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
             }
         }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, requesterPostTasksNames);
-        clickableList.setAdapter(adapter);
-
+        return taskList;
     }
 }
