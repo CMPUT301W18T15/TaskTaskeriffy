@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 
 import java.util.ArrayList;
@@ -29,9 +30,21 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         TextView taskStatus = findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
         TextView taskLowestBid = findViewById(R.id.taskLowestBid);
+        TextView myBidPrice = findViewById(R.id.myBidPrice);
+
+        // TODO assume every bidder can only make 1 bid for each task
+        for (Bid bids:task.getBids()){
+            if (bids.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())){
+                myBidPrice.setText(bids.getBidPrice().toString());
+            }
+        }
+
+        Button finishTask = findViewById(R.id.finishTask);
 
         taskLowestBid.setText(task.getLowestBid());
-
+        if (task.getStatus().equals("Assigned")){
+            finishTask.setVisibility(View.VISIBLE);
+        }
         //TODO: provider should not be able to change status of task.
 //        finishTask = findViewById(R.id.finishTask);
 //        finishTask.setOnClickListener(new View.OnClickListener() {
