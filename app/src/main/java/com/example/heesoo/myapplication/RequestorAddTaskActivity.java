@@ -1,11 +1,8 @@
 package com.example.heesoo.myapplication;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +27,7 @@ public class RequestorAddTaskActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addtask);
+        setContentView(R.layout.activity_add_task);
 
         taskName = findViewById(R.id.taskName);
         taskDescription = findViewById(R.id.taskDescription);
@@ -55,7 +52,7 @@ public class RequestorAddTaskActivity extends AppCompatActivity {
 
                 // Save all the fields
                 else{
-                    Task task = new Task(MyApplication.getCurrentUser().getUsername(), name, description, "Requested");
+                    Task task = new Task(MyApplication.getCurrentUser().getUsername(), name, description);
                     ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                     addTasksTask.execute(task);
                     CharSequence text = "Saving Task";

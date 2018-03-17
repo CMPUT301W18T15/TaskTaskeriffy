@@ -175,8 +175,6 @@ public class ElasticSearchTaskController {
 
             return tasks;
         }
-
-
     }
 
     public static void verifySettings() {

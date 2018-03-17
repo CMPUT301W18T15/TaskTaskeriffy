@@ -39,20 +39,4 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
 //            }
 //        });
     }
-/*
-    public String findLowestBid(ArrayList<Bid> bids){
-        if (bids.isEmpty()){
-            return "NA";
-        }
-        else{
-            Float maxValue = bids.get(0).getBidPrice();
-            for (Bid bid:bids){
-                if (bid.getBidPrice() < maxValue){
-                    maxValue = bid.getBidPrice();
-                }
-            }
-            return maxValue.toString();
-        }
-    }
-*/
 }

@@ -2,8 +2,7 @@ package com.example.heesoo.myapplication;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.example.heesoo.modelclasses.Task;
-import com.example.heesoo.modelclasses.TaskRequester;
+import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.TaskRequester;
 
 /**
@@ -12,32 +11,32 @@ import com.example.heesoo.myapplication.Entities.TaskRequester;
 
 public class TaskRequesterTest extends ActivityInstrumentationTestCase2 {
     public TaskRequesterTest(){
+
         super(TaskRequester.class);
     }
 
-    TaskRequester tp = new TaskRequester("username1", "password", "emailaddress@email.com", "Home Address");
-    private String TaskName = "task1";
-    private String Description = "This is task description";
-    private String Status = "Requested";
-    Task t = new Task(tp, TaskName, Description, Status);
+    private String username = "Username1";
+    private String password = "Password";
+    private String email = "email@email.com";
+    private String phoneNumber = "0000000000";
 
-    TaskRequester tp2 = new TaskRequester("username2", "password2", "emailaddress@email.com2", "Home Address2");
-    private String TaskName2 = "task2";
-    private String Description2 = "This is task description2";
-    private String Status2 = "Requested2";
-    Task t2 = new Task(tp2, TaskName2, Description2, Status2);
+    private String TaskName = "Task1";
+    private String TaskDescription = "TaskDescription";
 
     public void testAddTask(){
-
-        tp.addTask(t);
-        assertEquals(tp.getTask(t), t);
+        TaskRequester taskRequester = new TaskRequester(username, password, email, phoneNumber);
+        Task task = new Task(taskRequester.getUsername(), TaskName, TaskDescription);
+        taskRequester.addTask(task);
+        assertEquals(taskRequester.getTask(task), task);
 
     }
 
     public void testRemoveTask() {
-
-        tp.addTask(t);
-        tp.removeTask(t);
-        assertNull(tp.getTask(t));
+        TaskRequester taskRequester = new TaskRequester(username, password, email, phoneNumber);
+        Task task = new Task(taskRequester.getUsername(), TaskName, TaskDescription);
+        taskRequester.addTask(task);
+        assertEquals(taskRequester.getTask(task), task);
+        taskRequester.removeTask(task);
+        assertNull(taskRequester.getTask(task));
     }
 }

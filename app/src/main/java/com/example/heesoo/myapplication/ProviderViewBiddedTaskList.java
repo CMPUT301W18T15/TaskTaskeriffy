@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_new_tasks);
 
-        listView = findViewById(R.id.historyView);
+        listView = findViewById(R.id.avaliableTasksList);
         listView.setClickable(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,14 +87,14 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
 
         // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
 
-        /* ElasticSearchController.GetAllTasks getAllTasks = new ElasticSearchController().GetAllTasks();
-        getAllTasks.execute();
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
 
         try{
             tempTaskList = getAllTasks.get();
         } catch(Exception e){
             Log.i("ERROR", "Failed to pull tasks from Database");
-        } */
+        }
 
         for(int i = 0; i < tempTaskList.size(); i++){
             if ( Objects.equals(tempTaskList.get(i).getUserName(), MyApplication.getCurrentUser().getUsername())
@@ -102,7 +103,6 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
             }
         }
 
-        Log.d("IN TASKLIST", taskList.get(0).getTaskName());
         adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         listView.setAdapter(adapter);
 

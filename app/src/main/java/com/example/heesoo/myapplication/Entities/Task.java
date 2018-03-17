@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import android.media.Image;
 
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 
 import io.searchbox.annotations.JestId;
@@ -27,11 +26,11 @@ public class Task implements Serializable{
     private ArrayList<Bid> bids;
     private ArrayList<User> taskBidders;
 
-    public Task(String taskRequester, String taskName, String taskDescription, String status) {
+    public Task(String taskRequester, String taskName, String taskDescription) {
         this.taskRequester = taskRequester;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.status = status;
+        this.status = "Requested";
         this.bids = new ArrayList<Bid>();
         this.taskBidders = new ArrayList<User>();
         this.assignedTaskProvider = "";
@@ -39,65 +38,82 @@ public class Task implements Serializable{
 
 
     public String getUserName(){
+
         return taskRequester;
     }
 
     public String getTaskProvider(){
+
         return assignedTaskProvider;
     }
 
     public void setTaskProvider(String taskProvider){
+
         this.assignedTaskProvider = taskProvider;
     }
 
-
     public String getTaskName(){
+
         return taskName;
     }
 
     public void setTaskName(String taskName){
+
         this.taskName = taskName;
     }
 
     public String getTaskDescription(){
+
         return taskDescription;
     }
 
-    public void setTaskDescription(String taskDescription){
+    public void setTaskDescription(String taskDescription) {
+
         this.taskDescription = taskDescription;
     }
 
-    public String getStatus(){
+    public String getStatus() {
+
         return status;
     }
 
-    public void setStatus(String status){
+    public void setStatus(String status) {
+
         this.status = status;
     }
-    public String getId(){
+    public String getId() {
+
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
+
         this.id = id;
     }
 
-    public void addBid(Bid bid){
+    public void addBid(Bid bid) {
+
         bids.add(bid);
         this.status = "Bidded";
         ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
         editTask.execute(this);
-
     }
 
-    public void deleteBid(Bid recieved_bid){
+    public void deleteBid(Bid recieved_bid) {
+
         // TODO fix remove bid from task
-        for (Bid bid:bids){
+        if (bids.contains(recieved_bid)) {
+            int index = bids.indexOf(recieved_bid);
+            if (bids.get(index).getId() == recieved_bid.getId()) {
+                bids.remove(index);
+            }
+        }
+        /* for (Bid bid:bids){
             if(bid.getId().equals(recieved_bid.getId())){
                 bids.remove(bid);
                 break;
             }
-        }
+        } */
         if (bids.isEmpty()){
             this.status = "Requested";
             ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
@@ -107,10 +123,12 @@ public class Task implements Serializable{
     }
 
     public ArrayList<Bid> getBids(){
+
         return bids;
     }
 
     public void acceptBid(String taskProvider) {
+
         assignedTaskProvider = taskProvider;
         this.setStatus("Assigned");
         ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
@@ -118,10 +136,12 @@ public class Task implements Serializable{
     }
 
     public String toString() {
+
         return  "Name: " + taskName +" \n Status: " + status;
     }
 
     public String getLowestBid() {
+
         if (bids.isEmpty()){
             return "Null";
         }

@@ -14,7 +14,6 @@ package com.example.heesoo.myapplication;
 
 
         import java.util.ArrayList;
-        import java.util.Objects;
 
 /**
  * Created by riyariya on 2018-03-14.
@@ -30,7 +29,7 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_assigned_task_list);
+        setContentView(R.layout.activity_requester_assigned_task_list);
 
 
         // when click on list
@@ -57,23 +56,6 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
         //String thisRequesterName = getCurrentUser
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
-
-
-//        // dummy tasks:
-//        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
-//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-//        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Bidded");
-//        // dummy user's name
-//
-//        String thisRequesterName = "Requestname2";
-//        String thisStatus = "Assigned";
-//
-//
-//        allTasks.add(dTask1);
-//        allTasks.add(dTask12);
-//        allTasks.add(dTask13);
-//        allTasks.add(dTask123);
 
         ArrayList<String> requesterAssignedTasksNames = new ArrayList<String>();
 

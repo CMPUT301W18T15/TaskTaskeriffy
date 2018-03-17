@@ -33,7 +33,7 @@
         android:id="@+id/UsernameView"
         android:layout_width="244dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="TextView"
@@ -57,7 +57,7 @@
         android:id="@+id/EmailAddressView"
         android:layout_width="246dp"
         android:layout_height="44dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/phoneNumberView"
@@ -67,12 +67,12 @@
         android:id="@+id/editInfoButton"
         android:layout_width="167dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Edit Information"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/changeModeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -92,8 +92,22 @@
         android:layout_width="244dp"
         android:layout_height="47dp"
         android:layout_marginBottom="36dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="4dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/editInfoButton"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/changeModeButton"
+        android:layout_width="166dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="CHANGE MODE"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
