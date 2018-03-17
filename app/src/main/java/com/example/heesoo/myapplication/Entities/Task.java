@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import android.media.Image;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
+
 import io.searchbox.annotations.JestId;
 
 
@@ -85,10 +88,19 @@ public class Task implements Serializable{
 
     public void addBid(Bid bid){
         bids.add(bid);
+        this.status = "Bidded";
+        ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+        editTask.execute(this);
+
     }
 
     public void deleteBid(Bid bid){
         bids.remove(bid);
+        if (bids.isEmpty()){
+            this.status = "Requested";
+            ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+            editTask.execute(this);
+        }
     }
 
     public ArrayList<Bid> getBids(){
@@ -98,6 +110,8 @@ public class Task implements Serializable{
     public void acceptBid(String taskProvider) {
         assignedTaskProvider = taskProvider;
         this.setStatus("Assigned");
+        ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+        editTask.execute(this);
     }
 
     public String toString() {
