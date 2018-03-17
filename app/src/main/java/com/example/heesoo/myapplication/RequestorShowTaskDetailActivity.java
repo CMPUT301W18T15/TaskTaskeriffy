@@ -1,6 +1,8 @@
 package com.example.heesoo.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -60,7 +62,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RequestorShowTaskDetailActivity.this, RequestorEditTaskActivity.class);
                 intent.putExtra("TaskToEdit", task);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -71,17 +73,20 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 deleteTask.execute(task);
 
                 ArrayList<Bid> allBids = task.getBids();
-                for (int i = 0; i < allBids.size(); i++ ) {
+                for (int i = 0; i < allBids.size(); i++) {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(allBids.get(i));
                 }
 
                 Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
+                Intent deleteTaskIntent = new Intent(getApplicationContext(), RequesterMainActivity.class);
+                deleteTaskIntent.putExtra("TaskDeleted", task);
+                setResult(Activity.RESULT_OK, deleteTaskIntent);
                 finish();
             }
         });
 
-        if (task.getStatus().equals("Bidded")){
+        if (task.getStatus().equals("Bidded")) {
             viewBidsButton.setVisibility(View.VISIBLE);
             viewBidsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,31 +97,26 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 }
             });
         }
-        if (task.getStatus().equals("Assigned")){
+        if (task.getStatus().equals("Assigned")) {
             textView.setVisibility(View.VISIBLE);
             taskProvider.setVisibility(View.VISIBLE);
-
             taskProvider.setText(task.getTaskProvider());
 
         }
-
-
     }
-/*
-    public String findLowestBid(ArrayList<Bid> bids){
-        if (bids.isEmpty()){
-            return "NA";
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent i) {
+        if (i == null) {
+
         }
-        else{
-            Float maxValue = bids.get(0).getBidPrice();
-            for (Bid bid:bids){
-                if (bid.getBidPrice() < maxValue){
-                    maxValue = bid.getBidPrice();
-                }
-            }
-            return maxValue.toString();
+        else if (requestCode == 1) {
+            Task task = (Task) i.getSerializableExtra("TaskEdited");
+            taskName.setText(task.getTaskName());
+            taskDescription.setText(task.getTaskDescription());
+            taskStatus.setText(task.getStatus());
+            taskLowestBid.setText(task.getLowestBid());
         }
     }
-*/
 
 }

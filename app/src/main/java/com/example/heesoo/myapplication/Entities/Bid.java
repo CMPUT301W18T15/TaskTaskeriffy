@@ -11,18 +11,17 @@ import io.searchbox.annotations.JestId;
 
 public class Bid implements Serializable{
     private String taskName;
-    //private String taskDetails;
     private String description;
     private String status;
     private String taskProvider;
     private Float bidPrice;
+
     @JestId
     private String id;
 
     public Bid(String TaskName, String Description, Float BidPrice, String TaskProvider) {
         this.taskName = TaskName;
         this.taskProvider = TaskProvider;
-        //this.taskDetails = TaskDetail;
         this.description = Description;
         this.status = "Placed";
         this.bidPrice = BidPrice;
@@ -77,16 +76,6 @@ public class Bid implements Serializable{
         
         this.id = id;
     }
-
-    /* public String getTaskDetail(){
-
-        return taskDetails;
-    }
-
-    public void setTaskDetail(String TaskDetail){
-
-        this.taskDetails = TaskDetail;
-    } */
 
     public Float getBidPrice(){
 
