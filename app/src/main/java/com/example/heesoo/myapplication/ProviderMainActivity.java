@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
 
 
@@ -38,7 +39,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_main);
         searchNewTaskButton = findViewById(R.id.search_new_task_button);
-
+        viewBiddedListButton = findViewById(R.id.view_bidded_list_button);
 
         //show my History button
 //        Button myHistoryButton = findViewById(R.id.my_history_button);
@@ -69,12 +70,12 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // view provider's bidded list button
-        Button viewBiddedListButton = findViewById(R.id.view_bidded_list_button);
+
         viewBiddedListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
-                Intent intent = new Intent(ProviderMainActivity.this, ProviderViewBiddedTaskList.class);
+                setResult(RESULT_OK);
+                Intent intent = new Intent(getApplicationContext(), ProviderViewBiddedTaskList.class);
                 startActivity(intent);
             }
         });
@@ -134,6 +135,15 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
 
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
+
+        try {
+            tempTaskList = getAllTasks.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "The request for tweets failed in onStart");
+        }
 
         ArrayList<String> tasksNames = new ArrayList<String>();
 
