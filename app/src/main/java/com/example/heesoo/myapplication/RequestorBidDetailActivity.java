@@ -27,7 +27,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bidded_task_detail);
+        setContentView(R.layout.activity_bid_detail);
 
 
         task = (Task) getIntent().getSerializableExtra("task");
@@ -77,10 +77,12 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 // TODO change the status of the task
                 task.acceptBid(bid.getTaskProvider());
                 bid.setStatus("Accepted");
-                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
-                editTask.execute(task);
+//                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+//                editTask.execute(task);
                 ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
                 editBid.execute(bid);
+                task.acceptBid(bid.getTaskProvider());
+                finish();
 
             }
         });
@@ -89,9 +91,15 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
         declineBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO delete this bid by elastic search
+                // TODO fix remove bid from task
+                task.deleteBid(bid);
                 bid.setStatus("Declined");
                 ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
                 editBid.execute(bid);
+                task.addBid(bid);
+                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                editTask.execute(task);
+                finish();
             }
         });
 

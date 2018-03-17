@@ -58,22 +58,6 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
         allTasks = new ArrayList<Task>();
         ArrayList<String> requesterBiddedTasksNames = new ArrayList<String>();
 
-
-//        // dummy tasks:
-//        Task dTask1 = new Task("Requestname1","dTaskNameshouldnotappear" ,"dTask1Description","Assigned");
-//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-//        Task dTask123 = new Task("Requestname2","dTaskName123" ,"dTask123Description","Bidded");
-//        // dummy user's name
-//
-//        String thisRequesterName = "Requestname2";
-//        String thisStatus = "Bidded";
-//
-//
-//        allTasks.add(dTask1);
-//        allTasks.add(dTask12);
-//        allTasks.add(dTask13);
-//        allTasks.add(dTask123);
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
 
@@ -91,13 +75,6 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
 
             }
         }
-
-
-//        for(int i = 0; i < taskList.size(); i++){
-//            if(thisRequesterName == taskList.get(i).getUserName() && thisStatus == taskList.get(i).getStatus()){
-//                requesterBiddedTasksNames.add("Name: "+taskList.get(i).getTaskName()+" Status: " + taskList.get(i).getStatus());
-//            }
-//        }
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

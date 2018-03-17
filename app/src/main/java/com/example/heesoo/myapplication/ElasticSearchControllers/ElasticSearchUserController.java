@@ -127,17 +127,6 @@ public class ElasticSearchUserController {
             verifySettings();
 
             for (User user : users) {
-                Gson gson = new Gson();
-
-                // Create body for PUT API of ElasticSearch
-                // Need to extract fields separately since some of the fields are transient
-//                String source = "{\"username\": \"" + user.getUsername() + "\"," +
-//                        "\"email\": \"" + user.getEmailAddress() + "\"," +
-//                        "\"password\": " + user.getPassword() + "," +
-//                        "\"phoneNumber\": " + user.getPhoneNumber() + "}";
-//
-//                String doc = "{" + "\"doc\": " + source + "}";
-//                Log.d("ESC.UpdateUserTask", doc);
 
                 Index index = new Index.Builder(user)
                         .index(index_team)

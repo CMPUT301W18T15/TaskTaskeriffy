@@ -34,6 +34,7 @@
         <activity android:name=".RequestorBidDetailActivity"></activity>
         <activity android:name=".RequestorEditTaskActivity"></activity>
         <activity android:name=".ProviderViewBiddedTaskList"></activity>
+        <activity android:name=".RequestorViewBidsOnTaskActivity"></activity>
 
 
 

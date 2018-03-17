@@ -27,6 +27,8 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
     private TextView taskDescription;
     private TextView taskStatus;
     private TextView taskLowestBid;
+    private TextView textView;
+    private TextView taskProvider;
 
     private ElasticSearchTaskController elasticSearchTaskController;
     private Task task;
@@ -51,6 +53,8 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         taskLowestBid = findViewById(R.id.taskLowestBid);
         taskLowestBid.setText(task.getLowestBid());
         viewBidsButton = findViewById(R.id.view_bids);
+        textView = findViewById(R.id.textView);
+        taskProvider = findViewById(R.id.taskProvider);
 
 
         editTask = findViewById(R.id.editTask);
@@ -69,7 +73,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 deleteTask.execute(task);
 
                 ArrayList<Bid> allBids = task.getBids();
-                for (int i = 0; i < allBids.size(); i++ ) {
+                for (int i = 0; i < allBids.size(); i++) {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(allBids.get(i));
                 }
@@ -82,7 +86,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             }
         });
 
-        if (task.getStatus().equals("Bidded")){
+        if (task.getStatus().equals("Bidded")) {
             viewBidsButton.setVisibility(View.VISIBLE);
             viewBidsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,7 +97,12 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 }
             });
         }
+        if (task.getStatus().equals("Assigned")) {
+            textView.setVisibility(View.VISIBLE);
+            taskProvider.setVisibility(View.VISIBLE);
+            taskProvider.setText(task.getTaskProvider());
 
+        }
     }
 
     @Override

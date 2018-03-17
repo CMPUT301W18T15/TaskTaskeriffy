@@ -10,9 +10,15 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.searchbox.client.JestResult;
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Get;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 /**
  * Created by riyariya on 2018-03-15.
@@ -21,6 +27,10 @@ import io.searchbox.core.Index;
 public class ElasticSearchBidController {
     private static JestDroidClient client;
 
+    private final static String index_team = "cmput301w18t15";
+    private final static String type_task = "bid";
+    private final static String database_team = "http://cmput301.softwareprocess.es:8080";
+
     public static class AddBidsTask extends AsyncTask<Bid, Void, Void> {
 
         @Override
@@ -28,8 +38,8 @@ public class ElasticSearchBidController {
             verifySettings();
 
             for (Bid bid : bids) {
-                Index index = new Index.Builder(bid).index("cmput301w18t15")
-                        .type("bid")
+                Index index = new Index.Builder(bid).index(index_team)
+                        .type(type_task)
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
@@ -49,10 +59,55 @@ public class ElasticSearchBidController {
         }
     }
 
+    public static class GetBid extends AsyncTask<String, Void, Bid> {
+        @Override
+        protected Bid doInBackground(String... id) {
+            verifySettings();
+            Bid bid = null;
+            Get get = new Get.Builder(index_team, id[0])
+                    .type(type_task)
+                    .build();
+            try {
+                JestResult result = client.execute(get);
+                if (result.isSucceeded()) {
+                    bid = result.getSourceAsObject(Bid.class);
+                }
+                else{
+                    Log.i("error", "Search query failed to find any thing =/");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return bid;
+        }
+
+    }
+
     public static class EditBidTask extends AsyncTask<Bid, Void, Void> {
         @Override
         protected Void doInBackground(Bid... bids) {
             verifySettings();
+
+            for (Bid bid : bids) {
+
+                Index index = new Index.Builder(bid)
+                        .index(index_team)
+                        .type(type_task)
+                        .id(bid.getId())
+                        .build();
+
+                try {
+                    DocumentResult execute = client.execute(index);
+                    if (execute.isSucceeded()) {
+                        Log.i("ESC.EditTask", "Bid has been updated.");
+                    }
+                }
+                catch (Exception e) {
+                    Log.e("ESC.EditTask", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+
+            }
             return null;
         }
     }
@@ -61,15 +116,59 @@ public class ElasticSearchBidController {
         @Override
         protected Void doInBackground(Bid... bids) {
             verifySettings();
+
+            for (Bid bid : bids) {
+                Delete delete = new Delete.Builder(bid.getId())
+                        .index(index_team)
+                        .type(type_task)
+                        .build();
+                try {
+                    DocumentResult result = client.execute(delete);
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to delete the bid");
+
+                }
+            }
             return null;
         }
     }
 
-    public static class GetAllBidsTasks extends AsyncTask<Task, Void, ArrayList<Bid>> {
+    public static class GetAllBids extends AsyncTask<String, Void, ArrayList<Bid>> {
+
         @Override
-        protected ArrayList<Bid> doInBackground(Task... tasks) {
+        protected ArrayList<Bid> doInBackground(String... search_parameters) {
             verifySettings();
-            return null;
+
+            ArrayList<Bid> bids = new ArrayList<Bid>();
+
+            //TODO: Try this commented stuff if older implementation does not work
+            //String query = ("{ \"query\": { \" match_all \" : {} } }");
+            //Search search = new Search.Builder(query).addIndex(index_team).addType(type_task).build();
+
+            Search search = new Search.Builder(search_parameters[0])
+                    .addIndex(index_team)
+                    .addType(type_task)
+                    .build();
+
+
+            try {
+                // TODO get the results of the query
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+                    List<Bid> foundBids;
+                    foundBids = result.getSourceAsObjectList(Bid.class);
+                    bids.addAll(foundBids);
+                }
+                else{
+                    Log.i("ERROR","search query failed to find anything");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return bids;
         }
     }
 

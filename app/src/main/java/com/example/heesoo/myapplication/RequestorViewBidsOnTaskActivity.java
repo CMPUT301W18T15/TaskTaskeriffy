@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
 
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 
@@ -24,7 +28,9 @@ public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
     private ArrayList<Bid> tempBidList;
     private ArrayList<Bid> bidList;
     private Task task;
-    private ArrayAdapter<Bid> adapter;
+
+    //private ArrayAdapter<String> adapter;
+
 
 
     @Override
@@ -34,33 +40,38 @@ public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("task");
+
+        bidsView = findViewById(R.id.bidsView);
+        bidsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
+                Intent bidinfo = new Intent(RequestorViewBidsOnTaskActivity.this, RequestorBidDetailActivity.class);
+                Bid bid = bidList.get(index);
+
+                bidinfo.putExtra("bid", bid);
+                bidinfo.putExtra("task", task);
+                startActivity(bidinfo);
+            }
+        });
     }
 
-    @SuppressLint("NewApi")
     @Override
     protected void onStart() {
         super.onStart();
-        tempBidList = new ArrayList<Bid>();
+
         bidList = new ArrayList<Bid>();
+        bidList = task.getBids();
 
-        // TODO: UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
+        ArrayList<String> bidNames = new ArrayList<String>();
 
-        /* ElasticSearchController.GetAllBids getAllBids = new ElasticSearchController().GetAllBids();
-        getAllBids.execute();
 
-        try{
-            tempBidList = getAllBids.get();
-        } catch(Exception e){
-            Log.i("ERROR", "Failed to pull tasks from Database");
-        } */
-
-        for(int i = 0; i < tempBidList.size(); i++){
-            if (!Objects.equals(tempBidList.get(i).getTaskName(), task.getTaskName())) {
-                bidList.add(tempBidList.get(i));
-            }
+        for (Bid bid:bidList){
+                bidNames.add("Provider Name: "+bid.getTaskProvider()+"Bid Price: "+bid.getBidPrice()+" Status: " + bid.getStatus());
         }
-        Log.d("IN TASKLIST", bidList.get(0).getTaskName());
-        adapter = new ArrayAdapter<Bid>(this, android.R.layout.simple_list_item_1, android.R.id.text1, bidList);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, bidNames);
         bidsView.setAdapter(adapter);
 
     }
