@@ -118,23 +118,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
 
-        // dummy tasks:
-//        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
-//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-//        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
-//
-//        dTask1.setTaskProvider("RiyaRiya");
-//        dTask12.setTaskProvider("Requestname3");
-//        dTask13.setTaskProvider("RiyaRiya");
-//
-//        tempTaskList.add(dTask1);
-//        tempTaskList.add(dTask12);
-//        tempTaskList.add(dTask13);
-//        tempTaskList.add(dTask123);
-
-
-        // added elastic search here
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
 

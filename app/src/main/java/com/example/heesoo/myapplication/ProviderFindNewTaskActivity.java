@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
@@ -83,32 +84,6 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
 
-        // dummy tasks:
-//        Task dTask1 = new Task("Requestname1","dTask" ,"dTask1Description","Assigned");
-//        Task dTask12 = new Task("Requestname2","dTaskName12" ,"dTask12Description","Assigned");
-//        Task dTask13 = new Task("Requestname2","dTaskName13" ,"dTask13Description","Requested");
-//        Task dTask123 = new Task("Requestname2","dTaskName123Nameshouldnotappear" ,"dTask123Description","Assigned");
-//
-//        dTask1.setTaskProvider("Requestname3");
-//        dTask12.setTaskProvider("Requestname3");
-//        dTask13.setTaskProvider("Requestname3");
-//
-//        tempTaskList.add(dTask1);
-//        tempTaskList.add(dTask12);
-//        tempTaskList.add(dTask13);
-//        tempTaskList.add(dTask123);
-
-//        Bid newBid = new Bid("dTask", "dTask1Description", 100f,MyApplication.getCurrentUser().getUsername());
-//        Bid newBid2 = new Bid("dTask", "dTask1Description", 120f, MyApplication.getCurrentUser().getUsername());
-//        Bid newBid3 = new Bid("dTask", "dTask1Description", 80f, MyApplication.getCurrentUser().getUsername());
-//        dTask13.addBid(newBid);
-//        dTask13.addBid(newBid2);
-//        dTask13.addBid(newBid3);
-
-
-
-        // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
-
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
 
@@ -125,7 +100,6 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
                 taskList.add(tempTaskList.get(i));
             }
         }
-        Log.d("IN TASKLIST", taskList.get(0).getTaskName());
         adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         listView.setAdapter(adapter);
 
@@ -141,8 +115,8 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
 
             Bid bidPlaced = (Bid) i.getSerializableExtra("bidPlaced");
 
-            //ElasticSearchUserController.AddBid addBid = new ElasticSearchUserController.AddBid();
-            //addBid.execute(bidPlaced);
+            ElasticSearchBidController.AddBidsTask addBid = new ElasticSearchBidController.AddBidsTask();
+            addBid.execute(bidPlaced);
 
         }
 

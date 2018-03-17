@@ -14,7 +14,6 @@ import com.example.heesoo.myapplication.Entities.Task;
 
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by riyariya on 2018-03-14.
@@ -29,7 +28,7 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requestor_bidded_task_list);
+        setContentView(R.layout.activity_requestor_bidded_task_list);
 
 
         // when click on list

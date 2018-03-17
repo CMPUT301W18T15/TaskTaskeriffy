@@ -19,21 +19,24 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView EmailAddressView;
     private TextView PhoneNumberView;
     private Button editButton;
+    private Button changeModeButton;
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_profile);
+        setContentView(R.layout.activity_view_profile);
         usernameView = findViewById(R.id.UsernameView);
         EmailAddressView = findViewById(R.id.EmailAddressView);
         PhoneNumberView = findViewById(R.id.phoneNumberView);
         editButton = findViewById(R.id.editInfoButton);
+        changeModeButton = findViewById(R.id.changeModeButton);
 
         User user_recieved = (User) getIntent().getSerializableExtra("USER");
         if(user_recieved == null){
             user = MyApplication.getCurrentUser();
             editButton.setVisibility(View.VISIBLE);
+            changeModeButton.setVisibility(View.VISIBLE);
         }else{
            user  = user_recieved;
         }
@@ -47,9 +50,19 @@ public class ViewProfileActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
 
                 Intent edit_information = new Intent(getApplicationContext(), EditProfileActivity.class);
-                //edit_information.putExtra("UserToEdit", user);
                 startActivity(edit_information);
                 finish();
+            }
+        });
+
+        changeModeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                Intent change_mode = new Intent(getApplicationContext(), ChooseModeActivity.class);
+                startActivity(change_mode);
+                finish();
+
             }
         });
     }
