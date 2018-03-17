@@ -94,22 +94,6 @@ public class ElasticSearchTaskController {
             verifySettings();
 
             for (Task task : tasks) {
-                Gson gson = new Gson();
-
-                // Create body for PUT API of ElasticSearch
-                // Need to extract fields separately since some of the fields are transient
-//                String source = "{\"assignedTaskProvider\": \"" + task.getTaskProvider() + "\"," +
-//                        "\"bids\": \"" + task.getBids() + "\"," +
-//                        "\"status\": " + task.getStatus() + "," +
-//                        "\"taskBidders\": " + task.getBid() + "," +
-//                        "\"taskDescription\": " +task.getTaskDescription() + "," +
-//                        "\"taskName\": "+task.getTaskName() + "}";
-//
-//                String doc = "{" + "\"doc\": " + source + "}";
-//                Log.d("ESC.UpdateUserTask", doc);
-//
-//                Update update = new Update.Builder(doc).index(index_team).type(type_task).id(task.getId()).build();
-//                Log.d("ESC.UpdateUserTask", task.getId());
 
                 Index index = new Index.Builder(task)
                         .index(index_team)
