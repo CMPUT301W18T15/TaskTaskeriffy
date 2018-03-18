@@ -19,6 +19,17 @@ public class UserLoginTest extends ActivityInstrumentationTestCase2 {
 
     public UserLoginTest(){
         super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        try{
+            solo.clickOnButton("register");
+            solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
+            solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
+            solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
+            solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
+            solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
+            solo.clickOnButton("Submit");
+        }
+        catch (Exception e){
+        }
     }
 
     public void setUp() throws Exception{
@@ -45,6 +56,7 @@ public class UserLoginTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Please fill in Username and Password"));
 
+        // TODO make sure user USER0000 not exist
         // user not exist
         solo.enterText((EditText) solo.getView(R.id.login_username), "USER0000");
         solo.enterText((EditText) solo.getView(R.id.login_password), "USER0000");
