@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.*;
 import com.example.heesoo.myapplication.Entities.Bid;
@@ -100,6 +101,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 task.acceptBid(bid.getTaskProvider());
                 ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
+                Toast.makeText(getApplicationContext(),"Task Accepted", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -122,6 +124,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 task.addBid(bid);
                 ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
+                Toast.makeText(getApplicationContext(),"Task Declined", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
