@@ -2,6 +2,7 @@ package com.example.heesoo.myapplication.Requestor;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -85,7 +86,12 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                 Intent deleteTaskIntent = new Intent(getApplicationContext(), RequesterMainActivity.class);
                 deleteTaskIntent.putExtra("TaskDeleted", task);
                 setResult(Activity.RESULT_OK, deleteTaskIntent);
-                finish();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
             }
         });
 
