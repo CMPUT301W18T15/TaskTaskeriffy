@@ -15,6 +15,7 @@ import com.example.heesoo.myapplication.Constraints.TaskConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 
 /**
@@ -52,14 +53,9 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                 String description = taskDescription.getText().toString();
 
                 // Check if Required fields are entered
-                if (name.isEmpty()){
-                    CharSequence text = "Missing Required Fields";
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }else{
-                    // Save all the fields
-                    TaskConstraints taskConstraints = new TaskConstraints();
-                    if (taskConstraints.titleLength(name)){
+                TaskConstraints taskConstraints = new TaskConstraints();
+                if (taskConstraints.checkEmpty(name, description)) {
+                    if (taskConstraints.titleLength(name)) {
                         if (taskConstraints.descriptionLength(description)) {
                             task.setTaskName(name);
                             task.setTaskDescription(description);
@@ -83,9 +79,13 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                         }else{
                             Toast.makeText(getApplicationContext(),"Maximum length of Description (300 characters)", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Maximum length of Title (30 characters)", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Maximum length of Title (30 characters)", Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    CharSequence text = "Missing Required Fields";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
             }
         });
@@ -93,3 +93,4 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
     }
 }
+
