@@ -23,7 +23,6 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView PhoneNumberView;
     private Button editButton;
     private Button changeModeButton;
-    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +40,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         User user_recieved = (User) getIntent().getSerializableExtra("USER");
+        User user;
         if (user_recieved == null) {
             user = SetCurrentUser.getCurrentUser();
             editButton.setVisibility(View.VISIBLE);
@@ -70,8 +70,6 @@ public class ViewProfileActivity extends AppCompatActivity {
 
                 Intent change_mode = new Intent(getApplicationContext(), ChooseModeActivity.class);
                 startActivity(change_mode);
-                //finish();
-
             }
         });
     }
