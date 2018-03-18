@@ -14,29 +14,4 @@ public class TaskRequesterTest extends ActivityInstrumentationTestCase2 {
 
         super(TaskRequester.class);
     }
-
-    private String username = "Username1";
-    private String password = "Password";
-    private String email = "email@email.com";
-    private String phoneNumber = "0000000000";
-
-    private String TaskName = "Task1";
-    private String TaskDescription = "TaskDescription";
-
-    public void testAddTask(){
-        TaskRequester taskRequester = new TaskRequester(username, password, email, phoneNumber);
-        Task task = new Task(taskRequester.getUsername(), TaskName, TaskDescription);
-        taskRequester.addTask(task);
-        assertEquals(taskRequester.getTask(task), task);
-
-    }
-
-    public void testRemoveTask() {
-        TaskRequester taskRequester = new TaskRequester(username, password, email, phoneNumber);
-        Task task = new Task(taskRequester.getUsername(), TaskName, TaskDescription);
-        taskRequester.addTask(task);
-        assertEquals(taskRequester.getTask(task), task);
-        taskRequester.removeTask(task);
-        assertNull(taskRequester.getTask(task));
-    }
 }
