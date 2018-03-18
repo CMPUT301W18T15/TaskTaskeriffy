@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.ModeClassTests;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

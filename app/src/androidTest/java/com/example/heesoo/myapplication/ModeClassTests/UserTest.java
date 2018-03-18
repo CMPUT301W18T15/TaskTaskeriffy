@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.ModeClassTests;
 
 import android.media.Image;
 import android.test.ActivityInstrumentationTestCase2;
