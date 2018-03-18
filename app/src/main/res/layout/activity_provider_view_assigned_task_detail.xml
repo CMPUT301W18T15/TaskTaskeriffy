@@ -98,13 +98,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView15"
-        android:layout_width="126dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:text="My Bid Price: "
-        app:layout_constraintBaseline_toBaselineOf="@+id/myBidPrice"
-        app:layout_constraintStart_toStartOf="parent" />
+    android:id="@+id/textView15"
+    android:layout_width="126dp"
+    android:layout_height="35dp"
+    android:layout_marginStart="8dp"
+    android:text="My Bid Price: "
+    app:layout_constraintBaseline_toBaselineOf="@+id/myBidPrice"
+    app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/myBidPrice"
@@ -115,4 +115,22 @@
         android:text="myBidPrice"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/taskStatus" />
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="126dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:text="My Bid Status: "
+        app:layout_constraintBaseline_toBaselineOf="@+id/myBidStatus"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/myBidStatus"
+        android:layout_width="225dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="myBidStatus"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/myBidPrice" />
 </android.support.constraint.ConstraintLayout>

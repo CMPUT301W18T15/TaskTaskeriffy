@@ -29,6 +29,7 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         taskDescription.setText(task.getTaskDescription());
         TextView taskStatus = findViewById(R.id.taskStatus);
         taskStatus.setText(task.getStatus());
+        TextView bidStatus = findViewById(R.id.myBidStatus);
         TextView taskLowestBid = findViewById(R.id.taskLowestBid);
         TextView myBidPrice = findViewById(R.id.myBidPrice);
 
@@ -36,15 +37,18 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         for (Bid bids:task.getBids()){
             if (bids.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())){
                 myBidPrice.setText(bids.getBidPrice().toString());
+                bidStatus.setText(bids.getStatus());
             }
         }
 
-        Button finishTask = findViewById(R.id.finishTask);
+        //TODO: Again, provider should not be able to change status of task or "finish" a task.
 
-        taskLowestBid.setText(task.getLowestBid());
-        if (task.getStatus().equals("Assigned")){
-            finishTask.setVisibility(View.VISIBLE);
-        }
+//        Button finishTask = findViewById(R.id.finishTask);
+//
+//        taskLowestBid.setText(task.getLowestBid());
+//        if (task.getStatus().equals("Assigned")){
+//            finishTask.setVisibility(View.VISIBLE);
+//        }
         //TODO: provider should not be able to change status of task.
 //        finishTask = findViewById(R.id.finishTask);
 //        finishTask.setOnClickListener(new View.OnClickListener() {
