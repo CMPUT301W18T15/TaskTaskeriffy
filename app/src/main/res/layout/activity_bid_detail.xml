@@ -9,50 +9,40 @@
     <TextView
         android:id="@+id/bidderName"
         android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="16dp"
         android:text="@string/biddername"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/bidAmount"
         android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="bidAmount"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/taskName" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/taskName"
         android:layout_width="250dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
         android:text="taskName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/taskStatus" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
-        android:id="@+id/taskStatus"
+        android:id="@+id/bidStatus"
         android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="taskStatus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/bidderName" />
+        android:layout_height="36dp"
+        android:layout_marginRight="16dp"
+        android:text="bidStatus"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/deleteTask"
@@ -122,14 +112,14 @@
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Task Status:"
+        android:text="Bid Status:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="75dp"
-        android:layout_height="30dp"
+        android:layout_height="38dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="Bidder Name:"
@@ -139,7 +129,7 @@
     <TextView
         android:id="@+id/textView12"
         android:layout_width="75dp"
-        android:layout_height="30dp"
+        android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Bid Amount:"

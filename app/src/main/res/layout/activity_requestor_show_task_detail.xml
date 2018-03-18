@@ -127,7 +127,7 @@
     <Button
         android:id="@+id/seePicture"
         android:layout_width="189dp"
-        android:layout_height="48dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:text="View Photo"
         app:layout_constraintBaseline_toBaselineOf="@+id/seeMap"
@@ -148,13 +148,13 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:visibility="gone"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="16dp"
         android:text="Task Provider: "
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/taskProvider"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/taskProvider"
@@ -178,7 +178,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
         android:text="Mark Done"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBaseline_toBaselineOf="@+id/mark_requested_button"
         app:layout_constraintEnd_toStartOf="@+id/mark_requested_button"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -187,11 +187,12 @@
         android:id="@+id/mark_requested_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Mark Requested"
-        android:visibility="gone"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/seeMap"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="309dp" />
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

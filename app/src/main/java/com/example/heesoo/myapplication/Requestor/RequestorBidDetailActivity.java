@@ -44,8 +44,8 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
         TextView taskName = findViewById(R.id.taskName);
         taskName.setText(bid.getTaskName());
 
-        TextView taskStatus = findViewById(R.id.taskStatus);
-        taskStatus.setText(bid.getStatus());
+        TextView bidStatus = findViewById(R.id.bidStatus);
+        bidStatus.setText(bid.getStatus());
 
         editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {

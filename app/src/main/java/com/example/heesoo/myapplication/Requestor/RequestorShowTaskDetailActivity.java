@@ -111,6 +111,8 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                     task.setStatus("Done");
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
+                    Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_SHORT).show();
+
                 }
             });
             markRequested = findViewById(R.id.mark_requested_button);
@@ -123,6 +125,8 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
 
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
+                    Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Marked as Requested", Toast.LENGTH_SHORT).show();
+
                 }
             });
 
