@@ -58,7 +58,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                 float bidPrice;
 
                 if (newBidPrice.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "All Fields Must Be Filled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please Fill the Bid Price", Toast.LENGTH_SHORT).show();
                 } else {
                     bidPrice = Float.parseFloat(newBidPrice);
                     Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername());
@@ -68,6 +68,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                     Intent new_bid = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
                     new_bid.putExtra("bidPlaced", newBid);
                     setResult(Activity.RESULT_OK, new_bid);
+                    Toast.makeText(getApplicationContext(), "Bid Placed", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
