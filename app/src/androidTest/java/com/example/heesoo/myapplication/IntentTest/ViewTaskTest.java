@@ -54,6 +54,7 @@ public class ViewTaskTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Add new task");
         solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
+        solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
