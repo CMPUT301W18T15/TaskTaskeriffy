@@ -127,9 +127,15 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
                     Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_SHORT).show();
-
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 1000);
                 }
             });
+
             markRequested = findViewById(R.id.mark_requested_button);
             markRequested.setVisibility(View.VISIBLE);
             markRequested.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +147,13 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
                     Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Marked as Requested", Toast.LENGTH_SHORT).show();
+                    //startActivity(intent);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 1000);
 
                 }
             });

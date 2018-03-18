@@ -1,14 +1,21 @@
 package com.example.heesoo.myapplication.Provider;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.Requestor.RequestorBidDetailActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 
@@ -16,6 +23,8 @@ import java.util.ArrayList;
 
 public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
     private Button finishTask;
+    private Task task;
+    private String requester_string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +42,18 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         TextView taskLowestBid = findViewById(R.id.taskLowestBid);
         TextView myBidPrice = findViewById(R.id.myBidPrice);
 
+        TextView requesterUsername = findViewById(R.id.requester_username);
+        requesterUsername.setText(task.getUserName());
+
+        requester_string = requesterUsername.getText().toString();
+
         // TODO assume every bidder can only make 1 bid for each task.
         // TODO: ^^ Incorrect Assumption.
         for (Bid bids:task.getBids()){
             if (bids.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())){
                 myBidPrice.setText(bids.getBidPrice().toString());
                 bidStatus.setText(bids.getStatus());
+                taskLowestBid.setText(task.getLowestBid());
             }
         }
 
@@ -58,4 +73,19 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
 //            }
 //        });
     }
+
+    public void clickHandler(View view){
+        ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
+        getUser.execute(requester_string);
+        User user = new User();
+        try {
+            user = getUser.get();
+        } catch (Exception e) {
+            //Log.d
+        }
+        Intent intent = new Intent(ProviderViewAssignedTaskDetail.this, ViewProfileActivity.class);
+        intent.putExtra("USER", user);
+        startActivity(intent);
+    }
+
 }

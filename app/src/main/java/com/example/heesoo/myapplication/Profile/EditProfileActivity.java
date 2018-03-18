@@ -2,6 +2,7 @@ package com.example.heesoo.myapplication.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +55,13 @@ public class EditProfileActivity extends AppCompatActivity {
                 if(userConstraints.emailFormat(emailAddress)){
                     ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
                     editUser.execute(user);
-                    finish();
+                    Toast.makeText(EditProfileActivity.this, "Profile Edited", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 1000);
                     SetCurrentUser.setCurrentUser(user);
                 }else{
                     Toast.makeText(getApplicationContext(), "Enter Valid Email Address", Toast.LENGTH_SHORT).show();

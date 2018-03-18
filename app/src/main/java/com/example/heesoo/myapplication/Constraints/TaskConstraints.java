@@ -21,4 +21,12 @@ public class TaskConstraints {
         }
     }
 
+    public boolean checkEmpty(String name, String description) {
+        if(!(name.equals("") || description.equals(""))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

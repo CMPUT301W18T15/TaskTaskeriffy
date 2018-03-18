@@ -12,6 +12,7 @@
         android:layout_height="40dp"
         android:layout_marginRight="16dp"
         android:text="@string/biddername"
+        android:onClick="bidderNameClicked"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
         app:layout_constraintRight_toRightOf="parent" />
 

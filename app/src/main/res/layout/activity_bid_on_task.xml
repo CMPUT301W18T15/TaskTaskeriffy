@@ -93,7 +93,7 @@
         android:layout_marginBottom="12dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Bid Amount"
+        android:hint="Bid Amount"
         app:layout_constraintBottom_toTopOf="@+id/place_bid_button"
         tools:layout_editor_absoluteX="16dp" />
 

@@ -1,8 +1,12 @@
 package com.example.heesoo.myapplication.Requestor;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +15,7 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.*;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
@@ -25,6 +30,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
     private Button viewBidderProfile;
     private Task task;
     private Bid bid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +70,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 deleteTask.execute(task);
 
                 ArrayList<Bid> allBids = task.getBids();
-                for (int i = 0; i < allBids.size(); i++ ) {
+                for (int i = 0; i < allBids.size(); i++) {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(allBids.get(i));
                 }
@@ -77,7 +83,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
         acceptBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ArrayList<Bid> allBids = task.getBids();
-                for (Bid task_bid : allBids ) {
+                for (Bid task_bid : allBids) {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(task_bid);
                 }
@@ -89,7 +95,12 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 task.acceptBid(bid.getTaskProvider());
                 ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
-                finish();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
 
             }
         });
@@ -106,7 +117,12 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 task.addBid(bid);
                 ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
-                finish();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
             }
         });
 
@@ -119,8 +135,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 User user = new User();
                 try {
                     user = getUser.get();
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     //Log.d
                 }
                 Intent intent = new Intent(RequestorBidDetailActivity.this, ViewProfileActivity.class);
@@ -128,6 +143,22 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
+
+    public void bidderNameClicked(View view) {
+
+        //alter text of textview widget
+        ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
+        getUser.execute(bid.getTaskProvider());
+        User user = new User();
+        try {
+            user = getUser.get();
+        } catch (Exception e) {
+            //Log.d
+        }
+        Intent intent = new Intent(RequestorBidDetailActivity.this, ViewProfileActivity.class);
+        intent.putExtra("USER", user);
+        startActivity(intent);
+    }
+
 }

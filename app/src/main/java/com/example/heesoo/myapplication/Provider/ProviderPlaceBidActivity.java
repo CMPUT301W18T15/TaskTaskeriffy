@@ -3,6 +3,7 @@ package com.example.heesoo.myapplication.Provider;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -62,7 +63,13 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                 Intent new_bid = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
                 new_bid.putExtra("bidPlaced", newBid);
                 setResult(Activity.RESULT_OK, new_bid);
-                finish();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
+
             }
         });
     }
