@@ -17,7 +17,6 @@ import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 public class ChooseModeActivity extends AppCompatActivity {
 
-    private String testing;
     private Button request_button;
     private Button provide_button;
 

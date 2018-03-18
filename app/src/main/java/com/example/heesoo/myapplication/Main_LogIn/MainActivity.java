@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText enter_password;
     private ElasticSearchUserController elasticSearchUserController;
 
-    private String user_str,pwd_str;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 user_information.add(enter_username.getText().toString());
                 user_information.add(enter_password.getText().toString());
 
-                user_str = enter_username.getText().toString();
-                pwd_str = enter_password.getText().toString();
+                String user_str = enter_username.getText().toString();
+                String pwd_str = enter_password.getText().toString();
 
                 if (checkEmpty(user_str,pwd_str)){
 
