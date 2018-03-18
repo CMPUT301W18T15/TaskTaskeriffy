@@ -1,7 +1,9 @@
 package com.example.heesoo.myapplication.Constraints;
 
-/**
- * Created by heesoopark on 2018-03-17.
+/*
+This class contains methods that allow the program to verify task constraints, such as : the task
+ title satisfies a maximum length constraint, the description satisfies a maximum length constraint,
+ and that neither field has been left empty. An instance of this class is utilized by the RequesterAddTaskActivity.
  */
 
 public class TaskConstraints {

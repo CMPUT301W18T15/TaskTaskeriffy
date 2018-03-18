@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.heesoo.myapplication.Entities.Task;
-import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -19,10 +18,12 @@ import io.searchbox.core.Index;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
 
-/**
- * Created by riyariya on 2018-03-12.
+/*
+This class is how the program accesses and updates the task type of the our index in the database.
+It is used in the following : Task, ProviderFindNewTaskActivity, ProviderMainActivity,
+ProviderViewBiddedTaskActivity and all Activities in the Requester package
+(minus RequesterViewBidsOnTaskActivity).
  */
 
 public class ElasticSearchTaskController {

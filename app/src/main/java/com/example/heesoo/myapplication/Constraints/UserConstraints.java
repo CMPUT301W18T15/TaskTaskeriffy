@@ -1,15 +1,16 @@
 package com.example.heesoo.myapplication.Constraints;
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by heesoopark on 2018-03-17.
+/*
+This class contains methods that allow the program to verify user constraints, such as : the user
+has not left any fields blank, the username satisfies a maximum length, the entered email address
+follows the correct format, and the entered passwords match. An instance of this class is utilized
+by the RegisterActivity.
  */
 
-public class UserConstraints{
+public class UserConstraints {
 
     public Boolean PasswordMatch(String password, String repeat_password) {
         if (password.equals(repeat_password)) {

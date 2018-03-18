@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.heesoo.myapplication.Entities.Bid;
-import com.example.heesoo.myapplication.Entities.Task;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -20,15 +19,17 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-/**
- * Created by riyariya on 2018-03-15.
+/*
+This class is how the program accesses and updates the bid type of the our index in the database.
+It is used in the following : ProviderFindNewTaskActivity, ProviderPlaceBidActivity,
+RequesterShowTaskDetailActivity.
  */
 
 public class ElasticSearchBidController {
     private static JestDroidClient client;
 
     private final static String index_team = "cmput301w18t15";
-    private final static String type_task = "bid";
+    private final static String type_bid = "bid";
     private final static String database_team = "http://cmput301.softwareprocess.es:8080";
 
     public static class AddBidsTask extends AsyncTask<Bid, Void, Void> {
@@ -39,7 +40,7 @@ public class ElasticSearchBidController {
 
             for (Bid bid : bids) {
                 Index index = new Index.Builder(bid).index(index_team)
-                        .type(type_task)
+                        .type(type_bid)
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
@@ -65,7 +66,7 @@ public class ElasticSearchBidController {
             verifySettings();
             Bid bid = null;
             Get get = new Get.Builder(index_team, id[0])
-                    .type(type_task)
+                    .type(type_bid)
                     .build();
             try {
                 JestResult result = client.execute(get);
@@ -93,7 +94,7 @@ public class ElasticSearchBidController {
 
                 Index index = new Index.Builder(bid)
                         .index(index_team)
-                        .type(type_task)
+                        .type(type_bid)
                         .id(bid.getId())
                         .build();
 
@@ -120,7 +121,7 @@ public class ElasticSearchBidController {
             for (Bid bid : bids) {
                 Delete delete = new Delete.Builder(bid.getId())
                         .index(index_team)
-                        .type(type_task)
+                        .type(type_bid)
                         .build();
                 try {
                     DocumentResult result = client.execute(delete);
@@ -144,11 +145,11 @@ public class ElasticSearchBidController {
 
             //TODO: Try this commented stuff if older implementation does not work
             //String query = ("{ \"query\": { \" match_all \" : {} } }");
-            //Search search = new Search.Builder(query).addIndex(index_team).addType(type_task).build();
+            //Search search = new Search.Builder(query).addIndex(index_team).addType(type_bid).build();
 
             Search search = new Search.Builder(search_parameters[0])
                     .addIndex(index_team)
-                    .addType(type_task)
+                    .addType(type_bid)
                     .build();
 
 
@@ -174,7 +175,7 @@ public class ElasticSearchBidController {
 
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder(database_team);
             DroidClientConfig config = builder.build();
 
             JestClientFactory factory = new JestClientFactory();

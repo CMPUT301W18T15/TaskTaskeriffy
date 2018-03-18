@@ -11,8 +11,11 @@ import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
-/**
- * Created by heesoopark on 2018-03-13.
+/*
+This activity gives the user the option to choose between behaving like a "Task Provider" or
+a "Task Requester". Their choice determines the next activities they can perform and the Views that
+are visible to them. This activity displays after the user had logged-in or after the user has
+pressed the "Change Mode" button in the ViewProfileActivity.
  */
 
 public class ChooseModeActivity extends AppCompatActivity {
@@ -48,5 +51,3 @@ public class ChooseModeActivity extends AppCompatActivity {
 
     }
 }
-
-

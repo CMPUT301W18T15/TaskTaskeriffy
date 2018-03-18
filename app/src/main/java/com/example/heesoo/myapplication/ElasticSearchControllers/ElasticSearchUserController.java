@@ -15,11 +15,12 @@ import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
-import io.searchbox.core.Update;
 
-/**
- * Created by romansky on 10/20/16.
+/*
+This class is how the program accesses and updates the user type of the our index in the database.
+It is used in the following : RegisterActivity, MainActivity, EditProfileActivity.
  */
+
 public class ElasticSearchUserController {
 
 
