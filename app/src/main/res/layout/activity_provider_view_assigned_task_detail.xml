@@ -44,7 +44,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="taskLowestBid"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/bidTextView"
         app:layout_constraintTop_toBottomOf="@+id/taskDescription" />
 
     <Button
@@ -89,7 +89,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/bidTextView"
         android:layout_width="126dp"
         android:layout_height="37dp"
         android:layout_marginStart="8dp"
