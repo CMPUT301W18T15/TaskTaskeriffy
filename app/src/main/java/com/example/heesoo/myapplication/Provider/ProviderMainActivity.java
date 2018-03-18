@@ -134,12 +134,8 @@ public class ProviderMainActivity extends AppCompatActivity {
         ArrayList<String> tasksNames = new ArrayList<String>();
 
 
-        Log.d("HEREEEE", SetCurrentUser.getCurrentUser().getUsername());
         for(int i = 0; i < tempTaskList.size(); i++){
-            Log.d("HEREEEE", tempTaskList.get(i).getTaskProvider());
-            if ( tempTaskList.get(i).getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())
-                    && tempTaskList.get(i).getStatus().equals("Assigned")) {
-                Log.d("HEREEEE", "IHATE");
+            if ( tempTaskList.get(i).getStatus().equals("Assigned") && tempTaskList.get(i).getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
                 taskList.add(tempTaskList.get(i));
                 tasksNames.add("Name: "+tempTaskList.get(i).getTaskName()+" Status: " + tempTaskList.get(i).getStatus());
 

@@ -23,6 +23,9 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
     private Button editTask;
     private Button deleteTask;
     private Button viewBidsButton;
+    private Button markDone;
+    private Button markRequested;
+
     private TextView taskName;
     private TextView taskDescription;
     private TextView taskStatus;
@@ -101,6 +104,27 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             textView.setVisibility(View.VISIBLE);
             taskProvider.setVisibility(View.VISIBLE);
             taskProvider.setText(task.getTaskProvider());
+            markDone = findViewById(R.id.mark_done_button);
+            markDone.setVisibility(View.VISIBLE);
+            markDone.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    task.setStatus("Done");
+                    ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                    editTask.execute(task);
+                }
+            });
+            markRequested = findViewById(R.id.mark_requested_button);
+            markRequested.setVisibility(View.VISIBLE);
+            markRequested.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    task.setStatus("Requested");
+                    task.setTaskProvider("");
+                    //TODO delete the particlar bid from the task and database
+
+                    ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                    editTask.execute(task);
+                }
+            });
 
         }
     }
