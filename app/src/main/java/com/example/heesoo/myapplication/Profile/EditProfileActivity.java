@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.UserConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.Requestor.RequesterMainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
@@ -35,6 +36,11 @@ public class EditProfileActivity extends AppCompatActivity {
         phoneNumberEdit = findViewById(R.id.phoneNumberEdit);
         saveButton = findViewById(R.id.saveInfoButton);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         Intent i = getIntent();
         user = SetCurrentUser.getCurrentUser();
 
@@ -56,13 +62,13 @@ public class EditProfileActivity extends AppCompatActivity {
                     ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
                     editUser.execute(user);
                     Toast.makeText(EditProfileActivity.this, "Profile Edited", Toast.LENGTH_SHORT).show();
+                    SetCurrentUser.setCurrentUser(user);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             finish();
                         }
-                    }, 1000);
-                    SetCurrentUser.setCurrentUser(user);
+                    }, 0000);
                 }else{
                     Toast.makeText(getApplicationContext(), "Enter Valid Email Address", Toast.LENGTH_SHORT).show();
                 }

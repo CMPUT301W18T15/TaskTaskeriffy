@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.TaskConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
@@ -69,6 +70,7 @@ public class RequestorEditTaskActivity extends AppCompatActivity {
                             ElasticSearchTaskController.EditTask editTask =
                                     new ElasticSearchTaskController.EditTask();
                             editTask.execute(task);
+
                             Intent edited_task = new Intent(getApplicationContext(), RequestorShowTaskDetailActivity.class);
                             edited_task.putExtra("TaskEdited", task);
                             setResult(Activity.RESULT_OK, edited_task);

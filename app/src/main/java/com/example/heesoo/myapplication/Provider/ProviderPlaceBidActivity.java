@@ -68,7 +68,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                     public void run() {
                         finish();
                     }
-                }, 1000);
+                }, 1500);
 
             }
         });

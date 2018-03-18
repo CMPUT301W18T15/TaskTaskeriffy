@@ -36,7 +36,9 @@ public class Task implements Serializable{
         this.assignedTaskProvider = "";
     }
 
+    public Task() {
 
+    }
     public String getUserName(){
 
         return taskRequester;

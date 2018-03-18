@@ -35,14 +35,20 @@ public class ViewProfileActivity extends AppCompatActivity {
         editButton = findViewById(R.id.editInfoButton);
         changeModeButton = findViewById(R.id.changeModeButton);
 
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
         User user_recieved = (User) getIntent().getSerializableExtra("USER");
-        if(user_recieved == null){
+        if (user_recieved == null) {
             user = SetCurrentUser.getCurrentUser();
             editButton.setVisibility(View.VISIBLE);
             changeModeButton.setVisibility(View.VISIBLE);
-        }else{
-           user  = user_recieved;
+        } else {
+            user = user_recieved;
         }
+
 
         usernameView.setText(user.getUsername());
         EmailAddressView.setText(user.getEmailAddress());

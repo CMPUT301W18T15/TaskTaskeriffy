@@ -53,6 +53,11 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
         TextView bidStatus = findViewById(R.id.bidStatus);
         bidStatus.setText(bid.getStatus());
 
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
         editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -100,7 +105,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                     public void run() {
                         finish();
                     }
-                }, 1000);
+                }, 2000);
 
             }
         });
@@ -122,7 +127,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                     public void run() {
                         finish();
                     }
-                }, 1000);
+                }, 2000);
             }
         });
 
@@ -143,6 +148,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     public void bidderNameClicked(View view) {
