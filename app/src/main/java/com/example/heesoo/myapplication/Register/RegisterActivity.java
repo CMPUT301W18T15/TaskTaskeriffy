@@ -25,9 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText usernameTxt, passwordTxt, repeat_passwordTxt, emailTxt, phoneTxt;
     private Button submit_button;
     private String usernameStr, passwordStr, repeat_passwordStr, emailStr, phoneStr;
-    //private AsyncTask<String, Void, User> profile;
     private ElasticSearchUserController elasticSearchUserController;
-    //private UserConstraints userConstraints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 
 public class SetCurrentUser extends Application {
     private static Context applicationContext;
-    private static User currentUser;
     private static SharedPreferences sharedPreferences;
 
     @Override
