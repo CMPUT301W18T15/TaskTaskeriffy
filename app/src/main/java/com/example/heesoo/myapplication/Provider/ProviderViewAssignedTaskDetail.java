@@ -33,7 +33,8 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
         TextView taskLowestBid = findViewById(R.id.taskLowestBid);
         TextView myBidPrice = findViewById(R.id.myBidPrice);
 
-        // TODO assume every bidder can only make 1 bid for each task
+        // TODO assume every bidder can only make 1 bid for each task.
+        // TODO: ^^ Incorrect Assumption.
         for (Bid bids:task.getBids()){
             if (bids.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())){
                 myBidPrice.setText(bids.getBidPrice().toString());
