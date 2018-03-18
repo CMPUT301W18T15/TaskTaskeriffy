@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requestor.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requestor.RequestorAddTaskActivity;
-import com.example.heesoo.myapplication.Requestor.RequestorShowTaskDetailActivity;
+import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
+import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
+import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -54,7 +52,7 @@ public class ViewTaskTest extends ActivityInstrumentationTestCase2 {
         // add sample task: user0000 task1
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
         solo.clickOnButton("Add new task");
-        solo.assertCurrentActivity("Wrong Activity", RequestorAddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
         solo.clickOnButton("Save");
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
@@ -62,7 +60,7 @@ public class ViewTaskTest extends ActivityInstrumentationTestCase2 {
         // click the list view in position 0
         // show the task details
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequestorShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
         assertTrue(solo.searchText("user0000 task1"));
         solo.goBack();
         // clear the garbage
