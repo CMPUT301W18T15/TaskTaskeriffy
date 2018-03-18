@@ -64,15 +64,18 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
         bidTextView = findViewById(R.id.bidTextView);
         taskProvider = findViewById(R.id.taskProvider);
 
+        if (task.getStatus().equals("Requested")) {
+            editTask = findViewById(R.id.editTask);
+            editTask.setVisibility(View.VISIBLE);
+            editTask.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(RequestorShowTaskDetailActivity.this, RequestorEditTaskActivity.class);
+                    intent.putExtra("TaskToEdit", task);
+                    startActivityForResult(intent, 1);
+                }
+            });
+        }
 
-        editTask = findViewById(R.id.editTask);
-        editTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(RequestorShowTaskDetailActivity.this, RequestorEditTaskActivity.class);
-                intent.putExtra("TaskToEdit", task);
-                startActivityForResult(intent, 1);
-            }
-        });
 
         deleteTask = findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
