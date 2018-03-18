@@ -122,6 +122,13 @@ public class Task implements Serializable{
         return;
     }
 
+    public void deleteAllBids() {
+        this.bids.clear();
+        return;
+    }
+
+
+
     public ArrayList<Bid> getBids(){
 
         return bids;
