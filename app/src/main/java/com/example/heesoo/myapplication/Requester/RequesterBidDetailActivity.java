@@ -1,5 +1,6 @@
 package com.example.heesoo.myapplication.Requester;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -55,19 +56,10 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        editTask = findViewById(R.id.editTask);
-        editTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(RequesterBidDetailActivity.this, RequesterEditTaskActivity.class);
-                intent.putExtra("TaskToEdit", task);
-                startActivity(intent);
-            }
-        });
 
         deleteTask = (Button) findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO delete the task by elastic search
                 ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
                 deleteTask.execute(task);
 
@@ -76,6 +68,16 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(allBids.get(i));
                 }
+                Toast.makeText(RequesterBidDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
+                Intent deleteTaskIntent = new Intent(getApplicationContext(), RequesterMainActivity.class);
+                deleteTaskIntent.putExtra("TaskDeleted", task);
+                setResult(Activity.RESULT_OK, deleteTaskIntent);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
 
             }
         });
@@ -111,8 +113,6 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
         declineBid = findViewById(R.id.declineBid);
         declineBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO delete this bid by elastic search
-                // TODO fix remove bid from task
                 task.deleteBid(bid);
                 bid.setStatus("Declined");
                 ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
@@ -133,7 +133,6 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
         viewBidderProfile = findViewById(R.id.viewBidderProfile);
         viewBidderProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO find user in elasticsearch user table by userame.equals(bid.getTaskProvider())
                 ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
                 getUser.execute(bid.getTaskProvider());
                 User user = new User();
