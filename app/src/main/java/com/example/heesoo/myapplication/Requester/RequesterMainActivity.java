@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
 // Harry
 
@@ -44,7 +44,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         addNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RequesterMainActivity.this, RequestorAddTaskActivity.class);
+                Intent intent = new Intent(RequesterMainActivity.this, RequesterAddTaskActivity.class);
                 startActivity(intent);
             }
         });
@@ -77,7 +77,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         showAssignedTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RequesterMainActivity.this, RequestorAssignedTaskListActivity.class);
+                Intent intent = new Intent(RequesterMainActivity.this, RequesterAssignedTaskListActivity.class);
                 startActivity(intent);
             }
 
@@ -89,7 +89,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent taskinfo = new Intent(RequesterMainActivity.this, RequestorShowTaskDetailActivity.class);
+                Intent taskinfo = new Intent(RequesterMainActivity.this, RequesterShowTaskDetailActivity.class);
                 task = taskList.get(index);
                 taskinfo.putExtra("task", task);
                 startActivityForResult(taskinfo, 2);

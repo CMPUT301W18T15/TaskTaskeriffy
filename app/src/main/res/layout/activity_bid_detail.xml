@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.heesoo.myapplication.Requestor.RequestorBidDetailActivity">
+    tools:context="com.example.heesoo.myapplication.Requester.RequesterBidDetailActivity">
 
     <TextView
         android:id="@+id/bidderName"

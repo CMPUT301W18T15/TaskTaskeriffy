@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.UserConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
-import com.example.heesoo.myapplication.Requestor.RequesterMainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 

@@ -80,7 +80,7 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
         });
     }
 
-    // Objects.equals() is only accepted in new API's
+    // Objects.equals() is only accepted in new Api's
     @SuppressLint("NewApi")
     @Override
     protected void onStart() {

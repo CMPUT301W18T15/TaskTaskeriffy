@@ -10,8 +10,7 @@ import com.example.heesoo.myapplication.Profile.EditProfileActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Register.RegisterActivity;
-import com.example.heesoo.myapplication.Requestor.RequesterMainActivity;
+import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
 import com.robotium.solo.Solo;
 
 /**

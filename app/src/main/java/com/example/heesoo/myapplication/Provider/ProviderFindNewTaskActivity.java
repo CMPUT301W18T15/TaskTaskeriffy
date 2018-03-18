@@ -35,7 +35,6 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_new_tasks);
-        //taskList = new TaskList();
 
         listView = findViewById(R.id.avaliableTasksList);
         listView.setClickable(true);
@@ -45,9 +44,6 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Object t = listView.getItemAtPosition(i);
                 selectedTask = (Task) t;
-
-                Log.d("PRINTING", selectedTask.getTaskName());
-
 
                 AlertDialog.Builder popUp = new AlertDialog.Builder(ProviderFindNewTaskActivity.this);
                 popUp.setMessage("Would you like to see details about '"  + selectedTask.getTaskName() + "' ?");

@@ -3,11 +3,9 @@ package com.example.heesoo.myapplication.Provider;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.Bid;
@@ -15,11 +13,7 @@ import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requestor.RequestorBidDetailActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
-
-
-import java.util.ArrayList;
 
 public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
     private Button finishTask;

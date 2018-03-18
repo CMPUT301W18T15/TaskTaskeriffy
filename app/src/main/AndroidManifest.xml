@@ -21,20 +21,20 @@
     <activity android:name=".Register.RegisterActivity"></activity>
         <activity android:name="com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity"></activity>
         <activity android:name=".Provider.ProviderMainActivity"></activity>
-        <activity android:name=".Requestor.RequesterMainActivity"></activity>
+        <activity android:name=".Requester.RequesterMainActivity"></activity>
         <activity android:name=".Profile.ViewProfileActivity"></activity>
         <activity android:name=".Profile.EditProfileActivity"></activity>
-        <activity android:name=".Requestor.RequestorAddTaskActivity"></activity>
-        <activity android:name=".Requestor.RequestorShowTaskDetailActivity"></activity>
+        <activity android:name=".Requester.RequesterAddTaskActivity"></activity>
+        <activity android:name=".Requester.RequesterShowTaskDetailActivity"></activity>
         <activity android:name=".Provider.ProviderViewAssignedTaskDetail"></activity>
-        <activity android:name=".Requestor.RequesterBiddedTasksListActivity"></activity>
-        <activity android:name=".Requestor.RequestorAssignedTaskListActivity"></activity>
+        <activity android:name=".Requester.RequesterBiddedTasksListActivity"></activity>
+        <activity android:name=".Requester.RequesterAssignedTaskListActivity"></activity>
         <activity android:name=".Provider.ProviderFindNewTaskActivity"></activity>
         <activity android:name=".Provider.ProviderPlaceBidActivity"></activity>
-        <activity android:name=".Requestor.RequestorBidDetailActivity"></activity>
-        <activity android:name=".Requestor.RequestorEditTaskActivity"></activity>
+        <activity android:name=".Requester.RequesterBidDetailActivity"></activity>
+        <activity android:name=".Requester.RequesterEditTaskActivity"></activity>
         <activity android:name=".Provider.ProviderViewBiddedTaskList"></activity>
-        <activity android:name=".Requestor.RequestorViewBidsOnTaskActivity"></activity>
+        <activity android:name=".Requester.RequesterViewBidsOnTaskActivity"></activity>
 
 
 

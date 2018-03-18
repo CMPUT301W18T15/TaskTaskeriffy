@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,22 +14,19 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.TaskConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
-import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 
 /**
  * Created by manuelakm on 2018-03-15.
  */
 
-public class RequestorEditTaskActivity extends AppCompatActivity {
-    private EditText taskNameEdit;
-    private EditText descriptionEdit;
-    private Button saveChangesButton;
-    private Task task;
+public class RequesterEditTaskActivity extends AppCompatActivity {
+
     private EditText taskName;
     private EditText taskDescription;
+    private Button saveChangesButton;
+    private Task task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +68,7 @@ public class RequestorEditTaskActivity extends AppCompatActivity {
                                     new ElasticSearchTaskController.EditTask();
                             editTask.execute(task);
 
-                            Intent edited_task = new Intent(getApplicationContext(), RequestorShowTaskDetailActivity.class);
+                            Intent edited_task = new Intent(getApplicationContext(), RequesterShowTaskDetailActivity.class);
                             edited_task.putExtra("TaskEdited", task);
                             setResult(Activity.RESULT_OK, edited_task);
                             CharSequence text = "Saving Task";

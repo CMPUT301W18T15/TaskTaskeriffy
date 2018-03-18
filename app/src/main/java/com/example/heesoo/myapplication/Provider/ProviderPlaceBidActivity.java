@@ -29,7 +29,6 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
     private EditText placeBidView;
     private Button placeBidButton;
     private String newBidPrice;
-    private Task task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bid_on_task);
 
         Intent intent = getIntent();
-        task = (Task) intent.getSerializableExtra("TaskToBidOn");
+        final Task task = (Task) intent.getSerializableExtra("TaskToBidOn");
 
         titleView = findViewById(R.id.task_view_Title_content);
         titleView.setText(task.getTaskName());

@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requestor.RequesterMainActivity;
+import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 /**

@@ -1,7 +1,6 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +22,7 @@ import com.example.heesoo.myapplication.R;
  */
 
 
-public class RequestorAddTaskActivity extends AppCompatActivity {
+public class RequesterAddTaskActivity extends AppCompatActivity {
     private EditText taskName;
     private EditText taskDescription;
     private Button saveButton;
@@ -63,7 +62,7 @@ public class RequestorAddTaskActivity extends AppCompatActivity {
                                 //Clear all the views
                                 taskName.getText().clear();
                                 taskDescription.getText().clear();
-                                //final Intent intent = new Intent(RequestorAddTaskActivity.this, RequesterMainActivity.class);
+                                //final Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterMainActivity.class);
                                 //startActivity(intent);
                                 new Handler().postDelayed(new Runnable() {
                                     @Override

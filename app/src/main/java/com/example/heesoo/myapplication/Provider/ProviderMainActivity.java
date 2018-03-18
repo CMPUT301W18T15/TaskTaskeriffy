@@ -1,7 +1,5 @@
 package com.example.heesoo.myapplication.Provider;
 
-// Harry
-
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +23,6 @@ import java.util.ArrayList;
 
 public class ProviderMainActivity extends AppCompatActivity {
 
-    private Button myHistoryButton;
     private Button myAccountButton;
     private Button findNearbyTaskButton;
     private Button viewBiddedListButton;
@@ -44,17 +41,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_provider_main);
         searchNewTaskButton = findViewById(R.id.search_new_task_button);
         viewBiddedListButton = findViewById(R.id.view_bidded_list_button);
-
-        //show my History button
-//        Button myHistoryButton = findViewById(R.id.my_history_button);
-//        myHistoryButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ProviderMainActivity.this, ProviderViewBiddedTaskList.class);
-//                startActivity(intent);
-//            }
-//        });
-
 
         // show my Account Button
         Button myAccountButton = findViewById(R.id.my_account_button);
@@ -148,5 +134,4 @@ public class ProviderMainActivity extends AppCompatActivity {
         clickableList.setAdapter(adapter);
 
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
         import android.content.Intent;
         import android.os.Bundle;
@@ -21,7 +21,7 @@ package com.example.heesoo.myapplication.Requestor;
  * Created by riyariya on 2018-03-14.
  */
 
-public class RequestorAssignedTaskListActivity extends AppCompatActivity {
+public class RequesterAssignedTaskListActivity extends AppCompatActivity {
 
     private ArrayList<Task> taskList; // the list of tasks that requester posted
     private ListView clickableList;
@@ -39,7 +39,7 @@ public class RequestorAssignedTaskListActivity extends AppCompatActivity {
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent taskinfo = new Intent(RequestorAssignedTaskListActivity.this, RequestorShowTaskDetailActivity.class);
+                Intent taskinfo = new Intent(RequesterAssignedTaskListActivity.this, RequesterShowTaskDetailActivity.class);
                 Task task = taskList.get(index);
                 taskinfo.putExtra("task", task);
                 startActivity(taskinfo);

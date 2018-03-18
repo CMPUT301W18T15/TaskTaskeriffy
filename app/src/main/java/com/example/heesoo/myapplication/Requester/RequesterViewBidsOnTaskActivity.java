@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,15 +20,10 @@ import java.util.ArrayList;
  * Created by manuelakm on 2018-03-15.
  */
 
-public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
+public class RequesterViewBidsOnTaskActivity extends AppCompatActivity {
     private ListView bidsView;
-    private ArrayList<Bid> tempBidList;
     private ArrayList<Bid> bidList;
     private Task task;
-
-    //private ArrayAdapter<String> adapter;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +37,7 @@ public class RequestorViewBidsOnTaskActivity extends AppCompatActivity {
         bidsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent bidinfo = new Intent(RequestorViewBidsOnTaskActivity.this, RequestorBidDetailActivity.class);
+                Intent bidinfo = new Intent(RequesterViewBidsOnTaskActivity.this, RequesterBidDetailActivity.class);
                 Bid bid = bidList.get(index);
 
                 bidinfo.putExtra("bid", bid);

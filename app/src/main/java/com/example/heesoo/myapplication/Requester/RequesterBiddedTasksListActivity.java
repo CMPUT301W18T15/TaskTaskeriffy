@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requestor_bidded_task_list);
+        setContentView(R.layout.activity_requester_bidded_task_list);
 
 
         // when click on list
@@ -38,7 +38,7 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent taskinfo = new Intent(RequesterBiddedTasksListActivity.this, RequestorShowTaskDetailActivity.class);
+                Intent taskinfo = new Intent(RequesterBiddedTasksListActivity.this, RequesterShowTaskDetailActivity.class);
                 Task task = taskList.get(index);
                 taskinfo.putExtra("task", task);
                 startActivity(taskinfo);

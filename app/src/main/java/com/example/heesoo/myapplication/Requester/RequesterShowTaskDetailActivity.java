@@ -1,4 +1,4 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.example.heesoo.myapplication.R;
 
 import java.util.ArrayList;
 
-public class RequestorShowTaskDetailActivity extends AppCompatActivity {
+public class RequesterShowTaskDetailActivity extends AppCompatActivity {
 
     private Button editTask;
     private Button deleteTask;
@@ -43,7 +43,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requestor_show_task_detail);
+        setContentView(R.layout.activity_requester_show_task_detail);
 
         elasticSearchTaskController = new ElasticSearchTaskController();
 
@@ -69,7 +69,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             editTask.setVisibility(View.VISIBLE);
             editTask.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(RequestorShowTaskDetailActivity.this, RequestorEditTaskActivity.class);
+                    Intent intent = new Intent(RequesterShowTaskDetailActivity.this, RequesterEditTaskActivity.class);
                     intent.putExtra("TaskToEdit", task);
                     startActivityForResult(intent, 1);
                 }
@@ -89,7 +89,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                     deleteBidTask.execute(allBids.get(i));
                 }
 
-                Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RequesterShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
                 Intent deleteTaskIntent = new Intent(getApplicationContext(), RequesterMainActivity.class);
                 deleteTaskIntent.putExtra("TaskDeleted", task);
                 setResult(Activity.RESULT_OK, deleteTaskIntent);
@@ -107,7 +107,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
             viewBidsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), RequestorViewBidsOnTaskActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), RequesterViewBidsOnTaskActivity.class);
                     intent.putExtra("task", task);
                     startActivity(intent);
                 }
@@ -126,7 +126,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
                     task.setStatus("Done");
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
-                    Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RequesterShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -146,7 +146,7 @@ public class RequestorShowTaskDetailActivity extends AppCompatActivity {
 
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
-                    Toast.makeText(RequestorShowTaskDetailActivity.this, "Task Marked as Requested", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RequesterShowTaskDetailActivity.this, "Task Marked as Requested", Toast.LENGTH_SHORT).show();
                     //startActivity(intent);
                     new Handler().postDelayed(new Runnable() {
                         @Override

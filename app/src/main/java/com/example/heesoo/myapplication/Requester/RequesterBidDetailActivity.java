@@ -1,12 +1,9 @@
-package com.example.heesoo.myapplication.Requestor;
+package com.example.heesoo.myapplication.Requester;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,14 +13,13 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.*;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 import java.util.ArrayList;
 
 
-public class RequestorBidDetailActivity extends AppCompatActivity {
+public class RequesterBidDetailActivity extends AppCompatActivity {
     private Button editTask;
     private Button deleteTask;
     private Button acceptBid;
@@ -62,7 +58,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
         editTask = findViewById(R.id.editTask);
         editTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RequestorBidDetailActivity.this, RequestorEditTaskActivity.class);
+                Intent intent = new Intent(RequesterBidDetailActivity.this, RequesterEditTaskActivity.class);
                 intent.putExtra("TaskToEdit", task);
                 startActivity(intent);
             }
@@ -146,7 +142,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     //Log.d
                 }
-                Intent intent = new Intent(RequestorBidDetailActivity.this, ViewProfileActivity.class);
+                Intent intent = new Intent(RequesterBidDetailActivity.this, ViewProfileActivity.class);
                 intent.putExtra("USER", user);
                 startActivity(intent);
             }
@@ -165,7 +161,7 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
         } catch (Exception e) {
             //Log.d
         }
-        Intent intent = new Intent(RequestorBidDetailActivity.this, ViewProfileActivity.class);
+        Intent intent = new Intent(RequesterBidDetailActivity.this, ViewProfileActivity.class);
         intent.putExtra("USER", user);
         startActivity(intent);
     }
