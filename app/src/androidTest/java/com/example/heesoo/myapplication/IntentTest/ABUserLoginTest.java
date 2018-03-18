@@ -6,30 +6,21 @@ import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Register.RegisterActivity;
+import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
 import com.robotium.solo.Solo;
 
 /**
  * Created by chengze on 2018/3/17.
  */
 
-public class UserLoginTest extends ActivityInstrumentationTestCase2 {
+public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
-    public UserLoginTest(){
+    public ABUserLoginTest(){
         super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
-        try{
-            solo.clickOnButton("register");
-            solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
-            solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
-            solo.clickOnButton("Submit");
-        }
-        catch (Exception e){
-        }
     }
 
     public void setUp() throws Exception{
@@ -65,10 +56,14 @@ public class UserLoginTest extends ActivityInstrumentationTestCase2 {
 
         // TODO we need a existed user account to test
         // user exist
-        // password not match
+        // did not enter password
         solo.clearEditText((EditText) solo.getView(R.id.login_username));
         solo.clearEditText((EditText) solo.getView(R.id.login_password));
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
+        solo.clickOnButton("Login");
+        assertTrue(solo.searchText("Please fill in Username and Password"));
+
+        // password not match
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Password Does not Match"));
@@ -81,8 +76,12 @@ public class UserLoginTest extends ActivityInstrumentationTestCase2 {
         solo.assertCurrentActivity("Wrong Activity", ChooseModeActivity.class);
         assertTrue(solo.searchText("Logged In"));
 
+        // choose mode
+        solo.clickOnButton("Would you like a task performed for you?");
+        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.clickOnButton("Would you like to perform a task?");
+        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
     }
 
     @Override

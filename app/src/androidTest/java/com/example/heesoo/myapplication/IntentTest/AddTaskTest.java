@@ -10,8 +10,8 @@ import com.example.heesoo.myapplication.Profile.EditProfileActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requestor.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requestor.RequestorAddTaskActivity;
+import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
+import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -60,7 +60,7 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
 
         // add new task page
         solo.clickOnButton("Add new task");
-        solo.assertCurrentActivity("Wrong Activity", RequestorAddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
 
         // did not fill task name
         solo.clickOnButton("Save");
@@ -69,23 +69,16 @@ public class AddTaskTest extends ActivityInstrumentationTestCase2 {
         // only fill the task name
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
         solo.clickOnButton("Save");
+        assertTrue(solo.searchText("Missing Required Fields"));
+
+        // fill both task name and description
+        solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
+        solo.clickOnButton("Save");
         assertTrue(solo.searchText("Saving Task"));
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
         assertTrue(solo.searchText("user0000 task1"));
 
-        // fill both task name and description
-        solo.clickOnButton("Add new task");
-        solo.assertCurrentActivity("Wrong Activity", RequestorAddTaskActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task2");
-        solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task2 Description");
-        solo.clickOnButton("Save");
-        assertTrue(solo.searchText("Saving Task"));
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-        assertTrue(solo.searchText("user0000 task2"));
-
         // clear the garbage
-        solo.clickInList(0);
-        solo.clickOnButton("Delete Task");
         solo.clickInList(0);
         solo.clickOnButton("Delete Task");
     }

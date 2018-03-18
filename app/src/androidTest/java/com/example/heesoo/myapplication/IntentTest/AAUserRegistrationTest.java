@@ -14,22 +14,11 @@ import com.robotium.solo.Solo;
  * Created by chengze on 2018/3/17.
  */
 
-public class UserRegistrationTest extends ActivityInstrumentationTestCase2 {
+public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
-    public UserRegistrationTest(){
+    public AAUserRegistrationTest(){
         super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
-        try{
-            solo.clickOnButton("register");
-            solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
-            solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
-            solo.clickOnButton("Submit");
-        }
-        catch (Exception e){
-        }
     }
 
     public void setUp() throws Exception{
@@ -50,22 +39,30 @@ public class UserRegistrationTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRegister(){
+        // prepare a existed account
         solo.clickOnButton("register");
-        solo.assertCurrentActivity("Wrong Activity", RegisterActivity.class);
-
-        // Did not fill anything
-        solo.clickOnButton("Submit");
-        assertTrue(solo.searchText("All fields must be filled"));
-
-        // The username has been used
-        // TODO put the account into database
         solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
         solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
         solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
         solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
         solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
         solo.clickOnButton("Submit");
-        assertTrue(solo.searchText("Username already exists"));
+
+        solo.clickOnButton("register");
+        solo.assertCurrentActivity("Wrong Activity", RegisterActivity.class);
+
+        // Did not fill anything
+        solo.clickOnButton("Submit");
+        assertTrue(solo.searchText("All Fields Must Be Filled"));
+
+        // The username has been used
+        solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
+        solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
+        solo.clickOnButton("Submit");
+        assertTrue(solo.searchText("Username Already Exists"));
 
         // Create a new account
         solo.clearEditText((EditText) solo.getView(R.id.enter_username));
@@ -74,9 +71,17 @@ public class UserRegistrationTest extends ActivityInstrumentationTestCase2 {
         solo.clearEditText((EditText) solo.getView(R.id.enter_email));
         solo.clearEditText((EditText) solo.getView(R.id.enter_phone));
         solo.enterText((EditText) solo.getView(R.id.enter_username), "user0001");
+        solo.clickOnButton("Submit");
+        assertTrue(solo.searchText("All Fields Must Be Filled"));
         solo.enterText((EditText) solo.getView(R.id.enter_password), "user0001");
+        solo.clickOnButton("Submit");
+        assertTrue(solo.searchText("All Fields Must Be Filled"));
         solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0001");
+        solo.clickOnButton("Submit");
+        assertTrue(solo.searchText("All Fields Must Be Filled"));
         solo.enterText((EditText) solo.getView(R.id.enter_email), "user0001@example.com");
+        solo.clickOnButton("Submit");
+        assertTrue(solo.searchText("All Fields Must Be Filled"));
         solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000001");
         solo.clickOnButton("Submit");
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
