@@ -76,14 +76,21 @@ public class RequestorBidDetailActivity extends AppCompatActivity {
         acceptBid = findViewById(R.id.acceptBid);
         acceptBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO change the status of the task
-                task.acceptBid(bid.getTaskProvider());
+                //TODO: fix. needs to delete all other bids from the task object as well as from the bid database.
+                //TODO: Problem is cannot enumerate and delete the bids in the ffor loop as index keeps changing concurrently
+                ArrayList<Bid> allBids = task.getBids();
+                for (Bid task_bid : allBids ) {
+                    task.deleteBid(task_bid);
+                    ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
+                    deleteBidTask.execute(task_bid);
+                }
                 bid.setStatus("Accepted");
-//                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
-//                editTask.execute(task);
-                ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
-                editBid.execute(bid);
+                ElasticSearchBidController.AddBidsTask addBid = new ElasticSearchBidController.AddBidsTask();
+                addBid.execute(bid);
+                task.addBid(bid);
                 task.acceptBid(bid.getTaskProvider());
+                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                editTask.execute(task);
                 finish();
 
             }

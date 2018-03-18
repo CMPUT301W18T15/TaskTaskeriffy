@@ -98,7 +98,7 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
 
         for(int i = 0; i < tempTaskList.size(); i++){
             if (!(tempTaskList.get(i).getUserName().equals( SetCurrentUser.getCurrentUser().getUsername()))
-                    && !tempTaskList.get(i).getStatus().equals("Assigned")) {
+                    && !tempTaskList.get(i).getStatus().equals("Assigned") && !tempTaskList.get(i).getStatus().equals("Done")) {
                 taskList.add(tempTaskList.get(i));
             }
         }
@@ -116,9 +116,6 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
         else if (requestCode == 1) {
 
             Bid bidPlaced = (Bid) i.getSerializableExtra("bidPlaced");
-
-            ElasticSearchBidController.AddBidsTask addBid = new ElasticSearchBidController.AddBidsTask();
-            addBid.execute(bidPlaced);
 
         }
 
