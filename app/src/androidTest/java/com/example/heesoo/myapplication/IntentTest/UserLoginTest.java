@@ -45,23 +45,26 @@ public class UserLoginTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Please fill in Username and Password"));
 
-        solo.enterText((EditText) solo.getView(R.id.login_username), "UserNotExist");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "password");
+        // user not exist
+        solo.enterText((EditText) solo.getView(R.id.login_username), "USER0000");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "USER0000");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Account Does not Exist"));
 
         // TODO we need a existed user account to test
+        // user exist
+        // password not match
         solo.clearEditText((EditText) solo.getView(R.id.login_username));
         solo.clearEditText((EditText) solo.getView(R.id.login_password));
-        solo.enterText((EditText) solo.getView(R.id.login_username), "User0000");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "WrongPassword");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Password Does not Match"));
 
         solo.clearEditText((EditText) solo.getView(R.id.login_username));
         solo.clearEditText((EditText) solo.getView(R.id.login_password));
-        solo.enterText((EditText) solo.getView(R.id.login_username), "User0000");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "CorrectPassword");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", ChooseModeActivity.class);
         assertTrue(solo.searchText("Logged In"));
