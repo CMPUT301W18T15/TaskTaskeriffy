@@ -19,6 +19,12 @@ import com.robotium.solo.Solo;
  * User Story: 05.02.01
  */
 
+/* IMPORTANT NOTE : Please DELETE the contents of the database before running intent tests.
+    Some tests will not pass if the intent tests have already been run; for example, testRegister
+    will not pass if the account you are attempting to create is already in the database from a previous
+    iteration of the intent tests.
+ */
+
 public class DEProviderSeeBiddedTask extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
