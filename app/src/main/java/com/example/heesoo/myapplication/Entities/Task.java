@@ -50,7 +50,7 @@ public class Task implements Serializable{
 
     /**
      * <p>
-     *     This method returns the string that corresponds to the username of the user that has
+     *     This method returns the string that represents the username of the user that has
      *     requested this activity
      * </p>
      *
@@ -63,7 +63,7 @@ public class Task implements Serializable{
 
     /**
      * <p>
-     *     This method returns the string that corresponds to the username of the user that has
+     *     This method returns the string that represents the username of the user that has
      *     been assigned to perform this task
      * </p>
      *
@@ -76,8 +76,7 @@ public class Task implements Serializable{
 
     /**
      * <p>
-     *     This method sets the value of "assignedTaskProvider" to the username of the user that has
-     *     been assigned to perform this task. This value is passed into the method via param.
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param taskProvider string that represents the username of the user that has been assigned to
      *                     perform this activity
@@ -123,7 +122,7 @@ public class Task implements Serializable{
 
     /**
      * <p>
-     *     This method sets the variable 'taskDescription' to the string passed into the method.
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param taskDescription string that represents the description given to this task
      */
@@ -145,7 +144,7 @@ public class Task implements Serializable{
 
     /**
      * <p>
-     *     This method assigned the variable "status" to whatever is passed into the method through parameters
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param status string that represents the new status of the task
      */
@@ -167,8 +166,7 @@ public class Task implements Serializable{
 
     /**
      * <p>
-     *     A method that sets the variable "id" to whatever string is passed into the method through the
-     *     parameters
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param id string that represents the unique id assigned to the task
      */
@@ -256,7 +254,7 @@ public class Task implements Serializable{
 
     /**
      * <p>
-     *     This method returns a string value that represents this task
+     *     This method returns a string that represents this task.
      * </p>
      * @return  string that represents the task as a string
      */

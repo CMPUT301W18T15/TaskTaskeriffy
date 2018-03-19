@@ -4,11 +4,6 @@ import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
-
-/**
- * Created by chengze on 2018/2/26.
- */
-
 public class Bid implements Serializable{
     private String taskName;
     private String description;
@@ -21,14 +16,14 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     * A constructor that creates a new bid  given the following four parameters. The default value
-     * for a newly created bid's status is "Placed".
+     * A constructor that creates a new bid when given the following four parameters. The default value
+     * of a newly created bid's status is "Placed".
      *</p>
      * <pre>
      * @parm taskProvider     a string that represents the unique username of the user than has bid on this task
      * @parm taskName         a string that represents the task name
      * @parm taskDescription  a string that represents the task description
-     * @parm bidPrice         a float that represents the bid the taskProvider has placed on this task
+     * @parm bidPrice         a float that represents the price of the bid the taskProvider has placed on this task
      * </pre>
      * @author      Manuela Key Marichales
      * @since       1.0
@@ -43,9 +38,9 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method returns the string that corresponds to the task that this bid is placed on
+     *     This method returns a string that corresponds to the name of the task that this bid is placed on.
      * </p>
-     * @return string that represents the taskName that corresponds to this task
+     * @return string that represents the name of this task
      */
     public String getTaskName(){
 
@@ -54,10 +49,9 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method sets the variable "taskName" to the string passed to this method through
-     *     the parameters.
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
-     * @param taskname string that represents the name of the task that this bid is placed on
+     * @param taskname string that represents the name of the task that this bid is placed on.
      */
     public void setTaskName(String taskname){
 
@@ -66,8 +60,8 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method returns the string that represents the description of the task this bid is
-     *     placed on
+     *     This method returns a string that represents the description of the task this bid is
+     *     placed on.
      * </p>
      * @return string that represents the description of the task this bid is placed on
      */
@@ -78,8 +72,7 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method sets the "description" variable to the string passed to this method through the
-     *     parameter.
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param description string that represents the description of the task that this bid is placed on
      */
@@ -90,7 +83,7 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method returns a string that represents the status of this bid
+     *     This method returns a string that represents the status of this bid.
      * </p>
      * @return string that represents the status of this bid
      */
@@ -101,10 +94,9 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method sets the variable "status" to the string that is passed to the method through
-     *     the parameter.
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
-     * @param status string that repreents the status of this bid
+     * @param status string that represents the status of this bid
      */
     public void setStatus(String status) {
 
@@ -114,7 +106,7 @@ public class Bid implements Serializable{
     /**
      * <p>
      *     This method returns the string that corresponds to the username of task provider that has
-     *     placed the bid.
+     *     placed this bid.
      * </p>
      * @return string that represents the username of task provider that has placed this bid
      */
@@ -125,8 +117,7 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method sets the variable "taskProvider" to the string that is passed to the method
-     *     through the parameters.
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param taskProvider string that represents the username of the task provider that has placed this bid
      */
@@ -137,7 +128,7 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method returns the string that corresponds to the id of this bid
+     *     This method returns the string that represents the unique id of this bid.
      * </p>
      * @return string that represents the unique id of this bid
      */
@@ -148,7 +139,7 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method sets the variable "id" to the string passed to the method through the parameter
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param id string that represents the unique id of this bid
      */
@@ -159,7 +150,7 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method returns the Float value that represents the value of bid placed on this task
+     *     This method returns the Float that represents the value of bid placed on this task
      * </p>
      * @return Float that represents the price of the bid placed on a task
      */
@@ -170,8 +161,7 @@ public class Bid implements Serializable{
 
     /**
      * <p>
-     *     This method sets the variable "bidPrice" to the Float passed to the method through the
-     *     parameters
+     *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
      * @param BidPrice Float that represents the price of bid placed on a task
      */
