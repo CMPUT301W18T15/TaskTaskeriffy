@@ -24,6 +24,12 @@ import java.util.ArrayList;
  * Created by manuelakm on 2018-03-14.
  */
 
+/*
+This activity is navigated to when the provider wants to find a new task that they can bid on. It shows a list view of
+ all the tasks that are in a requested or bidded state which are created by other users. BY clicking on a list item, the
+ provider can navigate to a particular and see it's details.
+ */
+
 public class ProviderFindNewTaskActivity extends AppCompatActivity {
     private ArrayList<Task> tempTaskList;
     private ArrayList<Task> taskList;

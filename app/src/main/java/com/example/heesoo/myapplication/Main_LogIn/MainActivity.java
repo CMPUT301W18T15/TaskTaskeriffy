@@ -19,6 +19,13 @@ import com.example.heesoo.myapplication.Register.RegisterActivity;
 
 import java.util.ArrayList;
 
+/*
+This activity gives the user the interface to log in. It contains a button that navigates to register
+instead in case, the user is not registered. This is the main starting screen for the application.
+The user must be registered and the correct username password combination must be provided for a
+successful login.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText enter_username;

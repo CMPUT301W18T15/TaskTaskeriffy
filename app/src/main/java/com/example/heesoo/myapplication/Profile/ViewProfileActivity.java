@@ -16,6 +16,15 @@ import com.example.heesoo.myapplication.R;
  * Created by manuelakm on 2018-03-13.
  */
 
+/*
+This activity gives the user an interface to view their profile which contains information about their account such as
+ the username, the email address and the phone number. It contains button to navigate to the ChooseModeActivity
+ where the user can switch between Task Provider or Task Requester mode. It also contains a button to navigate to the EditProfileActivity
+ where the user may edit their own profile information. The User can reach this activity when clicking on any username to
+ show (for eg. the bidder's details) their profile or clicking at the My Account button on the main dashboard in
+ either the provider or the requester mode.
+ */
+
 public class ViewProfileActivity extends AppCompatActivity {
 
     private TextView usernameView;
