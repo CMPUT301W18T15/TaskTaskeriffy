@@ -50,7 +50,7 @@ public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
         // did not enter password
         solo.clearEditText((EditText) solo.getView(R.id.login_username));
         solo.clearEditText((EditText) solo.getView(R.id.login_password));
-        solo.enterText((EditText) solo.getView(R.id.login_username), "user00001");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Please fill in Username and Password"));
 
