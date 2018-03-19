@@ -13,6 +13,12 @@ import com.google.gson.Gson;
  * Created by heesoopark on 2018-03-13.
  */
 
+/*
+This class is used to keep a track of the shared preferences that are needed amongst most other activities.
+Upon login, the current user is set so it may be easily looked up through the class method "getCurrentUser".
+Similarly current mode is also a shared preference that may be used in future.
+ */
+
 public class SetCurrentUser extends Application {
     private static Context applicationContext;
     private static SharedPreferences sharedPreferences;
