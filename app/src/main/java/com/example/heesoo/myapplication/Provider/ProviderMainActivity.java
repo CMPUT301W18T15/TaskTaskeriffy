@@ -21,6 +21,11 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 import java.util.ArrayList;
 
+/*
+This activity serves as the main dashboard for the provider mode and shows a list of tasks that are assigned to the provider.
+It also contains buttons to view profile, view tasks that the provider has bidded on and find new tasks to bid on.
+ */
+
 public class ProviderMainActivity extends AppCompatActivity {
 
     private Button myAccountButton;
@@ -47,7 +52,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         myAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ViewProfileActivity.class);
                 startActivity(intent);
             }
@@ -100,10 +104,6 @@ public class ProviderMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //@todo need to pull all the tasks posted by this requester
-        // will return an arraylist of tasks,
-        // @todo get user's name
-        //String thisRequesterName = getCurrentUser
 
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();

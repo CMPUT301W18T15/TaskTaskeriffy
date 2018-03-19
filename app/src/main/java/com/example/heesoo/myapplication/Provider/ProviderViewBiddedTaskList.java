@@ -26,8 +26,12 @@ import java.util.Objects;
  * Created by manuelakm on 2018-03-15.
  */
 
+/*
+This activity is navigated to when the provider clicks on the button to view bidded list
+in the ProviderMainActivity. This activity shows the list of tasks that the provider has bidded on. By clicking an
+item in the list, the provider may view the details of the task and it's lowest bid.
+ */
 
-//TODO: IMPORTANT::: Using this class as Provider View Bidded List. Different from Requester view Bidded List
 public class ProviderViewBiddedTaskList extends AppCompatActivity {
 
     private ArrayList<Task> tempTaskList;
@@ -87,8 +91,6 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
         super.onStart();
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
-
-        // UNCOMMENT OUT WHEN ELASTICSEARCH CONTROLLER IS IMPLEMENTED
 
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");

@@ -21,6 +21,11 @@ import java.util.ArrayList;
  * Created by riyariya on 2018-03-14.
  */
 
+/*
+This activity serves to show the task requester a list of the tasks requested by them that are bidded on by providers.
+This activity is reached through the show bidded task list button on the dashboard (RequesterMainActivity).
+ */
+
 public class RequesterBiddedTasksListActivity extends AppCompatActivity{
 
     private ArrayList<Task> taskList; // the list of tasks that requester posted
@@ -51,10 +56,6 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
-        //@todo need to pull all the tasks posted by this requester
-        // will return an arraylist of tasks,
-        // @todo get user's name
-        //String thisRequesterName = getCurrentUser
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
         ArrayList<String> requesterBiddedTasksNames = new ArrayList<String>();
@@ -66,7 +67,7 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
             allTasks = getAllTasks.get();
         }
         catch (Exception e) {
-            Log.i("Error", "The request for tweets failed in onStart");
+            Log.i("Error", "The request for tasks failed in onStart");
         }
 
         for (Task task:allTasks){

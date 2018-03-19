@@ -21,6 +21,12 @@ import com.example.heesoo.myapplication.R;
  * Created by manuelakm on 2018-03-15.
  */
 
+/*
+This activity is navigated to when the provider wants to place a bid on a task. It is reached from the ProviderFindNewTaskActivity.
+This activity provides an interface for the provider to see the details of a task and it's lowest bid and where
+the provider can place his own bid.
+ */
+
 public class ProviderPlaceBidActivity extends AppCompatActivity {
     private TextView titleView;
     private TextView descriptionView;

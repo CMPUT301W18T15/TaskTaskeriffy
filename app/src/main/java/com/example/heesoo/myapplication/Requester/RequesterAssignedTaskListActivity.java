@@ -21,6 +21,11 @@ package com.example.heesoo.myapplication.Requester;
  * Created by riyariya on 2018-03-14.
  */
 
+/*
+This activity serves to show the task requester a list of the tasks requested by them that are assigned to a provider.
+This activity is reached through the show assigned task list button on the dashboard (RequesterMainActivity).
+ */
+
 public class RequesterAssignedTaskListActivity extends AppCompatActivity {
 
     private ArrayList<Task> taskList; // the list of tasks that requester posted
@@ -52,10 +57,6 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //@todo need to pull all the tasks posted by this requester
-        // will return an arraylist of tasks,
-        // @todo get user's name
-        //String thisRequesterName = getCurrentUser
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
 
@@ -68,7 +69,7 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
             allTasks = getAllTasks.get();
         }
         catch (Exception e) {
-            Log.i("Error", "The request for tweets failed in onStart");
+            Log.i("Error", "The request for tasks failed in onStart");
         }
 
         for (Task task:allTasks){
