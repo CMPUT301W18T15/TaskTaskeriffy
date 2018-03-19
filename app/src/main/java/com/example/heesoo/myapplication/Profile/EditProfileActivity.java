@@ -15,6 +15,10 @@ import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
+/*
+This activity gives the user the option to edit their profile. The user can navigate to this activity through the
+ "Edit Profile" button which is embedded in the ViewProfileActivity, when they are viewing their own profile.
+ */
 
 /**
  * Created by manuelakm on 2018-03-13.

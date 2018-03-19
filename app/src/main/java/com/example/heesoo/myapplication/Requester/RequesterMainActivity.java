@@ -1,7 +1,5 @@
 package com.example.heesoo.myapplication.Requester;
 
-// Harry
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +18,12 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 
 import java.util.ArrayList;
+
+/*
+This activity serves as the main dashboard for the requestor mode and shows a list of tasks that were added by the requester
+along with their statuses. It also contains buttons to view profile, add new task, view tasks that have been bidded on and
+tasks that are assigned to a provider.
+ */
 
 public class RequesterMainActivity extends AppCompatActivity {
 

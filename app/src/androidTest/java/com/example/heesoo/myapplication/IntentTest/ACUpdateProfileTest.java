@@ -15,6 +15,7 @@ import com.robotium.solo.Solo;
 
 /**
  * Created by chengze on 2018/3/17.
+ * User Story: 03.02.01
  */
 
 public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {

@@ -21,6 +21,11 @@ import com.example.heesoo.myapplication.R;
  * Created by riyariya on 2018-03-12.
  */
 
+/*
+This activity is navigated to when the requester clicks on the button to add a task in the RequesterMainActivity.
+This activity provides an interface to the task requester where they can enter the details of a task
+that they want to request and add that task.
+ */
 
 public class RequesterAddTaskActivity extends AppCompatActivity {
     private EditText taskName;

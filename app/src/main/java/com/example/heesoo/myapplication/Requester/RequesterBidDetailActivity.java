@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +20,12 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 import java.util.ArrayList;
 
+/*
+This activity is navigated to when the requester clicks on any bid in the list of bids on a particular task.
+This activity is reached by clicking on a particular list item from the RequesterViewBidsOnTask.
+It shows them the details of the bid as well as gives options to accept the bid, decline the bid,
+delete the task or view the bidder's profile.
+ */
 
 public class RequesterBidDetailActivity extends AppCompatActivity {
     private Button editTask;
@@ -139,7 +146,8 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
                 try {
                     user = getUser.get();
                 } catch (Exception e) {
-                    //Log.d
+                    Log.i("Error", "The request for user failed in onStart");
+
                 }
                 Intent intent = new Intent(RequesterBidDetailActivity.this, ViewProfileActivity.class);
                 intent.putExtra("USER", user);
@@ -158,7 +166,7 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
         try {
             user = getUser.get();
         } catch (Exception e) {
-            //Log.d
+            Log.i("Error", "The request for user failed in bidderNameClicked");
         }
         Intent intent = new Intent(RequesterBidDetailActivity.this, ViewProfileActivity.class);
         intent.putExtra("USER", user);

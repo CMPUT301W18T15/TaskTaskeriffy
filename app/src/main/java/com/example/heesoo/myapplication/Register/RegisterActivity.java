@@ -21,6 +21,12 @@ import com.example.heesoo.myapplication.Constraints.UserConstraints;
  * Created by heesoopark on 2018-03-12.
  */
 
+/*
+This activity is navigated to when the user clicks the Register button in the log in page of the app (MainActivity).
+This activity provides an interface where the user can register to use the app by entering a unique username, password, email address and
+phone number. The user may not register twice. The user may only log in if they were registered before that.
+ */
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText usernameTxt, passwordTxt, repeat_passwordTxt, emailTxt, phoneTxt;
     private Button submit_button;

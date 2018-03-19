@@ -19,6 +19,16 @@ import com.example.heesoo.myapplication.R;
 
 import java.util.ArrayList;
 
+/*
+This activity is navigated to when the provider clicks on any list view where they are able to see their tasks.
+It serves as a custom show page that is varied slightly based on the status of the task that was clicked on.
+In all cases, the details of the task along with it's lowest bid and the option to delete the task is shown.
+When the task is "requested", there is an additional button to navigate to EditTAskActivity where the
+task may be edited. When the task is "bidded", there is an additional button to navigate to
+RequesterViewBidsOnTaskActivity where a list of all the bids on a particular task is shown. When the task
+is "assigned", there are two additional buttons to mark the status of the task as either "Done" or "Requested".
+ */
+
 public class RequesterShowTaskDetailActivity extends AppCompatActivity {
 
     private Button editTask;
@@ -142,7 +152,6 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     task.setStatus("Requested");
                     task.setTaskProvider("");
-                    //TODO delete the particlar bid from the task and database
 
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);

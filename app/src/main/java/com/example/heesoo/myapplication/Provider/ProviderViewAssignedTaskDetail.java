@@ -15,6 +15,11 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
+/*
+This activity is navigated to when the provider clicks on any task that was assigned to them in the
+list view of the ProvideMainActivity.  It shows them the details of the task as well as the accepted bid.
+ */
+
 public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
     private Button finishTask;
     private Task task;
@@ -50,22 +55,6 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
                 taskLowestBid.setText(task.getLowestBid());
             }
         }
-
-        //TODO: Again, provider should not be able to change status of task or "finish" a task.
-
-//        Button finishTask = findViewById(R.id.finishTask);
-//
-//        taskLowestBid.setText(task.getLowestBid());
-//        if (task.getStatus().equals("Assigned")){
-//            finishTask.setVisibility(View.VISIBLE);
-//        }
-        //TODO: provider should not be able to change status of task.
-//        finishTask = findViewById(R.id.finishTask);
-//        finishTask.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                task.setStatus("Finished");
-//            }
-//        });
     }
 
     public void clickHandler(View view){

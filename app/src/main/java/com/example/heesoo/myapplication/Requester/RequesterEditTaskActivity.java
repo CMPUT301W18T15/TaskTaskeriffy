@@ -22,6 +22,12 @@ import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
  * Created by manuelakm on 2018-03-15.
  */
 
+/*
+This activity is navigated to when the requester clicks on the edit task button when viewing a task with status requested
+through the RequesterShowTaskDetailActivity. This activity provides an interface to the task requester
+where they can edit the details of a task that they requested earlier.
+ */
+
 public class RequesterEditTaskActivity extends AppCompatActivity {
 
     private EditText taskName;

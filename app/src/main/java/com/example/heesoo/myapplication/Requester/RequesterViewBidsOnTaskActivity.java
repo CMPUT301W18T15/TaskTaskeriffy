@@ -20,6 +20,13 @@ import java.util.ArrayList;
  * Created by manuelakm on 2018-03-15.
  */
 
+/*
+This activity is navigated to when the requester clicks on the button to view bids through the
+RequesterShowTaskDetailActivity when the status of the task is "bidded". This activity provides shows a
+list view of all the bids on a particular task to the requester so they may click on a bid to see it's details
+and perform an action.
+ */
+
 public class RequesterViewBidsOnTaskActivity extends AppCompatActivity {
     private ListView bidsView;
     private ArrayList<Bid> bidList;

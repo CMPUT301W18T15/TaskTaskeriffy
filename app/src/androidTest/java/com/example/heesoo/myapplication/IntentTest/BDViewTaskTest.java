@@ -12,6 +12,9 @@ import com.robotium.solo.Solo;
 
 /**
  * Created by chengze on 2018/3/17.
+ * User Story: 01.02.01
+ *             02.01.01
+ *             02.02.02
  */
 
 public class BDViewTaskTest extends ActivityInstrumentationTestCase2 {
