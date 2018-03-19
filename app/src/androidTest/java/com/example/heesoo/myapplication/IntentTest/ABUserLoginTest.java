@@ -14,6 +14,7 @@ import com.robotium.solo.Solo;
 
 /**
  * Created by chengze on 2018/3/17.
+ * User Story:
  */
 
 public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
@@ -29,16 +30,6 @@ public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
 
     public void testStart() throws Exception{
         Activity activity = getActivity();
-    }
-
-    public void testClickRegister(){
-        MainActivity activity = (MainActivity)solo.getCurrentActivity();
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        solo.clickOnButton("register");
-        solo.assertCurrentActivity("Wrong Activity", RegisterActivity.class);
-        solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
     }
 
     public void testLogin(){
@@ -59,7 +50,7 @@ public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
         // did not enter password
         solo.clearEditText((EditText) solo.getView(R.id.login_username));
         solo.clearEditText((EditText) solo.getView(R.id.login_password));
-        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "user00001");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Please fill in Username and Password"));
 

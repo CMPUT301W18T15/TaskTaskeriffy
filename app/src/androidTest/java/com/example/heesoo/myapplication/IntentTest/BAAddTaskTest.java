@@ -16,6 +16,9 @@ import com.robotium.solo.Solo;
 
 /**
  * Created by chengze on 2018/3/17.
+ * User Story: 01.01.01
+ *             01.01.02
+ *             01.01.03
  */
 
 public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {

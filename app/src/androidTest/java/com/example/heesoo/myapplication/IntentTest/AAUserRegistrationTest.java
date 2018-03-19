@@ -12,6 +12,9 @@ import com.robotium.solo.Solo;
 
 /**
  * Created by chengze on 2018/3/17.
+ * User Story: 03.01.01
+ *             03.01.02
+ *             03.01.03
  */
 
 public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
