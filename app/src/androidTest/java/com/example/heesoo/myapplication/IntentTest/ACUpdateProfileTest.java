@@ -17,10 +17,10 @@ import com.robotium.solo.Solo;
  * Created by chengze on 2018/3/17.
  */
 
-public class UpdateProfileTest extends ActivityInstrumentationTestCase2 {
+public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
-    public UpdateProfileTest(){
+    public ACUpdateProfileTest(){
         super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
         try{
             solo.clickOnButton("register");

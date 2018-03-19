@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.Entities.Bid;
@@ -60,21 +61,27 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setResult(RESULT_OK);
                 newBidPrice = placeBidView.getText().toString();
-                float bidPrice = Float.parseFloat(newBidPrice);
-                Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername());
-                ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
-                addBidsTask.execute(newBid);
-                task.addBid(newBid);
-                Intent new_bid = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
-                new_bid.putExtra("bidPlaced", newBid);
-                setResult(Activity.RESULT_OK, new_bid);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 1500);
+                float bidPrice;
 
+                if (newBidPrice.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please Fill the Bid Price", Toast.LENGTH_SHORT).show();
+                } else {
+                    bidPrice = Float.parseFloat(newBidPrice);
+                    Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername());
+                    ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
+                    addBidsTask.execute(newBid);
+                    task.addBid(newBid);
+                    Intent new_bid = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
+                    new_bid.putExtra("bidPlaced", newBid);
+                    setResult(Activity.RESULT_OK, new_bid);
+                    Toast.makeText(getApplicationContext(), "Bid Placed", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 1500);
+                }
             }
         });
     }
