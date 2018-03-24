@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heesoo.myapplication">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
@@ -35,6 +37,7 @@
         <activity android:name=".Requester.RequesterEditTaskActivity"></activity>
         <activity android:name=".Provider.ProviderViewBiddedTaskList"></activity>
         <activity android:name=".Requester.RequesterViewBidsOnTaskActivity"></activity>
+        <activity android:name=".Requester.RequesterGeoMapActivity"></activity>
 
 
 
