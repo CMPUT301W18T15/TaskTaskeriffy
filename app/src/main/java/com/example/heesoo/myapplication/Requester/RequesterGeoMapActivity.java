@@ -3,19 +3,19 @@ package com.example.heesoo.myapplication.Requester;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.heesoo.myapplication.R;
+/* import com.example.heesoo.myapplication.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback; */
 
 /**
  * Created by manuelakm on 2018-03-23.
  */
 
 public class RequesterGeoMapActivity extends AppCompatActivity {
-
+    /*
     private MapView mapView;
 
     @Override
@@ -78,4 +78,6 @@ public class RequesterGeoMapActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
+} */
+
 }
