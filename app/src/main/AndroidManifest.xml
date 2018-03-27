@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heesoo.myapplication">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
-        android:allowBackup="true"
         android:name=".SetCurrentUser.SetCurrentUser"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -20,26 +20,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    <activity android:name=".Register.RegisterActivity"></activity>
-        <activity android:name="com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity"></activity>
-        <activity android:name=".Provider.ProviderMainActivity"></activity>
-        <activity android:name=".Requester.RequesterMainActivity"></activity>
-        <activity android:name=".Profile.ViewProfileActivity"></activity>
-        <activity android:name=".Profile.EditProfileActivity"></activity>
-        <activity android:name=".Requester.RequesterAddTaskActivity"></activity>
-        <activity android:name=".Requester.RequesterShowTaskDetailActivity"></activity>
-        <activity android:name=".Provider.ProviderViewAssignedTaskDetail"></activity>
-        <activity android:name=".Requester.RequesterBiddedTasksListActivity"></activity>
-        <activity android:name=".Requester.RequesterAssignedTaskListActivity"></activity>
-        <activity android:name=".Provider.ProviderFindNewTaskActivity"></activity>
-        <activity android:name=".Provider.ProviderPlaceBidActivity"></activity>
-        <activity android:name=".Requester.RequesterBidDetailActivity"></activity>
-        <activity android:name=".Requester.RequesterEditTaskActivity"></activity>
-        <activity android:name=".Provider.ProviderViewBiddedTaskList"></activity>
-        <activity android:name=".Requester.RequesterViewBidsOnTaskActivity"></activity>
-        <activity android:name=".Requester.RequesterGeoMapActivity"></activity>
+        <activity android:name=".Register.RegisterActivity" />
+        <activity android:name=".ChooseMode.ChooseModeActivity" />
+        <activity android:name=".Provider.ProviderMainActivity" />
+        <activity android:name=".Requester.RequesterMainActivity" />
+        <activity android:name=".Profile.ViewProfileActivity" />
+        <activity android:name=".Profile.EditProfileActivity" />
+        <activity android:name=".Requester.RequesterAddTaskActivity" />
+        <activity android:name=".Requester.RequesterShowTaskDetailActivity" />
+        <activity android:name=".Provider.ProviderViewAssignedTaskDetail" />
+        <activity android:name=".Requester.RequesterBiddedTasksListActivity" />
+        <activity android:name=".Requester.RequesterAssignedTaskListActivity" />
+        <activity android:name=".Provider.ProviderFindNewTaskActivity" />
+        <activity android:name=".Provider.ProviderPlaceBidActivity" />
+        <activity android:name=".Requester.RequesterBidDetailActivity" />
+        <activity android:name=".Requester.RequesterEditTaskActivity" />
+        <activity android:name=".Provider.ProviderViewBiddedTaskList" />
+        <activity android:name=".Requester.RequesterViewBidsOnTaskActivity" />
+        <activity android:name=".Requester.RequesterGeoMapActivity" />
 
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
-
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
+
 </manifest>

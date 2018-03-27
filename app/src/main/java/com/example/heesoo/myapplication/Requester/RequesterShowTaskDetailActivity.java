@@ -14,6 +14,7 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBi
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.MapsActivity;
 import com.example.heesoo.myapplication.R;
 
 
@@ -36,6 +37,7 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
     private Button viewBidsButton;
     private Button markDone;
     private Button markRequested;
+    private Button mapButton;
 
     private TextView taskName;
     private TextView taskDescription;
@@ -168,6 +170,15 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             });
 
         }
+
+        mapButton = findViewById(R.id.seeMap);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

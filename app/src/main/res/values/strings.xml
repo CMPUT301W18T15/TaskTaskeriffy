@@ -24,6 +24,7 @@
     <string name="biddername">bidderName</string>
     <string name="deletetask">deleteTask</string>
     <string name="declinebid">declineBid</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
