@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDexApplication;
 
 import com.example.heesoo.myapplication.Entities.User;
 
@@ -19,7 +20,7 @@ Upon login, the current user is set so it may be easily looked up through the cl
 Similarly current mode is also a shared preference that may be used in future.
  */
 
-public class SetCurrentUser extends Application {
+public class SetCurrentUser extends MultiDexApplication {
     private static Context applicationContext;
     private static SharedPreferences sharedPreferences;
 

@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.example.heesoo.myapplication.Entities.User;
 import com.google.gson.Gson;
+
+
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
