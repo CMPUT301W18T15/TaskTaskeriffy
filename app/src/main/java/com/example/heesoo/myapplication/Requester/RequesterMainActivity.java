@@ -12,14 +12,13 @@ import android.widget.ListView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 
 import java.util.ArrayList;
-
-import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.user;
 
 /*
 This activity serves as the main dashboard for the requestor mode and shows a list of tasks that were added by the requester
@@ -118,7 +117,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         // TODO use elastic search to get the Task Table
 
         Log.d("REQUESTCODE", "UPDATING LIST FROM DATABASE");
-        taskList = getUserTasksFromDatabase();
+        taskList = MainActivity.user.getTempReqTaskList();
         taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         taskAdapter.notifyDataSetChanged();
         //clickableList.invalidateViews();
@@ -126,28 +125,5 @@ public class RequesterMainActivity extends AppCompatActivity {
 
     }
 
-    protected ArrayList<Task> getUserTasksFromDatabase() {
-        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
-        getAllTasks.execute("");
-        taskList.clear();
 
-        try {
-            allTasks = getAllTasks.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "The request for tweets failed in onStart");
-        }
-        
-
-        ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
-
-        for (Task task : allTasks){
-            if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
-                Log.d("REQUESTCODE", task.getTaskName());
-                taskList.add(task);
-                requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
-            }
-        }
-        return taskList;
-    }
 }

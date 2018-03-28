@@ -3,6 +3,8 @@ package com.example.heesoo.myapplication.Requester;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -97,6 +99,20 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager mgr = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] info = mgr.getAllNetworkInfo();
+        if (info != null) {
+            for (int i = 0; i < info.length; i++) {
+                if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

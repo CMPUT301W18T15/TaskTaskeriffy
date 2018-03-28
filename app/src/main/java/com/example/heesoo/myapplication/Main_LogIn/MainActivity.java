@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText enter_password;
     private ElasticSearchUserController elasticSearchUserController;
     private ArrayList<Task> tempList;
-    static public User user;
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
