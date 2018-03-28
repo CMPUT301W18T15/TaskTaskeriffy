@@ -117,13 +117,28 @@ public class RequesterMainActivity extends AppCompatActivity {
         // TODO use elastic search to get the Task Table
 
         Log.d("REQUESTCODE", "UPDATING LIST FROM DATABASE");
-        taskList = MainActivity.user.getTempReqTaskList();
+        taskList = getUserTasksFromDatabase();
         taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         taskAdapter.notifyDataSetChanged();
         //clickableList.invalidateViews();
         clickableList.setAdapter(taskAdapter);
 
+
     }
 
+    protected ArrayList<Task> getUserTasksFromDatabase() {
+        allTasks = MainActivity.user.getTempReqTaskList();
+
+        ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
+
+        for (Task task : allTasks){
+            if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
+                Log.d("REQUESTCODE", task.getTaskName());
+                taskList.add(task);
+                requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
+            }
+        }
+        return taskList;
+    }
 
 }
