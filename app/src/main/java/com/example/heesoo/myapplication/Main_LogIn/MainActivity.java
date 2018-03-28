@@ -91,14 +91,21 @@ public class MainActivity extends AppCompatActivity {
                                 Log.i("Error", "The request for task failed in onStart");
                             }
 
+                            ArrayList<Task> tempR = new ArrayList<Task>();
+                            ArrayList<Task> tempP = new ArrayList<Task>();
+
                             for (Task task : tempList){
                                 if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
-                                    user.getTempProTaskList().add(task);
+                                    tempR.add(task);
+
                                 }
-                                if ( task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
-                                    user.getTempReqTaskList().add(task);
+                                if (task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
+                                    tempP.add(task);
+
                                 }
                             }
+                            user.setTempProTaskList(tempP);
+                            user.setTempReqTaskList(tempR);
                             
 
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
