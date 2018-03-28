@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
@@ -108,15 +109,8 @@ public class ProviderMainActivity extends AppCompatActivity {
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
 
-        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
-        getAllTasks.execute("");
+        tempTaskList = MainActivity.user.getProviderTasks();
 
-        try {
-            tempTaskList = getAllTasks.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "The request for tweets failed in onStart");
-        }
 
         ArrayList<String> tasksNames = new ArrayList<String>();
 
