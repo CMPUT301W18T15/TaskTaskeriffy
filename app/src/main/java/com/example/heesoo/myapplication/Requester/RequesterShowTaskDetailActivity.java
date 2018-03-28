@@ -189,11 +189,14 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
 
         }
         else if (requestCode == 1) {
-            Task task = (Task) i.getSerializableExtra("TaskEdited");
-            taskName.setText(task.getTaskName());
-            taskDescription.setText(task.getTaskDescription());
-            taskStatus.setText(task.getStatus());
-            taskLowestBid.setText(task.getLowestBid());
+            Task newTask = (Task) i.getSerializableExtra("TaskEdited");
+            taskName.setText(newTask.getTaskName());
+            task.setTaskName(newTask.getTaskName());
+            taskDescription.setText(newTask.getTaskDescription());
+            task.setTaskDescription(newTask.getTaskDescription());
+            taskStatus.setText(newTask.getStatus());
+            task.setStatus(newTask.getStatus());
+            taskLowestBid.setText(newTask.getLowestBid());
         }
         else if (requestCode == 2) {
             Log.d("MapError", "Returning Code");
