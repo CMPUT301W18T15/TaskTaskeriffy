@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
                             for (Task task : tempList){
                                 if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
-                                    Log.d("REQUESTCODE", task.getTaskName());
                                     user.getTempProTaskList().add(task);
                                 }
                                 if ( task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
