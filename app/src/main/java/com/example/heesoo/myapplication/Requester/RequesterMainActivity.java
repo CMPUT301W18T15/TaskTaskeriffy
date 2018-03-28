@@ -106,11 +106,7 @@ public class RequesterMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        //@todo need to pull all the tasks posted by this requester
-        // will return an arraylist of tasks,
-        // @todo get user's name
-        //String thisRequesterName = getCurrentUser
+        
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
 
