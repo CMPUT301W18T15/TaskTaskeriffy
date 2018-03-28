@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.MapsActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
@@ -35,7 +36,9 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
     private TextView lowestBidView;
     private EditText placeBidView;
     private Button placeBidButton;
+    private Button viewMap;
     private String newBidPrice;
+    private Task task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bid_on_task);
 
         Intent intent = getIntent();
-        final Task task = (Task) intent.getSerializableExtra("TaskToBidOn");
+        task = (Task) intent.getSerializableExtra("TaskToBidOn");
 
         titleView = findViewById(R.id.task_view_Title_content);
         titleView.setText(task.getTaskName());
@@ -84,7 +87,20 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if (!task.getLatitude().equals(-1.0) && !task.getLongitude().equals(-1.0)) {
+            viewMap = findViewById(R.id.viewMap);
+            viewMap.setVisibility(View.VISIBLE);
+            viewMap.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                    intent.putExtra("Task", task);
+                    intent.putExtra("Mode", "ViewMarker");
+                    startActivity(intent);
+                }
+            });
+
+        }
     }
-
-
 }

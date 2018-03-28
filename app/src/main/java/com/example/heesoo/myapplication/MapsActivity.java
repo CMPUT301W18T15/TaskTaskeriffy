@@ -45,6 +45,7 @@ public class MapsActivity extends AppCompatActivity
     private FusedLocationProviderClient mFusedLocationClient;
     private LatLng taskLatLng;
     private Task task;
+    private String mode;
 
     private static int MY_LOCATION_REQUEST_CODE = 1;
     private boolean LOCATION_PERMISSION_GRANTED = true;
@@ -58,6 +59,7 @@ public class MapsActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("Task");
+        mode = intent.getStringExtra("Mode");
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -78,49 +80,51 @@ public class MapsActivity extends AppCompatActivity
             goToTaskLocation(task);
         }
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                taskLatLng = latLng;
-                mMap.clear();
-                task.setLatitude(taskLatLng.latitude);
-                task.setLongitude(taskLatLng.longitude);
-                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
-                editTask.execute(task);
-                mMap.addMarker(new MarkerOptions().position(taskLatLng).title("Task Location"));
+        if (mode.equals("AddMarker")) {
+            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    taskLatLng = latLng;
+                    mMap.clear();
+                    task.setLatitude(taskLatLng.latitude);
+                    task.setLongitude(taskLatLng.longitude);
+                    ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                    editTask.execute(task);
+                    mMap.addMarker(new MarkerOptions().position(taskLatLng).title("Task Location"));
 
-                AlertDialog.Builder popUp = new AlertDialog.Builder(MapsActivity.this);
-                popUp.setMessage("Would you like to assign this location to the '" + task.getTaskName() + "' task?");
-                popUp.setCancelable(true);
+                    AlertDialog.Builder popUp = new AlertDialog.Builder(MapsActivity.this);
+                    popUp.setMessage("Would you like to assign this location to the '" + task.getTaskName() + "' task?");
+                    popUp.setCancelable(true);
 
 
-                popUp.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                setResult(RESULT_OK);
-                                Intent intent = new Intent(getApplicationContext(), RequesterShowTaskDetailActivity.class);
-                                intent.putExtra("TaskWithLoc", task);
-                                setResult(Activity.RESULT_OK, intent);
-                                finish();
+                    popUp.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    setResult(RESULT_OK);
+                                    Intent intent = new Intent(getApplicationContext(), RequesterShowTaskDetailActivity.class);
+                                    intent.putExtra("TaskWithLoc", task);
+                                    setResult(Activity.RESULT_OK, intent);
+                                    finish();
 
-                            }
-                        });
+                                }
+                            });
 
-                popUp.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                mMap.clear();
-                                dialog.cancel();
-                            }
-                        });
+                    popUp.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    mMap.clear();
+                                    dialog.cancel();
+                                }
+                            });
 
-                AlertDialog alert11 = popUp.create();
-                alert11.show();
+                    AlertDialog alert11 = popUp.create();
+                    alert11.show();
 
-            }
-        });
+                }
+            });
+        }
     }
 
     public void enableMyLocation() {

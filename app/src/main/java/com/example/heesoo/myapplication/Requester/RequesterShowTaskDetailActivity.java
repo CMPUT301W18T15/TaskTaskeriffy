@@ -178,6 +178,7 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
                 intent.putExtra("Task", task);
+                intent.putExtra("Mode", "AddMarker");
                 startActivityForResult(intent, 2);
             }
         });
