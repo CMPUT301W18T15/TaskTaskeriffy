@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText enter_password;
     private ElasticSearchUserController elasticSearchUserController;
     private ArrayList<Task> tempList;
+    public User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     if (elasticSearchUserController.profileExists(user_str)) {
                         ElasticSearchUserController.GetUserTask getUserTask = new ElasticSearchUserController.GetUserTask();
                         getUserTask.execute(user_str);
-                        User user = null;
+                        user = null;
                         try {
                             user = getUserTask.get();
                         } catch (Exception e) {
@@ -130,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkEmpty(String username,String password) {
         return !(username.equals("") || password.equals(""));
     }
+
+
 
 
 }
