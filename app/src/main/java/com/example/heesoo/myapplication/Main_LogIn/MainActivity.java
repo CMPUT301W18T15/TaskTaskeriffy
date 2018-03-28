@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
+import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText enter_username;
     private EditText enter_password;
     private ElasticSearchUserController elasticSearchUserController;
+    private ArrayList<Task> tempList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +76,35 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.i("Error", "The request for tweets failed in onStart");
                         }
+
                         SetCurrentUser.setCurrentUser(user);
+
                         if (pwd_str.equals(user.getPassword())) {
+                            //log in success, get task list from server
+
+
+
+                            ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+                            getAllTasks.execute("");
+
+                            try {
+                                tempList = getAllTasks.get();
+                            }
+                            catch (Exception e) {
+                                Log.i("Error", "The request for task failed in onStart");
+                            }
+
+                            for (Task task : tempList){
+                                if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
+                                    Log.d("REQUESTCODE", task.getTaskName());
+                                    user.getTempProTaskList().add(task);
+                                }
+                                if ( task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
+                                    user.getTempReqTaskList().add(task);
+                                }
+                            }
+                            
+
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
                         } else {

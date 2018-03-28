@@ -4,16 +4,24 @@ import android.media.Image;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
 
 public class User implements Comparable<User>, Serializable {
 
     private String username, password, emailAddress, phoneNumber;
+
+    private ArrayList<Task> tempProTaskList;
+
+    private ArrayList<Task> tempReqTaskList;
+
     transient Image picture;
 
     @JestId
     private String id = null;
+
+
 
 
     /**
@@ -165,9 +173,28 @@ public class User implements Comparable<User>, Serializable {
     public void setPicture(Image picture) { this.picture = picture; }
 
 
+
+// for offline behavior =============
+    public ArrayList<Task> getTempProTaskList() {
+        return tempProTaskList;
+    }
+
+    public void setTempProTaskList(ArrayList<Task> list){
+        tempProTaskList = list;
+    }
+
+    public ArrayList<Task> getTempReqTaskList() {
+        return tempReqTaskList;
+    }
+
+    public void setTempReqTaskList(ArrayList<Task> list) {
+        this.tempReqTaskList = list;
+    }
+//===========
     @Override
     public int compareTo(@NonNull User user) {
         //return this.getName().toLowerCase().compareTo(user.getName().toLowerCase());
         return 0;
     }
+
 }
