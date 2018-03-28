@@ -81,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
                         if (pwd_str.equals(user.getPassword())) {
                             //log in success, get task list from server
-
-
-
                             ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
                             getAllTasks.execute("");
 
