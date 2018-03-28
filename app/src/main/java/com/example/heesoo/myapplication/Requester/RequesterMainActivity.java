@@ -19,6 +19,8 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 import java.util.ArrayList;
 
+import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.user;
+
 /*
 This activity serves as the main dashboard for the requestor mode and shows a list of tasks that were added by the requester
 along with their statuses. It also contains buttons to view profile, add new task, view tasks that have been bidded on and
@@ -135,6 +137,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         catch (Exception e) {
             Log.i("Error", "The request for tweets failed in onStart");
         }
+        
 
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
