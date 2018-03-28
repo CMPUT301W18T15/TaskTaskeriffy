@@ -106,7 +106,7 @@ public class RequesterMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        
+
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
 

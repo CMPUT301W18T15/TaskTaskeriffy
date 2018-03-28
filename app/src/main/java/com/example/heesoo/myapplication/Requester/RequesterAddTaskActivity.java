@@ -15,8 +15,11 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.TaskConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -33,6 +36,7 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
     private EditText taskName;
     private EditText taskDescription;
     private Button saveButton;
+    public ArrayList<Task> unSyncNewTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,11 +64,27 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                         if (taskConstraints.titleLength(name)) {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
-                                ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
-                                addTasksTask.execute(task);
-                                CharSequence text = "Saving Task";
-                                Toast toast = Toast.makeText(context, text, duration);
-                                toast.show();
+
+                                // not connected to internet, save this new task to an unsave task arraylist, wait when reconnect
+                                // then push the unsave list to the server
+                                // also add the new task to the user temp list
+                                if(!isNetworkAvailable(RequesterAddTaskActivity.this)){
+                                    ArrayList<Task> unSyncNewTask = new ArrayList<Task>();
+                                    unSyncNewTask.add(task);
+                                    CharSequence text = "No Internet, Wait to Sync later";
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                }
+                                else{
+                                    ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
+                                    addTasksTask.execute(task);
+                                    CharSequence text = "Saving Task";
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                }
+
+                                //add the new task to the user temp list to be able to show in main page
+                                MainActivity.user.getTempReqTaskList().add(task);
 
                                 //Clear all the views
                                 taskName.getText().clear();
