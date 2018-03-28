@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -176,7 +177,8 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(intent);
+                intent.putExtra("Task", task);
+                startActivityForResult(intent, 2);
             }
         });
     }
@@ -192,6 +194,12 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             taskDescription.setText(task.getTaskDescription());
             taskStatus.setText(task.getStatus());
             taskLowestBid.setText(task.getLowestBid());
+        }
+        else if (requestCode == 2) {
+            Log.d("MapError", "Returning Code");
+            Task newTask = (Task) i.getSerializableExtra("TaskWithLoc");
+            task.setLongitude(newTask.getLongitude());
+            task.setLatitude(newTask.getLatitude());
         }
     }
 
