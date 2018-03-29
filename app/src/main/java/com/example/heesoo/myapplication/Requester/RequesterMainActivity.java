@@ -1,9 +1,14 @@
 package com.example.heesoo.myapplication.Requester;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,10 +17,9 @@ import android.widget.ListView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
-import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
-import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
-
+import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 import java.util.ArrayList;
 
@@ -100,6 +104,38 @@ public class RequesterMainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.item_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                ArrayList<Task> templist = new ArrayList<Task>();
+
+                for(Task temp : taskList){
+                    if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
+                        templist.add(temp);
+                    }
+                }
+                taskAdapter = new ArrayAdapter<Task>(RequesterMainActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, templist);
+                //taskAdapter.notifyDataSetChanged();
+                clickableList.setAdapter(taskAdapter);
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
