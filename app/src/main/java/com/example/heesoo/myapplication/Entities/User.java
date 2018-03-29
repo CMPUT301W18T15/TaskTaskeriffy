@@ -2,8 +2,13 @@ package com.example.heesoo.myapplication.Entities;
 
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
 
@@ -11,6 +16,9 @@ public class User implements Comparable<User>, Serializable {
 
     private String username, password, emailAddress, phoneNumber;
     transient Image picture;
+
+    private ArrayList<Task> requesterTasks = new ArrayList<Task>();
+    private ArrayList<Task> providerTasks = new ArrayList<Task>();
 
     @JestId
     private String id = null;
@@ -169,5 +177,86 @@ public class User implements Comparable<User>, Serializable {
     public int compareTo(@NonNull User user) {
         //return this.getName().toLowerCase().compareTo(user.getName().toLowerCase());
         return 0;
+    }
+
+    public void initializeOffline(){
+        // offline behavior
+        // get the data as login successfully
+        ArrayList<Task> allTasks;
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
+
+        try {
+            allTasks = getAllTasks.get();
+
+            for (Task task : allTasks){
+                if (this.getUsername().equals(task.getUserName())){
+                    Log.d("REQUESTCODE", task.getTaskName());
+                    requesterTasks.add(task);
+                }
+
+                for(int i = 0; i < allTasks.size(); i++){
+                    if ( allTasks.get(i).getStatus().equals("Assigned") && allTasks.get(i).getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
+                        providerTasks.add(allTasks.get(i));
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            Log.i("Error", "The request for tweets failed in onStart");
+        }
+    }
+
+    public void sync(){
+        for (Task task : requesterTasks){
+            ElasticSearchTaskController.GetTask getTask = new ElasticSearchTaskController.GetTask();
+            getTask.execute(task.getId());
+            Task currentTask;
+            try{
+                currentTask = getTask.get();
+                if(currentTask == null){
+                    ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
+                    addTasksTask.execute(task);
+                }else{
+                    ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                    editTask.execute(task);
+                }
+            }
+            catch (Exception e){
+                Log.i("Error", "Cannot find the task!");
+            }
+        }
+    }
+
+    public ArrayList<Task> getRequesterTasks(){
+        return requesterTasks;
+    }
+
+    public ArrayList<Task> getProviderTasks(){
+        return providerTasks;
+    }
+
+    public void addRequesterTasks(Task task){
+        requesterTasks.add(task);
+    }
+
+    public void addProviderTasks(Task task){
+        providerTasks.add(task);
+    }
+
+    public void deleteRequesterTasks(Task task){
+        for (Task deletedTask : requesterTasks){
+            if (deletedTask.getId().equals(task.getId())){
+                requesterTasks.remove(deletedTask);
+            }
+        }
+    }
+
+    public void deleteProviderTasks(Task task){
+        for (Task deletedTask : providerTasks){
+            if (deletedTask.getId().equals(task.getId())){
+                providerTasks.remove(deletedTask);
+            }
+        }
     }
 }

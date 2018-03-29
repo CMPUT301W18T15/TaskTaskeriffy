@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.TaskConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
@@ -58,8 +59,10 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                         if (taskConstraints.titleLength(name)) {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
-                                ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
-                                addTasksTask.execute(task);
+//                                ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
+//                                addTasksTask.execute(task);
+                                MainActivity.user.addRequesterTasks(task);
+                                MainActivity.user.sync();
                                 CharSequence text = "Saving Task";
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
