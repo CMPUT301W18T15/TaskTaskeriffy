@@ -74,9 +74,11 @@ public class MapsActivity extends AppCompatActivity
         enableMyLocation();
 
         if (task.getLatitude().equals(-1.0) && task.getLongitude().equals(-1.0)) {
+            Log.d("MapError", "NoLocation");
             getDeviceLocation();
         }
         else {
+            Log.d("MapError", "YesLocation");
             goToTaskLocation(task);
         }
 
@@ -102,6 +104,8 @@ public class MapsActivity extends AppCompatActivity
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     setResult(RESULT_OK);
+                                    ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
+                                    editTask.execute(task);
                                     Intent intent = new Intent(getApplicationContext(), RequesterShowTaskDetailActivity.class);
                                     intent.putExtra("TaskWithLoc", task);
                                     setResult(Activity.RESULT_OK, intent);
