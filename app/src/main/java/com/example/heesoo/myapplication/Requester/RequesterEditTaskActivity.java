@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.TaskConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
@@ -63,6 +64,15 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                 if (taskConstraints.checkEmpty(name, description)) {
                     if (taskConstraints.titleLength(name)) {
                         if (taskConstraints.descriptionLength(description)) {
+
+                            // offline behavior
+                            for (Task changedTask : MainActivity.user.getRequesterTasks()){
+                                if(changedTask.getId().equals(task.getId())){
+                                    changedTask.setTaskName(name);
+                                    changedTask.setTaskDescription(description);
+                                }
+                            }
+
                             task.setTaskName(name);
                             task.setTaskDescription(description);
 
