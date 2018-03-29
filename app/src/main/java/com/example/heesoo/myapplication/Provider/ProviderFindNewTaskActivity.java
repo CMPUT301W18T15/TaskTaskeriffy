@@ -3,9 +3,14 @@ package com.example.heesoo.myapplication.Provider;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +20,7 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBi
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
@@ -36,6 +42,7 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
     private ListView listView;
     private Task selectedTask;
     private ArrayAdapter<Task> adapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,6 +87,38 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.item_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                ArrayList<Task> templist = new ArrayList<Task>();
+
+                for(Task temp : taskList){
+                    if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
+                        templist.add(temp);
+                    }
+                }
+                adapter = new ArrayAdapter<Task>(ProviderFindNewTaskActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, templist);
+                //taskAdapter.notifyDataSetChanged();
+                listView.setAdapter(adapter);
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
