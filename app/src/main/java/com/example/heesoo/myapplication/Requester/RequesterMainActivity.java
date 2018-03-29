@@ -1,6 +1,11 @@
 package com.example.heesoo.myapplication.Requester;
 
+import android.content.Context;
 import android.content.Intent;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +22,9 @@ import android.widget.ListView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
@@ -142,6 +150,12 @@ public class RequesterMainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // offline behavior
+        // sync
+        if (checkNetwork(this)){
+            MainActivity.user.sync();
+        }
+
         //@todo need to pull all the tasks posted by this requester
         // will return an arraylist of tasks,
         // @todo get user's name
@@ -161,16 +175,9 @@ public class RequesterMainActivity extends AppCompatActivity {
     }
 
     protected ArrayList<Task> getUserTasksFromDatabase() {
-        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
-        getAllTasks.execute("");
-        taskList.clear();
-
-        try {
-            allTasks = getAllTasks.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "The request for tweets failed in onStart");
-        }
+        // offline behavior
+        // get data from local object
+        allTasks = MainActivity.user.getRequesterTasks();
 
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
@@ -182,5 +189,19 @@ public class RequesterMainActivity extends AppCompatActivity {
             }
         }
         return taskList;
+    }
+
+    // check network status
+    public static boolean checkNetwork(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
+        if (info != null) {
+            for (int i = 0; i < info.length; i++) {
+                if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

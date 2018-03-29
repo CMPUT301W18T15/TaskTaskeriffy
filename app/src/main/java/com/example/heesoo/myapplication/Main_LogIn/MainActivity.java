@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText enter_username;
     private EditText enter_password;
     private ElasticSearchUserController elasticSearchUserController;
+    // offline behavior
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +69,13 @@ public class MainActivity extends AppCompatActivity {
                     if (elasticSearchUserController.profileExists(user_str)) {
                         ElasticSearchUserController.GetUserTask getUserTask = new ElasticSearchUserController.GetUserTask();
                         getUserTask.execute(user_str);
-                        User user = null;
+                        user = null;
                         try {
                             user = getUserTask.get();
                         } catch (Exception e) {
                             Log.i("Error", "The request for tweets failed in onStart");
                         }
+                        user.initializeOffline();
                         SetCurrentUser.setCurrentUser(user);
                         if (pwd_str.equals(user.getPassword())) {
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
