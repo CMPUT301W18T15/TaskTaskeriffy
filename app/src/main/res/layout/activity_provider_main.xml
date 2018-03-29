@@ -69,8 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="gone"
-                android:text="Find Nearby task" />
+                android:text="Find Nearby task"
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/view_bidded_list_button"

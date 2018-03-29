@@ -57,10 +57,14 @@ public class ProviderMainActivity extends AppCompatActivity {
             }
         });
 
-
-        //find Nearby task button
-        // @TODO need user's geo location to get nearby tasks
-        // Button findNearbyTaskButton
+        findNearbyTaskButton = findViewById(R.id.find_nearby_task_button);
+        findNearbyTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProviderMainActivity.this, ProviderFindNearbyTasksActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // view provider's bidded list button
