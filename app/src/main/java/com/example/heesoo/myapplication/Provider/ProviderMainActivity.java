@@ -28,6 +28,8 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 import java.util.ArrayList;
 
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
+
 /*
 This activity serves as the main dashboard for the provider mode and shows a list of tasks that are assigned to the provider.
 It also contains buttons to view profile, view tasks that the provider has bidded on and find new tasks to bid on.
@@ -150,6 +152,12 @@ public class ProviderMainActivity extends AppCompatActivity {
 
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
+
+        // offline behavior
+        // sync
+        if (checkNetwork(this)){
+            MainActivity.user.sync();
+        }
 
         tempTaskList = MainActivity.user.getProviderTasks();
 

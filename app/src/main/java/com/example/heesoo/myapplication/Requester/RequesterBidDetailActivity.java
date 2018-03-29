@@ -20,6 +20,8 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 import java.util.ArrayList;
 
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
+
 /*
 This activity is navigated to when the requester clicks on any bid in the list of bids on a particular task.
 This activity is reached by clicking on a particular list item from the RequesterViewBidsOnTask.
@@ -63,7 +65,7 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        checkNetwork(this);
         deleteTask = (Button) findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
+
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 /**
  * Created by manuelakm on 2018-03-13.
@@ -47,6 +50,8 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
     @Override
     protected void onStart() {
+        // offline check
+        checkNetwork(this);
         super.onStart();
         User user_recieved = (User) getIntent().getSerializableExtra("USER");
         User user;

@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
@@ -183,6 +184,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         return taskList;
     }
     public static boolean checkNetwork(Context context) {
+        int duration = Toast.LENGTH_SHORT;
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
         if (info != null) {
@@ -192,6 +194,11 @@ public class RequesterMainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        CharSequence text = "No Internet!";
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
         return false;
     }
 

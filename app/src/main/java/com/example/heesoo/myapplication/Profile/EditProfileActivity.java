@@ -12,8 +12,11 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.UserConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
+
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 /*
 This activity gives the user the option to edit their profile. The user can navigate to this activity through the
@@ -43,6 +46,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        checkNetwork(this);
         super.onStart();
         Intent i = getIntent();
         user = SetCurrentUser.getCurrentUser();

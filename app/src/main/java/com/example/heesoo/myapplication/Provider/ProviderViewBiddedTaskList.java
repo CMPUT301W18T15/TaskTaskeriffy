@@ -28,6 +28,8 @@ import com.example.heesoo.myapplication.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
+
 /**
  * Created by manuelakm on 2018-03-15.
  */
@@ -128,6 +130,8 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        checkNetwork(this);
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
 

@@ -17,6 +17,8 @@ import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
+
 
 /**
  * Created by riyariya on 2018-03-12.
@@ -61,6 +63,7 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
 //                                ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
 //                                addTasksTask.execute(task);
+
                                 MainActivity.user.addRequesterTasks(task);
                                 MainActivity.user.sync();
                                 CharSequence text = "Saving Task";

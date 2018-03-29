@@ -22,6 +22,8 @@ import com.example.heesoo.myapplication.R;
 
 import java.util.ArrayList;
 
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
+
 /**
  * Created by riyariya on 2018-03-14.
  */
@@ -65,6 +67,7 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
         super.onStart();
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
+        checkNetwork(this);
         ArrayList<String> requesterBiddedTasksNames = new ArrayList<String>();
 
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
