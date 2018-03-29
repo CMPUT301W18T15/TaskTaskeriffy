@@ -1,12 +1,21 @@
 package com.example.heesoo.myapplication.Requester;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -16,6 +25,14 @@ import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
+
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
@@ -34,6 +51,12 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
     private EditText taskName;
     private EditText taskDescription;
     private Button saveButton;
+    private Button addPhoto;
+    private Bitmap bitmap;
+
+
+    private ImageView mImageView;
+    private static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +66,9 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
         taskName = findViewById(R.id.taskName);
         taskDescription = findViewById(R.id.taskDescription);
         saveButton = findViewById(R.id.save);
+        addPhoto = findViewById(R.id.addPhoto);
+        mImageView = findViewById(R.id.mImageView);
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -61,11 +87,16 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                         if (taskConstraints.titleLength(name)) {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
-//                                ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
-//                                addTasksTask.execute(task);
+                                //TODO: Bitmap storage in elasticsearch not happening
 
                                 MainActivity.user.addRequesterTasks(task);
                                 MainActivity.user.sync();
+
+//                                if(bitmap!= null){
+//                                    String base64String = ImageUtil.convert(bitmap);
+//                                    task.addPicture(base64String);
+//                                }
+
                                 CharSequence text = "Saving Task";
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
@@ -73,8 +104,6 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                                 //Clear all the views
                                 taskName.getText().clear();
                                 taskDescription.getText().clear();
-                                //final Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterMainActivity.class);
-                                //startActivity(intent);
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -95,5 +124,51 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
 
             }
         });
+
+        addPhoto.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                /* Taken from https://stackoverflow.com/questions/11144783/how-to-access-an-image-from-the-phones-photo-gallery
+                on Mar 28, 2018. Takes picture from gallery to show in image view.
+                 */
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 0);
+
+                /* Another implementation is at Taken from https://stackoverflow.com/questions/12995185/android-taking-photos-and-saving-them-with-a-custom-name-to-a-custom-destinati
+                 on Mar 28, 2018. Opens camera to snap picture and store in external file*/
+//                Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//
+//                File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages");
+//                imagesFolder.mkdirs();
+//
+//                File image = new File(imagesFolder, "QR_" + timeStamp + ".png");
+//                Uri uriSavedImage = Uri.fromFile(image);
+//
+//                imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+//                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /* Taken from https://stackoverflow.com/questions/11144783/how-to-access-an-image-from-the-phones-photo-gallery
+                on Mar 28, 2018
+         */
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK ){
+            Uri targetUri = data.getData();
+            try {
+                /*TODO fix error on this line java.io.FileNotFoundException: /storage/emulated/0/MyImages/QR_20180329_132741.png: open failed: EACCES (Permission denied)*/
+                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                mImageView.setImageBitmap(bitmap);
+//                Toast.makeText(this, "Image saved to:\n" +
+//                        targetUri, Toast.LENGTH_LONG).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

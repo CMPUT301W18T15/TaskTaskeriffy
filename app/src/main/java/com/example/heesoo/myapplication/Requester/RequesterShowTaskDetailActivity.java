@@ -2,6 +2,7 @@ package com.example.heesoo.myapplication.Requester;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.MapsActivity;
+import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
+import com.example.heesoo.myapplication.Provider.ProviderViewAssignedTaskDetail;
 import com.example.heesoo.myapplication.R;
 
 
@@ -40,6 +43,8 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
     private Button markDone;
     private Button markRequested;
     private Button mapButton;
+    private Button seePhotoButton;
+
 
     private TextView taskName;
     private TextView taskDescription;
@@ -186,6 +191,19 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
                 startActivityForResult(intent, 2);
             }
         });
+
+        //TODO: uncomment when photos work
+
+//        seePhotoButton = findViewById(R.id.seePicture);
+//        seePhotoButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
+//                String encodedPhoto = task.getPicture();
+//                intent.putExtra("photo", encodedPhoto);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
