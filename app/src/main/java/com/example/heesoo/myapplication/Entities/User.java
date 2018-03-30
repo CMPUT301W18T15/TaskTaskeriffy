@@ -218,6 +218,9 @@ public class User implements Comparable<User>, Serializable {
                     ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                     addTasksTask.execute(task);
                 }else{
+                    for (Bid addedBid : currentTask.getBids()){
+                        task.addBid(addedBid);
+                    }
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
                 }
