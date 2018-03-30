@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.MapsActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
@@ -74,6 +75,12 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                     ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
                     addBidsTask.execute(newBid);
                     task.addBid(newBid);
+                    // offline behavior
+                    for (Task changedTask : MainActivity.user.getRequesterTasks()){
+                        if (changedTask.getId().equals(task.getId())){
+                            changedTask.addBid(newBid);
+                        }
+                    }
                     Intent new_bid = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
                     new_bid.putExtra("bidPlaced", newBid);
                     setResult(Activity.RESULT_OK, new_bid);

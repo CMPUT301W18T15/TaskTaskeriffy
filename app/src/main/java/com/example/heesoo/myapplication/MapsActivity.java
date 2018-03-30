@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderPlaceBidActivity;
 import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
@@ -104,6 +105,14 @@ public class MapsActivity extends AppCompatActivity
                                     setResult(RESULT_OK);
                                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                                     editTask.execute(task);
+                                    // offline behavior
+
+                                    for (Task changedTask : MainActivity.user.getRequesterTasks()){
+                                        if (changedTask.getId().equals(task.getId())){
+                                            changedTask.setLatitude(taskLatLng.latitude);
+                                            changedTask.setLongitude(taskLatLng.longitude);
+                                        }
+                                    }
                                     Intent intent = new Intent(getApplicationContext(), RequesterShowTaskDetailActivity.class);
                                     intent.putExtra("TaskWithLoc", task);
                                     setResult(Activity.RESULT_OK, intent);
