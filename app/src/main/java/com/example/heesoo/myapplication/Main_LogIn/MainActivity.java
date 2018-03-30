@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Register.RegisterActivity;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         if (pwd_str.equals(user.getPassword())) {
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
+                            //startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
                         } else {
                             Toast.makeText(getApplicationContext(), "Password Does not Match", Toast.LENGTH_SHORT).show();
                         }

@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".Main_LogIn.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +39,8 @@
         <activity android:name=".Provider.ProviderViewBiddedTaskList" />
         <activity android:name=".Requester.RequesterViewBidsOnTaskActivity" />
         <activity android:name=".Requester.RequesterGeoMapActivity" />
-        <activity android:name=".Provider.ProviderFindNearbyTasksActivity"></activity>
+        <activity android:name=".Provider.ProviderFindNearbyTasksActivity" />
+            <activity android:name=".MainTaskActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

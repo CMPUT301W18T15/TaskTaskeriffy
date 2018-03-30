@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_myAccount"
+            android:title="My Account" />
+
+        <item
+            android:id="@+id/nav_myTasks"
+            android:title="My Requested Tasks" />
+
+        <item
+            android:id="@+id/nav_myRequestedBiddedTasks"
+            android:title="My Bidded Requested Tasks" />
+
+        <item
+            android:id="@+id/nav_myRequestedAssignedTasks"
+            android:title="My Assigned Requested Tasks" />
+
+        <item
+            android:id="@+id/nav_findNewTasks"
+            android:title="Find New Tasks" />
+
+        <item
+            android:id="@+id/nav_myAssignedTasks"
+            android:title="My Assigned Tasks" />
+
+        <item
+            android:id="@+id/nav_myBiddedTasks"
+            android:title="My Bidded Tasks" />
+
+    </group>
+
+</menu>
