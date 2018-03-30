@@ -214,21 +214,61 @@ public class User implements Comparable<User>, Serializable {
             Task currentTask;
             try{
                 currentTask = getTask.get();
+                // push
                 if(currentTask == null){
                     ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                     addTasksTask.execute(task);
                 }else{
-                    for (Bid addedBid : currentTask.getBids()){
-                        task.addBid(addedBid);
-                    }
+//                    // pull
+//                    for (Bid addedBid : currentTask.getBids()){
+//                        Boolean has = false;
+//                        for (Bid containedBid : task.getBids()){
+//                            if (addedBid.getId().equals(containedBid.getId())){
+//                                has = true;
+//                            }
+//                        }
+//                        if (!has){
+//                            task.addBid(addedBid);
+//                        }
+//                    }
+                    // push
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
-                    editTask.execute(task);
+                    currentTask.setTaskName(task.getTaskName());
+                    currentTask.setTaskDescription(task.getTaskDescription());
+                    editTask.execute(currentTask);
                 }
             }
             catch (Exception e){
                 Log.i("Error", "Cannot find the task!");
             }
         }
+        requesterTasks.clear();
+        providerTasks.clear();
+
+        // pull
+        ArrayList<Task> allTasks;
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
+        try {
+            allTasks = getAllTasks.get();
+
+            for (Task task : allTasks){
+                if (this.getUsername().equals(task.getUserName())){
+                    Log.d("REQUESTCODE", task.getTaskName());
+                    requesterTasks.add(task);
+                }
+
+                for(int i = 0; i < allTasks.size(); i++){
+                    if ( allTasks.get(i).getStatus().equals("Assigned") && allTasks.get(i).getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
+                        providerTasks.add(allTasks.get(i));
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            Log.i("Error", "The request for tweets failed in onStart");
+        }
+
     }
 
     public ArrayList<Task> getRequesterTasks(){
