@@ -55,10 +55,10 @@ public class MainTaskActivity extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }
                         if ( menuItem.getItemId() == R.id.nav_myTasks ) {
-                            startActivity(new Intent(getApplicationContext(), RequesterMainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
                         }
                         if ( menuItem.getItemId() == R.id.nav_myRequestedBiddedTasks ) {
-                            startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
+                            startActivity(new Intent(getApplicationContext(), RequesterBiddedTasksListActivity.class));
                         }
                         if ( menuItem.getItemId() == R.id.nav_myRequestedAssignedTasks ) {
                             startActivity(new Intent(getApplicationContext(), RequesterAssignedTaskListActivity.class));
