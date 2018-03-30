@@ -90,8 +90,6 @@ public class MapsActivity extends AppCompatActivity
                     mMap.clear();
                     task.setLatitude(taskLatLng.latitude);
                     task.setLongitude(taskLatLng.longitude);
-                    ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
-                    editTask.execute(task);
                     mMap.addMarker(new MarkerOptions().position(taskLatLng).title("Task Location"));
 
                     AlertDialog.Builder popUp = new AlertDialog.Builder(MapsActivity.this);
