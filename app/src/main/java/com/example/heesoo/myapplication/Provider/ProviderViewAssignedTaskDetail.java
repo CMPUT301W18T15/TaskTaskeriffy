@@ -13,6 +13,7 @@ import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.Requester.ShowPhotoActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 /*
@@ -21,7 +22,7 @@ list view of the ProvideMainActivity.  It shows them the details of the task as 
  */
 
 public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
-    private Button finishTask;
+    private Button seePhotoButton;
     private Task task;
     private String requester_string;
 
@@ -55,6 +56,17 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
                 taskLowestBid.setText(task.getLowestBid());
             }
         }
+
+        seePhotoButton = findViewById(R.id.seePicture);
+        seePhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
+                String encodedPhoto = task.getPicture();
+                intent.putExtra("photo", encodedPhoto);
+                startActivity(intent);
+            }
+        });
     }
 
     public void clickHandler(View view){

@@ -1,7 +1,9 @@
 package com.example.heesoo.myapplication.Requester;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -34,6 +37,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.os.Environment.DIRECTORY_PICTURES;
+import static android.os.Environment.getExternalStoragePublicDirectory;
 import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 
@@ -54,9 +59,7 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
     private Button addPhoto;
     private Bitmap bitmap;
 
-
     private ImageView mImageView;
-    private static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,15 +90,14 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                         if (taskConstraints.titleLength(name)) {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
-                                //TODO: Bitmap storage in elasticsearch not happening
-
+                                if(bitmap!= null){
+                                    String base64String = ImageUtil.convert(bitmap);
+                                    task.addPicture(base64String);
+                                }
                                 MainActivity.user.addRequesterTasks(task);
                                 MainActivity.user.sync();
 
-//                                if(bitmap!= null){
-//                                    String base64String = ImageUtil.convert(bitmap);
-//                                    task.addPicture(base64String);
-//                                }
+
 
                                 CharSequence text = "Saving Task";
                                 Toast toast = Toast.makeText(context, text, duration);
@@ -136,17 +138,6 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
 
                 /* Another implementation is at Taken from https://stackoverflow.com/questions/12995185/android-taking-photos-and-saving-them-with-a-custom-name-to-a-custom-destinati
                  on Mar 28, 2018. Opens camera to snap picture and store in external file*/
-//                Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//
-//                File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages");
-//                imagesFolder.mkdirs();
-//
-//                File image = new File(imagesFolder, "QR_" + timeStamp + ".png");
-//                Uri uriSavedImage = Uri.fromFile(image);
-//
-//                imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-//                startActivityForResult(imageIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
             }
         });
     }
@@ -161,11 +152,8 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK ){
             Uri targetUri = data.getData();
             try {
-                /*TODO fix error on this line java.io.FileNotFoundException: /storage/emulated/0/MyImages/QR_20180329_132741.png: open failed: EACCES (Permission denied)*/
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
                 mImageView.setImageBitmap(bitmap);
-//                Toast.makeText(this, "Image saved to:\n" +
-//                        targetUri, Toast.LENGTH_LONG).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

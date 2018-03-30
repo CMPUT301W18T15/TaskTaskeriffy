@@ -192,18 +192,16 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: uncomment when photos work
-
-//        seePhotoButton = findViewById(R.id.seePicture);
-//        seePhotoButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
-//                String encodedPhoto = task.getPicture();
-//                intent.putExtra("photo", encodedPhoto);
-//                startActivity(intent);
-//            }
-//        });
+        seePhotoButton = findViewById(R.id.seePicture);
+        seePhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
+                String encodedPhoto = task.getPicture();
+                intent.putExtra("photo", encodedPhoto);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -15,15 +15,15 @@ import com.example.heesoo.myapplication.R;
  */
 
 public class ShowPhotoActivity extends AppCompatActivity {
-//    private ImageView showPhoto;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.show_photo);
-//        showPhoto = findViewById(R.id.showPhoto);
-//        String encodedPhoto = (String) getIntent().getSerializableExtra("photo");
-//        Bitmap bitmap = ImageUtil.convert(encodedPhoto);
-//        showPhoto.setImageBitmap(bitmap);
-//    }
+    private ImageView showPhoto;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.show_photo);
+        showPhoto = findViewById(R.id.showPhoto);
+        String encodedPhoto = (String) getIntent().getSerializableExtra("photo");
+        Bitmap bitmap = ImageUtil.convert(encodedPhoto);
+        showPhoto.setImageBitmap(bitmap);
+    }
 }
