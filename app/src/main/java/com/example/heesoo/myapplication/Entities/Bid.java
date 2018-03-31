@@ -1,6 +1,8 @@
 package com.example.heesoo.myapplication.Entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import io.searchbox.annotations.JestId;
 
@@ -8,8 +10,12 @@ public class Bid implements Serializable{
     private String taskName;
     private String description;
     private String status;
+
+    private String taskRequester;
     private String taskProvider;
     private Float bidPrice;
+
+    private String timeStamp;
 
     @JestId
     private String id;
@@ -28,12 +34,15 @@ public class Bid implements Serializable{
      * @author      Manuela Key Marichales
      * @since       1.0
      */
-    public Bid(String TaskName, String Description, Float BidPrice, String TaskProvider) {
+    public Bid(String TaskName, String Description, Float BidPrice, String TaskProvider, String TaskRequester) {
         this.taskName = TaskName;
         this.taskProvider = TaskProvider;
+        this.taskRequester = TaskRequester;
         this.description = Description;
         this.status = "Placed";
         this.bidPrice = BidPrice;
+        this.timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
     }
 
     /**
@@ -168,5 +177,21 @@ public class Bid implements Serializable{
     public void setBidPrice(Float BidPrice){
 
         this.bidPrice = BidPrice;
+    }
+
+    public String getTaskRequester() {
+        return taskRequester;
+    }
+
+    public void setTaskRequester(String taskRequester) {
+        this.taskRequester = taskRequester;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }

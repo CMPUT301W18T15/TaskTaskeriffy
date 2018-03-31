@@ -71,7 +71,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please Fill the Bid Price", Toast.LENGTH_SHORT).show();
                 } else {
                     bidPrice = Float.parseFloat(newBidPrice);
-                    Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername());
+                    Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername(), task.getUserName());
                     ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
                     addBidsTask.execute(newBid);
                     task.addBid(newBid);
