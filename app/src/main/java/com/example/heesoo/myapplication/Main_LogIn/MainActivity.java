@@ -83,14 +83,17 @@ public class MainActivity extends AppCompatActivity {
                         user.initializeOffline();
 
                         SetCurrentUser.setCurrentUser(user);
+                        SetCurrentUser.setCurrentMode("Requester");
                         if (pwd_str.equals(user.getPassword())) {
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
-                            //startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
+                            //startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
+                            startActivity(new Intent(MainActivity.this, MainTaskActivity.class));
                         } else {
                             Toast.makeText(getApplicationContext(), "Password Does not Match", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        // DELETE THE FOLLOWING LINE AFTER
+                        //startActivity(new Intent(MainActivity.this, MainTaskActivity.class));
                         Toast.makeText(getApplicationContext(), "Account Does not Exist", Toast.LENGTH_SHORT).show();
 
                     }

@@ -1,26 +1,22 @@
 package com.example.heesoo.myapplication.Provider;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
+import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
+import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
@@ -37,10 +33,6 @@ It also contains buttons to view profile, view tasks that the provider has bidde
 
 public class ProviderMainActivity extends AppCompatActivity {
 
-    private Button myAccountButton;
-    private Button findNearbyTaskButton;
-    private Button viewBiddedListButton;
-    private Button searchNewTaskButton;
     private ListView myAssignedTasklist;
     private TextView taskLabel;
     private ArrayList<Task> tempTaskList;
@@ -48,60 +40,20 @@ public class ProviderMainActivity extends AppCompatActivity {
     private ArrayAdapter<Task> taskAdapter;
     private ListView clickableList;
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_provider_main);
-        searchNewTaskButton = findViewById(R.id.search_new_task_button);
-        viewBiddedListButton = findViewById(R.id.view_bidded_list_button);
+        setContentView(R.layout.activity_view_tasks);;
 
-        // show my Account Button
-        Button myAccountButton = findViewById(R.id.my_account_button);
-        myAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProviderMainActivity.this, ViewProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        findNearbyTaskButton = findViewById(R.id.find_nearby_task_button);
-        findNearbyTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProviderMainActivity.this, ProviderFindNearbyTasksActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        // view provider's bidded list button
-
-        viewBiddedListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_OK);
-                Intent intent = new Intent(getApplicationContext(), ProviderViewBiddedTaskList.class);
-                startActivity(intent);
-            }
-        });
-
-
-        // provider search new task button
-
-        searchNewTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_OK);
-                Intent intent = new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         // when click on list
-        clickableList = findViewById(R.id.provider_assigned_task_list);
+        clickableList = findViewById(R.id.tasksListView);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
@@ -111,40 +63,43 @@ public class ProviderMainActivity extends AppCompatActivity {
                 startActivity(taskinfo);
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        drawerLayout.closeDrawers();
 
-        MenuItem searchItem = menu.findItem(R.id.item_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                ArrayList<Task> templist = new ArrayList<Task>();
-
-                for(Task temp : taskList){
-                    if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
-                        templist.add(temp);
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+                        if ( menuItem.getItemId() == R.id.nav_myAccount ) {
+                            startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myTasks ) {
+                            startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myRequestedBiddedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), RequesterBiddedTasksListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myRequestedAssignedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), RequesterAssignedTaskListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_findNewTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myAssignedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderMainActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myBiddedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderViewBiddedTaskList.class));
+                        }
+                        return true;
                     }
-                }
-                taskAdapter = new ArrayAdapter<Task>(ProviderMainActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, templist);
-                //taskAdapter.notifyDataSetChanged();
-                clickableList.setAdapter(taskAdapter);
-                return true;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
+                });
     }
-
 
     @Override
     protected void onStart() {
@@ -160,10 +115,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         }
 
         tempTaskList = MainActivity.user.getProviderTasks();
-
-
-
-
 
         ArrayList<String> tasksNames = new ArrayList<String>();
 

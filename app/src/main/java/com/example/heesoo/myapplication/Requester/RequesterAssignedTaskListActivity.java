@@ -2,12 +2,10 @@ package com.example.heesoo.myapplication.Requester;
 
         import android.content.Intent;
         import android.os.Bundle;
-        import android.support.v4.view.MenuItemCompat;
+        import android.support.design.widget.NavigationView;
+        import android.support.v4.widget.DrawerLayout;
         import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.SearchView;
         import android.util.Log;
-        import android.view.Menu;
-        import android.view.MenuInflater;
         import android.view.MenuItem;
         import android.view.View;
         import android.widget.AdapterView;
@@ -16,6 +14,11 @@ package com.example.heesoo.myapplication.Requester;
 
         import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
         import com.example.heesoo.myapplication.Entities.Task;
+        import com.example.heesoo.myapplication.MainTaskActivity;
+        import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
+        import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
+        import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
+        import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
         import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
         import com.example.heesoo.myapplication.R;
 
@@ -40,15 +43,20 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
     private ArrayList<Task> allTasks;
     private ArrayAdapter<Task> taskAdapter;
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requester_assigned_task_list);
+        setContentView(R.layout.activity_view_tasks);
 
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         // when click on list
-        clickableList = findViewById(R.id.requester_assigned_task_list);
+        clickableList = findViewById(R.id.tasksListView);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
@@ -59,40 +67,43 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
             }
         });
 
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        drawerLayout.closeDrawers();
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.item_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                ArrayList<Task> templist = new ArrayList<Task>();
-
-                for(Task temp : taskList){
-                    if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
-                        templist.add(temp);
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+                        if ( menuItem.getItemId() == R.id.nav_myAccount ) {
+                            startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myTasks ) {
+                            startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myRequestedBiddedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), RequesterBiddedTasksListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myRequestedAssignedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), RequesterAssignedTaskListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_findNewTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myAssignedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderMainActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myBiddedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderViewBiddedTaskList.class));
+                        }
+                        return true;
                     }
-                }
-                taskAdapter = new ArrayAdapter<Task>(RequesterAssignedTaskListActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, templist);
-                //taskAdapter.notifyDataSetChanged();
-                clickableList.setAdapter(taskAdapter);
-                return true;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
+                });
+
+
     }
 
     @Override
@@ -120,6 +131,7 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
 
             }
         }
+        //requesterAssignedTasksNames.add("NAME: GARBAGE STATUS: SURE");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, requesterAssignedTasksNames);
