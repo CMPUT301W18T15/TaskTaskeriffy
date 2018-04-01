@@ -282,13 +282,13 @@ public class Task implements Serializable{
      * @param picture a Bitmap that has been placed on this task
      */
     public void addPicture(String encodedPicture) {
+
         pictures.add(encodedPicture);
     }
 
     public String getPicture() {
         return pictures.get(0);
     }
-
 
     /**
      * <p>

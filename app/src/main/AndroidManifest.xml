@@ -41,7 +41,9 @@
         <activity android:name=".Requester.RequesterViewBidsOnTaskActivity" />
         <activity android:name=".Requester.RequesterGeoMapActivity" />
         <activity android:name=".Requester.ShowPhotoActivity" />
-        <activity android:name=".Provider.ProviderFindNearbyTasksActivity"></activity>
+        <activity android:name=".Provider.ProviderFindNearbyTasksActivity"/>
+        <activity android:name=".Requester.AddPictureActivity" />
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

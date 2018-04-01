@@ -16,6 +16,8 @@ import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Requester.ShowPhotoActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
+import java.util.ArrayList;
+
 /*
 This activity is navigated to when the provider clicks on any task that was assigned to them in the
 list view of the ProvideMainActivity.  It shows them the details of the task as well as the accepted bid.
@@ -62,7 +64,7 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
-                String encodedPhoto = task.getPicture();
+                ArrayList<String> encodedPhoto = task.getPictures();
                 intent.putExtra("photo", encodedPhoto);
                 startActivity(intent);
             }
