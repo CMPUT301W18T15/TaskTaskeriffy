@@ -13,11 +13,14 @@ import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.MapsActivity;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 
 import java.util.ArrayList;
@@ -49,6 +52,8 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
     private TextView taskProvider;
     private TextView bidTextView;
 
+    private User currentTaskProvider, currentUser;
+
 
 
     private ElasticSearchTaskController elasticSearchTaskController;
@@ -64,6 +69,7 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
 
         String lowestBid;
         task = (Task) getIntent().getSerializableExtra("task");
+        currentUser = SetCurrentUser.getCurrentUser();
 
         taskName = findViewById(R.id.taskName);
         taskName.setText(task.getTaskName());
@@ -143,6 +149,7 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
                     task.setStatus("Done");
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     editTask.execute(task);
+                    updateStatistics(task.getTaskProvider(), task.getLowestBid());
                     Toast.makeText(RequesterShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -210,5 +217,22 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             task.setLatitude(newTask.getLatitude());
         }
     }
+    public void updateStatistics(String taskProviderUsername, String earning){
+        ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
+        getUser.execute(taskProviderUsername);
+        try {
+            currentTaskProvider = getUser.get();
+        } catch (Exception e) {
+            Log.d("Error", "Cannot find task provider in database");
+        }
+        currentUser.updateCompletedPostedTasks();
+        currentTaskProvider.updateCompletedProvidedTasks();
+        currentTaskProvider.updateTotalEarnings(Double.parseDouble(earning));
+        //currentTaskProvider.updateRating(rating);
+        ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
+        editUser.execute(currentUser);
+        editUser.execute(currentTaskProvider);
+    }
+
 
 }
