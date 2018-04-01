@@ -1,6 +1,8 @@
 package com.example.heesoo.myapplication;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -109,7 +111,7 @@ public class MainTaskActivity extends AppCompatActivity {
             }
         };
 
-//        thread.start();
+        thread.start();
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,25 +225,34 @@ public class MainTaskActivity extends AppCompatActivity {
 
     public void sendNotification(String msg) {
 
-        //SEND NOTIFICATION
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainTaskActivity.this);
+        NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notify=new Notification.Builder
+                (getApplicationContext()).setContentTitle("TaskTaskeriffy Notification").setContentText(msg).
+                setContentTitle("TaskTaskeriffy Notification").setSmallIcon(R.drawable.common_google_signin_btn_icon_dark).build();
 
-        final EditText editText = new EditText(MainTaskActivity.this);
-        editText.setText(msg);
+        notify.flags |= Notification.FLAG_AUTO_CANCEL;
+        notif.notify(0, notify);
 
-        alertDialogBuilder.setView(editText);
 
-        // set dialog message
-        alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
-        alertDialog.show();
+//        //SEND NOTIFICATION
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainTaskActivity.this);
+//
+//        final EditText editText = new EditText(MainTaskActivity.this);
+//        editText.setText(msg);
+//
+//        alertDialogBuilder.setView(editText);
+//
+//        // set dialog message
+//        alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int id) {
+//                dialog.cancel();
+//            }
+//        });
+//
+//        // create alert dialog
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        // show it
+//        alertDialog.show();
     }
 
 }
