@@ -1,12 +1,17 @@
 package com.example.heesoo.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,9 +19,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
+import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
@@ -30,6 +38,8 @@ import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivit
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by manuelakm on 2018-03-29.
@@ -57,6 +67,49 @@ public class MainTaskActivity extends AppCompatActivity {
         myTasks = findViewById(R.id.tasksListView);
         addTask = findViewById(R.id.addTaskButton);
         addTask.setVisibility(View.VISIBLE);
+
+        Thread thread= new Thread()
+        {
+            public void run()
+            {
+
+                Calendar timeStamp = Calendar.getInstance();
+
+
+                while (true) {
+                    Log.d("ERROR", "IN THREAD");
+
+                    ElasticSearchBidController.GetAllBids getAllBids = new ElasticSearchBidController.GetAllBids();
+                    getAllBids.execute("");
+                    ArrayList<Bid> allBids = new ArrayList<Bid>();
+
+                    try {
+                        allBids = getAllBids.get();
+                    } catch (Exception e) {
+                        Log.d("ERROR", "Oh no! Something went wrong while accessing the database");
+                    }
+
+                    ArrayList<Bid> myBids = new ArrayList<Bid>();
+                    for (Bid bid: allBids) {
+                        if (bid.getTaskRequester().equals(SetCurrentUser.getCurrentUser().getUsername())) {
+                            myBids.add(bid);
+                            if (bid.getTimeStamp().after(timeStamp)) {
+                                Log.d("ERROR", "BID HAS BEEN PLACED");
+                                sendNotification("You have received a bid on the following task: " + bid.getTaskName() + "!");
+                            }
+                        }
+                    }
+
+                    timeStamp = Calendar.getInstance();
+                    try {
+                        TimeUnit.MINUTES.sleep(1);
+                    }
+                    catch (Exception e) {}
+                }
+            }
+        };
+
+//        thread.start();
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +219,29 @@ public class MainTaskActivity extends AppCompatActivity {
         toast.show();
 
         return false;
+    }
+
+    public void sendNotification(String msg) {
+
+        //SEND NOTIFICATION
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainTaskActivity.this);
+
+        final EditText editText = new EditText(MainTaskActivity.this);
+        editText.setText(msg);
+
+        alertDialogBuilder.setView(editText);
+
+        // set dialog message
+        alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
     }
 
 }

@@ -1,7 +1,10 @@
 package com.example.heesoo.myapplication.Entities;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 import io.searchbox.annotations.JestId;
@@ -15,7 +18,7 @@ public class Bid implements Serializable{
     private String taskProvider;
     private Float bidPrice;
 
-    private String timeStamp;
+    Calendar timeStamp;
 
     @JestId
     private String id;
@@ -41,7 +44,7 @@ public class Bid implements Serializable{
         this.description = Description;
         this.status = "Placed";
         this.bidPrice = BidPrice;
-        this.timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        this.timeStamp = Calendar.getInstance();
 
     }
 
@@ -187,11 +190,11 @@ public class Bid implements Serializable{
         this.taskRequester = taskRequester;
     }
 
-    public String getTimeStamp() {
+    public Calendar getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(Calendar timeStamp) {
         this.timeStamp = timeStamp;
     }
 }
