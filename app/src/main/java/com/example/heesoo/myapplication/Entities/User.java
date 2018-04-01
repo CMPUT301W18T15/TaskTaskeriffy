@@ -15,6 +15,9 @@ import io.searchbox.annotations.JestId;
 public class User implements Comparable<User>, Serializable {
 
     private String username, password, emailAddress, phoneNumber;
+    private Double rating, totalEarnings;
+    private Integer completedProvidedTasks, completedPostedTasks;
+
     transient Image picture;
 
     private ArrayList<Task> requesterTasks = new ArrayList<Task>();
@@ -45,6 +48,10 @@ public class User implements Comparable<User>, Serializable {
         this.password = pwd;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        this.rating = 0.00;
+        this.completedPostedTasks = 0;
+        this.completedProvidedTasks = 0;
+        this.totalEarnings = 0.00;
     }
 
     public User() {
@@ -89,6 +96,58 @@ public class User implements Comparable<User>, Serializable {
      * @return string that represents the password that is associated with this user
      */
     public String getPassword() { return password; }
+
+    /**
+     * <p>
+     *     This method returns the number of tasks that are provided by the user
+     * </p>
+     *
+     * @return integer corresponding to the number of tasks finished by the user
+     */
+    public Integer getCompletedProvidedTasks(){ return completedProvidedTasks;}
+
+    public void updateCompletedProvidedTasks(){
+        this.completedProvidedTasks += 1;
+    }
+
+    /**
+     * <p>
+     *     This method returns the number of completed tasks that were posted by this user
+     * </p>
+     *
+     * @return integer corresponding to the number of user's tasks that were completed
+     */
+    public Integer getCompletedPostedTasks(){ return completedPostedTasks;}
+
+    public void updateCompletedPostedTasks(){
+        this.completedPostedTasks += 1;
+    }
+
+    /**
+     * <p>
+     *     This method returns the user's rating
+     * </p>
+     *
+     * @return double, user's rating from 5 stars
+     */
+    public Double getRating(){ return rating;}
+
+    public void updateRating(Double rating){
+        this.rating = 3.0;
+    }
+
+    /**
+     * <p>
+     *     This method returns the user's earnings so far
+     * </p>
+     *
+     * @return double, user's total earnings so far
+     */
+    public Double getTotalEarnings(){ return totalEarnings;}
+
+    public void updateTotalEarnings(Double earnings){
+        this.totalEarnings += earnings;
+    }
 
     /**
      * <p>
