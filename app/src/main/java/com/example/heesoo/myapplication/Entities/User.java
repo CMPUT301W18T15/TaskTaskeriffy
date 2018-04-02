@@ -347,18 +347,22 @@ public class User implements Comparable<User>, Serializable {
     }
 
     public void deleteRequesterTasks(Task task){
+        ArrayList<Task> tempTasks = new ArrayList<Task>();
         for (Task deletedTask : requesterTasks){
-            if (deletedTask.getId().equals(task.getId())){
-                requesterTasks.remove(deletedTask);
+            if (!deletedTask.getId().equals(task.getId())){
+                tempTasks.add(deletedTask);
             }
         }
+        requesterTasks = tempTasks;
     }
 
     public void deleteProviderTasks(Task task){
+        ArrayList<Task> tempTasks = new ArrayList<Task>();
         for (Task deletedTask : providerTasks){
-            if (deletedTask.getId().equals(task.getId())){
-                providerTasks.remove(deletedTask);
+            if (!deletedTask.getId().equals(task.getId())){
+                tempTasks.add(deletedTask);
             }
         }
+        providerTasks = tempTasks;
     }
 }
