@@ -50,30 +50,11 @@ public class SetCurrentUser extends MultiDexApplication {
         prefEditor.commit();
     }
 
-    public static String getCurrentMode(){
-        return sharedPreferences.getString("CURRENT_MODE", null);
-    }
-
     public static void setCurrentMode(String currentMode){
         SharedPreferences.Editor editor = PreferenceManager
                 .getDefaultSharedPreferences(SetCurrentUser.getContext())
                 .edit();
         editor.putString("CURRENT_MODE", currentMode).apply();
     }
-
-    public static Context getCurrentContext(){
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("MyContext", "");
-        return gson.fromJson(json, Context.class);
-    }
-
-    public static void setCurrentContext(Context currentContext){
-        SharedPreferences.Editor prefEditor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(currentContext);
-        prefEditor.putString("MyContext", json);
-        prefEditor.commit();
-    }
-
 
 }

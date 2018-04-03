@@ -44,7 +44,7 @@ public class MonitorBidsTask extends AsyncTask<Context, Void, Void> {
 
 
         while (!done) {
-            Log.d("ERROR", "IN THREAD");
+            Log.d("ERROR", "IN ASYNCTASK");
 
             ElasticSearchBidController.GetAllBids getAllBids = new ElasticSearchBidController.GetAllBids();
             getAllBids.execute("");
@@ -62,10 +62,6 @@ public class MonitorBidsTask extends AsyncTask<Context, Void, Void> {
                     myBids.add(bid);
                     if (bid.getTimeStamp().after(timeStamp)) {
                         Log.d("ERROR", "BID HAS BEEN PLACED");
-
-                        AlertDialog.Builder popUp = new AlertDialog.Builder(SetCurrentUser.getCurrentContext());
-                        popUp.setMessage("You have received a bid on the following task: " + bid.getTaskName() + "!");
-                        popUp.setCancelable(true);
 
                         Log.d("ERROR", "Inside sendnotification function");
 
