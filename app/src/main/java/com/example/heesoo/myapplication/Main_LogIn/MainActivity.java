@@ -13,6 +13,7 @@ import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.MonitorBidsTask;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Register.RegisterActivity;
@@ -44,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         elasticSearchUserController = new ElasticSearchUserController();
 
-
         enter_username = findViewById(R.id.login_username);
         enter_password = findViewById(R.id.login_password);
+
         Button register_button = findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -61,4 +61,19 @@ public class SetCurrentUser extends MultiDexApplication {
         editor.putString("CURRENT_MODE", currentMode).apply();
     }
 
+    public static Context getCurrentContext(){
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("MyContext", "");
+        return gson.fromJson(json, Context.class);
+    }
+
+    public static void setCurrentContext(Context currentContext){
+        SharedPreferences.Editor prefEditor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(currentContext);
+        prefEditor.putString("MyContext", json);
+        prefEditor.commit();
+    }
+
+
 }

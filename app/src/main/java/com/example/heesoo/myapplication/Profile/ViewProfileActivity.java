@@ -47,7 +47,6 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView PhoneNumberView;
 
     private Button editButton;
-    private Button changeModeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +111,6 @@ public class ViewProfileActivity extends AppCompatActivity {
         if (user_recieved == null) {
             user = SetCurrentUser.getCurrentUser();
             editButton.setVisibility(View.VISIBLE);
-            //changeModeButton.setVisibility(View.VISIBLE);
         } else {
             user = user_recieved;
         }

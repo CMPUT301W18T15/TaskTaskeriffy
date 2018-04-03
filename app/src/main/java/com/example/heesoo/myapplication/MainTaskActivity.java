@@ -70,48 +70,8 @@ public class MainTaskActivity extends AppCompatActivity {
         addTask = findViewById(R.id.addTaskButton);
         addTask.setVisibility(View.VISIBLE);
 
-        Thread thread= new Thread()
-        {
-            public void run()
-            {
-
-                Calendar timeStamp = Calendar.getInstance();
-
-
-                while (true) {
-                    Log.d("ERROR", "IN THREAD");
-
-                    ElasticSearchBidController.GetAllBids getAllBids = new ElasticSearchBidController.GetAllBids();
-                    getAllBids.execute("");
-                    ArrayList<Bid> allBids = new ArrayList<Bid>();
-
-                    try {
-                        allBids = getAllBids.get();
-                    } catch (Exception e) {
-                        Log.d("ERROR", "Oh no! Something went wrong while accessing the database");
-                    }
-
-                    ArrayList<Bid> myBids = new ArrayList<Bid>();
-                    for (Bid bid: allBids) {
-                        if (bid.getTaskRequester().equals(SetCurrentUser.getCurrentUser().getUsername())) {
-                            myBids.add(bid);
-                            if (bid.getTimeStamp().after(timeStamp)) {
-                                Log.d("ERROR", "BID HAS BEEN PLACED");
-                                sendNotification("You have received a bid on the following task: " + bid.getTaskName() + "!");
-                            }
-                        }
-                    }
-
-                    timeStamp = Calendar.getInstance();
-                    try {
-                        TimeUnit.MINUTES.sleep(1);
-                    }
-                    catch (Exception e) {}
-                }
-            }
-        };
-
-        thread.start();
+        //MonitorBidsTask monitorBidsTask = new MonitorBidsTask();
+        //monitorBidsTask.execute(this);
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +131,7 @@ public class MainTaskActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        SetCurrentUser.setCurrentContext(getApplicationContext());
 
         if (checkNetwork(this)) {
             MainActivity.user.sync();
@@ -221,38 +182,6 @@ public class MainTaskActivity extends AppCompatActivity {
         toast.show();
 
         return false;
-    }
-
-    public void sendNotification(String msg) {
-
-        NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notify=new Notification.Builder
-                (getApplicationContext()).setContentTitle("TaskTaskeriffy Notification").setContentText(msg).
-                setContentTitle("TaskTaskeriffy Notification").setSmallIcon(R.drawable.common_google_signin_btn_icon_dark).build();
-
-        notify.flags |= Notification.FLAG_AUTO_CANCEL;
-        notif.notify(0, notify);
-
-
-//        //SEND NOTIFICATION
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainTaskActivity.this);
-//
-//        final EditText editText = new EditText(MainTaskActivity.this);
-//        editText.setText(msg);
-//
-//        alertDialogBuilder.setView(editText);
-//
-//        // set dialog message
-//        alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                dialog.cancel();
-//            }
-//        });
-//
-//        // create alert dialog
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        // show it
-//        alertDialog.show();
     }
 
 }
