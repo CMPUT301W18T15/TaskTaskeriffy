@@ -29,6 +29,7 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBi
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.Profile.MyStatsActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
@@ -104,6 +105,9 @@ public class MainTaskActivity extends AppCompatActivity {
                         // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myStatistics ) {
+                            startActivity(new Intent(getApplicationContext(), MyStatsActivity.class));
                         }
                         if ( menuItem.getItemId() == R.id.nav_myTasks ) {
                             startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
