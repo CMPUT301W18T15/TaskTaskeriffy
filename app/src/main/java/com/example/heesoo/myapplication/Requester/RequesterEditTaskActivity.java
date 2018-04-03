@@ -38,6 +38,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
         taskName = findViewById(R.id.taskNameEdit);
@@ -48,6 +49,12 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         task = (Task)intent.getSerializableExtra("TaskToEdit");
         taskName.setText(task.getTaskName());
         taskDescription.setText(task.getTaskDescription());
+
+        // set editing
+        task.setEditStatus(true);
+        ElasticSearchTaskController.EditTask setEditing = new ElasticSearchTaskController.EditTask();
+        setEditing.execute(task);
+
 
         saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +93,12 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                             CharSequence text = "Saving Task";
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
+
+                            // set not editing
+                            task.setEditStatus(false);
+                            ElasticSearchTaskController.EditTask setNotEditing = new ElasticSearchTaskController.EditTask();
+                            setNotEditing.execute(task);
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

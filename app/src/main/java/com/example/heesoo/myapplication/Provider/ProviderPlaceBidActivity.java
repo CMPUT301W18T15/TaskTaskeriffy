@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
@@ -67,9 +69,24 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                 newBidPrice = placeBidView.getText().toString();
                 float bidPrice;
 
+                Boolean editing = false;
+                Task currentTask;
+                // get editing status by using elastic search
+                ElasticSearchTaskController.GetTask mayEdit = new ElasticSearchTaskController.GetTask();
+                mayEdit.execute(task.getId());
+                try {
+                    currentTask = mayEdit.get();
+                    editing = currentTask.getEditStatus();
+                }
+                catch (Exception e) {
+                    Log.i("Error", "Did not find the task!");
+                }
+
                 if (newBidPrice.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Fill the Bid Price", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(editing){
+                    Toast.makeText(getApplicationContext(), "The Requester are editing the task, please try again!", Toast.LENGTH_SHORT).show();
+                } else{
                     bidPrice = Float.parseFloat(newBidPrice);
                     Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername(), task.getUserName());
                     ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();

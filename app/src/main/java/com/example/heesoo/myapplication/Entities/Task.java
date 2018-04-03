@@ -17,6 +17,7 @@ public class Task implements Serializable{
     private String status;
     private Double latitude;
     private Double longitude;
+    private Boolean editing;
 
     @JestId
     private String id;
@@ -48,6 +49,7 @@ public class Task implements Serializable{
         this.assignedTaskProvider = "";
         this.latitude = -1.0;
         this.longitude = -1.0;
+        this.editing = false;
     }
 
     public Task() {
@@ -309,5 +311,13 @@ public class Task implements Serializable{
             return minValue.toString();
         }
 
+    }
+
+    public void setEditStatus(Boolean status){
+        this.editing = status;
+    }
+
+    public Boolean getEditStatus(){
+        return editing;
     }
 }
