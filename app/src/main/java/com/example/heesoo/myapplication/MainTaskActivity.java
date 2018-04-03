@@ -131,7 +131,7 @@ public class MainTaskActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SetCurrentUser.setCurrentContext(getApplicationContext());
+        //SetCurrentUser.setCurrentContext(getApplicationContext());
 
         if (checkNetwork(this)) {
             MainActivity.user.sync();

@@ -13,8 +13,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
+import com.example.heesoo.myapplication.Entities.TaskList;
 import com.example.heesoo.myapplication.MapsActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
@@ -31,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
+import java.util.WeakHashMap;
 
 /**
  * Created by manuelakm on 2018-03-28.
@@ -43,6 +46,7 @@ public class ProviderFindNearbyTasksActivity extends AppCompatActivity
     private GoogleMap mMap;
     private Location mLastKnownLocation;
     private FusedLocationProviderClient mFusedLocationClient;
+    private ArrayList<Task> taskList;
     private boolean LOCATION_PERMISSION_GRANTED = true;
     private static final int DEFAULT_ZOOM = 15;
 
@@ -97,6 +101,25 @@ public class ProviderFindNearbyTasksActivity extends AppCompatActivity
                                         .radius(5000)
                                         .strokeColor(Color.BLACK)
                                         .fillColor(Color.WHITE));
+
+                                    ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+                                    getAllTasks.execute("");
+
+                                    try {
+                                        taskList = (ArrayList<Task>) getAllTasks.get();
+                                    } catch (Exception e) {}
+
+                                    for (Task t: taskList) {
+
+                                        Location taskLocation = new Location("");
+                                        taskLocation.setLongitude(t.getLongitude());
+                                        taskLocation.setLatitude(t.getLatitude());
+
+                                        if (!t.getLongitude().equals(-1.0) && !t.getLatitude().equals(-1.0) && (mLastKnownLocation.distanceTo(taskLocation) <= 5000)) {
+                                            mMap.addMarker(new MarkerOptions().position(new LatLng(t.getLatitude(), t.getLongitude())).title(t.getTaskName()));
+
+                                        }
+                                    }
                                 }
                             }
                         });
