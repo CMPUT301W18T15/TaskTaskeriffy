@@ -317,10 +317,8 @@ public class User implements Comparable<User>, Serializable {
                     requesterTasks.add(task);
                 }
 
-                for(int i = 0; i < allTasks.size(); i++){
-                    if ( allTasks.get(i).getStatus().equals("Assigned") && allTasks.get(i).getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
-                        providerTasks.add(allTasks.get(i));
-                    }
+                if ( task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
+                    providerTasks.add(task);
                 }
             }
         }
