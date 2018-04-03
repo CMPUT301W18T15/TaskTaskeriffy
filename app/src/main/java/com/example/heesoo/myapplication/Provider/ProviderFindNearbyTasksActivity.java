@@ -20,6 +20,7 @@ import com.example.heesoo.myapplication.Entities.TaskList;
 import com.example.heesoo.myapplication.MapsActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
+import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -115,7 +116,10 @@ public class ProviderFindNearbyTasksActivity extends AppCompatActivity
                                         taskLocation.setLongitude(t.getLongitude());
                                         taskLocation.setLatitude(t.getLatitude());
 
-                                        if (!t.getLongitude().equals(-1.0) && !t.getLatitude().equals(-1.0) && (mLastKnownLocation.distanceTo(taskLocation) <= 5000)) {
+                                        if (!t.getLongitude().equals(-1.0)
+                                                && !t.getLatitude().equals(-1.0)
+                                                && !t.getUserName().equals(SetCurrentUser.getCurrentUser().getUsername())
+                                                && (mLastKnownLocation.distanceTo(taskLocation) <= 5000)) {
                                             mMap.addMarker(new MarkerOptions().position(new LatLng(t.getLatitude(), t.getLongitude())).title(t.getTaskName()));
 
                                         }
@@ -127,27 +131,6 @@ public class ProviderFindNearbyTasksActivity extends AppCompatActivity
         }
         catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
-        }
-    }
-
-    private void calculatePerimeter(LatLng currentCoordinates, Double radius) {
-        ArrayList<LatLng> positions = new ArrayList<LatLng>();
-        int numOfSides = 100;
-        Double distanceX = radius/(111.319 * Math.cos(currentCoordinates.latitude * Math.PI / 180));
-        Double distanceY = radius/ 110.574;
-
-        Double slice = 2 * Math.PI / numOfSides;
-        Double theta, x, y;
-        LatLng position;
-
-        for (int i = 0; i < numOfSides; i++) {
-            theta = i * slice;
-            x = distanceX * Math.cos(theta);
-            y = distanceY * Math.sin(theta);
-
-            position = new LatLng(currentCoordinates.latitude + y,
-                    currentCoordinates.longitude + x);
-            positions.add(position);
         }
     }
 }
