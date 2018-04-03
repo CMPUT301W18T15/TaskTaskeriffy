@@ -4,6 +4,9 @@
         <item
             android:id="@+id/nav_myAccount"
             android:title="My Account" />
+        <item
+            android:id="@+id/nav_myStatistics"
+            android:title="My Statistics" />
 
         <item
             android:id="@+id/nav_myTasks"

@@ -27,6 +27,7 @@
         <activity android:name=".Requester.RequesterMainActivity" />
         <activity android:name=".Profile.ViewProfileActivity" />
         <activity android:name=".Profile.EditProfileActivity" />
+        <activity android:name=".Profile.MyStatsActivity" />
         <activity android:name=".Requester.RequesterAddTaskActivity" />
         <activity android:name=".Requester.RequesterShowTaskDetailActivity" />
         <activity android:name=".Provider.ProviderViewAssignedTaskDetail" />
@@ -40,7 +41,8 @@
         <activity android:name=".Requester.RequesterViewBidsOnTaskActivity" />
         <activity android:name=".Requester.RequesterGeoMapActivity" />
         <activity android:name=".Provider.ProviderFindNearbyTasksActivity" />
-            <activity android:name=".MainTaskActivity" />
+        <activity android:name=".MainTaskActivity" />
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

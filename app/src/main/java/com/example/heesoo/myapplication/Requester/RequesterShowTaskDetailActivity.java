@@ -229,9 +229,10 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
         currentTaskProvider.updateCompletedProvidedTasks();
         currentTaskProvider.updateTotalEarnings(Double.parseDouble(earning));
         //currentTaskProvider.updateRating(rating);
-        ElasticSearchUserController.EditUserTask editUser = new ElasticSearchUserController.EditUserTask();
-        editUser.execute(currentUser);
-        editUser.execute(currentTaskProvider);
+        ElasticSearchUserController.EditUserTask editCurrentUser = new ElasticSearchUserController.EditUserTask();
+        ElasticSearchUserController.EditUserTask editCurrentTaskProvider = new ElasticSearchUserController.EditUserTask();
+        editCurrentUser.execute(currentUser);
+        editCurrentTaskProvider.execute(currentTaskProvider);
     }
 
 

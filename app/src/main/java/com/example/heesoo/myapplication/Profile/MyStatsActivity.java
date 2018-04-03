@@ -39,23 +39,20 @@ public class MyStatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+        Intent i = getIntent();
         totalEarnings = findViewById(R.id.totalEarnings);
         myRating = findViewById(R.id.myRating);
         completedPostedTasks = findViewById(R.id.completedPostedTasks);
         completedProvidedTasks = findViewById(R.id.completedProvidedTasks);
 
-    }
-
-    @Override
-    protected void onStart() {
-        checkNetwork(this);
-        super.onStart();
-        Intent i = getIntent();
         user = SetCurrentUser.getCurrentUser();
-        completedPostedTasks.setText(user.getCompletedPostedTasks());
-        completedProvidedTasks.setText(user.getCompletedProvidedTasks());
+        int posted_tasks = user.getCompletedPostedTasks();
+        completedPostedTasks.setText(String.valueOf(posted_tasks));
+        int provided_tasks = user.getCompletedProvidedTasks();
+        completedProvidedTasks.setText(String.valueOf(provided_tasks));
         myRating.setText(user.getRating().toString());
         totalEarnings.setText(user.getTotalEarnings().toString());
+
     }
 
 }
