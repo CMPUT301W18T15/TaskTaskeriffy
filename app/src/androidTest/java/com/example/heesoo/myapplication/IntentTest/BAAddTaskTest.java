@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
+import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Profile.EditProfileActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
@@ -52,7 +53,7 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", ChooseModeActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
         assertTrue(solo.searchText("Logged In"));
     }
 
@@ -61,12 +62,10 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddTask(){
-        solo.assertCurrentActivity("Wrong Activity", ChooseModeActivity.class);
-        solo.clickOnButton("Would you like a task performed for you?");
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
 
         // add new task page
-        solo.clickOnButton("Add new task");
+        solo.clickOnButton("Add Task");
         solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
 
         // did not fill task name
@@ -82,7 +81,7 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
         assertTrue(solo.searchText("Saving Task"));
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
         assertTrue(solo.searchText("user0000 task1"));
 
         // clear the garbage

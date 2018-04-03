@@ -1,10 +1,13 @@
 package com.example.heesoo.myapplication.IntentTest;
 
 import android.app.Activity;
+import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.Gravity;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
+import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.R;
@@ -68,15 +71,12 @@ public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", ChooseModeActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
         assertTrue(solo.searchText("Logged In"));
 
-        // choose mode
-        solo.clickOnButton("Would you like a task performed for you?");
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-        solo.goBack();
-        solo.clickOnButton("Would you like to perform a task?");
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        // open the navigation bar
+        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawer_layout);
+        drawerLayout.openDrawer(Gravity.LEFT);
     }
 
     @Override

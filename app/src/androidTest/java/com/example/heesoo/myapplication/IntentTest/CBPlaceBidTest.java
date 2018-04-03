@@ -1,10 +1,17 @@
 package com.example.heesoo.myapplication.IntentTest;
 
 import android.app.Activity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.SearchView;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
+import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
@@ -61,18 +68,15 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Logged In"));
-        solo.clickOnButton("Would you like a task performed for you?");
 
         // add sample task: user0000 task1
-        solo.clickOnButton("Add new task");
+        solo.clickOnButton("Add Task");
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
 
         // back to login activity
-        solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", ChooseModeActivity.class);
         solo.goBack();
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
@@ -82,10 +86,24 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0001");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
-        solo.clickOnButton("Would you like to perform a task?");
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
-        solo.clickOnButton("search new task");
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+
+        // get the navigation bar
+        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawer_layout);
+
+        // open the navigation bar
+        drawerLayout.openDrawer(Gravity.LEFT);
+        solo.clickOnMenuItem("Find New Tasks");
         solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+
+        // * click the search button and
+        // * enter search keyword
+        Activity activity = solo.getCurrentActivity();
+        int id = activity.getResources().getIdentifier("item_search", "id", solo.getCurrentActivity().getPackageName());
+        View view = solo.getView(id);
+        solo.clickOnView(view);
+        //solo.typeText(0, "user0000");
+        solo.enterText(0, "user0000");
 
         // click the list view in position 0
         solo.clickInList(0);
@@ -105,13 +123,26 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Place Bid");
         assertTrue(solo.searchText("Bid Placed"));
 
-        // go back ProviderMainActivity
+        // go back ProviderFindNewTaskActivity
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+
+        // quit search
+        solo.goBack();
+        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+
+        // go back main
+        solo.goBack();
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
 
         // see bidded list
-        solo.clickOnButton("View bidded list");
+        // open the navigation bar
+        drawerLayout.openDrawer(Gravity.LEFT);
+        solo.clickOnMenuItem("My Bidded Tasks");
         solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
+
+//        solo.clickOnButton("View bidded list");
+//        solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
         solo.clickInList(0);
         solo.clickOnButton("Yes");
         solo.assertCurrentActivity("Wrong Activity", ProviderViewAssignedTaskDetail.class);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
+import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
 import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
@@ -48,7 +49,6 @@ public class BDViewTaskTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Logged In"));
-        solo.clickOnButton("Would you like a task performed for you?");
     }
 
     public void testStart() throws Exception{
@@ -57,13 +57,13 @@ public class BDViewTaskTest extends ActivityInstrumentationTestCase2 {
 
     public void testViewTask(){
         // add sample task: user0000 task1
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-        solo.clickOnButton("Add new task");
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.clickOnButton("Add Task");
         solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
 
         // click the list view in position 0
         // show the task details
