@@ -133,7 +133,8 @@ public class User implements Comparable<User>, Serializable {
     public Double getRating(){ return rating;}
 
     public void updateRating(Double rating){
-        this.rating = 3.0;
+
+        //TODO: Write rating logic here and call this method. Out of 5 stars.
     }
 
     /**
