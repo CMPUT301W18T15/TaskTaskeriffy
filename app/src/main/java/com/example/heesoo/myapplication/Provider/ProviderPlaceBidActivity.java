@@ -85,7 +85,7 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
                 if (newBidPrice.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Fill the Bid Price", Toast.LENGTH_SHORT).show();
                 } else if(editing){
-                    Toast.makeText(getApplicationContext(), "The Requester are editing the task, please try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "The Requester is editing this task, please try to place bid later!", Toast.LENGTH_SHORT).show();
                 } else{
                     bidPrice = Float.parseFloat(newBidPrice);
                     Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetCurrentUser.getCurrentUser().getUsername(), task.getUserName());
