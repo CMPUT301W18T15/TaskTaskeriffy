@@ -17,6 +17,7 @@ import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
+import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.needSync;
 import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 
@@ -61,15 +62,23 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                         if (taskConstraints.titleLength(name)) {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
-//                                ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
-//                                addTasksTask.execute(task);
+                                ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
+                                addTasksTask.execute(task);
 
                                 MainActivity.user.addRequesterTasks(task);
-                                MainActivity.user.sync();
+
+                                if (!checkNetwork(RequesterAddTaskActivity.this)) {
+                                    MainActivity.needSync = true;
+                                }
+                                //MainActivity.user.sync();
                                 CharSequence text = "Saving Task";
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
-
+                                try {
+                                    Thread.currentThread().sleep(1000);//阻断2秒
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 //Clear all the views
                                 taskName.getText().clear();
                                 taskDescription.getText().clear();

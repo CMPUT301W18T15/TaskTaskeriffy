@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
@@ -43,6 +44,9 @@ import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.needSync;
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 /**
  * Created by manuelakm on 2018-03-29.
@@ -138,13 +142,24 @@ public class MainTaskActivity extends AppCompatActivity {
         //SetCurrentUser.setCurrentContext(getApplicationContext());
 
         if (checkNetwork(this)) {
-            MainActivity.user.sync();
+            if (needSync == true){
+                Toast.makeText(getApplicationContext(),"The database is syncing", Toast.LENGTH_SHORT).show();
+                MainActivity.user.sync();
+                MainActivity.needSync = false;
+            }
+        }else{
+            MainActivity.needSync = true;
         }
 
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
 
-        taskList = getUserTasksFromDatabase();
+        if(checkNetwork(this)){
+            taskList = getUserTasksFromDatabase();
+        }else{
+            taskList =  MainActivity.user.getRequesterTasks();
+        }
+
 
         taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         //taskAdapter.notifyDataSetChanged();
@@ -154,19 +169,27 @@ public class MainTaskActivity extends AppCompatActivity {
     }
 
     protected ArrayList<Task> getUserTasksFromDatabase() {
-
-        allTasks = MainActivity.user.getRequesterTasks();
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
+        taskList.clear();
+        try {
+            allTasks = getAllTasks.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "The request for tweets failed in onStart");
+        }
 
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
         for (Task task : allTasks){
-            if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())) {
-                Log.d("REQUESTCODE2", task.getTaskName());
+            if (SetCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
+                Log.d("REQUESTCODE", task.getTaskName());
                 taskList.add(task);
                 requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
             }
         }
         return taskList;
+
     }
 
     public static boolean checkNetwork(Context context) {

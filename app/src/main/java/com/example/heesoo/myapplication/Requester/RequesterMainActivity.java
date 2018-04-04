@@ -28,6 +28,8 @@ import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 import java.util.ArrayList;
 
+import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.needSync;
+
 /*
 This activity serves as the main dashboard for the requestor mode and shows a list of tasks that were added by the requester
 along with their statuses. It also contains buttons to view profile, add new task, view tasks that have been bidded on and
@@ -148,13 +150,24 @@ public class RequesterMainActivity extends AppCompatActivity {
         super.onStart();
         // offline behavior
         // sync
-        if (checkNetwork(this)){
-            MainActivity.user.sync();
+        if (checkNetwork(this)) {
+            if (needSync == true){
+                Toast.makeText(getApplicationContext(),"The database is syncing", Toast.LENGTH_SHORT).show();
+                MainActivity.user.sync();
+                MainActivity.needSync = false;
+            }
+        }else{
+            MainActivity.needSync = true;
         }
-
 
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
+
+        if(checkNetwork(this)){
+            taskList = getUserTasksFromDatabase();
+        }else{
+            taskList =  MainActivity.user.getRequesterTasks();
+        }
 
         Log.d("REQUESTCODE", "UPDATING LIST FROM DATABASE");
         taskList = getUserTasksFromDatabase();
@@ -168,7 +181,15 @@ public class RequesterMainActivity extends AppCompatActivity {
     protected ArrayList<Task> getUserTasksFromDatabase() {
         // offline behavior
         // get data from local object
-        allTasks = MainActivity.user.getRequesterTasks();
+        ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+        getAllTasks.execute("");
+        taskList.clear();
+        try {
+            allTasks = getAllTasks.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "The request for tweets failed in onStart");
+        }
 
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 

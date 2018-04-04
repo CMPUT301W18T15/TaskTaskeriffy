@@ -18,6 +18,8 @@ import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
+import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
+
 
 /**
  * Created by manuelakm on 2018-03-15.
@@ -79,7 +81,9 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                                     changedTask.setTaskDescription(description);
                                 }
                             }
-
+                            if (!checkNetwork(RequesterEditTaskActivity.this)) {
+                                MainActivity.needSync = true;
+                            }
                             task.setTaskName(name);
                             task.setTaskDescription(description);
 

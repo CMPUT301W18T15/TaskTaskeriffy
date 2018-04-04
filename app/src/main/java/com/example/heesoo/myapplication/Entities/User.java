@@ -279,19 +279,6 @@ public class User implements Comparable<User>, Serializable {
                     ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                     addTasksTask.execute(task);
                 }else{
-//                    // pull
-//                    for (Bid addedBid : currentTask.getBids()){
-//                        Boolean has = false;
-//                        for (Bid containedBid : task.getBids()){
-//                            if (addedBid.getId().equals(containedBid.getId())){
-//                                has = true;
-//                            }
-//                        }
-//                        if (!has){
-//                            task.addBid(addedBid);
-//                        }
-//                    }
-                    // push
                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                     currentTask.setTaskName(task.getTaskName());
                     currentTask.setTaskDescription(task.getTaskDescription());
@@ -304,6 +291,11 @@ public class User implements Comparable<User>, Serializable {
         }
         requesterTasks.clear();
         providerTasks.clear();
+        try {
+            Thread.currentThread().sleep(1000);//阻断2秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // pull
         ArrayList<Task> allTasks;
@@ -311,13 +303,11 @@ public class User implements Comparable<User>, Serializable {
         getAllTasks.execute("");
         try {
             allTasks = getAllTasks.get();
-
             for (Task task : allTasks){
                 if (this.getUsername().equals(task.getUserName())){
                     Log.d("REQUESTCODE", task.getTaskName());
                     requesterTasks.add(task);
                 }
-
                 if ( task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetCurrentUser.getCurrentUser().getUsername())) {
                     providerTasks.add(task);
                 }

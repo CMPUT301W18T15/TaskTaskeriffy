@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     // offline behavior
     public static User user;
+    public static Boolean needSync = false;
 
 
     @Override
