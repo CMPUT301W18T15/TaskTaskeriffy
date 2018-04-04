@@ -105,9 +105,11 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
 
-                                Log.e("PHOTO","PHOTO"+ImageDecode);
-                                task.addPicture(ImageDecode);
+                                if (bitmap != null) {
+                                    String base64String = ImageUtil.convert(bitmap);
+                                    task.addPicture(base64String);
 
+                                }
 
                                 MainActivity.user.addRequesterTasks(task);
                                 MainActivity.user.sync();
@@ -183,7 +185,9 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
 
                 Log.e("NEW","NEW"+ URI);
 
-                mImageView.setImageBitmap(BitmapFactory.decodeStream(getContentResolver().openInputStream(URI)));
+                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(URI));
+
+                mImageView.setImageBitmap(bitmap);
 
             }
         } catch (Exception e) {

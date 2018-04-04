@@ -1,6 +1,7 @@
 package com.example.heesoo.myapplication.Requester;
 
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,9 +29,11 @@ public class ShowPhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_photo);
 
-        my_new = task.getPicture();
+        showPhoto = findViewById(R.id.showPhoto);
 
-        Log.e("MEME","MEME"+my_new);
+
+        Bitmap bitmap = ImageUtil.convert(encodedPhoto);
+        showPhoto.setImageBitmap(bitmap);
 
     }
 }
