@@ -160,15 +160,7 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
                     editTask.execute(task);
                     updateStatistics(task.getTaskProvider(), task.getLowestBid());
                     Toast.makeText(RequesterShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_SHORT).show();
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            //finish();
-                            startActivity(new Intent(RequesterShowTaskDetailActivity.this, UserRatingActivity.class));
-                        }
-                    }, 1000);
-
+                    startActivityForResult(new Intent(RequesterShowTaskDetailActivity.this, UserRatingActivity.class),3);
                 }
 
             });
@@ -230,8 +222,16 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             task.setLongitude(newTask.getLongitude());
             task.setLatitude(newTask.getLatitude());
         }
+        else if (requestCode == 3) {
+            Double rating = (Double) i.getSerializableExtra("Rating");
+            //TODO: SO BIG PROBLEMO
+            currentTaskProvider.updateRating(rating);
+            ElasticSearchUserController.EditUserTask editCurrentTaskProvider = new ElasticSearchUserController.EditUserTask();
+            editCurrentTaskProvider.execute(currentTaskProvider);
+        }
     }
     public void updateStatistics(String taskProviderUsername, String earning){
+        Toast.makeText(RequesterShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_LONG).show();
         ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
         getUser.execute(taskProviderUsername);
         try {
@@ -242,7 +242,6 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
         currentUser.updateCompletedPostedTasks();
         currentTaskProvider.updateCompletedProvidedTasks();
         currentTaskProvider.updateTotalEarnings(Double.parseDouble(earning));
-        //currentTaskProvider.updateRating(rating);
         ElasticSearchUserController.EditUserTask editCurrentUser = new ElasticSearchUserController.EditUserTask();
         ElasticSearchUserController.EditUserTask editCurrentTaskProvider = new ElasticSearchUserController.EditUserTask();
         editCurrentUser.execute(currentUser);
