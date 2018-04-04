@@ -132,6 +132,8 @@ public class User implements Comparable<User>, Serializable {
      */
     public Double getRating(){ return rating;}
 
+    public void setRating(){this.rating = rating;}
+
     public void updateRating(Double rating){
 
         //TODO: Write rating logic here and call this method. Out of 5 stars.

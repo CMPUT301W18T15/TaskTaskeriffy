@@ -1,13 +1,18 @@
 package com.example.heesoo.myapplication.Requester;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +22,12 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUs
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.MapsActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
+import com.example.heesoo.myapplication.UserRatingActivity;
 
 
 import java.util.ArrayList;
@@ -54,6 +61,8 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
 
     private User currentTaskProvider, currentUser;
 
+    Button Close;
+    Button Create;
 
 
     private ElasticSearchTaskController elasticSearchTaskController;
@@ -151,14 +160,19 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
                     editTask.execute(task);
                     updateStatistics(task.getTaskProvider(), task.getLowestBid());
                     Toast.makeText(RequesterShowTaskDetailActivity.this, "Task Marked as Done", Toast.LENGTH_SHORT).show();
+
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            finish();
+                            //finish();
+                            startActivity(new Intent(RequesterShowTaskDetailActivity.this, UserRatingActivity.class));
                         }
                     }, 1000);
+
                 }
+
             });
+
 
             markRequested = findViewById(R.id.mark_requested_button);
             markRequested.setVisibility(View.VISIBLE);
@@ -180,7 +194,6 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
 
                 }
             });
-
         }
 
         mapButton = findViewById(R.id.seeMap);
@@ -194,6 +207,7 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent i) {
