@@ -35,6 +35,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
     private EditText taskName;
     private EditText taskDescription;
+    private Button addPictureButton;
     private Button saveChangesButton;
     private Task task;
 
@@ -43,6 +44,8 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
+
+        addPictureButton = findViewById(R.id.addPicture);
         taskName = findViewById(R.id.taskNameEdit);
         taskDescription = findViewById(R.id.descriptionEdit);
         saveChangesButton = findViewById(R.id.saveChangesButton);
@@ -57,6 +60,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         ElasticSearchTaskController.EditTask setEditing = new ElasticSearchTaskController.EditTask();
         setEditing.execute(task);
 
+        addPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RequesterEditTaskActivity.this, AddPictureActivity.class);
+                intent.putExtra("Task", task);
+                startActivity(intent);
+            }
+        });
 
         saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override

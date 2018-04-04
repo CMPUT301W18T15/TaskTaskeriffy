@@ -292,7 +292,7 @@ public class User implements Comparable<User>, Serializable {
         requesterTasks.clear();
         providerTasks.clear();
         try {
-            Thread.currentThread().sleep(1000);//阻断2秒
+            Thread.currentThread().sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
