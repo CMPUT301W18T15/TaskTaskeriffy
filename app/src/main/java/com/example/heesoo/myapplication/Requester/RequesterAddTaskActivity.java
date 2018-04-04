@@ -108,7 +108,6 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                                 if (bitmap != null) {
                                     String base64String = ImageUtil.convert(bitmap);
                                     task.addPicture(base64String);
-
                                 }
 
                                 MainActivity.user.addRequesterTasks(task);

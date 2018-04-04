@@ -64,7 +64,7 @@ public class ProviderViewAssignedTaskDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
-                ArrayList<String> encodedPhoto = task.getPictures();
+                String encodedPhoto = task.getPicture();
                 intent.putExtra("photo", encodedPhoto);
                 startActivity(intent);
             }

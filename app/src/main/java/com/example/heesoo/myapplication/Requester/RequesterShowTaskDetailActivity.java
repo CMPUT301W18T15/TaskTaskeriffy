@@ -204,8 +204,8 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
-                ArrayList<String> encodedPhotos = task.getPictures();
-                intent.putExtra("photo", encodedPhotos);
+                String encodedPhoto = task.getPicture();
+                intent.putExtra("photo", encodedPhoto);
                 startActivity(intent);
             }
         });

@@ -21,16 +21,14 @@ import java.util.ArrayList;
 
 public class ShowPhotoActivity extends AppCompatActivity {
     private ImageView showPhoto;
-    private Task task;
-    private String my_new;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_photo);
+        String encodedPhoto = (String) getIntent().getSerializableExtra("photo");
 
         showPhoto = findViewById(R.id.showPhoto);
-
 
         Bitmap bitmap = ImageUtil.convert(encodedPhoto);
         showPhoto.setImageBitmap(bitmap);
