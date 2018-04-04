@@ -47,6 +47,8 @@
         <activity android:name=".Requester.ShowPhotoActivity" />
         <activity android:name=".Provider.ProviderFindNearbyTasksActivity"/>
         <activity android:name=".Requester.AddPictureActivity" />
+        <activity android:name=".UserRatingActivity" />
+
 
 
         <!--
