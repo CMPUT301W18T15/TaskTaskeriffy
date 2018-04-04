@@ -4,8 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -59,7 +63,17 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
     private Button addPhoto;
     private Bitmap bitmap;
 
+    private Task task;
+
     private ImageView mImageView;
+
+
+    private static int IMG_RESULT = 1;
+    public String ImageDecode;
+    ImageView imageViewLoad;
+    Button LoadImage;
+    Intent intent;
+    String[] FILE;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,10 +104,11 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                         if (taskConstraints.titleLength(name)) {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
-                                if(bitmap!= null){
-                                    String base64String = ImageUtil.convert(bitmap);
-                                    task.addPicture(base64String);
-                                }
+
+                                Log.e("PHOTO","PHOTO"+ImageDecode);
+                                task.addPicture(ImageDecode);
+
+
                                 MainActivity.user.addRequesterTasks(task);
                                 MainActivity.user.sync();
 
@@ -132,9 +147,11 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                 /* Taken from https://stackoverflow.com/questions/11144783/how-to-access-an-image-from-the-phones-photo-gallery
                 on Mar 28, 2018. Takes picture from gallery to show in image view.
                  */
-                Intent intent = new Intent(Intent.ACTION_PICK,
+
+                intent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 0);
+
+                startActivityForResult(intent, IMG_RESULT);
 
                 /* Another implementation is at Taken from https://stackoverflow.com/questions/12995185/android-taking-photos-and-saving-them-with-a-custom-name-to-a-custom-destinati
                  on Mar 28, 2018. Opens camera to snap picture and store in external file*/
@@ -144,19 +161,35 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /* Taken from https://stackoverflow.com/questions/11144783/how-to-access-an-image-from-the-phones-photo-gallery
-                on Mar 28, 2018
-         */
         super.onActivityResult(requestCode, resultCode, data);
+        try {
 
-        if (resultCode == RESULT_OK ){
-            Uri targetUri = data.getData();
-            try {
-                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                mImageView.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            if (requestCode == IMG_RESULT && resultCode == RESULT_OK
+                    && null != data) {
+
+
+                Uri URI = data.getData();
+                String[] FILE = { MediaStore.Images.Media.DATA };
+
+
+                Cursor cursor = getContentResolver().query(URI,
+                        FILE, null, null, null);
+
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(FILE[0]);
+                ImageDecode = cursor.getString(columnIndex);
+                cursor.close();
+
+                Log.e("NEW","NEW"+ URI);
+
+                mImageView.setImageBitmap(BitmapFactory.decodeStream(getContentResolver().openInputStream(URI)));
+
             }
+        } catch (Exception e) {
+            Toast.makeText(this, "Please try again", Toast.LENGTH_LONG)
+                    .show();
         }
     }
+
 }
