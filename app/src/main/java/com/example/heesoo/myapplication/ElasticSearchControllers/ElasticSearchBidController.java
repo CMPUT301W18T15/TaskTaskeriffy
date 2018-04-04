@@ -139,7 +139,11 @@ public class ElasticSearchBidController {
 
         @Override
         protected ArrayList<Bid> doInBackground(String... search_parameters) {
+            Log.d("ERROR", "In EC Get All Bids");
+
             verifySettings();
+
+            Log.d("ERROR", "In EC Get All Bids");
 
             ArrayList<Bid> bids = new ArrayList<Bid>();
 

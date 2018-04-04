@@ -71,9 +71,6 @@ public class MainTaskActivity extends AppCompatActivity {
         addTask = findViewById(R.id.addTaskButton);
         addTask.setVisibility(View.VISIBLE);
 
-        //MonitorBidsTask monitorBidsTask = new MonitorBidsTask();
-        //monitorBidsTask.execute(this);
-
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

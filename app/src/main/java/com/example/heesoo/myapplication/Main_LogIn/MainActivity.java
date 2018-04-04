@@ -1,5 +1,6 @@
 package com.example.heesoo.myapplication.Main_LogIn;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.MainTaskActivity;
-import com.example.heesoo.myapplication.MonitorBidsTask;
+import com.example.heesoo.myapplication.MonitorBidsThread;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Register.RegisterActivity;
@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private ElasticSearchUserController elasticSearchUserController;
 
     // offline behavior
+    private Context context = this;
     public static User user;
+    private MonitorBidsThread monitorBidsThread;
 
 
     @Override
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         elasticSearchUserController = new ElasticSearchUserController();
+        monitorBidsThread = new MonitorBidsThread(context);
 
         enter_username = findViewById(R.id.login_username);
         enter_password = findViewById(R.id.login_password);
@@ -87,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                         SetCurrentUser.setCurrentMode("Requester");
                         if (pwd_str.equals(user.getPassword())) {
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(MainActivity.this, ChooseModeActivity.class));
+
+                            //monitorBidsThread.run();
                             startActivity(new Intent(MainActivity.this, MainTaskActivity.class));
                         } else {
                             Toast.makeText(getApplicationContext(), "Password Does not Match", Toast.LENGTH_SHORT).show();
@@ -108,9 +112,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.d("ERROR", "ONDESTROY");
+        monitorBidsThread.stop();
+    }
+
     private boolean checkEmpty(String username,String password) {
         return !(username.equals("") || password.equals(""));
     }
-
 
 }

@@ -8,13 +8,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
+import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
@@ -22,19 +26,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-public class MonitorBidsTask extends AsyncTask<Context, Void, Void> {
+public class MonitorBidsThread extends Thread {
 
     private NotificationManager myNotificationManager;
+    private ArrayList<Bid> allBids;
     private Calendar timeStamp;
     private Context context;
     private boolean done;
 
-    @Override
-    protected Void doInBackground(Context... params) {
+    public MonitorBidsThread(Context context) {
+        this.context = context;
+    }
 
-        for (Context c: params) {
-            context = c;
-        }
+    public void run() {
 
         myNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -42,13 +46,14 @@ public class MonitorBidsTask extends AsyncTask<Context, Void, Void> {
         timeStamp = Calendar.getInstance();
         done = false;
 
-
         while (!done) {
-            Log.d("ERROR", "IN ASYNCTASK");
+
+            Log.d("ERROR","In while loop");
 
             ElasticSearchBidController.GetAllBids getAllBids = new ElasticSearchBidController.GetAllBids();
             getAllBids.execute("");
-            ArrayList<Bid> allBids = new ArrayList<Bid>();
+
+            allBids = new ArrayList<Bid>();;
 
             try {
                 allBids = getAllBids.get();
@@ -56,14 +61,10 @@ public class MonitorBidsTask extends AsyncTask<Context, Void, Void> {
                 Log.d("ERROR", "Oh no! Something went wrong while accessing the database");
             }
 
-            ArrayList<Bid> myBids = new ArrayList<Bid>();
             for (Bid bid: allBids) {
                 if (bid.getTaskRequester().equals(SetCurrentUser.getCurrentUser().getUsername())) {
-                    myBids.add(bid);
                     if (bid.getTimeStamp().after(timeStamp)) {
                         Log.d("ERROR", "BID HAS BEEN PLACED");
-
-                        Log.d("ERROR", "Inside sendnotification function");
 
                         String channelID = "myChannelID";
                         String channelName = "myChannelName";
@@ -82,14 +83,13 @@ public class MonitorBidsTask extends AsyncTask<Context, Void, Void> {
                                 .setAutoCancel(true);
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            // Create the NotificationChannel, but only on API 26+ because
-                            // the NotificationChannel class is new and not in the support library
+
                             CharSequence name = channelName;
                             String description = channelDescription;
                             int importance = NotificationManager.IMPORTANCE_DEFAULT;
                             NotificationChannel channel = new NotificationChannel(channelID, name, importance);
                             channel.setDescription(description);
-                            // Register the channel with the system
+
                             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
                             myNotificationManager.createNotificationChannel(channel);
                         }
@@ -99,14 +99,29 @@ public class MonitorBidsTask extends AsyncTask<Context, Void, Void> {
                 }
             }
 
-            timeStamp = Calendar.getInstance();
+            SleepTask sleepTask = new SleepTask();
+            sleepTask.execute();
 
-            try {
-                TimeUnit.MINUTES.sleep(1);
-            }
-            catch (Exception e) {}
+            //SystemClock.sleep(7000);
+
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Log.d("ERROR","End of delay");
+//                }
+//            }, 6000);
+
+//            try {
+//                //Thread.sleep(60000);
+//                Log.d("Error", "BEFORE pLEASE");
+//                Thread.currentThread().sleep(6000);
+//                //Thread.currentThread().wait(6000);
+//                Log.d("Error", "AFTER pLEASE");
+//            }
+//            catch (Exception e) {
+//                Log.d("ERROR", "nO WAIT");
+//            }
         }
 
-        return null;
     }
 }
