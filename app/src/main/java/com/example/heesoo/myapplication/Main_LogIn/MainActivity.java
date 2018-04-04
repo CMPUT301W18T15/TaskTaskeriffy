@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context = this;
     public static User user;
     private MonitorBidsThread monitorBidsThread;
-
+    public static Boolean needSync = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,9 +1,12 @@
 package com.example.heesoo.myapplication.Entities;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
 import android.media.Image;
+import android.util.Base64;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 
@@ -21,7 +24,7 @@ public class Task implements Serializable{
 
     @JestId
     private String id;
-    private Image picture;
+    private ArrayList<String> pictures; // photo bitmaps are encoded to base64 strings to store in elasticsearch
     private ArrayList<Bid> bids;
     private ArrayList<User> taskBidders;
 
@@ -45,6 +48,7 @@ public class Task implements Serializable{
         this.taskDescription = taskDescription;
         this.status = "Requested";
         this.bids = new ArrayList<Bid>();
+        this.pictures = new ArrayList<String>();
         this.taskBidders = new ArrayList<User>();
         this.assignedTaskProvider = "";
         this.latitude = -1.0;
@@ -259,6 +263,33 @@ public class Task implements Serializable{
     public ArrayList<Bid> getBids(){
 
         return bids;
+    }
+
+    /**
+     * <p>
+     *     This method returns an ArrayList<Bitmap> that represents all the pictures associated with this task
+     * </p>
+     * @return ArrayList<Bitmap>< that represents all the pictures associated with this task
+     */
+    public ArrayList<String> getPictures(){
+
+        return pictures;
+    }
+
+    /**
+     * <p>
+     *     This method adds a picture to the local ArrayList<Bitmap> that represents all the pictures placed
+     *     on the task. This method also uses elasticsearchcontroller to update the database.
+     * </p>
+     * @param picture a Bitmap that has been placed on this task
+     */
+    public void addPicture(String encodedPicture) {
+
+        pictures.add(encodedPicture);
+    }
+
+    public String getPicture() {
+        return pictures.get(0);
     }
 
     /**

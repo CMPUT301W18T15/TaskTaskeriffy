@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
@@ -25,6 +28,7 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 
 import java.util.ArrayList;
 
+import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.needSync;
 import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 /*
@@ -114,12 +118,28 @@ public class ProviderMainActivity extends AppCompatActivity {
 
         // offline behavior
         // sync
-        if (checkNetwork(this)){
-            MainActivity.user.sync();
+        if (checkNetwork(this)) {
+            if (needSync == true){
+                Toast.makeText(getApplicationContext(),"The database is syncing", Toast.LENGTH_SHORT).show();
+                MainActivity.user.sync();
+                MainActivity.needSync = false;
+            }
+        }else{
+            MainActivity.needSync = true;
         }
 
-        tempTaskList = MainActivity.user.getProviderTasks();
-
+        if(checkNetwork(this)){
+            ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
+            getAllTasks.execute("");
+            try {
+                tempTaskList = getAllTasks.get();
+            }
+            catch (Exception e) {
+                Log.i("Error", "The request for tweets failed in onStart");
+            }
+        }else {
+            tempTaskList = MainActivity.user.getProviderTasks();
+        }
         ArrayList<String> tasksNames = new ArrayList<String>();
 
 
