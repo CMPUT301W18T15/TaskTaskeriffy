@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Profile.MyStatsActivity;
 import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
@@ -47,12 +47,16 @@ public class ProviderMainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private TextView noTasksMessage;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_tasks);;
+        setContentView(R.layout.activity_view_tasks);
+        noTasksMessage = findViewById(R.id.noTasksMessage);
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -112,6 +116,8 @@ public class ProviderMainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        noTasksMessage.setVisibility(View.GONE);
+
 
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
@@ -149,6 +155,10 @@ public class ProviderMainActivity extends AppCompatActivity {
                 tasksNames.add("Name: "+tempTaskList.get(i).getTaskName()+" Status: " + tempTaskList.get(i).getStatus());
 
             }
+        }
+        if (taskList.size() == 0){
+            noTasksMessage.setVisibility(View.VISIBLE);
+            noTasksMessage.setText("You are not assigned to any tasks!");
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasksNames);
         clickableList.setAdapter(adapter);

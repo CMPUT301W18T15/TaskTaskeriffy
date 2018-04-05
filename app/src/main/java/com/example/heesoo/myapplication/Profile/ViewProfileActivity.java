@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
 import com.example.heesoo.myapplication.Entities.User;
-import com.example.heesoo.myapplication.MainTaskActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;

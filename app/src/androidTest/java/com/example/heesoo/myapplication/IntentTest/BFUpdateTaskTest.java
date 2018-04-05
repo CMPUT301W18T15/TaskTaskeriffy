@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.R;
 
 import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
 import com.example.heesoo.myapplication.Requester.RequesterEditTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
 import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
 import com.robotium.solo.Solo;
 

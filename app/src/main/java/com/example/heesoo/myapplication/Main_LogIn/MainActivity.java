@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.MonitorBidsThread;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;

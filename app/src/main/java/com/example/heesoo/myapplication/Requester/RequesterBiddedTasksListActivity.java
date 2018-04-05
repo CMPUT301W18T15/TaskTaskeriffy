@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Task;
-import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Profile.MyStatsActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
@@ -46,6 +46,8 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private TextView noTasksMessage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        noTasksMessage = findViewById(R.id.noTasksMessage);
+
 
 
         // when click on list
@@ -114,6 +118,7 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
+        noTasksMessage.setVisibility(View.GONE);
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
         checkNetwork(this);
@@ -135,6 +140,11 @@ public class RequesterBiddedTasksListActivity extends AppCompatActivity{
                 requesterBiddedTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
 
             }
+        }
+
+        if (taskList.size() == 0){
+            noTasksMessage.setVisibility(View.VISIBLE);
+            noTasksMessage.setText("None of your tasks are currently bidded on!");
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

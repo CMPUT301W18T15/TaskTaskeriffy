@@ -11,10 +11,10 @@ package com.example.heesoo.myapplication.Requester;
         import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
         import android.widget.ListView;
+        import android.widget.TextView;
 
         import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
         import com.example.heesoo.myapplication.Entities.Task;
-        import com.example.heesoo.myapplication.MainTaskActivity;
         import com.example.heesoo.myapplication.Profile.MyStatsActivity;
         import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
         import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
@@ -43,6 +43,7 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
     private ListView clickableList;
     private ArrayList<Task> allTasks;
     private ArrayAdapter<Task> taskAdapter;
+    private TextView noTasksMessage;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -55,6 +56,8 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        noTasksMessage = findViewById(R.id.noTasksMessage);
+
 
         // when click on list
         clickableList = findViewById(R.id.tasksListView);
@@ -113,6 +116,7 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        noTasksMessage.setVisibility(View.GONE);
         taskList = new ArrayList<Task>();
         allTasks = new ArrayList<Task>();
         checkNetwork(this);
@@ -134,6 +138,10 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
                 requesterAssignedTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
 
             }
+        }
+        if (taskList.size() == 0){
+            noTasksMessage.setVisibility(View.VISIBLE);
+            noTasksMessage.setText("None of your tasks are currently assigned to a provider!");
         }
         //requesterAssignedTasksNames.add("NAME: GARBAGE STATUS: SURE");
 

@@ -18,11 +18,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Profile.MyStatsActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
@@ -52,12 +53,16 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button findNearbyTasks;
+    private TextView noTasksMessage;
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_tasks);
+        noTasksMessage = findViewById(R.id.noTasksMessage);
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -185,6 +190,8 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        noTasksMessage.setVisibility(View.GONE);
+
         tempTaskList = new ArrayList<Task>();
         taskList = new ArrayList<Task>();
 
@@ -203,6 +210,10 @@ public class ProviderFindNewTaskActivity extends AppCompatActivity {
                     && !tempTaskList.get(i).getStatus().equals("Assigned") && !tempTaskList.get(i).getStatus().equals("Done")) {
                 taskList.add(tempTaskList.get(i));
             }
+        }
+        if (taskList.size() == 0){
+            noTasksMessage.setVisibility(View.VISIBLE);
+            noTasksMessage.setText("No Tasks available!");
         }
 
         adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);

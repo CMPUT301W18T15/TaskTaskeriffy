@@ -1,28 +1,19 @@
 package com.example.heesoo.myapplication.IntentTest;
 
 import android.app.Activity;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.SearchView;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderPlaceBidActivity;
 import com.example.heesoo.myapplication.Provider.ProviderViewAssignedTaskDetail;
 import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterEditTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
 import com.robotium.solo.Solo;
 
 /**

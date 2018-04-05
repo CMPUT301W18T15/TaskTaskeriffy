@@ -14,12 +14,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Profile.MyStatsActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
@@ -50,12 +51,16 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
     private ArrayAdapter<Task> adapter;
 
     private DrawerLayout drawerLayout;
+    private TextView noTasksMessage;
+
     private NavigationView navigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_tasks);
+        noTasksMessage = findViewById(R.id.noTasksMessage);
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -143,6 +148,8 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        noTasksMessage.setVisibility(View.GONE);
+
 
         checkNetwork(this);
         tempTaskList = new ArrayList<Task>();
@@ -166,6 +173,10 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
                     }
                 }
             }
+        }
+        if (taskList.size() == 0){
+            noTasksMessage.setVisibility(View.VISIBLE);
+            noTasksMessage.setText("You have not bidded on any tasks!");
         }
 
         adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);

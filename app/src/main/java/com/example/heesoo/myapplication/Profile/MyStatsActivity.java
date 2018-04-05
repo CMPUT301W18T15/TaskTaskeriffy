@@ -2,23 +2,17 @@ package com.example.heesoo.myapplication.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.heesoo.myapplication.Constraints.UserConstraints;
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
@@ -26,8 +20,6 @@ import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
 import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
-
-import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 /*
 This activity gives the user the option to edit their profile. The user can navigate to this activity through the

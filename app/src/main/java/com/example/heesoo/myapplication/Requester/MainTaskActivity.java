@@ -1,19 +1,12 @@
-package com.example.heesoo.myapplication;
+package com.example.heesoo.myapplication.Requester;
 
-import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -21,13 +14,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
-import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Profile.MyStatsActivity;
@@ -35,18 +26,12 @@ import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
 import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
-import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
+import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.needSync;
-import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
 
 /**
  * Created by manuelakm on 2018-03-29.
@@ -63,6 +48,9 @@ public class MainTaskActivity extends AppCompatActivity {
     private ListView myTasks;
     private Button addTask;
     private Task task;
+    private TextView noTasksMessage;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +62,8 @@ public class MainTaskActivity extends AppCompatActivity {
         myTasks = findViewById(R.id.tasksListView);
         addTask = findViewById(R.id.addTaskButton);
         addTask.setVisibility(View.VISIBLE);
+        noTasksMessage = findViewById(R.id.noTasksMessage);
+
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +126,8 @@ public class MainTaskActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        noTasksMessage.setVisibility(View.GONE);
+
         //SetCurrentUser.setCurrentContext(getApplicationContext());
 
         if (checkNetwork(this)) {
@@ -156,7 +148,10 @@ public class MainTaskActivity extends AppCompatActivity {
         }else{
             taskList =  MainActivity.user.getRequesterTasks();
         }
-
+        if (taskList.size() == 0){
+            noTasksMessage.setVisibility(View.VISIBLE);
+            noTasksMessage.setText("You have no tasks at the moment!");
+        }
 
         taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         //taskAdapter.notifyDataSetChanged();

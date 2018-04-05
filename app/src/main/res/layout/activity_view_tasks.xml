@@ -54,19 +54,32 @@
                 <ListView
                     android:id="@+id/tasksListView"
                     android:layout_width="350dp"
-                    android:layout_height="438dp"
+                    android:layout_height="454dp"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@+id/addTaskButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toBottomOf="@+id/textView20">
 
                 </ListView>
+
+                <TextView
+                    android:id="@+id/noTasksMessage"
+                    android:layout_width="363dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/tasksListView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 

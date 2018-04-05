@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import static com.example.heesoo.myapplication.Main_LogIn.MainActivity.needSync;
 
 /*
+TODO: Note this activity is not being used anymore. Instead MainTaskActivity is used in its place. Have to replace the intent tests with so.
 This activity serves as the main dashboard for the requestor mode and shows a list of tasks that were added by the requester
 along with their statuses. It also contains buttons to view profile, add new task, view tasks that have been bidded on and
 tasks that are assigned to a provider.
@@ -48,11 +50,14 @@ public class RequesterMainActivity extends AppCompatActivity {
     private ArrayAdapter<Task> taskAdapter;
     private ListView clickableList;
     private Task task;
+    private TextView noTasksMessage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requester_main);
+        noTasksMessage = findViewById(R.id.noTasksMessage);
 
         //add new task button
         addNewTaskButton = findViewById(R.id.add_new_task_button);
@@ -171,6 +176,10 @@ public class RequesterMainActivity extends AppCompatActivity {
 
         Log.d("REQUESTCODE", "UPDATING LIST FROM DATABASE");
         taskList = getUserTasksFromDatabase();
+        if (taskList.size() == 0){
+            noTasksMessage.setVisibility(View.VISIBLE);
+            noTasksMessage.setText("You have no tasks at the moment!");
+        }
         taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         taskAdapter.notifyDataSetChanged();
         //clickableList.invalidateViews();

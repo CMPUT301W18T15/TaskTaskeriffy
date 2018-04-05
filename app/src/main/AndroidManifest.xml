@@ -43,7 +43,7 @@
         <activity android:name=".Provider.ProviderViewBiddedTaskList" />
         <activity android:name=".Requester.RequesterViewBidsOnTaskActivity" />
         <activity android:name=".Requester.RequesterGeoMapActivity" />
-        <activity android:name=".MainTaskActivity" />
+        <activity android:name=".Requester.MainTaskActivity" />
         <activity android:name=".Requester.ShowPhotoActivity" />
         <activity android:name=".Provider.ProviderFindNearbyTasksActivity"/>
         <activity android:name=".Requester.AddPictureActivity" />

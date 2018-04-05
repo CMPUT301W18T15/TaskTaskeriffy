@@ -1,19 +1,13 @@
 package com.example.heesoo.myapplication.Requester;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +17,8 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUs
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
-import com.example.heesoo.myapplication.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.MapsActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderViewAssignedTaskDetail;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.UserRatingActivity;

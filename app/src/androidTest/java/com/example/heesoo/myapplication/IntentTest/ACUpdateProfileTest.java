@@ -6,14 +6,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.Gravity;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.Profile.EditProfileActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
 import com.robotium.solo.Solo;
 
 /**
