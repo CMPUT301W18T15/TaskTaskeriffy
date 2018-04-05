@@ -97,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Password Does not Match", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        // DELETE THE FOLLOWING LINE AFTER
-                        //startActivity(new Intent(MainActivity.this, MainTaskActivity.class));
                         Toast.makeText(getApplicationContext(), "Account Does not Exist", Toast.LENGTH_SHORT).show();
 
                     }

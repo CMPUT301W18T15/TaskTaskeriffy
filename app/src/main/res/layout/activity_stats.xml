@@ -28,75 +28,112 @@
                     android:id="@+id/myRating"
                     android:layout_width="250dp"
                     android:layout_height="40dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:isIndicator="true"
+                    app:layout_constraintBottom_toTopOf="@+id/completedPostedTasks"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/completedPostedTasks"
                     android:layout_width="162dp"
                     android:layout_height="43dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    android:layout_marginBottom="28dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/completedProvidedTasks"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/totalEarnings"
                     android:layout_width="223dp"
                     android:layout_height="36dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/myRating"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.836"
+                    app:layout_constraintStart_toEndOf="@+id/textView10" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="115dp"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="24dp"
                     android:text="Total Earnings:"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/totalEarnings"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="90dp"
                     android:layout_height="37dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="32dp"
                     android:text="My Rating:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/myRating"
+                    app:layout_constraintEnd_toStartOf="@+id/myRating"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="174dp"
                     android:layout_height="47dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:text="Completed Posted Tasks:"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/completedPostedTasks"
+                    app:layout_constraintEnd_toStartOf="@+id/completedPostedTasks"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="194dp"
                     android:layout_height="57dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:text="Completed Provided Tasks:"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/completedProvidedTasks"
+                    app:layout_constraintEnd_toStartOf="@+id/completedProvidedTasks"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/completedProvidedTasks"
                     android:layout_width="142dp"
                     android:layout_height="54dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView19"
+                    android:layout_marginBottom="132dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="64dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/totalEarnings"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="100dp"
+                    android:layout_height="34dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="My Rating"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    app:layout_constraintBottom_toTopOf="@+id/rating_bar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.815" />
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>

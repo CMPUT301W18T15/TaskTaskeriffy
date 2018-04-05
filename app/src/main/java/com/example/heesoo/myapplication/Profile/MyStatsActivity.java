@@ -7,9 +7,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,8 @@ public class MyStatsActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
+    private RatingBar ratingBar;
+
     private TextView myRating;
     private TextView completedPostedTasks;
     private TextView completedProvidedTasks;
@@ -52,12 +56,22 @@ public class MyStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
         Intent i = getIntent();
+
+        ratingBar = findViewById(R.id.rating_bar);
         totalEarnings = findViewById(R.id.totalEarnings);
         myRating = findViewById(R.id.myRating);
         completedPostedTasks = findViewById(R.id.completedPostedTasks);
         completedProvidedTasks = findViewById(R.id.completedProvidedTasks);
 
         user = SetCurrentUser.getCurrentUser();
+        ratingBar.setRating(Float.parseFloat(user.getRating().toString()));
+        ratingBar.setFocusable(false);
+        ratingBar.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
         int posted_tasks = user.getCompletedPostedTasks();
         completedPostedTasks.setText(String.valueOf(posted_tasks));
         int provided_tasks = user.getCompletedProvidedTasks();
