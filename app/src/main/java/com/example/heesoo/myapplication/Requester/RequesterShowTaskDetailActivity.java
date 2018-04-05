@@ -19,6 +19,7 @@ import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Entities.User;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.MapsActivity;
+import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.UserRatingActivity;
@@ -55,6 +56,8 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
     private TextView taskProvider;
     private TextView bidTextView;
 
+    private String provider_string;
+
     private User currentTaskProvider, currentUser;
 
     Button Close;
@@ -88,6 +91,10 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         bidTextView = findViewById(R.id.bidTextView);
         taskProvider = findViewById(R.id.taskProvider);
+
+        taskProvider.setText(task.getTaskProvider());
+
+        provider_string = taskProvider.getText().toString();
 
         if (task.getStatus().equals("Requested")) {
             editTask = findViewById(R.id.editTask);
@@ -258,6 +265,21 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
         ElasticSearchUserController.EditUserTask editCurrentTaskProvider = new ElasticSearchUserController.EditUserTask();
         editCurrentUser.execute(currentUser);
         editCurrentTaskProvider.execute(currentTaskProvider);
+    }
+
+    public void clickHandler_provider(View v){
+        ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
+        Log.e("PROVIDER","PROVIDER"+provider_string);
+        getUser.execute(provider_string);
+        User user = new User();
+        try {
+            user = getUser.get();
+        } catch (Exception e) {
+            //Log.d
+        }
+        Intent intent = new Intent(RequesterShowTaskDetailActivity.this, ViewProfileActivity.class);
+        intent.putExtra("USER", user);
+        startActivity(intent);
     }
 
 

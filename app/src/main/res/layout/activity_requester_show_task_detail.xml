@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_green_light"
-    tools:context="com.example.heesoo.myapplication.Provider.ProviderViewAssignedTaskDetail">
+    tools:context="com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity">
 
     <TextView
         android:id="@+id/taskName"
@@ -166,6 +166,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="taskProvider"
+        android:onClick="clickHandler_provider"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
