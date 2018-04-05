@@ -44,15 +44,12 @@ android:fitsSystemWindows="true">
 
         <TextView
             android:id="@+id/phoneNumberView"
-            android:layout_width="225dp"
+            android:layout_width="241dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.578"
-            app:layout_constraintStart_toEndOf="@+id/PhoneNumber"
             app:layout_constraintTop_toBottomOf="@+id/EmailAddressView" />
 
         <Button
@@ -78,9 +75,9 @@ android:fitsSystemWindows="true">
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Phone Number :"
+            app:layout_constraintBaseline_toBaselineOf="@+id/phoneNumberView"
             app:layout_constraintEnd_toStartOf="@+id/phoneNumberView"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="322dp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/UsernameView"
@@ -121,17 +118,20 @@ android:fitsSystemWindows="true">
             android:layout_height="34dp"
             android:layout_marginStart="8dp"
             android:text="Rating:"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="369dp" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/rating"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/rating"
             android:layout_width="226dp"
             android:layout_height="34dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="TextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberView" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

@@ -66,7 +66,6 @@ public class ViewProfileActivity extends AppCompatActivity {
 
 
         editButton = findViewById(R.id.editInfoButton);
-        //changeModeButton = findViewById(R.id.changeModeButton);
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
