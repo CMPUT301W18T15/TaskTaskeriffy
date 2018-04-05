@@ -108,7 +108,7 @@ public class RequesterBidDetailActivity extends AppCompatActivity {
                 task.acceptBid(bid.getTaskProvider());
                 ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
-                Toast.makeText(getApplicationContext(),"Task Accepted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Bid Accepted", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

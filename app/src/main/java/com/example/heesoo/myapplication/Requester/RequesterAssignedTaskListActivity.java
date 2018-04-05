@@ -15,6 +15,7 @@ package com.example.heesoo.myapplication.Requester;
         import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
         import com.example.heesoo.myapplication.Entities.Task;
         import com.example.heesoo.myapplication.MainTaskActivity;
+        import com.example.heesoo.myapplication.Profile.MyStatsActivity;
         import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
         import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
         import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
@@ -80,6 +81,9 @@ public class RequesterAssignedTaskListActivity extends AppCompatActivity {
                         // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myStatistics ) {
+                            startActivity(new Intent(getApplicationContext(), MyStatsActivity.class));
                         }
                         if ( menuItem.getItemId() == R.id.nav_myTasks ) {
                             startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));

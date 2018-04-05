@@ -21,31 +21,23 @@ import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivit
 
 public class UserRatingActivity extends AppCompatActivity {
     private RatingBar ratingBar;
-    private Button submitButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_rating);
-        // Initialize RatingBar
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        submitButton = (Button) findViewById(R.id.submit);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                float rating = ratingBar.getRating();
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 Intent intent = new Intent(getApplicationContext(), RequesterShowTaskDetailActivity.class);
-                intent.putExtra("Rating", rating);
+                Double double_rating  = Double.parseDouble(new Float(ratingBar.getRating()).toString());
+                intent.putExtra("Rating", double_rating);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });
-
-        //User user = new User();
-        //Double user_rating = user.getRating();
-
-        //Log.i("YourApp", "I have the RATING! "+ user_rating);
-
     }
 
 

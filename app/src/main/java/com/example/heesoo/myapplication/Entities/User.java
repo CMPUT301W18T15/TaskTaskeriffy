@@ -135,7 +135,7 @@ public class User implements Comparable<User>, Serializable {
     public void setRating(Double rating){this.rating = rating;}
 
     public void updateRating(Double rating){
-        Double updatedRatings = ((getRating() * this.completedProvidedTasks) + rating) / this.completedProvidedTasks;
+        Double updatedRatings = ((getRating() * (this.completedProvidedTasks-1)) + rating) / this.completedProvidedTasks;
         setRating(updatedRatings);
     }
 

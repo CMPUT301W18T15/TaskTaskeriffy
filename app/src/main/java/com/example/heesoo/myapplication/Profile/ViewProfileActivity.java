@@ -45,6 +45,9 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView usernameView;
     private TextView EmailAddressView;
     private TextView PhoneNumberView;
+    private TextView RatingView;
+
+
 
     private Button editButton;
 
@@ -59,6 +62,8 @@ public class ViewProfileActivity extends AppCompatActivity {
         usernameView = findViewById(R.id.UsernameView);
         EmailAddressView = findViewById(R.id.EmailAddressView);
         PhoneNumberView = findViewById(R.id.phoneNumberView);
+        RatingView = findViewById(R.id.rating);
+
 
         editButton = findViewById(R.id.editInfoButton);
         //changeModeButton = findViewById(R.id.changeModeButton);
@@ -76,6 +81,9 @@ public class ViewProfileActivity extends AppCompatActivity {
                         // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myStatistics ) {
+                            startActivity(new Intent(getApplicationContext(), MyStatsActivity.class));
                         }
                         if ( menuItem.getItemId() == R.id.nav_myTasks ) {
                             startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
@@ -119,6 +127,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         usernameView.setText(user.getUsername());
         EmailAddressView.setText(user.getEmailAddress());
         PhoneNumberView.setText(user.getPhoneNumber());
+        RatingView.setText(user.getRating().toString());
 
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

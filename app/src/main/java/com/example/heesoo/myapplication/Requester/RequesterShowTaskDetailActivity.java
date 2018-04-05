@@ -240,10 +240,15 @@ public class RequesterShowTaskDetailActivity extends AppCompatActivity {
         }
         else if (requestCode == 3) {
             Double rating = (Double) i.getSerializableExtra("Rating");
-            //TODO: SO BIG PROBLEMO
             currentTaskProvider.updateRating(rating);
             ElasticSearchUserController.EditUserTask editCurrentTaskProvider = new ElasticSearchUserController.EditUserTask();
             editCurrentTaskProvider.execute(currentTaskProvider);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 1000);
         }
     }
     public void updateStatistics(String taskProviderUsername, String earning){

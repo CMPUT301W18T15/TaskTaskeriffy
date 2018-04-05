@@ -3,7 +3,10 @@ package com.example.heesoo.myapplication.Profile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +16,13 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.Constraints.UserConstraints;
 import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.Entities.User;
+import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
+import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
+import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
+import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 
 import static com.example.heesoo.myapplication.Requester.RequesterMainActivity.checkNetwork;
@@ -30,6 +39,9 @@ This activity gives the user the option to edit their profile. The user can navi
 public class MyStatsActivity extends AppCompatActivity {
 
     private TextView totalEarnings;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+
     private TextView myRating;
     private TextView completedPostedTasks;
     private TextView completedProvidedTasks;
@@ -52,6 +64,47 @@ public class MyStatsActivity extends AppCompatActivity {
         completedProvidedTasks.setText(String.valueOf(provided_tasks));
         myRating.setText(user.getRating().toString());
         totalEarnings.setText(user.getTotalEarnings().toString());
+
+        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        drawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+                        if ( menuItem.getItemId() == R.id.nav_myAccount ) {
+                            startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myStatistics ) {
+                            startActivity(new Intent(getApplicationContext(), MyStatsActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myTasks ) {
+                            startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myRequestedBiddedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), RequesterBiddedTasksListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myRequestedAssignedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), RequesterAssignedTaskListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_findNewTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderFindNewTaskActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myAssignedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderMainActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myBiddedTasks ) {
+                            startActivity(new Intent(getApplicationContext(), ProviderViewBiddedTaskList.class));
+                        }
+                        return true;
+                    }
+                });
 
     }
 

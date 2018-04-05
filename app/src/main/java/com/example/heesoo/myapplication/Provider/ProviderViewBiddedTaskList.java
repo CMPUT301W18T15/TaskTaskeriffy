@@ -20,6 +20,7 @@ import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTa
 import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.MainTaskActivity;
+import com.example.heesoo.myapplication.Profile.MyStatsActivity;
 import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
 import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
 import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
@@ -110,6 +111,9 @@ public class ProviderViewBiddedTaskList extends AppCompatActivity {
                         // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.nav_myStatistics ) {
+                            startActivity(new Intent(getApplicationContext(), MyStatsActivity.class));
                         }
                         if ( menuItem.getItemId() == R.id.nav_myTasks ) {
                             startActivity(new Intent(getApplicationContext(), MainTaskActivity.class));
