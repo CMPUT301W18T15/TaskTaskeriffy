@@ -20,10 +20,10 @@
 
     <TextView
         android:id="@+id/task_view_Title_content"
-        android:layout_width="237dp"
-        android:layout_height="30dp"
+        android:layout_width="284dp"
+        android:layout_height="34dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:text="The Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,6 +79,7 @@
         android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
         android:background="@android:color/holo_orange_light"
         android:text="Place Bid"
         app:layout_constraintBottom_toBottomOf="parent"
