@@ -18,6 +18,7 @@ import com.example.heesoo.myapplication.Entities.Bid;
 import com.example.heesoo.myapplication.Entities.Task;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.MapsActivity;
+import com.example.heesoo.myapplication.Requester.ShowPhotoActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
@@ -42,6 +43,8 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
     private Button viewMap;
     private String newBidPrice;
     private Task task;
+    private Button seePhotoButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,5 +129,15 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
             });
 
         }
+        seePhotoButton = findViewById(R.id.viewPhoto);
+        seePhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
+                String encodedPhoto = task.getPicture();
+                intent.putExtra("photo", encodedPhoto);
+                startActivity(intent);
+            }
+        });
     }
 }
