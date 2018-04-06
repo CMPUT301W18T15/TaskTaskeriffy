@@ -76,15 +76,13 @@
 
     <Button
         android:id="@+id/place_bid_button"
-        android:layout_width="0dp"
+        android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@android:color/holo_orange_light"
         android:text="Place Bid"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/placeBid"
@@ -143,4 +141,17 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="390dp" />
+
+    <Button
+        android:id="@+id/viewPhoto"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="View Photo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toEndOf="@+id/place_bid_button" />
 </android.support.constraint.ConstraintLayout>

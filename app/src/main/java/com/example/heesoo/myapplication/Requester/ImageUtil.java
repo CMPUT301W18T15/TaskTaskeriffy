@@ -7,6 +7,8 @@ package com.example.heesoo.myapplication.Requester;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.Deflater;
@@ -29,21 +31,10 @@ public class ImageUtil
     {
         //Encoding to Base64
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream);
+        Log.e("ImageSize",String.valueOf(outputStream.toByteArray().length));
         String inputString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
-        byte[] input = inputString.getBytes();
-
-        // Compression Algorithm taken from https://stackoverflow.com/questions/13981965/decompress-base64-string on April 4, 2018
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        Deflater compresser = new Deflater(Deflater.BEST_COMPRESSION, true);
-        DeflaterOutputStream deflaterOutputStream = new DeflaterOutputStream(stream, compresser);
-        try {
-            deflaterOutputStream.write(input);
-            deflaterOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stream.toString();
+        return inputString;
     }
 
 }

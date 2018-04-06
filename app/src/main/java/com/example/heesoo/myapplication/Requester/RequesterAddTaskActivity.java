@@ -107,22 +107,18 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                         if (taskConstraints.titleLength(name)) {
                             if (taskConstraints.descriptionLength(description)) {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
-
+                                if (bitmap != null) {
+                                    String base64String = ImageUtil.convert(bitmap);
+                                    task.addPicture(base64String);
+                                }
                                 ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                                 addTasksTask.execute(task);
-
+                                //Log.e("Task ID", task.getId());
                                 MainActivity.user.addRequesterTasks(task);
 
                                 if (!checkNetwork(RequesterAddTaskActivity.this)) {
                                     MainActivity.needSync = true;
                                 }
-                                //MainActivity.user.sync();
-
-                                if (bitmap != null) {
-                                    String base64String = ImageUtil.convert(bitmap);
-                                    task.addPicture(base64String);
-                                }
-
 
                                 CharSequence text = "Saving Task";
                                 Toast toast = Toast.makeText(context, text, duration);
