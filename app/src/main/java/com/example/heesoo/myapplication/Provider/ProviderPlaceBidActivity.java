@@ -22,6 +22,8 @@ import com.example.heesoo.myapplication.Requester.ShowPhotoActivity;
 import com.example.heesoo.myapplication.SetCurrentUser.SetCurrentUser;
 import com.example.heesoo.myapplication.R;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by manuelakm on 2018-03-15.
@@ -134,8 +136,8 @@ public class ProviderPlaceBidActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ShowPhotoActivity.class);
-                String encodedPhoto = task.getPicture();
-                intent.putExtra("photo", encodedPhoto);
+                ArrayList<String> encodedPhotos = task.getPictures();
+                intent.putExtra("photos", encodedPhotos);
                 startActivity(intent);
             }
         });

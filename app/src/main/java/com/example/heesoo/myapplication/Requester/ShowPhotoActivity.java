@@ -20,18 +20,20 @@ import java.util.ArrayList;
  */
 
 public class ShowPhotoActivity extends AppCompatActivity {
-    private ImageView showPhoto;
+    private LinearLayout showPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_photo);
-        String encodedPhoto = (String) getIntent().getSerializableExtra("photo");
+        ArrayList<String> encodedPhotos = (ArrayList<String>) getIntent().getSerializableExtra("photos");
 
         showPhoto = findViewById(R.id.showPhoto);
-
-        Bitmap bitmap = ImageUtil.convert(encodedPhoto);
-        showPhoto.setImageBitmap(bitmap);
-
+        for(int i=0; i<encodedPhotos.size();i++){
+            ImageView imageView = new ImageView(getApplicationContext());
+            Bitmap bitmap = ImageUtil.convert(encodedPhotos.get(i));
+            imageView.setImageBitmap(bitmap);
+            showPhoto.addView(imageView);
+        }
     }
 }

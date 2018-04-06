@@ -3,12 +3,19 @@ package com.example.heesoo.myapplication.Requester;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.heesoo.myapplication.Constraints.TaskConstraints;
@@ -37,7 +44,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     private EditText taskDescription;
     private Button addPictureButton;
     private Button saveChangesButton;
+    public String ImageDecode;
+    private ImageView mImageView;
+
+
+    private static int IMG_RESULT = 1;
     private Task task;
+    private Bitmap bitmap;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,9 +77,10 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         addPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RequesterEditTaskActivity.this, AddPictureActivity.class);
-                intent.putExtra("Task", task);
-                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(intent, IMG_RESULT);
             }
         });
 
@@ -104,6 +119,10 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                             }
                             task.setTaskName(name);
                             task.setTaskDescription(description);
+                            if (bitmap != null) {
+                                String base64String = ImageUtil.convert(bitmap);
+                                task.addPicture(base64String);
+                            }
 
                             ElasticSearchTaskController.EditTask editTask =
                                     new ElasticSearchTaskController.EditTask();
@@ -142,6 +161,41 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+
+            if (requestCode == IMG_RESULT && resultCode == RESULT_OK
+                    && null != data) {
+
+
+                Uri URI = data.getData();
+                String[] FILE = { MediaStore.Images.Media.DATA };
+
+
+                Cursor cursor = getContentResolver().query(URI,
+                        FILE, null, null, null);
+
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(FILE[0]);
+                ImageDecode = cursor.getString(columnIndex);
+                cursor.close();
+
+                Log.e("NEW","NEW"+ URI);
+
+                //TODO: Returns bitmap = null. Unsure how to fix. Critical for multiple photographs
+                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(URI));
+
+                mImageView.setImageBitmap(bitmap);
+
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Please try again", Toast.LENGTH_LONG)
+                    .show();
+        }
     }
 }
 

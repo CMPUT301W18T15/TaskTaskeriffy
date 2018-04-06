@@ -109,7 +109,13 @@ public class RequesterAddTaskActivity extends AppCompatActivity {
                                 Task task = new Task(SetCurrentUser.getCurrentUser().getUsername(), name, description);
                                 if (bitmap != null) {
                                     String base64String = ImageUtil.convert(bitmap);
-                                    task.addPicture(base64String);
+                                    if(base64String!=null){
+                                        task.addPicture(base64String);
+                                    }else{
+                                        CharSequence text = "Image too big, saving without it!";
+                                        Toast toast = Toast.makeText(context, text, duration);
+                                        toast.show();
+                                    }
                                 }
                                 ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                                 addTasksTask.execute(task);
