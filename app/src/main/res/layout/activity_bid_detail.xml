@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     tools:context="com.example.heesoo.myapplication.Requester.RequesterBidDetailActivity">
 
     <TextView
@@ -54,6 +55,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/deletetask"
+        android:background="@color/secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +68,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/declinebid"
+        android:background="@color/secondary"
         app:layout_constraintBaseline_toBaselineOf="@+id/acceptBid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/acceptBid" />
@@ -77,14 +80,18 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:text="acceptBid"
+        android:background="@color/secondary"
         app:layout_constraintBottom_toTopOf="@+id/deleteTask"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/viewBidderProfile"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="370dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/secondary"
         android:text="View Bidder's Profile"
         app:layout_constraintBottom_toTopOf="@+id/declineBid"
         app:layout_constraintEnd_toEndOf="parent"

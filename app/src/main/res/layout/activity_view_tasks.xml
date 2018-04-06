@@ -6,6 +6,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     android:fitsSystemWindows="true">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
@@ -33,6 +34,7 @@
                     android:layout_marginStart="8dp"
                     android:text="Add Task"
                     android:visibility="gone"
+                    android:background="@color/secondary"
                     app:layout_constraintBottom_toTopOf="@+id/nearbyTaskButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -47,6 +49,7 @@
                     android:layout_marginStart="8dp"
                     android:text="Find Nearby Tasks"
                     android:visibility="gone"
+                    android:background="@color/secondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

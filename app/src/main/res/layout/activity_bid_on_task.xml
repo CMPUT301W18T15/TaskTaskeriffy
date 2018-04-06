@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/holo_blue_light"
+    android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,10 +20,10 @@
 
     <TextView
         android:id="@+id/task_view_Title_content"
-        android:layout_width="237dp"
-        android:layout_height="30dp"
+        android:layout_width="284dp"
+        android:layout_height="34dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:text="The Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,8 +79,9 @@
         android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@android:color/holo_orange_light"
+        android:layout_marginLeft="16dp"
         android:text="Place Bid"
+        android:background="@color/secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -139,6 +140,7 @@
         android:layout_marginEnd="8dp"
         android:text="View Location"
         android:visibility="invisible"
+        android:background="@color/secondary"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="390dp" />
 
@@ -150,6 +152,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="View Photo"
+        android:background="@color/secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.43"

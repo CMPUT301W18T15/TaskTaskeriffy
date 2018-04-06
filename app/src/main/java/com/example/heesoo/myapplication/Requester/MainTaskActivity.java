@@ -51,6 +51,10 @@ public class MainTaskActivity extends AppCompatActivity {
     private TextView noTasksMessage;
 
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "Please Use Logout Button", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +121,9 @@ public class MainTaskActivity extends AppCompatActivity {
                         }
                         if ( menuItem.getItemId() == R.id.nav_myBiddedTasks ) {
                             startActivity(new Intent(getApplicationContext(), ProviderViewBiddedTaskList.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.logout ) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                         return true;
                     }
