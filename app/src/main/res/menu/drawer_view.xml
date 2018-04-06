@@ -8,62 +8,43 @@
         <item
             android:id="@+id/nav_myStatistics"
             android:title="My Statistics" />
+
+        <item android:title="Requester">
+            <menu>
+                <item
+                    android:id="@+id/nav_myTasks"
+                    android:title="My Requested Tasks" />
+
+                <item
+                    android:id="@+id/nav_myRequestedBiddedTasks"
+                    android:title="My Bidded Tasks" />
+
+                <item
+                    android:id="@+id/nav_myRequestedAssignedTasks"
+                    android:title="My Assigned Tasks" />
+            </menu>
+        </item>
+
+        <item android:title="Provider">
+            <menu>
+                <item
+                    android:id="@+id/nav_findNewTasks"
+                    android:title="Find New Tasks" />
+
+                <item
+                    android:id="@+id/nav_myAssignedTasks"
+                    android:title="Tasks Assigned to Me" />
+
+                <item
+                    android:id="@+id/nav_myBiddedTasks"
+                    android:title="Tasks I have Bidded On" />
+            </menu>
+        </item>
+
+        <group>
+            <item
+                android:id="@+id/logout"
+                android:title="Logout" />
+        </group>
     </group>
-
-    <group android:id="@+id/group_two"
-        android:checkableBehavior="single">
-        <item
-            android:checkable="false"
-            android:title="Requester"/>
-    </group>
-
-    <group android:id="@+id/group_three"
-        android:checkableBehavior="single">
-
-    <item
-            android:id="@+id/nav_myTasks"
-            android:title="My Requested task" />
-
-        <item
-            android:id="@+id/nav_myRequestedBiddedTasks"
-            android:title="My Bidded Requested Tasks" />
-
-        <item
-            android:id="@+id/nav_myRequestedAssignedTasks"
-            android:title="My Assigned Requested Tasks" />
-    </group>
-
-    <group android:id="@+id/group_four"
-        android:checkableBehavior="single">
-        <item
-            android:checkable="false"
-            android:title="Provider"/>
-    </group>
-
-    <group android:id="@+id/group_five"
-        android:checkableBehavior="single">
-
-    <item
-            android:id="@+id/nav_findNewTasks"
-            android:title="Find New Tasks" />
-
-        <item
-            android:id="@+id/nav_myAssignedTasks"
-            android:title="My Assigned Tasks" />
-
-        <item
-            android:id="@+id/nav_myBiddedTasks"
-            android:title="My Bidded Tasks" />
-
-    </group>
-
-    <group android:id="@+id/group_six"
-        android:checkableBehavior="single">
-        
-    <item
-        android:id="@+id/logout"
-        android:title="Logout" />
-    </group>
-
-
 </menu>
