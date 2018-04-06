@@ -9,7 +9,7 @@
 
 
     <application
-        android:name=".SetCurrentUser.SetCurrentUser"
+        android:name=".shared_preferences.SetPublicCurrentUser"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="TaskTaskeriffy"
@@ -18,36 +18,33 @@
         android:theme="@style/CustomActionBarTheme">
 
 
-        <activity android:name=".Main_LogIn.MainActivity">
+        <activity android:name=".login_activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register.RegisterActivity" />
-        <activity android:name=".Provider.ProviderMainActivity" />
-        <activity android:name=".Requester.RequesterMainActivity" />
-        <activity android:name=".Profile.ViewProfileActivity" />
-        <activity android:name=".Profile.EditProfileActivity" />
-        <activity android:name=".Profile.MyStatsActivity" />
-        <activity android:name=".Requester.RequesterAddTaskActivity" />
-        <activity android:name=".Requester.RequesterShowTaskDetailActivity" />
-        <activity android:name=".Provider.ProviderViewAssignedTaskDetail" />
-        <activity android:name=".Requester.RequesterBiddedTasksListActivity" />
-        <activity android:name=".Requester.RequesterAssignedTaskListActivity" />
-        <activity android:name=".Provider.ProviderFindNewTaskActivity" />
-        <activity android:name=".Provider.ProviderPlaceBidActivity" />
-        <activity android:name=".Requester.RequesterBidDetailActivity" />
-        <activity android:name=".Requester.RequesterEditTaskActivity" />
-        <activity android:name=".Provider.ProviderViewBiddedTaskList" />
-        <activity android:name=".Requester.RequesterViewBidsOnTaskActivity" />
-        <activity android:name=".Requester.RequesterGeoMapActivity" />
-        <activity android:name=".Requester.MainTaskActivity" />
-        <activity android:name=".Requester.ShowPhotoActivity" />
-        <activity android:name=".Provider.ProviderFindNearbyTasksActivity"/>
-        <activity android:name=".Requester.AddPictureActivity" />
-        <activity android:name=".UserRatingActivity" />
+        <activity android:name=".login_activity.RegisterActivity" />
+        <activity android:name=".task_provider_activities.TaskProviderViewAssignedTasksActivity" />
+        <activity android:name=".profile_activities.ViewProfileActivity" />
+        <activity android:name=".profile_activities.EditProfileActivity" />
+        <activity android:name=".profile_activities.MyStatisticsActivity" />
+        <activity android:name=".task_requester_activities.AddTaskActivity" />
+        <activity android:name=".task_requester_activities.ShowTaskDetailActivity" />
+        <activity android:name=".task_provider_activities.TaskProviderViewAssignedTaskDetailActivity" />
+        <activity android:name=".task_requester_activities.TaskRequesterViewBiddedTasksActivity" />
+        <activity android:name=".task_requester_activities.TaskRequesterViewAssignedTasksActivity" />
+        <activity android:name=".task_provider_activities.FindNewTaskActivity" />
+        <activity android:name=".task_provider_activities.PlaceBidOnTaskActivity" />
+        <activity android:name=".task_requester_activities.ViewBidDetailActivity" />
+        <activity android:name=".task_requester_activities.EditTaskActivity" />
+        <activity android:name=".task_provider_activities.TaskProviderViewBiddedTaskListActivity" />
+        <activity android:name=".task_requester_activities.ViewBidsOnTaskActivity" />
+        <activity android:name=".task_requester_activities.ViewRequestedTasksActivity" />
+        <activity android:name=".general_activities.ShowPhotoActivity" />
+        <activity android:name=".task_provider_activities.FindNearbyTasksActivity"/>
+        <activity android:name=".task_requester_activities.RateTaskProviderActivity" />
 
 
 
@@ -64,7 +61,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".task_requester_activities.TaskMapActivity"
             android:label="@string/title_activity_maps"></activity>
     </application>
 

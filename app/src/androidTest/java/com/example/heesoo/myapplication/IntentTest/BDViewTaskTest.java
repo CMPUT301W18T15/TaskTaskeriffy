@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.Requester.MainTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.AddTaskActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -25,7 +25,7 @@ public class BDViewTaskTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public BDViewTaskTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         try{
             solo.clickOnButton("register");
             solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
@@ -56,18 +56,18 @@ public class BDViewTaskTest extends ActivityInstrumentationTestCase2 {
 
     public void testViewTask(){
         // add sample task: user0000 task1
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         solo.clickOnButton("Add Task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
 
         // click the list view in position 0
         // show the task details
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText("user0000 task1"));
         solo.goBack();
         // clear the garbage

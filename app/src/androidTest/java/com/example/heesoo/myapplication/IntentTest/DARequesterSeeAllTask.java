@@ -5,13 +5,12 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderPlaceBidActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
+import com.example.heesoo.myapplication.task_provider_activities.FindNewTaskActivity;
+import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewAssignedTasksActivity;
+import com.example.heesoo.myapplication.task_provider_activities.PlaceBidOnTaskActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
+import com.example.heesoo.myapplication.task_requester_activities.AddTaskActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -28,7 +27,7 @@ public class DARequesterSeeAllTask extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public DARequesterSeeAllTask(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         try{
             solo.clickOnButton("register");
             solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
@@ -66,7 +65,7 @@ public class DARequesterSeeAllTask extends ActivityInstrumentationTestCase2 {
 
         // add new task task2
         solo.clickOnButton("Add new task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task2");
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task2 Description");
         solo.clickOnButton("Save");
@@ -77,7 +76,7 @@ public class DARequesterSeeAllTask extends ActivityInstrumentationTestCase2 {
 
         // add new task task3
         solo.clickOnButton("Add new task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task3");
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task3 Description");
         solo.clickOnButton("Save");
@@ -99,9 +98,9 @@ public class DARequesterSeeAllTask extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
         solo.clickOnButton("Would you like to perform a task?");
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewAssignedTasksActivity.class);
         solo.clickOnButton("search new task");
-        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
 
         // PLACE BID 1
         // click the list view in position 0
@@ -109,9 +108,9 @@ public class DARequesterSeeAllTask extends ActivityInstrumentationTestCase2 {
 
         // get a dialog and choose Yes
 //        solo.clickOnButton("No");
-//        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+//        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
         solo.clickOnButton("Yes");
-        solo.assertCurrentActivity("Wrong Activity", ProviderPlaceBidActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", PlaceBidOnTaskActivity.class);
 
         // enter Bid Price
         solo.enterText((EditText) solo.getView(R.id.placeBid), "89");
@@ -124,18 +123,18 @@ public class DARequesterSeeAllTask extends ActivityInstrumentationTestCase2 {
 
         // get a dialog and choose Yes
 //        solo.clickOnButton("No");
-//        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+//        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
         solo.clickOnButton("Yes");
-        solo.assertCurrentActivity("Wrong Activity", ProviderPlaceBidActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", PlaceBidOnTaskActivity.class);
 
         // enter Bid Price
         solo.enterText((EditText) solo.getView(R.id.placeBid), "79");
         solo.clickOnButton("Place Bid");
         assertTrue(solo.searchText("Bid Placed"));
 
-        // go back ProviderMainActivity
+        // go back TaskProviderViewAssignedTasksActivity
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewAssignedTasksActivity.class);
 
         // go back Login page
         solo.goBack();

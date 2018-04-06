@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context="com.example.heesoo.myapplication.Main_LogIn.MainActivity">
+    tools:context="com.example.heesoo.myapplication.login_activity.MainActivity">
 
 
     <EditText

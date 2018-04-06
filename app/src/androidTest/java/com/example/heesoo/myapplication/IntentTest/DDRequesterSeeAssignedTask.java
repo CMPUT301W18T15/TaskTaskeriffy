@@ -5,13 +5,10 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
-import com.example.heesoo.myapplication.Requester.RequesterViewBidsOnTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewAssignedTasksActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ShowTaskDetailActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -26,7 +23,7 @@ public class DDRequesterSeeAssignedTask extends ActivityInstrumentationTestCase2
     private Solo solo;
 
     public DDRequesterSeeAssignedTask(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
     }
 
     public void setUp() throws Exception{
@@ -52,12 +49,12 @@ public class DDRequesterSeeAssignedTask extends ActivityInstrumentationTestCase2
 
         // see assigned task
         solo.clickOnButton("show assigned task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAssignedTaskListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewAssignedTasksActivity.class);
         assertTrue(solo.searchText("Assigned"));
 
         // click the list view in position 0
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText("Task Provider"));
         assertTrue(solo.searchText("Task Name"));
         assertTrue(solo.searchText("Accepted Bid"));

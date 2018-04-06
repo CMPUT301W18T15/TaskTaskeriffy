@@ -11,7 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
+import com.example.heesoo.myapplication.task_provider_activities.FindNewTaskActivity;
 import com.example.heesoo.myapplication.R;
 import com.robotium.solo.Solo;
 
@@ -29,7 +29,7 @@ public class testTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public testTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
     }
 
     public void setUp() throws Exception{
@@ -49,7 +49,7 @@ public class testTest extends ActivityInstrumentationTestCase2 {
         // open the navigation bar
         drawerLayout.openDrawer(Gravity.LEFT);
         solo.clickOnMenuItem("Find New Tasks");
-        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
 
         // click the search button and enter search keyword
         Activity activity = solo.getCurrentActivity();

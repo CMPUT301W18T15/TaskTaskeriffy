@@ -6,10 +6,10 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.Gravity;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.Requester.MainTaskActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Profile.EditProfileActivity;
-import com.example.heesoo.myapplication.Profile.ViewProfileActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
+import com.example.heesoo.myapplication.profile_activities.EditProfileActivity;
+import com.example.heesoo.myapplication.profile_activities.ViewProfileActivity;
 import com.example.heesoo.myapplication.R;
 import com.robotium.solo.Solo;
 
@@ -26,7 +26,7 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public ACUpdateProfileTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         try{
             solo.clickOnButton("register");
             solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
@@ -49,7 +49,7 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("Logged In"));
     }
 

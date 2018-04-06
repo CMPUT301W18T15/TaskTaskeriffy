@@ -5,14 +5,13 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterBidDetailActivity;
-import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
-import com.example.heesoo.myapplication.Requester.RequesterViewBidsOnTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewAssignedTasksActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewBidDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewBiddedTasksActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewBidsOnTaskActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -28,7 +27,7 @@ public class EBRequesterSetTaskRequested extends ActivityInstrumentationTestCase
     private Solo solo;
 
     public EBRequesterSetTaskRequested(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
     }
 
     public void setUp() throws Exception{
@@ -54,33 +53,33 @@ public class EBRequesterSetTaskRequested extends ActivityInstrumentationTestCase
 
         // set a bidded task to assigned
         solo.clickOnButton("show bidded");
-        solo.assertCurrentActivity("Wrong Activity", RequesterBiddedTasksListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewBiddedTasksActivity.class);
         // click the list view in position 0
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         solo.clickOnButton("View Bids");
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewBidsOnTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewBidsOnTaskActivity.class);
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterBidDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewBidDetailActivity.class);
         solo.clickOnButton("acceptBid");
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewBidsOnTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewBidsOnTaskActivity.class);
 
         // back to requester main activity
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", RequesterBiddedTasksListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewBiddedTasksActivity.class);
         solo.goBack();
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         // see assigned task
         solo.clickOnButton("show assigned task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAssignedTaskListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewAssignedTasksActivity.class);
         assertTrue(solo.searchText("Assigned"));
 
         // click the list view in position 0
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText("Task Provider"));
         assertTrue(solo.searchText("Task Name"));
         assertTrue(solo.searchText("Accepted Bid"));
@@ -90,7 +89,7 @@ public class EBRequesterSetTaskRequested extends ActivityInstrumentationTestCase
         // set the task requested
         solo.clickOnButton("Mark Requested");
         assertTrue(solo.searchText("Task Marked as Requested"));
-        solo.assertCurrentActivity("Wrong Activity", RequesterAssignedTaskListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewAssignedTasksActivity.class);
 
         // back to Requester Main Activity
         solo.goBack();

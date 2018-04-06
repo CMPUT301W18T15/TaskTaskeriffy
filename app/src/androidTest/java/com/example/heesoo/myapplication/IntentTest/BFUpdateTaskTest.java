@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.Requester.MainTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.AddTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.R;
 
-import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterEditTaskActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.EditTaskActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -25,7 +25,7 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public BFUpdateTaskTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         try{
             solo.clickOnButton("register");
             solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
@@ -56,23 +56,23 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
 
     public void testUpdateTask(){
         // add sample task: user0000 task1
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         solo.clickOnButton("Add Task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
 
         // click the list view in position 0
         // show the task details
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText("user0000 task1"));
 
         // edit the task with empty task name
         solo.clickOnButton("Edit Task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", EditTaskActivity.class);
         assertTrue(solo.searchText("user0000 task1"));
         solo.clearEditText((EditText) solo.getView(R.id.taskNameEdit));
         solo.clickOnButton("Save Changes");
@@ -93,22 +93,22 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.taskNameEdit), "user0000 task1_changed");
         solo.clickOnButton("Save Changes");
         assertTrue(solo.searchText("Saving Task"));
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText("user0000 task1_changed"));
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
 
         // TODO Fix the bug: click edit --> change details --> save changes --> click edit ==> details does not change!
         // edit the description
         solo.clickOnButton("Edit Task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", EditTaskActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.descriptionEdit));
         solo.enterText((EditText) solo.getView(R.id.descriptionEdit), "new description");
         solo.clickOnButton("Save Changes");
         assertTrue(solo.searchText("Saving Task"));
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText("new description"));
 
         // clear the garbage

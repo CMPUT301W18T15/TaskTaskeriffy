@@ -5,11 +5,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
+import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewBiddedTasksActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -25,7 +23,7 @@ public class DBRequesterSeeBiddedTask extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public DBRequesterSeeBiddedTask(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
     }
 
     public void setUp() throws Exception{
@@ -51,7 +49,7 @@ public class DBRequesterSeeBiddedTask extends ActivityInstrumentationTestCase2 {
 
         // see bidded task
         solo.clickOnButton("show bidded");
-        solo.assertCurrentActivity("Wrong Activity", RequesterBiddedTasksListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewBiddedTasksActivity.class);
 
         // check no Assigned and Requested task
         assertTrue(solo.searchText("Bidded"));

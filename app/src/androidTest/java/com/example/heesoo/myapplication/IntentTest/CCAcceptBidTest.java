@@ -6,22 +6,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderPlaceBidActivity;
-import com.example.heesoo.myapplication.Provider.ProviderViewAssignedTaskDetail;
-import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterBidDetailActivity;
-import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
-import com.example.heesoo.myapplication.Requester.RequesterViewBidsOnTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewAssignedTasksActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewBidDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewBiddedTasksActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewBidsOnTaskActivity;
 import com.robotium.solo.Solo;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by chengze on 2018/3/18.
@@ -36,7 +27,7 @@ public class CCAcceptBidTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public CCAcceptBidTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         try{
             solo.clickOnButton("register");
             solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
@@ -71,20 +62,20 @@ public class CCAcceptBidTest extends ActivityInstrumentationTestCase2 {
 
         // show requester bidded task list
         solo.clickOnButton("show bidded");
-        solo.assertCurrentActivity("Wrong Activity", RequesterBiddedTasksListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewBiddedTasksActivity.class);
 
         // click the list view in position 0
         // see detail of a task
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
 
         // see the bid list of a task
         solo.clickOnButton("View Bids");
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewBidsOnTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewBidsOnTaskActivity.class);
 
         // choose the first bid
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterBidDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewBidDetailActivity.class);
 
         // get current bid information for later check
         TextView view1 =  (TextView) solo.getView(R.id.bidderName);
@@ -99,21 +90,21 @@ public class CCAcceptBidTest extends ActivityInstrumentationTestCase2 {
         assertTrue(solo.searchText("Task Accepted"));
 
         // back to requester main activity
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewBidsOnTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewBidsOnTaskActivity.class);
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", RequesterBiddedTasksListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewBiddedTasksActivity.class);
         solo.goBack();
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         // see assigned task list
         solo.clickOnButton("show assigned task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAssignedTaskListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewAssignedTasksActivity.class);
 
         // choose the first assigned task
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText(biderName));
         assertTrue(solo.searchText(taskName));
         assertTrue(solo.searchText(bidAmount));

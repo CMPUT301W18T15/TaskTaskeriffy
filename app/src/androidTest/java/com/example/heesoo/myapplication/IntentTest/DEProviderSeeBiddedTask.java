@@ -5,13 +5,10 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
+import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewAssignedTasksActivity;
+import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewBiddedTaskListActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAssignedTaskListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -27,7 +24,7 @@ public class DEProviderSeeBiddedTask extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public DEProviderSeeBiddedTask(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
     }
 
     public void setUp() throws Exception{
@@ -49,17 +46,17 @@ public class DEProviderSeeBiddedTask extends ActivityInstrumentationTestCase2 {
 
         // choose mode
         solo.clickOnButton("Would you like to perform a task?");
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewAssignedTasksActivity.class);
 
         // see assigned task
         solo.clickOnButton("View bidded list");
-        solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
         assertTrue(solo.searchText("Bidded"));
 
         // click the list view in position 0
         solo.clickInList(0);
         solo.clickOnButton("Yes");
-        solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
         assertTrue(solo.searchText("Requester Username"));
         assertTrue(solo.searchText("Task Name"));
         assertTrue(solo.searchText("Lowest Bid"));
@@ -67,12 +64,12 @@ public class DEProviderSeeBiddedTask extends ActivityInstrumentationTestCase2 {
         assertTrue(solo.searchText("Task Status"));
         assertTrue(solo.searchText("My Bid Status"));
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
 
         // click the list view in position 1
         solo.clickInList(1);
         solo.clickOnButton("Yes");
-        solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
         assertTrue(solo.searchText("Requester Username"));
         assertTrue(solo.searchText("Task Name"));
         assertTrue(solo.searchText("Lowest Bid"));

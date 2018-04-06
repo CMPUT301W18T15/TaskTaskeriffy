@@ -5,13 +5,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.heesoo.myapplication.ChooseMode.ChooseModeActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderMainActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterBiddedTasksListActivity;
-import com.example.heesoo.myapplication.Requester.RequesterMainActivity;
-import com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity;
-import com.example.heesoo.myapplication.Requester.RequesterViewBidsOnTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewBiddedTasksActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewBidsOnTaskActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -27,7 +25,7 @@ public class DCRequesterSeeBidsForTask extends ActivityInstrumentationTestCase2 
     private Solo solo;
 
     public DCRequesterSeeBidsForTask(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
     }
 
     public void setUp() throws Exception{
@@ -53,18 +51,18 @@ public class DCRequesterSeeBidsForTask extends ActivityInstrumentationTestCase2 
 
         // see bidded task
         solo.clickOnButton("show bidded");
-        solo.assertCurrentActivity("Wrong Activity", RequesterBiddedTasksListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewBiddedTasksActivity.class);
 
         // check it is a bidded task list
         assertTrue(solo.searchText("Bidded"));
 
         // click the list view in position 0
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", RequesterShowTaskDetailActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
 
         // see bids for a task
         solo.clickOnButton("View Bids");
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewBidsOnTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewBidsOnTaskActivity.class);
 
         // check if there contain placed bids or not
         assertTrue(solo.searchText("Placed"));

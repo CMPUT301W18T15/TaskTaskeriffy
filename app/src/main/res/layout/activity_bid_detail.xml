@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context="com.example.heesoo.myapplication.Requester.RequesterBidDetailActivity">
+    tools:context="com.example.heesoo.myapplication.task_requester_activities.ViewBidDetailActivity">
 
     <TextView
         android:id="@+id/bidderName"

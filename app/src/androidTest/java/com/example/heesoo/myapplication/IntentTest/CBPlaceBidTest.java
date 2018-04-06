@@ -7,12 +7,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.Requester.MainTaskActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
-import com.example.heesoo.myapplication.Provider.ProviderFindNewTaskActivity;
-import com.example.heesoo.myapplication.Provider.ProviderPlaceBidActivity;
-import com.example.heesoo.myapplication.Provider.ProviderViewAssignedTaskDetail;
-import com.example.heesoo.myapplication.Provider.ProviderViewBiddedTaskList;
+import com.example.heesoo.myapplication.task_provider_activities.FindNewTaskActivity;
+import com.example.heesoo.myapplication.task_provider_activities.PlaceBidOnTaskActivity;
+import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewBiddedTaskListActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
+import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewAssignedTaskDetailActivity;
 import com.example.heesoo.myapplication.R;
 import com.robotium.solo.Solo;
 
@@ -30,7 +30,7 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public CBPlaceBidTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         try{
             solo.clickOnButton("register");
             solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
@@ -65,7 +65,7 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
 
         // back to login activity
         solo.goBack();
@@ -77,7 +77,7 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0001");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
 
         // get the navigation bar
         DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawer_layout);
@@ -85,7 +85,7 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         // open the navigation bar
         drawerLayout.openDrawer(Gravity.LEFT);
         solo.clickOnMenuItem("Find New Tasks");
-        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
 
         // * click the search button and
         // * enter search keyword
@@ -101,9 +101,9 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
 
         // get a dialog and choose Yes
 //        solo.clickOnButton("No");
-//        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+//        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
         solo.clickOnButton("Yes");
-        solo.assertCurrentActivity("Wrong Activity", ProviderPlaceBidActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", PlaceBidOnTaskActivity.class);
 
         // leave bidPrice blank
         solo.clickOnButton("Place Bid");
@@ -114,29 +114,29 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Place Bid");
         assertTrue(solo.searchText("Bid Placed"));
 
-        // go back ProviderFindNewTaskActivity
+        // go back FindNewTaskActivity
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
 
         // quit search
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", ProviderFindNewTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
 
         // go back main
         solo.goBack();
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
 
         // see bidded list
         // open the navigation bar
         drawerLayout.openDrawer(Gravity.LEFT);
         solo.clickOnMenuItem("My Bidded Tasks");
-        solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
 
 //        solo.clickOnButton("View bidded list");
-//        solo.assertCurrentActivity("Wrong Activity", ProviderViewBiddedTaskList.class);
+//        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
         solo.clickInList(0);
         solo.clickOnButton("Yes");
-        solo.assertCurrentActivity("Wrong Activity", ProviderViewAssignedTaskDetail.class);
+        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewAssignedTaskDetailActivity.class);
         assertTrue(solo.searchText("99"));
     }
 

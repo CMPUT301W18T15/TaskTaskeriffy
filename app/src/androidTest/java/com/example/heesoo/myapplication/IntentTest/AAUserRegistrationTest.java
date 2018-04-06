@@ -5,12 +5,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchClearDatabaseController;
-import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
-import com.example.heesoo.myapplication.Requester.MainTaskActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchClearDatabaseController;
+import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Register.RegisterActivity;
+import com.example.heesoo.myapplication.login_activity.RegisterActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -29,7 +28,7 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public AAUserRegistrationTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
     }
 
     public void setUp() throws Exception{
@@ -108,7 +107,7 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0001");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("Logged In"));
     }
 

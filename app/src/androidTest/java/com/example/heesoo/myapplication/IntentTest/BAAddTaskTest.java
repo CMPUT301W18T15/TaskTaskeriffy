@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
-import com.example.heesoo.myapplication.Requester.MainTaskActivity;
-import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
+import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.Requester.RequesterAddTaskActivity;
+import com.example.heesoo.myapplication.task_requester_activities.AddTaskActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -25,7 +25,7 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public BAAddTaskTest(){
-        super(com.example.heesoo.myapplication.Main_LogIn.MainActivity.class);
+        super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         try{
             solo.clickOnButton("register");
             solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
@@ -48,7 +48,7 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
         solo.clickOnButton("Login");
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("Logged In"));
     }
 
@@ -57,11 +57,11 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddTask(){
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
 
         // add new task page
         solo.clickOnButton("Add Task");
-        solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
 
         // did not fill task name
         solo.clickOnButton("Save");
@@ -76,7 +76,7 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
         solo.clickOnButton("Save");
         assertTrue(solo.searchText("Saving Task"));
-        solo.assertCurrentActivity("Wrong Activity", MainTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("user0000 task1"));
 
         // clear the garbage
