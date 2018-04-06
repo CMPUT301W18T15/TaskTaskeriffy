@@ -2,8 +2,11 @@ package com.example.heesoo.myapplication.IntentTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.widget.EditText;
 
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchClearDatabaseController;
+import com.example.heesoo.myapplication.ElasticSearchControllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.Requester.MainTaskActivity;
 import com.example.heesoo.myapplication.Main_LogIn.MainActivity;
 import com.example.heesoo.myapplication.R;
@@ -47,6 +50,12 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRegister(){
+        ElasticSearchClearDatabaseController deleteTask = new ElasticSearchClearDatabaseController();
+        try {
+            deleteTask.deleteIndex();
+        } catch (Exception e) {
+            Log.i("Error", "Fail to delete the database");
+        }
         // prepare a existed account
         solo.clickOnButton("register");
         solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
