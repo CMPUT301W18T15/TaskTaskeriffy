@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light"
+    android:background="@color/primary"
     tools:context="com.example.heesoo.myapplication.Requester.RequesterShowTaskDetailActivity">
 
     <TextView
@@ -59,6 +59,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Delete Task"
+        android:background="@color/secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -106,6 +107,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="View Bids"
+        android:background="@color/secondary"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/seeMap"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,6 +121,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Edit Task"
+        android:background="@color/secondary"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/deleteTask"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +134,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:text="View Photo"
+        android:background="@color/secondary"
         app:layout_constraintBaseline_toBaselineOf="@+id/seeMap"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
@@ -141,11 +145,12 @@
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:background="@color/secondary"
         android:text="View Map"
-        app:layout_constraintBottom_toTopOf="@+id/editTask"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/seePicture"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="390dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -153,6 +158,7 @@
         android:layout_height="38dp"
         android:layout_marginLeft="16dp"
         android:text="Task Provider: "
+        android:background="@color/secondary"
         android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/taskProvider"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -180,6 +186,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
         android:text="Mark Done"
+        android:background="@color/secondary"
         android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/mark_requested_button"
         app:layout_constraintEnd_toStartOf="@+id/mark_requested_button"
@@ -193,6 +200,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Mark Requested"
+        android:background="@color/secondary"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/seeMap"
         app:layout_constraintEnd_toEndOf="parent"

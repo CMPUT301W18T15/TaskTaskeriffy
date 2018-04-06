@@ -31,7 +31,7 @@ public class ImageUtil
     {
         //Encoding to Base64
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 1, outputStream);
         Log.e("ImageSize",String.valueOf(outputStream.toByteArray().length));
         String inputString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
         return inputString;

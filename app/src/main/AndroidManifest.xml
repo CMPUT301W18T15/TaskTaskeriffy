@@ -25,7 +25,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register.RegisterActivity" />
-        <activity android:name=".ChooseMode.ChooseModeActivity" />
         <activity android:name=".Provider.ProviderMainActivity" />
         <activity android:name=".Requester.RequesterMainActivity" />
         <activity android:name=".Profile.ViewProfileActivity" />

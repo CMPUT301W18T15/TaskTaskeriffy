@@ -7,7 +7,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:fitsSystemWindows="true">
+    android:background="@color/primary"
+    android:fitsSystemWindows="true">
 
 <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
 
@@ -60,6 +61,7 @@ android:fitsSystemWindows="true">
             android:layout_marginTop="8dp"
             android:text="Edit Information"
             android:visibility="gone"
+            android:background="@color/secondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
