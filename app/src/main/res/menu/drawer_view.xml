@@ -57,4 +57,13 @@
 
     </group>
 
+    <group android:id="@+id/group_six"
+        android:checkableBehavior="single">
+        
+    <item
+        android:id="@+id/logout"
+        android:title="Logout" />
+    </group>
+
+
 </menu>
