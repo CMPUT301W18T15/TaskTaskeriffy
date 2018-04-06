@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/group_one"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_myAccount"
             android:title="My Account" />
         <item
             android:id="@+id/nav_myStatistics"
             android:title="My Statistics" />
+    </group>
 
+    <group android:id="@+id/group_two"
+        android:checkableBehavior="single">
         <item
+            android:checkable="false"
+            android:title="Requester"/>
+    </group>
+
+    <group android:id="@+id/group_three"
+        android:checkableBehavior="single">
+
+    <item
             android:id="@+id/nav_myTasks"
-            android:title="My Requested Tasks" />
+            android:title="My Requested task" />
 
         <item
             android:id="@+id/nav_myRequestedBiddedTasks"
@@ -19,8 +31,19 @@
         <item
             android:id="@+id/nav_myRequestedAssignedTasks"
             android:title="My Assigned Requested Tasks" />
+    </group>
 
+    <group android:id="@+id/group_four"
+        android:checkableBehavior="single">
         <item
+            android:checkable="false"
+            android:title="Provider"/>
+    </group>
+
+    <group android:id="@+id/group_five"
+        android:checkableBehavior="single">
+
+    <item
             android:id="@+id/nav_findNewTasks"
             android:title="Find New Tasks" />
 
