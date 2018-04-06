@@ -87,9 +87,16 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
                             // offline behavior
                             for (Task changedTask : MainActivity.user.getRequesterTasks()){
-                                if(changedTask.getId().equals(task.getId())){
-                                    changedTask.setTaskName(name);
-                                    changedTask.setTaskDescription(description);
+                                if (task.getId() != null) {
+                                    if (changedTask.getId().equals(task.getId())) {
+                                        changedTask.setTaskName(name);
+                                        changedTask.setTaskDescription(description);
+                                    }
+                                }else {
+                                    if(changedTask.getTaskName().equals(task.getTaskName()) && changedTask.getTaskDescription().equals(task.getTaskDescription())){
+                                        changedTask.setTaskName(name);
+                                        changedTask.setTaskDescription(description);
+                                    }
                                 }
                             }
                             if (!checkNetwork(RequesterEditTaskActivity.this)) {
