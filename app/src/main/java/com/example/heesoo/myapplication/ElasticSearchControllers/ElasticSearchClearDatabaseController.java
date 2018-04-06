@@ -1,10 +1,14 @@
 package com.example.heesoo.myapplication.ElasticSearchControllers;
 
+import com.searchly.jestdroid.DroidClientConfig;
+import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
 
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Delete;
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.indices.DeleteIndex;
 
 import static junit.framework.Assert.assertFalse;
@@ -16,21 +20,41 @@ import static junit.framework.Assert.assertTrue;
 
 public class ElasticSearchClearDatabaseController {
     private static JestDroidClient client;
+    private final static String database_team = "http://cmput301.softwareprocess.es:8080";
 
     public void deleteIndex() throws IOException {
+
         String indexName = "cmput301w18t15";
         //createIndex(indexName);
+
+        verifySettings();
 
         DeleteIndex indicesExists = new DeleteIndex.Builder(indexName).build();
         JestResult result = client.execute(indicesExists);
         assertTrue(result.getErrorMessage(), result.isSucceeded());
     }
 
+    public void deleteTask() throws IOException {
+        String indexName = "cmput301w18t15";
+        //createIndex(indexName);
 
-    public void deleteNonExistingIndex() throws IOException {
-        DeleteIndex deleteIndex = new DeleteIndex.Builder("newindex2").build();
-        JestResult result = client.execute(deleteIndex);
-        assertFalse("Delete request should fail for an index that does not exist", result.isSucceeded());
+        verifySettings();
+
+        DeleteIndex indicesExists = new DeleteIndex.Builder(indexName)
+                .type("task")
+                .build();
+        JestResult result = client.execute(indicesExists);
+        assertTrue(result.getErrorMessage(), result.isSucceeded());
+
     }
+    public static void verifySettings() {
+        if (client == null) {
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder(database_team);
+            DroidClientConfig config = builder.build();
 
+            JestClientFactory factory = new JestClientFactory();
+            factory.setDroidClientConfig(config);
+            client = (JestDroidClient) factory.getObject();
+        }
+    }
 }
