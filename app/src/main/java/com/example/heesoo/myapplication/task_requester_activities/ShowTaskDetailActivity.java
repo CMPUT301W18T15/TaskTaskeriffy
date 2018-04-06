@@ -69,7 +69,7 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requester_show_task_detail);
+        setContentView(R.layout.activity_show_task_detail);
 
         elasticSearchTaskController = new ElasticSearchTaskController();
 

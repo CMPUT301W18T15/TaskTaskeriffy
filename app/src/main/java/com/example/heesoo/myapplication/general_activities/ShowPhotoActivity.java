@@ -24,7 +24,7 @@ public class ShowPhotoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_photo);
+        setContentView(R.layout.activity_show_photo);
         encodedPhotos = (ArrayList<String>) getIntent().getSerializableExtra("photos");
 
         showPhoto = findViewById(R.id.showPhoto);

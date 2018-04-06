@@ -20,7 +20,7 @@ public class RateTaskProviderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_rating);
+        setContentView(R.layout.activity_rate_provider);
 
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {

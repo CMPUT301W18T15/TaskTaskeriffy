@@ -51,7 +51,7 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bid_on_task);
+        setContentView(R.layout.activity_place_bid_on_task);
 
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("TaskToBidOn");

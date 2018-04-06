@@ -42,7 +42,7 @@ public class ViewBidDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bid_detail);
+        setContentView(R.layout.activity_view_bid_details);
 
 
         task = (Task) getIntent().getSerializableExtra("task");

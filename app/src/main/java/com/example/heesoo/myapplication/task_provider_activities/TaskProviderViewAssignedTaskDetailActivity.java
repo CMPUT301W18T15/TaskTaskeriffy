@@ -31,7 +31,7 @@ public class TaskProviderViewAssignedTaskDetailActivity extends AppCompatActivit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_provider_view_assigned_task_detail);
+        setContentView(R.layout.activity_view_assigned_task_detail);
         final Task task = (Task) getIntent().getSerializableExtra("task");
 
         TextView taskName = findViewById(R.id.taskName);

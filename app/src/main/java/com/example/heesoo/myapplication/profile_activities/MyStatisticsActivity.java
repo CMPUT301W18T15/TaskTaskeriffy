@@ -46,7 +46,7 @@ public class MyStatisticsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stats);
+        setContentView(R.layout.activity_user_statistics);
         Intent i = getIntent();
 
         ratingBar = findViewById(R.id.rating_bar);
