@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         if (pwd_str.equals(user.getPassword())) {
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
 
-                            //monitorBidsThread.run();
+                            monitorBidsThread.start();
                             startActivity(new Intent(MainActivity.this, MainTaskActivity.class));
                         } else {
                             Toast.makeText(getApplicationContext(), "Password Does not Match", Toast.LENGTH_SHORT).show();
