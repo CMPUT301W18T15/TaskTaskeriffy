@@ -162,7 +162,7 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
 
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
-            displayedTasks.add("Name: " + task.getTaskName() + "\n + Status: " + task.getStatus());
+            displayedTasks.add("Name: " + task.getTaskName() + "\n Status: " + task.getStatus());
         }
 
         taskAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, displayedTasks);
