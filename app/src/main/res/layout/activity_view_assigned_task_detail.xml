@@ -68,6 +68,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:text="Task Name :"
+        android:textStyle="bold|italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/taskName"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -77,6 +78,7 @@
         android:layout_height="37dp"
         android:layout_marginStart="8dp"
         android:text="Task Description :"
+        android:textStyle="bold|italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/taskDescription"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -86,6 +88,7 @@
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:text="Task Status :"
+        android:textStyle="bold|italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/taskStatus"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -95,17 +98,19 @@
         android:layout_height="37dp"
         android:layout_marginStart="8dp"
         android:text="Lowest Bid :"
+        android:textStyle="bold|italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/taskLowestBid"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-    android:id="@+id/textView15"
-    android:layout_width="126dp"
-    android:layout_height="35dp"
-    android:layout_marginStart="8dp"
-    android:text="My Bid Price: "
-    app:layout_constraintBaseline_toBaselineOf="@+id/myBidPrice"
-    app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/textView15"
+        android:layout_width="126dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold|italic"
+        android:text="My Bid Price: "
+        app:layout_constraintBaseline_toBaselineOf="@+id/myBidPrice"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/myBidPrice"
@@ -122,6 +127,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:text="My Bid Status: "
+        android:textStyle="bold|italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/myBidStatus"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -131,6 +137,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:text="My Bid Status: "
+        android:textStyle="bold|italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/myBidStatus"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -150,6 +157,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:text="Requester Username:"
+        android:textStyle="bold|italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/requesterUsername"
         app:layout_constraintStart_toStartOf="parent" />
 

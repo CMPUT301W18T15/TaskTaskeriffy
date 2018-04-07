@@ -62,6 +62,7 @@
                     android:layout_height="38dp"
                     android:layout_marginStart="24dp"
                     android:text="Total Earnings:"
+                    android:textStyle="bold|italic"
                     app:layout_constraintBaseline_toBaselineOf="@+id/totalEarnings"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -72,6 +73,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="24dp"
                     android:text="My Rating:"
+                    android:textStyle="bold|italic"
                     app:layout_constraintBaseline_toBaselineOf="@+id/myRating"
                     app:layout_constraintEnd_toStartOf="@+id/myRating"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -83,6 +85,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="24dp"
                     android:text="Completed Posted Tasks:"
+                    android:textStyle="bold|italic"
                     app:layout_constraintBaseline_toBaselineOf="@+id/completedPostedTasks"
                     app:layout_constraintEnd_toStartOf="@+id/completedPostedTasks"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -94,6 +97,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="24dp"
                     android:text="Completed Provided Tasks:"
+                    android:textStyle="bold|italic"
                     app:layout_constraintBaseline_toBaselineOf="@+id/completedProvidedTasks"
                     app:layout_constraintEnd_toStartOf="@+id/completedProvidedTasks"
                     app:layout_constraintStart_toStartOf="parent" />
