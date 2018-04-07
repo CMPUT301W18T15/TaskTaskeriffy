@@ -98,6 +98,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/roundedbutton"
         android:text="ADD PICTURE"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/saveChangesButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
