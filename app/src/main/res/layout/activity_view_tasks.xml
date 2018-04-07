@@ -34,7 +34,7 @@
                     android:layout_marginStart="8dp"
                     android:text="Add Task"
                     android:visibility="gone"
-                    android:background="@color/secondary"
+                    android:background = "@drawable/roundedbutton"
                     app:layout_constraintBottom_toTopOf="@+id/nearbyTaskButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

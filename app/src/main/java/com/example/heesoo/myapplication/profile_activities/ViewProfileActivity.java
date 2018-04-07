@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.heesoo.myapplication.entities.User;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.task_provider_activities.FindNewTaskActivity;
 import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewBiddedTaskListActivity;
 import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
@@ -99,6 +100,9 @@ public class ViewProfileActivity extends AppCompatActivity {
                         }
                         if ( menuItem.getItemId() == R.id.nav_myBiddedTasks ) {
                             startActivity(new Intent(getApplicationContext(), TaskProviderViewBiddedTaskListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.logout ) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                         return true;
                     }

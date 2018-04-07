@@ -55,7 +55,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/deletetask"
-        android:background="@color/secondary"
+        android:background = "@drawable/roundedbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/declinebid"
-        android:background="@color/secondary"
+        android:background = "@drawable/roundedbutton"
         app:layout_constraintBaseline_toBaselineOf="@+id/acceptBid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/acceptBid" />
@@ -80,7 +80,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:text="acceptBid"
-        android:background="@color/secondary"
+        android:background = "@drawable/roundedbutton"
         app:layout_constraintBottom_toTopOf="@+id/deleteTask"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -91,7 +91,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:background="@color/secondary"
+        android:background = "@drawable/roundedbutton"
         android:text="View Bidder's Profile"
         app:layout_constraintBottom_toTopOf="@+id/declineBid"
         app:layout_constraintEnd_toEndOf="parent"

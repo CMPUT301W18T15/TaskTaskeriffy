@@ -109,6 +109,9 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
                         if ( menuItem.getItemId() == R.id.nav_myBiddedTasks ) {
                             startActivity(new Intent(getApplicationContext(), TaskProviderViewBiddedTaskListActivity.class));
                         }
+                        if ( menuItem.getItemId() == R.id.logout ) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        }
                         return true;
                     }
                 });

@@ -56,7 +56,7 @@
         android:layout_marginStart="4dp"
         android:text="Done"
         android:visibility="gone"
-        android:background="@color/secondary"
+        android:background = "@drawable/roundedbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

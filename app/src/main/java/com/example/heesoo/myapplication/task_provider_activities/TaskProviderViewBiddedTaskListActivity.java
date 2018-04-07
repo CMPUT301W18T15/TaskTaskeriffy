@@ -21,6 +21,7 @@ import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearch
 import com.example.heesoo.myapplication.entities.Bid;
 import com.example.heesoo.myapplication.entities.Task;
 import com.example.heesoo.myapplication.entities.TaskList;
+import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.profile_activities.MyStatisticsActivity;
 import com.example.heesoo.myapplication.profile_activities.ViewProfileActivity;
@@ -140,6 +141,9 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
                         }
                         if ( menuItem.getItemId() == R.id.nav_myBiddedTasks ) {
                             startActivity(new Intent(getApplicationContext(), TaskProviderViewBiddedTaskListActivity.class));
+                        }
+                        if ( menuItem.getItemId() == R.id.logout ) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                         return true;
                     }
