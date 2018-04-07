@@ -13,6 +13,7 @@ import android.util.Log;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.entities.Bid;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.entities.BidList;
 import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewBiddedTasksActivity;
 import com.example.heesoo.myapplication.shared_preferences.SetPublicCurrentUser;
 
@@ -23,7 +24,7 @@ import java.lang.Thread;
 public class NotificationThread extends Thread {
 
     private NotificationManager myNotificationManager;
-    private ArrayList<Bid> allBids;
+    private BidList allBids;
     private Calendar timeStamp;
     private Context context;
     private boolean done;
@@ -47,7 +48,7 @@ public class NotificationThread extends Thread {
             ElasticSearchBidController.GetAllBids getAllBids = new ElasticSearchBidController.GetAllBids();
             getAllBids.execute("");
 
-            allBids = new ArrayList<Bid>();;
+            allBids = new BidList();;
             allBids.clear();
 
             try {
@@ -56,7 +57,9 @@ public class NotificationThread extends Thread {
                 Log.d("ERROR", "Oh no! Something went wrong while accessing the database");
             }
 
-            for (Bid bid: allBids) {
+            for (int i = 0; i < allBids.size(); i++) {
+                Bid bid = allBids.get(i);
+
                 if (bid.getTaskRequester().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
 
                     if (bid.getTimeStamp().after(timeStamp)) {

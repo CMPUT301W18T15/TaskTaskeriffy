@@ -26,8 +26,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import java.util.ArrayList;
-
 /**
  * Created by manuelakm on 2018-03-28.
  */
@@ -112,7 +110,7 @@ public class FindNearbyTasksActivity extends AppCompatActivity
 
                                         if (!t.getLongitude().equals(-1.0)
                                                 && !t.getLatitude().equals(-1.0)
-                                                && !t.getUserName().equals(SetPublicCurrentUser.getCurrentUser().getUsername())
+                                                && !t.getTaskRequester().equals(SetPublicCurrentUser.getCurrentUser().getUsername())
                                                 && (mLastKnownLocation.distanceTo(taskLocation) <= 5000)) {
                                             mMap.addMarker(new MarkerOptions().position(new LatLng(t.getLatitude(), t.getLongitude())).title(t.getTaskName()));
 

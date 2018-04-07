@@ -8,7 +8,6 @@ import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearch
 import com.example.heesoo.myapplication.shared_preferences.SetPublicCurrentUser;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
 
@@ -254,7 +253,7 @@ public class User implements Comparable<User>, Serializable {
             for(int i = 0; i < allTasks.getSize(); i++) {
 
                 Task task = allTasks.getTask(i);
-                if (this.getUsername().equals(task.getUserName())){
+                if (this.getUsername().equals(task.getTaskRequester())){
                     Log.d("REQUESTCODE", task.getTaskName());
                     requesterTasks.addTask(task);
                 }
@@ -313,7 +312,7 @@ public class User implements Comparable<User>, Serializable {
             for(int i = 0; i < allTasks.getSize(); i++) {
 
                 Task task = allTasks.getTask(i);
-                if (this.getUsername().equals(task.getUserName())){
+                if (this.getUsername().equals(task.getTaskRequester())){
                     Log.d("REQUESTCODE", task.getTaskName());
                     requesterTasks.addTask(task);
                 }

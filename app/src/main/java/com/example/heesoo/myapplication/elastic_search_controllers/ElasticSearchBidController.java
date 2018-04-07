@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.heesoo.myapplication.entities.Bid;
+import com.example.heesoo.myapplication.entities.BidList;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -135,14 +136,14 @@ public class ElasticSearchBidController {
         }
     }
 
-    public static class GetAllBids extends AsyncTask<String, Void, ArrayList<Bid>> {
+    public static class GetAllBids extends AsyncTask<String, Void, BidList> {
 
         @Override
-        protected ArrayList<Bid> doInBackground(String... search_parameters) {
+        protected BidList doInBackground(String... search_parameters) {
 
             verifySettings();
 
-            ArrayList<Bid> bids = new ArrayList<Bid>();
+            BidList bids = new BidList();
 
             //TODO: Try this commented stuff if older implementation does not work
             //String query = ("{ \"query\": { \" match_all \" : {} } }");

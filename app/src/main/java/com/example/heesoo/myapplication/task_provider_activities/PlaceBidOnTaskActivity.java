@@ -93,7 +93,7 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "The Requester is editing this task, please try to place bid later!", Toast.LENGTH_SHORT).show();
                 } else{
                     bidPrice = Float.parseFloat(newBidPrice);
-                    Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetPublicCurrentUser.getCurrentUser().getUsername(), task.getUserName());
+                    Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetPublicCurrentUser.getCurrentUser().getUsername(), task.getTaskRequester());
                     ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
                     addBidsTask.execute(newBid);
                     task.addBid(newBid);

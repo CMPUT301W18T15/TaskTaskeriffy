@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 
 import com.example.heesoo.myapplication.entities.Bid;
+import com.example.heesoo.myapplication.entities.BidList;
 import com.example.heesoo.myapplication.entities.Task;
 import com.example.heesoo.myapplication.R;
 
@@ -31,7 +32,7 @@ and perform an action.
 
 public class ViewBidsOnTaskActivity extends AppCompatActivity {
     private ListView bidsView;
-    private ArrayList<Bid> bidList;
+    private BidList bidList;
     private Task task;
 
     @Override
@@ -60,14 +61,15 @@ public class ViewBidsOnTaskActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         checkNetwork(this);
-        bidList = new ArrayList<Bid>();
+        bidList = new BidList();
         bidList = task.getBids();
 
         ArrayList<String> bidNames = new ArrayList<String>();
 
+        for (int i = 0; i < bidList.size(); i++) {
+            Bid bid = bidList.get(i);
 
-        for (Bid bid:bidList){
-                bidNames.add("Provider Name: "+bid.getTaskProvider()+"Bid Price: "+bid.getBidPrice()+" Status: " + bid.getStatus());
+            bidNames.add("Provider Name: "+bid.getTaskProvider()+"\n Bid Price: "+bid.getBidPrice()+"\n  Status: " + bid.getStatus());
         }
 
 

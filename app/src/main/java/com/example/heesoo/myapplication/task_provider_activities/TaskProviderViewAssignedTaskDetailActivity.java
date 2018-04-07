@@ -45,13 +45,15 @@ public class TaskProviderViewAssignedTaskDetailActivity extends AppCompatActivit
         TextView myBidPrice = findViewById(R.id.myBidPrice);
 
         TextView requesterUsername = findViewById(R.id.requester_username);
-        requesterUsername.setText(task.getUserName());
+        requesterUsername.setText(task.getTaskRequester());
 
         requester_string = requesterUsername.getText().toString();
 
         // TODO assume every bidder can only make 1 bid for each task.
         // TODO: ^^ Incorrect Assumption.
-        for (Bid bids:task.getBids()){
+        for (int i = 0; i < task.getBids().size(); i++) {
+            Bid bids = task.getBids().get(i);
+
             if (bids.getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())){
                 myBidPrice.setText(bids.getBidPrice().toString());
                 bidStatus.setText(bids.getStatus());

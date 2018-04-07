@@ -171,7 +171,10 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
 
         for(int i = 0; i < tempTaskList.getSize(); i++){
             if (tempTaskList.getTask(i).getStatus().equals("Bidded")) {
-                for (Bid pbid:tempTaskList.getTask(i).getBids()){
+
+                for (int j = 0; j < tempTaskList.getTask(i).getBids().size(); j++) {
+                    Bid pbid = tempTaskList.getTask(i).getBids().get(j);
+
                     if (pbid.getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())){
                         taskList.addTask(tempTaskList.getTask(i));
                         displayedTasks.add("Name: "+tempTaskList.getTask(i).getTaskName()+" Status: " + tempTaskList.getTask(i).getStatus());

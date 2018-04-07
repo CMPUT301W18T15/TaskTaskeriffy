@@ -15,6 +15,7 @@ import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearch
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.entities.Bid;
+import com.example.heesoo.myapplication.entities.BidList;
 import com.example.heesoo.myapplication.entities.Task;
 import com.example.heesoo.myapplication.entities.User;
 import com.example.heesoo.myapplication.general_activities.ShowPhotoActivity;
@@ -117,7 +118,7 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
                 // offline behavior
                 MainActivity.user.deleteRequesterTasks(task);
 
-                ArrayList<Bid> allBids = task.getBids();
+                BidList allBids = task.getBids();
                 for (int i = 0; i < allBids.size(); i++) {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(allBids.get(i));

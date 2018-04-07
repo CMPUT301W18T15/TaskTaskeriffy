@@ -138,7 +138,7 @@ public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
         for (int i = 0; i < allTasks.getSize(); i++) {
             Task task = allTasks.getTask(i);
 
-            if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getUserName()) && task.getStatus().equals("Bidded")){
+            if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getTaskRequester()) && task.getStatus().equals("Bidded")){
                 taskList.addTask(task);
                 requesterBiddedTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
 

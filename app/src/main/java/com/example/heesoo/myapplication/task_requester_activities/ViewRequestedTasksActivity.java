@@ -162,7 +162,6 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
 
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
-
             displayedTasks.add("Name: " + task.getTaskName() + "\n + Status: " + task.getStatus());
         }
 
@@ -190,10 +189,10 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
         for (int i = 0; i < allTasks.getSize(); i++) {
             Task task = allTasks.getTask(i);
 
-            if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
+            if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getTaskRequester())){
                 Log.d("REQUESTCODE", task.getTaskName());
                 taskList.addTask(task);
-                requesterPostTasksNames.add("Name: " + task.getTaskName() +" \n Status: " + task.getStatus());
+                requesterPostTasksNames.add("Name: " + task.getTaskName() + "\n Status: " + task.getStatus());
             }
         }
         return taskList;

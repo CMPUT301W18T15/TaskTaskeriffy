@@ -219,7 +219,7 @@ public class FindNewTaskActivity extends AppCompatActivity {
 
 
         for(int i = 0; i < tempTaskList.getSize(); i++){
-            if ( !(tempTaskList.getTask(i).getUserName().equals( SetPublicCurrentUser.getCurrentUser().getUsername())) ) {
+            if ( !(tempTaskList.getTask(i).getTaskRequester().equals( SetPublicCurrentUser.getCurrentUser().getUsername())) ) {
                 taskList.addTask(tempTaskList.getTask(i));
                 displayedTasks.add("Name: " + tempTaskList.getTask(i).getTaskName() +" \n Status: " + tempTaskList.getTask(i).getStatus());
             }

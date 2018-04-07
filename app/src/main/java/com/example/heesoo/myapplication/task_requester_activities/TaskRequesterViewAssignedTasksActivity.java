@@ -136,7 +136,7 @@ public class TaskRequesterViewAssignedTasksActivity extends AppCompatActivity {
         for (int i = 0; i < allTasks.getSize(); i++) {
             Task task = allTasks.getTask(i);
 
-            if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getUserName()) && task.getStatus().equals("Assigned")){
+            if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getTaskRequester()) && task.getStatus().equals("Assigned")){
                 taskList.addTask(task);
                 requesterAssignedTasksNames.add("Name: "+task.getTaskName()+"\n Status: " + task.getStatus());
 

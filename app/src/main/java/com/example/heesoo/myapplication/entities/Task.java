@@ -7,7 +7,7 @@ import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearch
 
 import io.searchbox.annotations.JestId;
 
-public class Task implements Serializable{
+public class Task implements Serializable {
     private String taskRequester; // Changing to just attach the username for making MainActivity getCurrentUser work in the constructor for task in ElasticSearchTaskController.
     private String taskName;
     private String taskDescription;
@@ -20,8 +20,7 @@ public class Task implements Serializable{
     @JestId
     private String id;
     private ArrayList<String> pictures; // photo bitmaps are encoded to base64 strings to store in elasticsearch
-    private ArrayList<Bid> bids;
-    private ArrayList<User> taskBidders;
+    private BidList bids;
 
     /**
      *<p>
@@ -42,9 +41,8 @@ public class Task implements Serializable{
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.status = "Requested";
-        this.bids = new ArrayList<Bid>();
+        this.bids = new BidList();
         this.pictures = new ArrayList<String>();
-        this.taskBidders = new ArrayList<User>();
         this.assignedTaskProvider = "";
         this.latitude = -1.0;
         this.longitude = -1.0;
@@ -62,7 +60,7 @@ public class Task implements Serializable{
      *
      * @return string that represents the User that has requested this task
      */
-    public String getUserName(){
+    public String getTaskRequester(){
 
         return taskRequester;
     }
@@ -220,14 +218,14 @@ public class Task implements Serializable{
      *     placed on the task and changes the status to "Requested" if there are no other bids on
      *     this task. This method also uses elasticsearchcontroller to update the database.
      * </p>
-     * @param recieved_bid a Bid that is to be deleted from this task
+     * @param receivedBid a Bid that is to be deleted from this task
      */
-    public void deleteBid(Bid recieved_bid) {
+    public void deleteBid(Bid receivedBid) {
 
         // TODO fix remove bid from task
-        if (bids.contains(recieved_bid)) {
-            int index = bids.indexOf(recieved_bid);
-            if (bids.get(index).getId() == recieved_bid.getId()) {
+        if (bids.contains(receivedBid)) {
+            int index = bids.indexOf(receivedBid);
+            if (bids.get(index).getId().equals(receivedBid.getId())) {
                 bids.remove(index);
             }
         }
@@ -255,7 +253,7 @@ public class Task implements Serializable{
      * </p>
      * @return ArrayList<Bid>< that represents all the bids associated with this task
      */
-    public ArrayList<Bid> getBids(){
+    public BidList getBids(){
 
         return bids;
     }
@@ -276,7 +274,7 @@ public class Task implements Serializable{
      *     This method adds a picture to the local ArrayList<Bitmap> that represents all the pictures placed
      *     on the task. This method also uses elasticsearchcontroller to update the database.
      * </p>
-     * @param picture a Bitmap that has been placed on this task
+     * @param encodedPicture a Bitmap that has been placed on this task
      */
     public void addPicture(String encodedPicture) {
 
@@ -329,7 +327,9 @@ public class Task implements Serializable{
         }
         else {
             Float minValue = bids.get(0).getBidPrice();
-            for (Bid bid : bids) {
+            for (int i = 0; i < bids.size(); i++) {
+                Bid bid = bids.get(i);
+
                 if (bid.getBidPrice() < minValue) {
                     minValue = bid.getBidPrice();
                 }

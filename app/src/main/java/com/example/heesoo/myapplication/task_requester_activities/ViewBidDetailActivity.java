@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.heesoo.myapplication.elastic_search_controllers.*;
 import com.example.heesoo.myapplication.entities.Bid;
+import com.example.heesoo.myapplication.entities.BidList;
 import com.example.heesoo.myapplication.entities.Task;
 import com.example.heesoo.myapplication.entities.User;
 import com.example.heesoo.myapplication.R;
@@ -72,7 +73,7 @@ public class ViewBidDetailActivity extends AppCompatActivity {
                 ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
                 deleteTask.execute(task);
 
-                ArrayList<Bid> allBids = task.getBids();
+                BidList allBids = task.getBids();
                 for (int i = 0; i < allBids.size(); i++) {
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(allBids.get(i));
@@ -95,8 +96,11 @@ public class ViewBidDetailActivity extends AppCompatActivity {
         acceptBid = findViewById(R.id.acceptBid);
         acceptBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ArrayList<Bid> allBids = task.getBids();
-                for (Bid task_bid : allBids) {
+                BidList allBids = task.getBids();
+
+                for (int i = 0; i < allBids.size(); i++) {
+                    Bid task_bid = allBids.get(i);
+
                     ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
                     deleteBidTask.execute(task_bid);
                 }
