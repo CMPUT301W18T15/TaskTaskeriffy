@@ -100,9 +100,11 @@ public class AddTaskActivity extends AppCompatActivity {
                                 ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                                 addTasksTask.execute(task);
                                 //Log.e("Task ID", task.getId());
+                                Log.d("ERROR", "ADDING TASK");
                                 MainActivity.user.addRequesterTasks(task);
 
                                 if (!checkNetwork(AddTaskActivity.this)) {
+                                    Log.d("ERROR", "ADDING OFFLINE TASK");
                                     MainActivity.needSync = true;
                                 }
 

@@ -73,6 +73,7 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("ERROR", "SENDING TO ADD TASK");
                 startActivity(new Intent(ViewRequestedTasksActivity.this, AddTaskActivity.class));
             }
         });
