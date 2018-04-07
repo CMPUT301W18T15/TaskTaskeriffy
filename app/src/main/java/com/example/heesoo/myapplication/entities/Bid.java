@@ -119,18 +119,18 @@ public class Bid implements Serializable {
      */
     public String getTaskProvider(){
 
-        return taskProvider;
+        return this.taskProvider;
     }
 
     /**
      * <p>
      *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
-     * @param taskProvider string that represents the username of the task provider that has placed this bid
+     * @param taskProvider1 string that represents the username of the task provider that has placed this bid
      */
-    public void setTaskProvider(String taskProvider) {
+    public void setTaskProvider(String taskProvider1) {
 
-        this.taskProvider = taskProvider;
+        this.taskProvider = taskProvider1;
     }
 
     /**
