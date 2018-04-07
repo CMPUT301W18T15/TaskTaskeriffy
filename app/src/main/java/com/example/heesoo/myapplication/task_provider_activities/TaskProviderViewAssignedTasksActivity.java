@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.entities.Task;
+import com.example.heesoo.myapplication.entities.TaskList;
 import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.profile_activities.MyStatisticsActivity;
@@ -40,8 +41,8 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
 
     private ListView myAssignedTasklist;
     private TextView taskLabel;
-    private ArrayList<Task> tempTaskList;
-    private ArrayList<Task> taskList;
+    private TaskList tempTaskList;
+    private TaskList taskList;
     private ArrayAdapter<Task> taskAdapter;
     private ListView clickableList;
 
@@ -67,7 +68,7 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent taskinfo = new Intent(TaskProviderViewAssignedTasksActivity.this, TaskProviderViewAssignedTaskDetailActivity.class);
-                Task task = taskList.get(index);
+                Task task = taskList.getTask(index);
                 taskinfo.putExtra("task", task);
                 startActivity(taskinfo);
             }
@@ -119,8 +120,8 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
         noTasksMessage.setVisibility(View.GONE);
 
 
-        tempTaskList = new ArrayList<Task>();
-        taskList = new ArrayList<Task>();
+        tempTaskList = new TaskList();
+        taskList = new TaskList();
 
         // offline behavior
         // sync
@@ -149,14 +150,14 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
         ArrayList<String> tasksNames = new ArrayList<String>();
 
 
-        for(int i = 0; i < tempTaskList.size(); i++){
-            if ( tempTaskList.get(i).getStatus().equals("Assigned") && tempTaskList.get(i).getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
-                taskList.add(tempTaskList.get(i));
-                tasksNames.add("Name: "+tempTaskList.get(i).getTaskName()+" Status: " + tempTaskList.get(i).getStatus());
+        for(int i = 0; i < tempTaskList.getSize(); i++){
+            if ( tempTaskList.getTask(i).getStatus().equals("Assigned") && tempTaskList.getTask(i).getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
+                taskList.addTask(tempTaskList.getTask(i));
+                tasksNames.add("Name: "+tempTaskList.getTask(i).getTaskName()+" Status: " + tempTaskList.getTask(i).getStatus());
 
             }
         }
-        if (taskList.size() == 0){
+        if (taskList.getSize() == 0){
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("You are not assigned to any tasks!");
         }

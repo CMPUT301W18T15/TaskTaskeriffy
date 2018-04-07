@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.entities.Bid;
 import com.example.heesoo.myapplication.entities.Task;
+import com.example.heesoo.myapplication.entities.TaskList;
 import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.profile_activities.MyStatisticsActivity;
 import com.example.heesoo.myapplication.profile_activities.ViewProfileActivity;
@@ -44,11 +45,12 @@ This activity is navigated to when the provider wants to find a new task that th
  */
 
 public class FindNewTaskActivity extends AppCompatActivity {
-    private ArrayList<Task> tempTaskList;
-    private ArrayList<Task> taskList;
+    private TaskList tempTaskList;
+    private TaskList taskList;
     private ListView listView;
     private Task selectedTask;
-    private ArrayAdapter<Task> adapter;
+    private ArrayList<String> searchResults;
+    private ArrayAdapter<String> adapter;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -82,8 +84,9 @@ public class FindNewTaskActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Object t = listView.getItemAtPosition(i);
-                selectedTask = (Task) t;
+                //final Object t = listView.getItemAtPosition(i);
+                //selectedTask = (Task) t;
+                selectedTask = taskList.getTask(i);
 
                 AlertDialog.Builder popUp = new AlertDialog.Builder(FindNewTaskActivity.this);
                 popUp.setMessage("Would you like to see details about '"  + selectedTask.getTaskName() + "' ?");
@@ -171,19 +174,25 @@ public class FindNewTaskActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                ArrayList<Task> templist = new ArrayList<Task>();
+                TaskList tempList = new TaskList();
+                searchResults = new ArrayList<String>();
 
-                for(Task temp : taskList){
+                for(int i = 0; i < taskList.getSize(); i++) {
+
+                    Task temp = taskList.getTask(i);
+
                     if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
-                        templist.add(temp);
+                        tempList.addTask(temp);
+                        searchResults.add("Name: " + temp.getTaskName() +" \n Status: " + temp.getStatus());
                     }
                 }
-                adapter = new ArrayAdapter<Task>(FindNewTaskActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, templist);
-                //taskAdapter.notifyDataSetChanged();
+
+                adapter = new ArrayAdapter<>(FindNewTaskActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, searchResults);
                 listView.setAdapter(adapter);
                 return true;
             }
         });
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -192,31 +201,35 @@ public class FindNewTaskActivity extends AppCompatActivity {
         super.onStart();
         noTasksMessage.setVisibility(View.GONE);
 
-        tempTaskList = new ArrayList<Task>();
-        taskList = new ArrayList<Task>();
+        tempTaskList = new TaskList();
+        taskList = new TaskList();
 
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
 
         try{
             tempTaskList = getAllTasks.get();
-        } catch(Exception e){
+        }
+        catch(Exception e){
             Log.i("ERROR", "Failed to pull tasks from Database");
         }
 
+        ArrayList<String> displayedTasks = new ArrayList<>();
+        tempTaskList = tempTaskList.getAvailableTasks();
 
-        for(int i = 0; i < tempTaskList.size(); i++){
-            if (!(tempTaskList.get(i).getUserName().equals( SetPublicCurrentUser.getCurrentUser().getUsername()))
-                    && !tempTaskList.get(i).getStatus().equals("Assigned") && !tempTaskList.get(i).getStatus().equals("Done")) {
-                taskList.add(tempTaskList.get(i));
+
+        for(int i = 0; i < tempTaskList.getSize(); i++){
+            if ( !(tempTaskList.getTask(i).getUserName().equals( SetPublicCurrentUser.getCurrentUser().getUsername())) ) {
+                taskList.addTask(tempTaskList.getTask(i));
+                displayedTasks.add("Name: " + tempTaskList.getTask(i).getTaskName() +" \n Status: " + tempTaskList.getTask(i).getStatus());
             }
         }
-        if (taskList.size() == 0){
+        if (taskList.getSize() == 0) {
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("No Tasks available!");
         }
 
-        adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, displayedTasks);
         listView.setAdapter(adapter);
 
     }

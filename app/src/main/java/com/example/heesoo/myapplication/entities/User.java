@@ -20,8 +20,8 @@ public class User implements Comparable<User>, Serializable {
 
     transient Image picture;
 
-    private ArrayList<Task> requesterTasks = new ArrayList<Task>();
-    private ArrayList<Task> providerTasks = new ArrayList<Task>();
+    private TaskList requesterTasks = new TaskList();
+    private TaskList providerTasks = new TaskList();
 
     @JestId
     private String id = null;
@@ -244,22 +244,24 @@ public class User implements Comparable<User>, Serializable {
     public void initializeOffline(){
         // offline behavior
         // get the data as login successfully
-        ArrayList<Task> allTasks;
+        TaskList allTasks;
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
 
         try {
             allTasks = getAllTasks.get();
 
-            for (Task task : allTasks){
+            for(int i = 0; i < allTasks.getSize(); i++) {
+
+                Task task = allTasks.getTask(i);
                 if (this.getUsername().equals(task.getUserName())){
                     Log.d("REQUESTCODE", task.getTaskName());
-                    requesterTasks.add(task);
+                    requesterTasks.addTask(task);
                 }
 
-                for(int i = 0; i < allTasks.size(); i++){
-                    if ( allTasks.get(i).getStatus().equals("Assigned") && allTasks.get(i).getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
-                        providerTasks.add(allTasks.get(i));
+                for(int j = 0; j < allTasks.getSize(); j++){
+                    if ( allTasks.getTask(i).getStatus().equals("Assigned") && allTasks.getTask(i).getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
+                        providerTasks.addTask(allTasks.getTask(i));
                     }
                 }
             }
@@ -270,7 +272,9 @@ public class User implements Comparable<User>, Serializable {
     }
 
     public void sync(){
-        for (Task task : requesterTasks){
+        for(int i = 0; i < requesterTasks.getSize(); i++) {
+            Task task = requesterTasks.getTask(i);
+
             ElasticSearchTaskController.GetTask getTask = new ElasticSearchTaskController.GetTask();
             getTask.execute(task.getId());
             Task currentTask;
@@ -300,18 +304,21 @@ public class User implements Comparable<User>, Serializable {
         }
 
         // pull
-        ArrayList<Task> allTasks;
+        TaskList allTasks;
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
         try {
             allTasks = getAllTasks.get();
-            for (Task task : allTasks){
+
+            for(int i = 0; i < allTasks.getSize(); i++) {
+
+                Task task = allTasks.getTask(i);
                 if (this.getUsername().equals(task.getUserName())){
                     Log.d("REQUESTCODE", task.getTaskName());
-                    requesterTasks.add(task);
+                    requesterTasks.addTask(task);
                 }
                 if ( task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
-                    providerTasks.add(task);
+                    providerTasks.addTask(task);
                 }
             }
         }
@@ -321,37 +328,43 @@ public class User implements Comparable<User>, Serializable {
 
     }
 
-    public ArrayList<Task> getRequesterTasks(){
+    public TaskList getRequesterTasks(){
         return requesterTasks;
     }
 
-    public ArrayList<Task> getProviderTasks(){
+    public TaskList getProviderTasks(){
         return providerTasks;
     }
 
     public void addRequesterTasks(Task task){
-        requesterTasks.add(task);
+        requesterTasks.addTask(task);
     }
 
     public void addProviderTasks(Task task){
-        providerTasks.add(task);
+        providerTasks.addTask(task);
     }
 
     public void deleteRequesterTasks(Task task){
-        ArrayList<Task> tempTasks = new ArrayList<Task>();
-        for (Task deletedTask : requesterTasks){
+        TaskList tempTasks = new TaskList();
+
+        for (int i = 0; i < requesterTasks.getSize(); i++) {
+            Task deletedTask = requesterTasks.getTask(i);
+
             if (!deletedTask.getId().equals(task.getId())){
-                tempTasks.add(deletedTask);
+                tempTasks.addTask(deletedTask);
             }
         }
         requesterTasks = tempTasks;
     }
 
-    public void deleteProviderTasks(Task task){
-        ArrayList<Task> tempTasks = new ArrayList<Task>();
-        for (Task deletedTask : providerTasks){
+    public void deleteProviderTasks(Task task) {
+        TaskList tempTasks = new TaskList();
+
+        for (int i = 0; i < providerTasks.getSize(); i++) {
+            Task deletedTask = providerTasks.getTask(i);
+
             if (!deletedTask.getId().equals(task.getId())){
-                tempTasks.add(deletedTask);
+                tempTasks.addTask(deletedTask);
             }
         }
         providerTasks = tempTasks;

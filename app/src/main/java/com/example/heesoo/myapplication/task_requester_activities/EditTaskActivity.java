@@ -100,7 +100,9 @@ public class EditTaskActivity extends AppCompatActivity {
                         if (taskConstraints.descriptionLength(description)) {
 
                             // offline behavior
-                            for (Task changedTask : MainActivity.user.getRequesterTasks()){
+                            for (int i = 0; i < MainActivity.user.getRequesterTasks().getSize(); i++) {
+                                Task changedTask = MainActivity.user.getRequesterTasks().getTask(i);
+
                                 if (task.getId() != null) {
                                     if (changedTask.getId().equals(task.getId())) {
                                         changedTask.setTaskName(name);

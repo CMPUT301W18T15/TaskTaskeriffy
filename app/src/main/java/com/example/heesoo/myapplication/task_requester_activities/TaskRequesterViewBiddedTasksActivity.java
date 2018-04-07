@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.entities.Task;
+import com.example.heesoo.myapplication.entities.TaskList;
 import com.example.heesoo.myapplication.profile_activities.MyStatisticsActivity;
 import com.example.heesoo.myapplication.profile_activities.ViewProfileActivity;
 import com.example.heesoo.myapplication.task_provider_activities.FindNewTaskActivity;
@@ -39,9 +40,9 @@ This activity is reached through the show bidded task list button on the dashboa
 
 public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
 
-    private ArrayList<Task> taskList; // the list of tasks that requester posted
+    private TaskList taskList; // the list of tasks that requester posted
     private ListView clickableList;
-    private ArrayList<Task> allTasks;
+    private TaskList allTasks;
     private ArrayAdapter<Task> taskAdapter;
 
     private DrawerLayout drawerLayout;
@@ -66,7 +67,7 @@ public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent taskinfo = new Intent(TaskRequesterViewBiddedTasksActivity.this, ShowTaskDetailActivity.class);
-                Task task = taskList.get(index);
+                Task task = taskList.getTask(index);
                 taskinfo.putExtra("task", task);
                 startActivity(taskinfo);
             }
@@ -119,8 +120,8 @@ public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         noTasksMessage.setVisibility(View.GONE);
-        taskList = new ArrayList<Task>();
-        allTasks = new ArrayList<Task>();
+        taskList = new TaskList();
+        allTasks = new TaskList();
         checkNetwork(this);
         ArrayList<String> requesterBiddedTasksNames = new ArrayList<String>();
 
@@ -134,15 +135,17 @@ public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
             Log.i("Error", "The request for tasks failed in onStart");
         }
 
-        for (Task task:allTasks){
+        for (int i = 0; i < allTasks.getSize(); i++) {
+            Task task = allTasks.getTask(i);
+
             if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getUserName()) && task.getStatus().equals("Bidded")){
-                taskList.add(task);
+                taskList.addTask(task);
                 requesterBiddedTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
 
             }
         }
 
-        if (taskList.size() == 0){
+        if (taskList.getSize() == 0){
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("None of your tasks are currently bidded on!");
         }

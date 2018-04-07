@@ -3,6 +3,7 @@ package com.example.heesoo.myapplication.entities;
 import android.annotation.SuppressLint;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -98,6 +99,10 @@ public class TaskList {
         return tl;
     }
 
+    public void addAll(Collection<Task> t) {
+        tasks.addAll(t);
+    }
+
     /**
      * <p>
      *     This method returns all the tasks in the list with the status "Assigned"
@@ -111,6 +116,18 @@ public class TaskList {
 
         for (int i = 0; i < tasks.size(); i++) {
             if (Objects.equals(tasks.get(i).getStatus(), "Assigned")) {
+                tl.addTask(tasks.get(i));
+            }
+        }
+        return tl;
+    }
+
+    public TaskList getAvailableTasks() {
+
+        TaskList tl = new TaskList();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if ( !(tasks.get(i).getStatus()).equals("Assigned") && !(tasks.get(i).getStatus()).equals("Done") ) {
                 tl.addTask(tasks.get(i));
             }
         }
@@ -163,5 +180,9 @@ public class TaskList {
      */
     public int getSize() {
         return tasks.size();
+    }
+
+    public void clear() {
+        tasks.clear();
     }
 }

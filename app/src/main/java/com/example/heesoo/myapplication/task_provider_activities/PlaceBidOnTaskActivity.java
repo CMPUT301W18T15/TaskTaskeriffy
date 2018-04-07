@@ -97,8 +97,11 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
                     ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
                     addBidsTask.execute(newBid);
                     task.addBid(newBid);
+
                     // offline behavior
-                    for (Task changedTask : MainActivity.user.getRequesterTasks()){
+                    for (int i = 0; i < MainActivity.user.getRequesterTasks().getSize(); i++) {
+                        Task changedTask = MainActivity.user.getRequesterTasks().getTask(i);
+
                         if (changedTask.getId().equals(task.getId())){
                             changedTask.addBid(newBid);
                         }

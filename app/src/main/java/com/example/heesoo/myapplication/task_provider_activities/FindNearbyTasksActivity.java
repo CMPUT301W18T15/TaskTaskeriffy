@@ -12,6 +12,7 @@ import android.util.Log;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.entities.Task;
 import com.example.heesoo.myapplication.R;
+import com.example.heesoo.myapplication.entities.TaskList;
 import com.example.heesoo.myapplication.shared_preferences.SetPublicCurrentUser;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -38,7 +39,7 @@ public class FindNearbyTasksActivity extends AppCompatActivity
     private GoogleMap mMap;
     private Location mLastKnownLocation;
     private FusedLocationProviderClient mFusedLocationClient;
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
     private boolean LOCATION_PERMISSION_GRANTED = true;
     private static final int DEFAULT_ZOOM = 15;
 
@@ -98,10 +99,12 @@ public class FindNearbyTasksActivity extends AppCompatActivity
                                     getAllTasks.execute("");
 
                                     try {
-                                        taskList = (ArrayList<Task>) getAllTasks.get();
+                                        taskList = getAllTasks.get();
                                     } catch (Exception e) {}
 
-                                    for (Task t: taskList) {
+                                    for(int i = 0; i < taskList.getSize(); i++) {
+
+                                        Task t = taskList.getTask(i);
 
                                         Location taskLocation = new Location("");
                                         taskLocation.setLongitude(t.getLongitude());

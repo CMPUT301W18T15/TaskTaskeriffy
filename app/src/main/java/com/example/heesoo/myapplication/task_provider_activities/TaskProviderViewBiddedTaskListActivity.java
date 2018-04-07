@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.entities.Bid;
 import com.example.heesoo.myapplication.entities.Task;
+import com.example.heesoo.myapplication.entities.TaskList;
 import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.profile_activities.MyStatisticsActivity;
 import com.example.heesoo.myapplication.profile_activities.ViewProfileActivity;
@@ -44,11 +45,11 @@ item in the list, the provider may view the details of the task and it's lowest 
 
 public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
 
-    private ArrayList<Task> tempTaskList;
-    private ArrayList<Task> taskList;
+    private TaskList tempTaskList;
+    private TaskList taskList;
     private ListView listView;
     private Task selectedTask;
-    private ArrayAdapter<Task> adapter;
+    private ArrayAdapter<String> adapter;
 
     private DrawerLayout drawerLayout;
     private TextView noTasksMessage;
@@ -70,8 +71,10 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Object t = listView.getItemAtPosition(i);
-                selectedTask = (Task) t;
+                //final Object t = listView.getItemAtPosition(i);
+                //selectedTask = (Task) t;
+                selectedTask = taskList.getTask(i);
+
 
                 AlertDialog.Builder popUp = new AlertDialog.Builder(TaskProviderViewBiddedTaskListActivity.this);
                 popUp.setMessage("Would you like to see details about '" + selectedTask.getTaskName() + "' ?");
@@ -152,8 +155,9 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
 
 
         checkNetwork(this);
-        tempTaskList = new ArrayList<Task>();
-        taskList = new ArrayList<Task>();
+        tempTaskList = new TaskList();
+        taskList = new TaskList();
+        ArrayList<String> displayedTasks = new ArrayList<>();
 
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
@@ -165,21 +169,22 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
         }
 
 
-        for(int i = 0; i < tempTaskList.size(); i++){
-            if (tempTaskList.get(i).getStatus().equals("Bidded")) {
-                for (Bid pbid:tempTaskList.get(i).getBids()){
+        for(int i = 0; i < tempTaskList.getSize(); i++){
+            if (tempTaskList.getTask(i).getStatus().equals("Bidded")) {
+                for (Bid pbid:tempTaskList.getTask(i).getBids()){
                     if (pbid.getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())){
-                        taskList.add(tempTaskList.get(i));
+                        taskList.addTask(tempTaskList.getTask(i));
+                        displayedTasks.add("Name: "+tempTaskList.getTask(i).getTaskName()+" Status: " + tempTaskList.getTask(i).getStatus());
                     }
                 }
             }
         }
-        if (taskList.size() == 0){
+        if (taskList.getSize() == 0){
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("You have not bidded on any tasks!");
         }
 
-        adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, displayedTasks);
         listView.setAdapter(adapter);
 
     }

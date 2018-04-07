@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.entities.Task;
+import com.example.heesoo.myapplication.entities.TaskList;
 import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.profile_activities.MyStatisticsActivity;
 import com.example.heesoo.myapplication.profile_activities.ViewProfileActivity;
@@ -39,9 +40,9 @@ import static com.example.heesoo.myapplication.login_activity.MainActivity.needS
 
 public class ViewRequestedTasksActivity extends AppCompatActivity {
 
-    private ArrayList<Task> allTasks;
-    private ArrayList<Task> taskList;
-    private ArrayAdapter<Task> taskAdapter;
+    private TaskList allTasks;
+    private TaskList taskList;
+    private ArrayAdapter<String> taskAdapter;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -81,7 +82,7 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent taskInfo = new Intent(ViewRequestedTasksActivity.this, ShowTaskDetailActivity.class);
-                task = taskList.get(index);
+                task = taskList.getTask(index);
                 taskInfo.putExtra("task", task);
                 startActivityForResult(taskInfo, 2);
             }
@@ -134,8 +135,7 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         noTasksMessage.setVisibility(View.GONE);
-
-        //SetPublicCurrentUser.setCurrentContext(getApplicationContext());
+        ArrayList<String> displayedTasks = new ArrayList<>();
 
         if (checkNetwork(this)) {
             if (needSync == true){
@@ -147,30 +147,37 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
             MainActivity.needSync = true;
         }
 
-        taskList = new ArrayList<Task>();
-        allTasks = new ArrayList<Task>();
+        taskList = new TaskList();
+        allTasks = new TaskList();
 
         if(checkNetwork(this)){
             taskList = getUserTasksFromDatabase();
         }else{
             taskList =  MainActivity.user.getRequesterTasks();
         }
-        if (taskList.size() == 0){
+        if (taskList.getSize() == 0){
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("You have no tasks at the moment!");
         }
 
-        taskAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
+        for (int i = 0; i < taskList.getSize(); i++) {
+            Task task = taskList.getTask(i);
+
+            displayedTasks.add("Name: " + task.getTaskName() + "\n + Status: " + task.getStatus());
+        }
+
+        taskAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, displayedTasks);
         //taskAdapter.notifyDataSetChanged();
 
         myTasks.setAdapter(taskAdapter);
 
     }
 
-    protected ArrayList<Task> getUserTasksFromDatabase() {
+    protected TaskList getUserTasksFromDatabase() {
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
         taskList.clear();
+
         try {
             allTasks = getAllTasks.get();
         }
@@ -180,11 +187,13 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
 
         ArrayList<String> requesterPostTasksNames = new ArrayList<String>();
 
-        for (Task task : allTasks){
+        for (int i = 0; i < allTasks.getSize(); i++) {
+            Task task = allTasks.getTask(i);
+
             if (SetPublicCurrentUser.getCurrentUser().getUsername().equals(task.getUserName())){
                 Log.d("REQUESTCODE", task.getTaskName());
-                taskList.add(task);
-                requesterPostTasksNames.add("Name: "+task.getTaskName()+" Status: " + task.getStatus());
+                taskList.addTask(task);
+                requesterPostTasksNames.add("Name: " + task.getTaskName() +" \n Status: " + task.getStatus());
             }
         }
         return taskList;

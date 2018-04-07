@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.heesoo.myapplication.entities.Task;
+import com.example.heesoo.myapplication.entities.TaskList;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -140,13 +141,13 @@ public class ElasticSearchTaskController {
         }
     }
 
-    public static class GetAllTasks extends AsyncTask<String, Void, ArrayList<Task>> {
+    public static class GetAllTasks extends AsyncTask<String, Void, TaskList> {
 
         @Override
-        protected ArrayList<Task> doInBackground(String... search_parameters) {
+        protected TaskList doInBackground(String... search_parameters) {
             verifySettings();
 
-            ArrayList<Task> tasks = new ArrayList<Task>();
+            TaskList tasks = new TaskList();
 
             //TODO: Try this commented stuff if older implementation does not work
             //String query = ("{ \"query\": { \" match_all \" : {} } }");

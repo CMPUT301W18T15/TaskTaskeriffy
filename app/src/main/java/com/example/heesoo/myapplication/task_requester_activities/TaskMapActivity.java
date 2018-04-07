@@ -95,7 +95,9 @@ public class TaskMapActivity extends AppCompatActivity
                                     editTask.execute(task);
                                     // offline behavior
 
-                                    for (Task changedTask : MainActivity.user.getRequesterTasks()){
+                                    for (int i = 0; i < MainActivity.user.getRequesterTasks().getSize(); i++) {
+                                        Task changedTask = MainActivity.user.getRequesterTasks().getTask(i);
+
                                         if (changedTask.getId().equals(task.getId())){
                                             changedTask.setLatitude(taskLatLng.latitude);
                                             changedTask.setLongitude(taskLatLng.longitude);
