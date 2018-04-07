@@ -71,8 +71,8 @@ public class MyStatisticsActivity extends AppCompatActivity {
         myRating.setText(user.getRating().toString());
         totalEarnings.setText(user.getTotalEarnings().toString());
 
-        navigationView = findViewById(R.id.nav_view);
-        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navView);
+        drawerLayout = findViewById(R.id.drawerLayout);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override

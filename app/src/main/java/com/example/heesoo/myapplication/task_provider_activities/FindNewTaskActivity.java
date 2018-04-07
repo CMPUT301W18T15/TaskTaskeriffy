@@ -66,8 +66,8 @@ public class FindNewTaskActivity extends AppCompatActivity {
         noTasksMessage = findViewById(R.id.noTasksMessage);
 
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navView);
 
         findNearbyTasks = findViewById(R.id.nearbyTaskButton);
         findNearbyTasks.setVisibility(View.VISIBLE);

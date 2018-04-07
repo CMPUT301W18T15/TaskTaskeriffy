@@ -5,16 +5,15 @@ import java.util.Calendar;
 
 import io.searchbox.annotations.JestId;
 
-public class Bid implements Serializable{
+public class Bid implements Serializable {
+
     private String taskName;
     private String description;
     private String status;
-
     private String taskRequester;
     private String taskProvider;
     private Float bidPrice;
-
-    Calendar timeStamp;
+    private Calendar timeStamp;
 
     @JestId
     private String id;
@@ -33,15 +32,15 @@ public class Bid implements Serializable{
      * @author      Manuela Key Marichales
      * @since       1.0
      */
-    public Bid(String TaskName, String Description, Float BidPrice, String TaskProvider, String TaskRequester) {
-        this.taskName = TaskName;
-        this.taskProvider = TaskProvider;
-        this.taskRequester = TaskRequester;
-        this.description = Description;
-        this.status = "Placed";
-        this.bidPrice = BidPrice;
-        this.timeStamp = Calendar.getInstance();
+    public Bid(String taskName, String description, Float bidPrice, String taskProvider, String taskRequester) {
 
+        this.taskName = taskName;
+        this.taskProvider = taskProvider;
+        this.taskRequester = taskRequester;
+        this.description = description;
+        this.status = "Placed";
+        this.bidPrice = bidPrice;
+        this.timeStamp = Calendar.getInstance();
     }
 
     /**
@@ -59,11 +58,11 @@ public class Bid implements Serializable{
      * <p>
      *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
-     * @param taskname string that represents the name of the task that this bid is placed on.
+     * @param taskName string that represents the name of the task that this bid is placed on.
      */
-    public void setTaskName(String taskname){
+    public void setTaskName(String taskName){
 
-        this.taskName = taskname;
+        this.taskName = taskName;
     }
 
     /**
@@ -171,26 +170,30 @@ public class Bid implements Serializable{
      * <p>
      *     This method replaces the local value of this variable with the value passed to the method.
      * </p>
-     * @param BidPrice Float that represents the price of bid placed on a task
+     * @param bidPrice Float that represents the price of bid placed on a task
      */
-    public void setBidPrice(Float BidPrice){
+    public void setBidPrice(Float bidPrice){
 
-        this.bidPrice = BidPrice;
+        this.bidPrice = bidPrice;
     }
 
     public String getTaskRequester() {
+
         return taskRequester;
     }
 
     public void setTaskRequester(String taskRequester) {
+
         this.taskRequester = taskRequester;
     }
 
     public Calendar getTimeStamp() {
+
         return timeStamp;
     }
 
     public void setTimeStamp(Calendar timeStamp) {
+
         this.timeStamp = timeStamp;
     }
 }

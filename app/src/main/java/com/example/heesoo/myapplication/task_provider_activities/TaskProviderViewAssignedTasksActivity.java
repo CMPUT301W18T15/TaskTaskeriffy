@@ -59,8 +59,8 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
         noTasksMessage = findViewById(R.id.noTasksMessage);
 
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navView);
 
         // when click on list
         clickableList = findViewById(R.id.tasksListView);

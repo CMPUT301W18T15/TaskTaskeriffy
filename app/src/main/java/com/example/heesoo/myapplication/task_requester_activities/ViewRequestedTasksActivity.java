@@ -62,8 +62,8 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_tasks);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navView);
         myTasks = findViewById(R.id.tasksListView);
         addTask = findViewById(R.id.addTaskButton);
         addTask.setVisibility(View.VISIBLE);

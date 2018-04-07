@@ -44,7 +44,7 @@ public class TaskProviderViewAssignedTaskDetailActivity extends AppCompatActivit
         TextView taskLowestBid = findViewById(R.id.taskLowestBid);
         TextView myBidPrice = findViewById(R.id.myBidPrice);
 
-        TextView requesterUsername = findViewById(R.id.requester_username);
+        TextView requesterUsername = findViewById(R.id.requesterUsername);
         requesterUsername.setText(task.getTaskRequester());
 
         requester_string = requesterUsername.getText().toString();

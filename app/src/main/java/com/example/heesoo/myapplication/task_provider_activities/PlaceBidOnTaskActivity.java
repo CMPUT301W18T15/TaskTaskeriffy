@@ -56,16 +56,16 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("TaskToBidOn");
 
-        titleView = findViewById(R.id.task_view_Title_content);
+        titleView = findViewById(R.id.viewTitle);
         titleView.setText(task.getTaskName());
-        descriptionView = findViewById(R.id.task_view_Description_content);
+        descriptionView = findViewById(R.id.viewDescription);
         descriptionView.setText(task.getTaskDescription());
-        statusView = findViewById(R.id.task_view_Status_content);
+        statusView = findViewById(R.id.viewStatus);
         statusView.setText(task.getStatus());
-        lowestBidView = findViewById(R.id.task_view_lowest_bid_content);
+        lowestBidView = findViewById(R.id.viewLowestBid);
         lowestBidView.setText(task.getLowestBid());
         placeBidView = findViewById(R.id.placeBid);
-        placeBidButton = findViewById(R.id.place_bid_button);
+        placeBidButton = findViewById(R.id.placeBidButton);
 
         placeBidButton.setOnClickListener(new View.OnClickListener() {
             @Override

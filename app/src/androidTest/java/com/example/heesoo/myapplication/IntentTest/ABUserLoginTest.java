@@ -71,7 +71,7 @@ public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
         assertTrue(solo.searchText("Logged In"));
 
         // open the navigation bar
-        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawer_layout);
+        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawerLayout);
         drawerLayout.openDrawer(Gravity.LEFT);
     }
 

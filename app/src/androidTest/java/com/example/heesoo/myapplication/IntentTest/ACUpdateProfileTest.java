@@ -86,7 +86,7 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
 
     public void testProviderUpdateProfile(){
         // get the navigation bar
-        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawer_layout);
+        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawerLayout);
 
         // open the navigation bar
         drawerLayout.openDrawer(Gravity.LEFT);

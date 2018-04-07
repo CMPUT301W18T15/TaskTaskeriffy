@@ -63,8 +63,8 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
         noTasksMessage = findViewById(R.id.noTasksMessage);
 
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navView);
 
         listView = findViewById(R.id.tasksListView);
         listView.setClickable(true);

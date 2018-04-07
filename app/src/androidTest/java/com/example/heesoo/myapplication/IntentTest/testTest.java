@@ -44,7 +44,7 @@ public class testTest extends ActivityInstrumentationTestCase2 {
         assertTrue(solo.searchText("Logged In"));
 
         // get the navigation bar
-        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawer_layout);
+        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawerLayout);
 
         // open the navigation bar
         drawerLayout.openDrawer(Gravity.LEFT);
