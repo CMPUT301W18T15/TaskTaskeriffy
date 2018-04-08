@@ -3,9 +3,12 @@ package com.example.heesoo.myapplication.IntentTest;
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.EditText;
 
+import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchUserController;
+import com.example.heesoo.myapplication.entities.User;
 import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.R;
@@ -25,6 +28,18 @@ public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
 
     public ABUserLoginTest(){
         super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
+        // ensure the test accounts exist
+        User user0 = new User("user0000", "user0000", "user0000@example.com", "7800000000");
+        User user1 = new User("user0001", "user0001", "user0001@example.com", "7800000001");
+        User user2 = new User("USER0000", "USER0000", "user0000@example.com", "7800000000");
+        ElasticSearchUserController.AddUserTask addUserTask = new ElasticSearchUserController.AddUserTask();
+        ElasticSearchUserController.DeleteProfile deleteUser = new ElasticSearchUserController.DeleteProfile();
+        addUserTask.execute(user0, user1);
+        try {
+            deleteUser.execute(user2);
+        } catch (Exception e){
+            Log.i("clear database","the user has been deleted");
+        }
     }
 
     public void setUp() throws Exception{
@@ -73,6 +88,8 @@ public class ABUserLoginTest extends ActivityInstrumentationTestCase2 {
         // open the navigation bar
         DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawerLayout);
         drawerLayout.openDrawer(Gravity.LEFT);
+        solo.clickOnMenuItem("Logout");
+
     }
 
     @Override

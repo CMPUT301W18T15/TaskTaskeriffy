@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.widget.EditText;
 
+import com.example.heesoo.myapplication.R;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchUserController;
@@ -16,25 +16,20 @@ import com.example.heesoo.myapplication.entities.Task;
 import com.example.heesoo.myapplication.entities.TaskList;
 import com.example.heesoo.myapplication.entities.User;
 import com.example.heesoo.myapplication.login_activity.MainActivity;
-import com.example.heesoo.myapplication.R;
-import com.example.heesoo.myapplication.task_requester_activities.RateTaskProviderActivity;
-import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewAssignedTasksActivity;
-import com.example.heesoo.myapplication.task_requester_activities.ShowTaskDetailActivity;
+import com.example.heesoo.myapplication.task_provider_activities.FindNearbyTasksActivity;
+import com.example.heesoo.myapplication.task_provider_activities.FindNewTaskActivity;
+import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewAssignedTaskDetailActivity;
+import com.example.heesoo.myapplication.task_provider_activities.TaskProviderViewAssignedTasksActivity;
 import com.robotium.solo.Solo;
 
 /**
- * Created by chengze on 2018/3/18.
- * User Story: 07.01.01
+ * Created by chengze on 2018/4/7.
  */
 
-/* IMPORTANT NOTE : Tests must be run in order as some tests depend on previous data.
-Please clear the database before running the first intent test.
- */
-
-public class EARequesterSetTaskDone extends ActivityInstrumentationTestCase2 {
+public class FAViewTaskIn5km extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
-    public EARequesterSetTaskDone(){
+    public FAViewTaskIn5km(){
         super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
 
         // ensure the test accounts exist
@@ -79,26 +74,6 @@ public class EARequesterSetTaskDone extends ActivityInstrumentationTestCase2 {
         catch (Exception e) {
             Log.i("Error", "The request for tweets failed in onStart");
         }
-
-        // create the test viewed task
-        Task task = new Task("user0000", "House and garden cleaning", "Square Feet: 2000, 3 floors, garden square feet: 200, address: 11111St, 99Ave, NW");
-        Task task2 = new Task("user0000", "Design a Christmas tree", "I have a pine in my garden, please help me to decorate it for Christmas.");
-        Task task3 = new Task("user0000", "Finding old books","I want 100 old books to fill my shelf.");
-        Bid bid = new Bid("House and garden cleaning", "Square Feet: 2000, 3 floors, garden square feet: 200, address: 11111St, 99Ave, NW", 500f, "user0001", "user0000");
-        Bid bid2 = new Bid("Design a Christmas tree", "I have a pine in my garden, please help me to decorate it for Christmas.", 300f, "user0001", "user0000");
-
-        ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
-        ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
-        addTasksTask.execute(task, task2, task3);
-        try {
-            Thread.currentThread().sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        task.addBid(bid);
-        task2.addBid(bid2);
-        addBidsTask.execute(bid, bid2);
-        task.acceptBid(bid.getTaskProvider());
     }
 
     public void setUp() throws Exception{
@@ -109,62 +84,36 @@ public class EARequesterSetTaskDone extends ActivityInstrumentationTestCase2 {
 //        Activity activity = getActivity();
 //    }
 
-    public void testSetTaskDone(){
+    public void testFindTaskIn5km(){
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
-        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "user0001");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Logged In"));
 
-        // see assigned task
+        // see bidded task
         Display display = solo.getCurrentActivity().getWindowManager().getDefaultDisplay();
         int width = display.getWidth();
         int height = display.getHeight();
         solo.drag(0, width / 2, height / 2, height / 2, 1);
-        solo.clickOnMenuItem("My Assigned Tasks");
-        solo.assertCurrentActivity("Wrong Activity", TaskRequesterViewAssignedTasksActivity.class);
-        assertTrue(solo.searchText("Assigned"));
+        solo.drag(width/3, width/3, width/2, width/10, 1);
+        solo.clickOnMenuItem("Find New Tasks");
+        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
 
-        // click the list view in position 0
-        solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
-        assertTrue(solo.searchText("Task Provider"));
-        assertTrue(solo.searchText("Task Name"));
-        assertTrue(solo.searchText("Accepted Bid"));
-        assertTrue(solo.searchText("Task Status"));
-        assertTrue(solo.searchText("Assigned"));
-
-        // set the task done
-        solo.clickOnButton("Mark Done");
-        assertTrue(solo.searchText("Task Marked as Done"));
-        solo.assertCurrentActivity("Wrong Activity", RateTaskProviderActivity.class);
-
-        // set the rating bar
-        solo.setProgressBar(0,4);
+        // find nearby tasks
+        solo.clickOnButton("Find Nearby Tasks");
+        solo.assertCurrentActivity("Wrong Activity", FindNearbyTasksActivity.class);
 
         try {
             Thread.currentThread().sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        // back to Requester Main Activity
-        solo.goBack();
-//        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-        assertTrue(solo.searchText("Done"));
-
-        try {
-            Thread.currentThread().sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
     }
-
 }

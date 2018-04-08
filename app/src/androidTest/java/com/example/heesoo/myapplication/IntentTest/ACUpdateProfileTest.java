@@ -6,6 +6,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.Gravity;
 import android.widget.EditText;
 
+import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchUserController;
+import com.example.heesoo.myapplication.entities.User;
 import com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity;
 import com.example.heesoo.myapplication.login_activity.MainActivity;
 import com.example.heesoo.myapplication.profile_activities.EditProfileActivity;
@@ -27,17 +29,12 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
 
     public ACUpdateProfileTest(){
         super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
-        try{
-            solo.clickOnButton("register");
-            solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
-            solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
-            solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
-            solo.clickOnButton("Submit");
-        }
-        catch (Exception e){
-        }
+
+        // ensure the test accounts exist
+        User user0 = new User("user0000", "user0000", "user0000@example.com", "7800000000");
+        User user1 = new User("user0001", "user0001", "user0001@example.com", "7800000001");
+        ElasticSearchUserController.AddUserTask addUserTask = new ElasticSearchUserController.AddUserTask();
+        addUserTask.execute(user0, user1);
     }
 
     public void setUp() throws Exception{
@@ -56,33 +53,6 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
     public void testStart() throws Exception{
         Activity activity = getActivity();
     }
-
-//    public void testRequesterUpdateProfile(){
-////        solo.assertCurrentActivity("Wrong Activity", ChooseModeActivity.class);
-////        solo.clickOnButton("Would you like a task performed for you?");
-//
-//        // open the navigation bar
-//        DrawerLayout drawerLayout = (DrawerLayout) solo.getView(R.id.drawer_layout);
-//        drawerLayout.openDrawer(Gravity.LEFT);
-//
-//        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-////        solo.clickOnButton("My Account");
-//        solo.clickOnMenuItem("My Account");
-//        solo.assertCurrentActivity("Wrong Activity", ViewProfileActivity.class);
-//        solo.clickOnButton("Edit Information");
-//        solo.assertCurrentActivity("Wrong Activity", EditProfileActivity.class);
-//
-//        // change the profile
-//        solo.clearEditText((EditText) solo.getView(R.id.emailAddressEdit));
-//        solo.clearEditText((EditText) solo.getView(R.id.phoneNumberEdit));
-//        solo.enterText((EditText) solo.getView(R.id.emailAddressEdit), "user0000_changed2@example.com");
-//        solo.enterText((EditText) solo.getView(R.id.phoneNumberEdit), "7800009998");
-//        solo.clickOnButton("Save Information");
-//        solo.goBack();
-//        solo.clickOnButton("My Account");
-//        assertTrue(solo.searchText("user0000_changed2@example.com"));
-//        assertTrue(solo.searchText("7800009998"));
-//    }
 
     public void testProviderUpdateProfile(){
         // get the navigation bar
@@ -110,6 +80,12 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
 
         assertTrue(solo.searchText("user0000_changed@example.com"));
         assertTrue(solo.searchText("7800009999"));
+
+        try {
+            Thread.currentThread().sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
