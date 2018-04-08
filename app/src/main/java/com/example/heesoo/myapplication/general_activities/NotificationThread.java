@@ -71,7 +71,6 @@ public class NotificationThread extends Thread {
                     if (bid.getTaskRequester().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
 
                         if (bid.getTimeStamp().after(timeStamp)) {
-                            Log.d("ERROR","Bid has been placed");
 
                             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_FOREGROUND);
 
