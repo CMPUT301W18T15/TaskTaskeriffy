@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 import io.searchbox.annotations.JestId;
 
-public class User implements Comparable<User>, Serializable {
+public class User implements Serializable {
 
     private String username, password, emailAddress, phoneNumber;
     private Double rating, totalEarnings;
@@ -24,7 +24,6 @@ public class User implements Comparable<User>, Serializable {
 
     @JestId
     private String id = null;
-
 
     /**
      * <p>
@@ -53,8 +52,12 @@ public class User implements Comparable<User>, Serializable {
         this.totalEarnings = 0.00;
     }
 
+    /**
+     * <p>
+     *     A constructor that creates an empty User object
+     * </p>
+     */
     public User() {
-
     }
 
     /**
@@ -65,6 +68,7 @@ public class User implements Comparable<User>, Serializable {
      * @return string that represents the User that has requested this user
      */
     public String getUsername() {
+
         return username; }
 
     /**
@@ -75,6 +79,7 @@ public class User implements Comparable<User>, Serializable {
      * @param username string that represents the username associated with this user.
      */
     public void setUsername(String username) {
+
         this.username = username;
     }
 
@@ -85,7 +90,9 @@ public class User implements Comparable<User>, Serializable {
      * </p>
      * @param password string that represents the password associated with this user.
      */
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+
+        this.password = password; }
 
     /**
      * <p>
@@ -94,18 +101,26 @@ public class User implements Comparable<User>, Serializable {
      *
      * @return string that represents the password that is associated with this user
      */
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password; }
 
     /**
      * <p>
-     *     This method returns the number of tasks that are provided by the user
+     *     This method returns the number of tasks that are performed by the user
      * </p>
      *
-     * @return integer corresponding to the number of tasks finished by the user
+     * @return integer corresponding to the number of tasks performed by the user
      */
-    public Integer getCompletedProvidedTasks(){ return completedProvidedTasks;}
+    public Integer getCompletedProvidedTasks(){
+        return completedProvidedTasks;}
 
+    /**
+     * <p>
+     *     This method increases the count for the number of completed tasks performed by the user
+     * </p>
+     */
     public void updateCompletedProvidedTasks(){
+
         this.completedProvidedTasks += 1;
     }
 
@@ -116,38 +131,72 @@ public class User implements Comparable<User>, Serializable {
      *
      * @return integer corresponding to the number of user's tasks that were completed
      */
-    public Integer getCompletedPostedTasks(){ return completedPostedTasks;}
+    public Integer getCompletedPostedTasks(){
+        return completedPostedTasks;}
 
+    /**
+     * <p>
+     *     This method increases the count for the number of completed tasks posted by this user
+     * </p>
+     */
     public void updateCompletedPostedTasks(){
+
         this.completedPostedTasks += 1;
     }
 
     /**
      * <p>
-     *     This method returns the user's rating
+     *     This method returns the double that represents this user's rating
      * </p>
      *
-     * @return double, user's rating from 5 stars
+     * @return Double that represents the user's rating
      */
-    public Double getRating(){ return rating;}
+    public Double getRating() {
 
-    public void setRating(Double rating){this.rating = rating;}
+        return rating;
+    }
 
-    public void updateRating(Double rating){
+    /**
+     * <p>
+     *     The method that assigned the user's rating to the one provided by the parameter
+     * </p>
+     * @param rating Double that represents the new rating of this user
+     */
+    public void setRating(Double rating) {
+
+        this.rating = rating;
+    }
+
+    /**
+     * <p>
+     *     The method that updates the user's rating by finding the average of all previous ratings
+     * </p>
+     * @param rating Double that represents the new rating given to a user
+     */
+    public void updateRating(Double rating) {
+
         Double updatedRatings = ((getRating() * (this.completedProvidedTasks-1)) + rating) / this.completedProvidedTasks;
         setRating(updatedRatings);
     }
 
     /**
      * <p>
-     *     This method returns the user's earnings so far
+     *     This method returns the user's total earnings thus far
      * </p>
      *
-     * @return double, user's total earnings so far
+     * @return Double that represents user's total earnings thus far
      */
-    public Double getTotalEarnings(){ return totalEarnings;}
+    public Double getTotalEarnings(){
+        return totalEarnings;}
 
+    /**
+     * <p>
+     *     This method adds the parameter provided to the user's total earnings
+     * </p>
+     * @param earnings Double that represents the new earnings of a user
+     */
     public void updateTotalEarnings(Double earnings){
+
         this.totalEarnings += earnings;
     }
 
@@ -159,6 +208,7 @@ public class User implements Comparable<User>, Serializable {
      * @return string that represents the unique id that is associated with this user
      */
     public String getId() {
+
         return id;
     }
 
@@ -170,6 +220,7 @@ public class User implements Comparable<User>, Serializable {
      * @param id string that represents the unique id associated with this user.
      */
     public void setId(String id) {
+
         this.id = id;
     }
 
@@ -181,6 +232,7 @@ public class User implements Comparable<User>, Serializable {
      * @return string that represents the email address that is associated with this user
      */
     public String getEmailAddress() {
+
         return emailAddress;
     }
 
@@ -192,6 +244,7 @@ public class User implements Comparable<User>, Serializable {
      * @param ad string that represents the email address associated with this user.
      */
     public void setEmailAddress(String ad) {
+
         this.emailAddress = ad;
     }
 
@@ -202,7 +255,8 @@ public class User implements Comparable<User>, Serializable {
      *
      * @return string that represents the phone number that is associated with this user
      */
-    public String getPhoneNumber() { return phoneNumber; }
+    public String getPhoneNumber() {
+        return phoneNumber; }
 
     /**
      * <p>
@@ -212,37 +266,19 @@ public class User implements Comparable<User>, Serializable {
      * @param phone_number string that represents the password associated with this user.
      */
     public void setPhoneNumber(String phone_number) {
+
         this.phoneNumber = phone_number;
     }
 
     /**
      * <p>
-     *     This method returns the Image that corresponds to the profile picture of the user
+     *     A method that stores all the user's tasks in order to enable offline activity. It stores
+     *     all the information about tasks upon successful login and separates them into requester and
+     *     provider tasks.
      * </p>
-     *
-     * @return Image that represents the profile picture that is associated with this user
      */
-    public Image getPicture() { return picture; }
-
-    /**
-     * <p>
-     *     This method sets the local variable "picture" to the Image that is entered to the method
-     *     through the parameters
-     * </p>
-     * @param picture Image that represents the profile picture associated with this user.
-     */
-    public void setPicture(Image picture) { this.picture = picture; }
-
-
-    @Override
-    public int compareTo(@NonNull User user) {
-        //return this.getName().toLowerCase().compareTo(user.getName().toLowerCase());
-        return 0;
-    }
-
     public void initializeOffline(){
-        // offline behavior
-        // get the data as login successfully
+
         TaskList allTasks;
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
@@ -254,7 +290,6 @@ public class User implements Comparable<User>, Serializable {
 
                 Task task = allTasks.getTask(i);
                 if (this.getUsername().equals(task.getTaskRequester())){
-                    Log.d("REQUESTCODE", task.getTaskName());
                     requesterTasks.addTask(task);
                 }
 
@@ -270,6 +305,11 @@ public class User implements Comparable<User>, Serializable {
         }
     }
 
+    /**
+     * <p>
+     *     Update the database with newly added and edited tasks that were modified while offline
+     * </p>
+     */
     public void sync(){
         for(int i = 0; i < requesterTasks.getSize(); i++) {
             Task task = requesterTasks.getTask(i);
@@ -279,7 +319,7 @@ public class User implements Comparable<User>, Serializable {
             Task currentTask;
             try{
                 currentTask = getTask.get();
-                // push
+
                 if(currentTask == null){
                     ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                     addTasksTask.execute(task);
@@ -296,13 +336,13 @@ public class User implements Comparable<User>, Serializable {
         }
         requesterTasks.clear();
         providerTasks.clear();
+
         try {
             Thread.currentThread().sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        // pull
         TaskList allTasks;
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
@@ -313,7 +353,6 @@ public class User implements Comparable<User>, Serializable {
 
                 Task task = allTasks.getTask(i);
                 if (this.getUsername().equals(task.getTaskRequester())){
-                    Log.d("REQUESTCODE", task.getTaskName());
                     requesterTasks.addTask(task);
                 }
                 if ( task.getStatus().equals("Assigned") && task.getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
@@ -327,22 +366,56 @@ public class User implements Comparable<User>, Serializable {
 
     }
 
+    /**
+     * <p>
+     *     A method that returns the TaskList of all requester tasks
+     * </p>
+     * @return TaskList that contains all the requesterTasks associated with this user
+     */
     public TaskList getRequesterTasks(){
+
         return requesterTasks;
     }
 
+    /**
+     * <p>
+     *     A method that returns the TaskList of all provider tasks
+     * </p>
+     * @return TaskList that contains all the providerTasks associated with this user
+     */
     public TaskList getProviderTasks(){
+
         return providerTasks;
     }
 
+    /**
+     * <p>
+     *     A method that adds a task from the requesterTasks TaskList
+     * </p>
+     * @param task Task that is to be added to the requesterTasks TaskList
+     */
     public void addRequesterTasks(Task task){
+
         requesterTasks.addTask(task);
     }
 
+    /**
+     * <p>
+     *     A method that adds a task from the providerTasks TaskList
+     * </p>
+     * @param task Task that is to be added to the providerTasks TaskList
+     */
     public void addProviderTasks(Task task){
+
         providerTasks.addTask(task);
     }
 
+    /**
+     * <p>
+     *     A method that deletes a task from the requesterTasks TaskList
+     * </p>
+     * @param task Task that is to be deleted from the requesterTasks TaskList
+     */
     public void deleteRequesterTasks(Task task){
         TaskList tempTasks = new TaskList();
 
@@ -356,6 +429,12 @@ public class User implements Comparable<User>, Serializable {
         requesterTasks = tempTasks;
     }
 
+    /**
+     * <p>
+     *     A method that deletes a task from the providerTasks TaskList
+     * </p>
+     * @param task Task that is to be deleted from the providerTasks TaskList
+     */
     public void deleteProviderTasks(Task task) {
         TaskList tempTasks = new TaskList();
 

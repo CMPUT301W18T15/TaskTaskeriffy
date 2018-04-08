@@ -20,8 +20,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     private String password = "chengze2018";
     private String emailAddress = "chengze@example.com";
     private String phoneNumber = "11111111111";
-    private Image profilePicture;
-    private Image newPicture;
 
     public void testGetUsername(){
         User user = new User(username, password, emailAddress, phoneNumber);
@@ -65,16 +63,5 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         User user = new User(username, password, emailAddress, phoneNumber);
         user.setPhoneNumber("newAddress");
         assertEquals("newAddress", user.getPhoneNumber());
-    }
-
-    public void testGetPicture(){
-        User user = new User(username, password, emailAddress, phoneNumber);
-        assertEquals(profilePicture, user.getPicture());
-    }
-
-    public void testSetPicture(){
-        User user = new User(username, password, emailAddress, phoneNumber);
-        user.setPicture(newPicture);
-        assertEquals(newPicture, user.getPicture());
     }
 }
