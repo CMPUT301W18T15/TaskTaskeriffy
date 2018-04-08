@@ -60,7 +60,6 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/roundedbutton"
         android:text="Delete Task"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -127,6 +126,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:visibility="gone"
         android:background="@drawable/roundedbutton"
         android:text="Edit Task"
         app:layout_constraintBottom_toTopOf="@+id/deleteTask"
