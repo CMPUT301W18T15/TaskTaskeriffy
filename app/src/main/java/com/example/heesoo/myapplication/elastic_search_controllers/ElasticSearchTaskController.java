@@ -9,7 +9,6 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.searchbox.client.JestResult;
@@ -149,10 +148,6 @@ public class ElasticSearchTaskController {
 
             TaskList tasks = new TaskList();
 
-            //TODO: Try this commented stuff if older implementation does not work
-            //String query = ("{ \"query\": { \" match_all \" : {} } }");
-            //Search search = new Search.Builder(query).addIndex(index_team).addType(type_task).build();
-
             Search search = new Search.Builder(search_parameters[0])
                     .addIndex(index_team)
                     .addType(type_task)
@@ -160,7 +155,6 @@ public class ElasticSearchTaskController {
 
 
             try {
-                // TODO get the results of the query
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Task> foundTasks;

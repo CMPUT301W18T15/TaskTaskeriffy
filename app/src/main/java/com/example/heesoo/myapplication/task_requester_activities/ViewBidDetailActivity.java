@@ -31,7 +31,6 @@ delete the task or view the bidder's profile.
  */
 
 public class ViewBidDetailActivity extends AppCompatActivity {
-    private Button editTask;
     private Button deleteTask;
     private Button acceptBid;
     private Button declineBid;
@@ -49,6 +48,8 @@ public class ViewBidDetailActivity extends AppCompatActivity {
         task = (Task) getIntent().getSerializableExtra("task");
         bid = (Bid) getIntent().getSerializableExtra("bid");
 
+
+
         TextView bidderName = findViewById(R.id.bidderName);
         bidderName.setText(bid.getTaskProvider());
 
@@ -61,13 +62,19 @@ public class ViewBidDetailActivity extends AppCompatActivity {
         TextView bidStatus = findViewById(R.id.bidStatus);
         bidStatus.setText(bid.getStatus());
 
-
+        deleteTask = (Button) findViewById(R.id.deleteTask);
+        acceptBid = findViewById(R.id.acceptBid);
+        declineBid = findViewById(R.id.declineBid);
+        viewBidderProfile = findViewById(R.id.viewBidderProfile);
+        if(bid.getStatus().equals("Declined")){
+            declineBid.setVisibility(View.GONE);
+            acceptBid.setVisibility(View.GONE);
+        }
     }
     @Override
     protected void onStart() {
         super.onStart();
         checkNetwork(this);
-        deleteTask = (Button) findViewById(R.id.deleteTask);
         deleteTask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
@@ -93,7 +100,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
         });
 
 
-        acceptBid = findViewById(R.id.acceptBid);
         acceptBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 BidList allBids = task.getBids();
@@ -110,8 +116,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
                 addBid.execute(bid);
                 task.addBid(bid);
                 task.acceptBid(bid.getTaskProvider());
-                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
-                editTask.execute(task);
                 Toast.makeText(getApplicationContext(),"Bid Accepted", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -123,7 +127,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
             }
         });
 
-        declineBid = findViewById(R.id.declineBid);
         declineBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 task.deleteBid(bid);
@@ -131,8 +134,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
                 ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
                 editBid.execute(bid);
                 task.addBid(bid);
-                ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
-                editTask.execute(task);
                 Toast.makeText(getApplicationContext(),"Bid Declined", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -143,7 +144,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
             }
         });
 
-        viewBidderProfile = findViewById(R.id.viewBidderProfile);
         viewBidderProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
@@ -169,7 +169,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
 
     public void bidderNameClicked(View view) {
 
-        //alter text of textview widget
         ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
         getUser.execute(bid.getTaskProvider());
         User user = new User();

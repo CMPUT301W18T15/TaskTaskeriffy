@@ -9,7 +9,6 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.searchbox.client.JestResult;
@@ -23,7 +22,7 @@ import io.searchbox.core.SearchResult;
 /*
 This class is how the program accesses and updates the bid type of the our index in the database.
 It is used in the following : FindNewTaskActivity, PlaceBidOnTaskActivity,
-ShowTaskDetailActivity.
+ShowTaskDetailActivity and NotificationThread
  */
 
 public class ElasticSearchBidController {
@@ -145,10 +144,6 @@ public class ElasticSearchBidController {
 
             BidList bids = new BidList();
 
-            //TODO: Try this commented stuff if older implementation does not work
-            //String query = ("{ \"query\": { \" match_all \" : {} } }");
-            //Search search = new Search.Builder(query).addIndex(index_team).addType(type_bid).build();
-
             Search search = new Search.Builder(search_parameters[0])
                     .addIndex(index_team)
                     .addType(type_bid)
@@ -156,7 +151,6 @@ public class ElasticSearchBidController {
 
 
             try {
-                // TODO get the results of the query
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Bid> foundBids;

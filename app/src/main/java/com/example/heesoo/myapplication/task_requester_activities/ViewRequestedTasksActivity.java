@@ -78,7 +78,6 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
             }
         });
 
-        // when click on list
         myTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
@@ -93,13 +92,9 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }
@@ -167,7 +162,6 @@ public class ViewRequestedTasksActivity extends AppCompatActivity {
         }
 
         taskAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, displayedTasks);
-        //taskAdapter.notifyDataSetChanged();
 
         myTasks.setAdapter(taskAdapter);
 

@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchBidController;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchTaskController;
 import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchUserController;
-import com.example.heesoo.myapplication.entities.Bid;
 import com.example.heesoo.myapplication.entities.BidList;
 import com.example.heesoo.myapplication.entities.Task;
 import com.example.heesoo.myapplication.entities.User;
@@ -57,14 +56,8 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
     private TextView bidTextView;
 
     private String provider_string;
-
     private User currentTaskProvider, currentUser;
 
-    Button Close;
-    Button Create;
-
-
-    private ElasticSearchTaskController elasticSearchTaskController;
     private Task task;
 
     @Override
@@ -72,10 +65,6 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_task_detail);
 
-        elasticSearchTaskController = new ElasticSearchTaskController();
-
-
-        String lowestBid;
         task = (Task) getIntent().getSerializableExtra("task");
         currentUser = SetPublicCurrentUser.getCurrentUser();
 
@@ -108,36 +97,33 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
             });
         }
 
-        if (!task.getStatus().equals("Bidded") && !task.getStatus().equals("Assigned")) {
-            deleteTask = findViewById(R.id.deleteTask);
-            deleteTask.setVisibility(View.VISIBLE);
-            deleteTask.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
-                    deleteTask.execute(task);
+        deleteTask = findViewById(R.id.deleteTask);
+        deleteTask.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
+                deleteTask.execute(task);
 
-                    // offline behavior
-                    MainActivity.user.deleteRequesterTasks(task);
+                // offline behavior
+                MainActivity.user.deleteRequesterTasks(task);
 
-                    BidList allBids = task.getBids();
-                    for (int i = 0; i < allBids.size(); i++) {
-                        ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
-                        deleteBidTask.execute(allBids.get(i));
-                    }
-
-                    Toast.makeText(ShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
-                    Intent deleteTaskIntent = new Intent(getApplicationContext(), ViewRequestedTasksActivity.class);
-                    deleteTaskIntent.putExtra("TaskDeleted", task);
-                    setResult(Activity.RESULT_OK, deleteTaskIntent);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            finish();
-                        }
-                    }, 1000);
+                BidList allBids = task.getBids();
+                for (int i = 0; i < allBids.size(); i++) {
+                    ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
+                    deleteBidTask.execute(allBids.get(i));
                 }
-            });
-        }
+
+                Toast.makeText(ShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
+                Intent deleteTaskIntent = new Intent(getApplicationContext(), ViewRequestedTasksActivity.class);
+                deleteTaskIntent.putExtra("TaskDeleted", task);
+                setResult(Activity.RESULT_OK, deleteTaskIntent);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
+            }
+        });
 
         if (task.getStatus().equals("Bidded")) {
             viewBidsButton.setVisibility(View.VISIBLE);
@@ -233,7 +219,6 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
             taskLowestBid.setText(newTask.getLowestBid());
         }
         else if (requestCode == 2) {
-            Log.d("MapError", "Returning Code");
             Task newTask = (Task) i.getSerializableExtra("TaskWithLoc");
             task.setLongitude(newTask.getLongitude());
             task.setLatitude(newTask.getLatitude());
@@ -271,7 +256,6 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
 
     public void clickHandler_provider(View v){
         ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
-        Log.e("PROVIDER","PROVIDER"+provider_string);
         getUser.execute(provider_string);
         User user = new User();
         try {
@@ -283,6 +267,4 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
         intent.putExtra("USER", user);
         startActivity(intent);
     }
-
-
 }

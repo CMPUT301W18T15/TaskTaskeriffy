@@ -57,7 +57,8 @@ public class BidList implements Serializable {
     }
 
     public int indexOf(Bid b) {
-        return bids.indexOf(b);
+        int index =bids.indexOf(b);
+        return index;
     }
 
     public void clear() {

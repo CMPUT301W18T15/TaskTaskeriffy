@@ -1,7 +1,8 @@
 package com.example.heesoo.myapplication.task_requester_activities;
 
-/**
- * Created by riyariya on 2018-03-29.
+/*
+This class allows us to manipulate the images that a user assigns to a task. There are methods to
+convert a bitmap to a string and a string to a bitmap.
  */
 
 import android.graphics.Bitmap;

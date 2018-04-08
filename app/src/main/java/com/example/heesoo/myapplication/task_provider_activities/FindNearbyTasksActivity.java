@@ -26,8 +26,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-/**
- * Created by manuelakm on 2018-03-28.
+/*
+This activity allows the user to view a google map view of all the tasks with a 5km radius. A white
+circle outlined with a black line is displayed on the map and all the tasks within this radius
+are displayed with red markers that show the name of the task as the marker title.
  */
 
 public class FindNearbyTasksActivity extends AppCompatActivity
@@ -65,29 +67,23 @@ public class FindNearbyTasksActivity extends AppCompatActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            Log.d("MapError", "Have permission");
-        } else {
-            // Show rationale and request permission.
         }
     }
 
     private void getDeviceLocation() {
         try {
             if (LOCATION_PERMISSION_GRANTED) {
-                Log.d("MapError", "Permission is granted");
 
                 mFusedLocationClient.getLastLocation()
                         .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                             @Override
                             public void onSuccess(Location location) {
                                 if (location != null) {
-                                    Log.d("MapError", "HERE");
-                                    Log.d("MapError", location.toString());
                                     mLastKnownLocation = location;
                                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                             new LatLng(mLastKnownLocation.getLatitude(),
                                                     mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-                                    Circle circle = mMap.addCircle(new CircleOptions()
+                                    mMap.addCircle(new CircleOptions()
                                         .center(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
                                         .radius(5000)
                                         .strokeColor(Color.BLACK)

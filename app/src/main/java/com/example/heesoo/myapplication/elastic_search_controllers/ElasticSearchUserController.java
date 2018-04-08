@@ -33,7 +33,6 @@ public class ElasticSearchUserController {
     private final static String database_team = "http://cmput301.softwareprocess.es:8080";
 
 
-    // TODO we need a function which adds tweets to elastic search
     public static class AddUserTask extends AsyncTask<User, Void, Void> {
 
         @Override
@@ -56,22 +55,18 @@ public class ElasticSearchUserController {
                         .id(user.getUsername())
                         .build();
                 try {
-                    Log.d("DATABASE SAVING" ,"Before execution");
                     DocumentResult result = client.execute(index);
-                    Log.d("YOUME10",""+result);
-                    Log.d("EXECUTE_RESULT", ""+result);
-                    Log.d("DATABASE SAVING" ,"After execution");
+
                     if (result.isSucceeded()) {
                         user.setId(result.getId());
-                        Log.d("DATABASE SAVING" ,"Successfully saved");
 
                     }else{
-                        Log.d("DATABASE SAVING" ,"User not entered");
+                        Log.d("ERROR" ,"User not entered");
                     }
                 }
                 catch (Exception e) {
                     e.printStackTrace();
-                    Log.d("DATABASE SAVING" ,"The program failed to save to database");
+                    Log.d("ERROR" ,"The program failed to save to database");
                 }
 
             }
@@ -93,11 +88,11 @@ public class ElasticSearchUserController {
                     user = result.getSourceAsObject(User.class);
                 }
                 else{
-                    Log.i("error", "Search query failed to find any thing =/");
+                    Log.i("ERROR", "Search query failed to find any thing =/");
                 }
             }
             catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Log.i("ERROR", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return user;
         }
@@ -112,7 +107,8 @@ public class ElasticSearchUserController {
         try {
             User profile = getUserTask.get();
             Log.d("XXX",""+profile);
-            // return false if no profile found
+
+            // If no profile is found, return false
             if (profile == null || username.isEmpty()) {
                 result = false;
             }
@@ -121,7 +117,6 @@ public class ElasticSearchUserController {
         }
         return result;
     }
-
 
     public static class EditUserTask extends AsyncTask<User, Void, Void> {
 
@@ -167,7 +162,7 @@ public class ElasticSearchUserController {
                     DocumentResult result = client.execute(delete);
                 }
                 catch (Exception e) {
-                    Log.i("Error", "The application failed to build and delete the profile");
+                    Log.i("ERROR", "The application failed to build and delete the profile");
 
                 }
             }

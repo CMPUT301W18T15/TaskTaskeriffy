@@ -39,11 +39,8 @@ It also contains buttons to view profile, view tasks that the provider has bidde
 
 public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
 
-    private ListView myAssignedTasklist;
-    private TextView taskLabel;
     private TaskList tempTaskList;
     private TaskList taskList;
-    private ArrayAdapter<Task> taskAdapter;
     private ListView clickableList;
 
     private DrawerLayout drawerLayout;
@@ -62,7 +59,6 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navView);
 
-        // when click on list
         clickableList = findViewById(R.id.tasksListView);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,13 +74,9 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }
@@ -126,8 +118,6 @@ public class TaskProviderViewAssignedTasksActivity extends AppCompatActivity {
         tempTaskList = new TaskList();
         taskList = new TaskList();
 
-        // offline behavior
-        // sync
         if (checkNetwork(this)) {
             if (needSync == true){
                 Toast.makeText(getApplicationContext(),"The database is syncing", Toast.LENGTH_SHORT).show();

@@ -8,8 +8,9 @@ import android.widget.RatingBar;
 
 import com.example.heesoo.myapplication.R;
 
-/**
- * Created by heesoopark on 2018-04-03.
+/*
+This activity prompts the user to rate a task provider's performance. This activity is called in when
+a task is marked as "Completed" in the following activity : ShowTaskDetailActivity.
  */
 
 public class RateTaskProviderActivity extends AppCompatActivity {

@@ -19,10 +19,6 @@ import java.util.ArrayList;
 
 import static com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity.checkNetwork;
 
-/**
- * Created by manuelakm on 2018-03-15.
- */
-
 /*
 This activity is navigated to when the requester clicks on the button to view bids through the
 ShowTaskDetailActivity when the status of the task is "bidded". This activity provides shows a
@@ -71,7 +67,6 @@ public class ViewBidsOnTaskActivity extends AppCompatActivity {
 
             bidNames.add("Provider Name: "+bid.getTaskProvider()+"\n Bid Price: "+bid.getBidPrice()+"\n  Status: " + bid.getStatus());
         }
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, bidNames);

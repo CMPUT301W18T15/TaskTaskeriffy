@@ -30,9 +30,6 @@ import java.util.ArrayList;
 
 import static com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity.checkNetwork;
 
-/**
- * Created by riyariya on 2018-03-14.
- */
 
 /*
 This activity serves to show the task requester a list of the tasks requested by them that are bidded on by providers.
@@ -41,10 +38,9 @@ This activity is reached through the show bidded task list button on the dashboa
 
 public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
 
-    private TaskList taskList; // the list of tasks that requester posted
+    private TaskList taskList;
     private ListView clickableList;
     private TaskList allTasks;
-    private ArrayAdapter<Task> taskAdapter;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -60,9 +56,6 @@ public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
         navigationView = findViewById(R.id.navView);
         noTasksMessage = findViewById(R.id.noTasksMessage);
 
-
-
-        // when click on list
         clickableList = findViewById(R.id.tasksListView);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,13 +71,9 @@ public class TaskRequesterViewBiddedTasksActivity extends AppCompatActivity{
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }

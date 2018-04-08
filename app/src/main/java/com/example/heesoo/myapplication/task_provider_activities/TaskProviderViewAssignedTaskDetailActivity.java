@@ -49,8 +49,6 @@ public class TaskProviderViewAssignedTaskDetailActivity extends AppCompatActivit
 
         requester_string = requesterUsername.getText().toString();
 
-        // TODO assume every bidder can only make 1 bid for each task.
-        // TODO: ^^ Incorrect Assumption.
         for (int i = 0; i < task.getBids().size(); i++) {
             Bid bids = task.getBids().get(i);
 

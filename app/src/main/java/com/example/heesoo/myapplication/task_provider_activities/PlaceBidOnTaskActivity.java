@@ -24,11 +24,6 @@ import com.example.heesoo.myapplication.R;
 
 import java.util.ArrayList;
 
-
-/**
- * Created by manuelakm on 2018-03-15.
- */
-
 /*
 This activity is navigated to when the provider wants to place a bid on a task. It is reached from the FindNewTaskActivity.
 This activity provides an interface for the provider to see the details of a task and it's lowest bid and where
@@ -77,7 +72,7 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
 
                 Boolean editing = false;
                 Task currentTask;
-                // get editing status by using elastic search
+
                 ElasticSearchTaskController.GetTask mayEdit = new ElasticSearchTaskController.GetTask();
                 mayEdit.execute(task.getId());
                 try {
@@ -90,9 +85,13 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
 
                 if (newBidPrice.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Fill the Bid Price", Toast.LENGTH_SHORT).show();
-                } else if(editing){
+                }
+
+                else if(editing){
                     Toast.makeText(getApplicationContext(), "The Requester is editing this task, please try to place bid later!", Toast.LENGTH_SHORT).show();
-                } else{
+                }
+
+                else{
                     bidPrice = Float.parseFloat(newBidPrice);
                     earlierBid = task.getBids().bidByUsername(SetPublicCurrentUser.getCurrentUser().getUsername());
                     if(earlierBid!=null){
@@ -145,6 +144,7 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
             });
 
         }
+
         seePhotoButton = findViewById(R.id.viewPhoto);
         seePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override

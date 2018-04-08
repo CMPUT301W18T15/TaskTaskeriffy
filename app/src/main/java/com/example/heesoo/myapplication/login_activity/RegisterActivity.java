@@ -16,10 +16,6 @@ import com.example.heesoo.myapplication.entities.User;
 import com.example.heesoo.myapplication.constraints.UserConstraints;
 
 
-/**
- * Created by heesoopark on 2018-03-12.
- */
-
 /*
 This activity is navigated to when the user clicks the Register button in the log in page of the app (MainActivity).
 This activity provides an interface where the user can register to use the app by entering a unique username, password, email address and
