@@ -222,11 +222,10 @@ public class Task implements Serializable {
      */
     public void deleteBid(Bid receivedBid) {
 
-        // TODO fix remove bid from task
-        if (bids.contains(receivedBid)) {
-            int index = bids.indexOf(receivedBid);
-            if (bids.get(index).getId().equals(receivedBid.getId())) {
-                bids.remove(index);
+        for(int i=0; i<bids.size(); i++){
+            if (bids.get(i).getId().equals(receivedBid.getId())) {
+                bids.remove(i);
+                break;
             }
         }
 

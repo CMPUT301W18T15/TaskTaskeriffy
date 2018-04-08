@@ -97,36 +97,33 @@ public class ShowTaskDetailActivity extends AppCompatActivity {
             });
         }
 
-        if (!task.getStatus().equals("Bidded") && !task.getStatus().equals("Assigned")) {
-            deleteTask = findViewById(R.id.deleteTask);
-            deleteTask.setVisibility(View.VISIBLE);
-            deleteTask.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
-                    deleteTask.execute(task);
+        deleteTask = findViewById(R.id.deleteTask);
+        deleteTask.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
+                deleteTask.execute(task);
 
-                    // offline behavior
-                    MainActivity.user.deleteRequesterTasks(task);
+                // offline behavior
+                MainActivity.user.deleteRequesterTasks(task);
 
-                    BidList allBids = task.getBids();
-                    for (int i = 0; i < allBids.size(); i++) {
-                        ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
-                        deleteBidTask.execute(allBids.get(i));
-                    }
-
-                    Toast.makeText(ShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
-                    Intent deleteTaskIntent = new Intent(getApplicationContext(), ViewRequestedTasksActivity.class);
-                    deleteTaskIntent.putExtra("TaskDeleted", task);
-                    setResult(Activity.RESULT_OK, deleteTaskIntent);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            finish();
-                        }
-                    }, 1000);
+                BidList allBids = task.getBids();
+                for (int i = 0; i < allBids.size(); i++) {
+                    ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
+                    deleteBidTask.execute(allBids.get(i));
                 }
-            });
-        }
+
+                Toast.makeText(ShowTaskDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
+                Intent deleteTaskIntent = new Intent(getApplicationContext(), ViewRequestedTasksActivity.class);
+                deleteTaskIntent.putExtra("TaskDeleted", task);
+                setResult(Activity.RESULT_OK, deleteTaskIntent);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
+            }
+        });
 
         if (task.getStatus().equals("Bidded")) {
             viewBidsButton.setVisibility(View.VISIBLE);
