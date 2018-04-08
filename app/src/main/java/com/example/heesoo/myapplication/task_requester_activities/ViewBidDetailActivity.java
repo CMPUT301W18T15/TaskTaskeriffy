@@ -133,7 +133,7 @@ public class ViewBidDetailActivity extends AppCompatActivity {
                 task.addBid(bid);
                 ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
-                Toast.makeText(getApplicationContext(),"Task Declined", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Bid Declined", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -148,13 +148,17 @@ public class ViewBidDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
                 getUser.execute(bid.getTaskProvider());
+
                 User user = new User();
+
                 try {
                     user = getUser.get();
+
                 } catch (Exception e) {
                     Log.i("Error", "The request for user failed in onStart");
 
                 }
+
                 Intent intent = new Intent(ViewBidDetailActivity.this, ViewProfileActivity.class);
                 intent.putExtra("USER", user);
                 startActivity(intent);
