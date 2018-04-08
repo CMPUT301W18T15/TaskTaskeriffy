@@ -47,9 +47,9 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
         }
 
         // delete the created user
-        User user0 = new User("user0000", "user0000", "user0000@example.com", "7800000000");
-        User user1 = new User("user0001", "user0001", "user0001@example.com", "7800000001");
-        User user2 = new User("USER0000", "USER0000", "user0000@example.com", "7800000000");
+        User user0 = new User("KevinHP", "KevinHP", "KevinHP@example.com", "7800000000");
+        User user1 = new User("RiyaRiya", "RiyaRiya", "RiyaRiya@example.com", "7800000001");
+        User user2 = new User("ManuelaKM", "ManuelaKM", "ManuelaKM@example.com", "7800000000");
         ElasticSearchUserController.DeleteProfile deleteUser0 = new ElasticSearchUserController.DeleteProfile();
         try {
             deleteUser0.execute(user0, user1, user2);
@@ -64,7 +64,7 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
             allTasks = getAllTasks.get();
             for(int i = 0; i < allTasks.getSize(); i++) {
                 Task task = allTasks.getTask(i);
-                if (task.getTaskRequester().equals("user0000")){
+                if (task.getTaskRequester().equals("KevinHP")){
                     Log.d("REQUESTCODE", task.getTaskName());
                     ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
                     deleteTask.execute(task);
@@ -82,7 +82,7 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
             bidList = getAllBids.get();
             for(int i = 0; i < bidList.size(); i++) {
                 Bid bid = bidList.get(i);
-                if (bid.getTaskRequester().equals("user0000") || bid.getTaskProvider().equals("user0001")){
+                if (bid.getTaskRequester().equals("KevinHP") || bid.getTaskProvider().equals("RiyaRiya")){
                     Log.d("REQUESTCODE", bid.getTaskName());
                     ElasticSearchBidController.DeleteBidTask deleteBid = new ElasticSearchBidController.DeleteBidTask();
                     deleteBid.execute(bid);
@@ -115,10 +115,10 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
     public void testRegister(){
         // prepare a existed account
         solo.clickOnButton("register");
-        solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
+        solo.enterText((EditText) solo.getView(R.id.enter_username), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.enter_password), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.enter_email), "KevinHP@example.com");
         solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
         solo.clickOnButton("Submit");
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -131,10 +131,10 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
         assertTrue(solo.searchText("All Fields Must Be Filled"));
 
         // The username has been used
-        solo.enterText((EditText) solo.getView(R.id.enter_username), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.enter_password), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.enter_email), "user0000@example.com");
+        solo.enterText((EditText) solo.getView(R.id.enter_username), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.enter_password), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.enter_email), "KevinHP@example.com");
         solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000000");
         solo.clickOnButton("Submit");
         assertTrue(solo.searchText("Username Already Exists"));
@@ -145,16 +145,16 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
         solo.clearEditText((EditText) solo.getView(R.id.enter_repeat_password));
         solo.clearEditText((EditText) solo.getView(R.id.enter_email));
         solo.clearEditText((EditText) solo.getView(R.id.enter_phone));
-        solo.enterText((EditText) solo.getView(R.id.enter_username), "user0001");
+        solo.enterText((EditText) solo.getView(R.id.enter_username), "RiyaRiya");
         solo.clickOnButton("Submit");
         assertTrue(solo.searchText("All Fields Must Be Filled"));
-        solo.enterText((EditText) solo.getView(R.id.enter_password), "user0001");
+        solo.enterText((EditText) solo.getView(R.id.enter_password), "RiyaRiya");
         solo.clickOnButton("Submit");
         assertTrue(solo.searchText("All Fields Must Be Filled"));
-        solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "user0001");
+        solo.enterText((EditText) solo.getView(R.id.enter_repeat_password), "RiyaRiya");
         solo.clickOnButton("Submit");
         assertTrue(solo.searchText("All Fields Must Be Filled"));
-        solo.enterText((EditText) solo.getView(R.id.enter_email), "user0001@example.com");
+        solo.enterText((EditText) solo.getView(R.id.enter_email), "RiyaRiya@example.com");
         solo.clickOnButton("Submit");
         assertTrue(solo.searchText("All Fields Must Be Filled"));
         solo.enterText((EditText) solo.getView(R.id.enter_phone), "7800000001");
@@ -163,8 +163,8 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
         assertTrue(solo.searchText("Account Registered"));
 
         // try to login use the account created just now
-        solo.enterText((EditText) solo.getView(R.id.login_username), "user0001");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "RiyaRiya");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "RiyaRiya");
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("Logged In"));

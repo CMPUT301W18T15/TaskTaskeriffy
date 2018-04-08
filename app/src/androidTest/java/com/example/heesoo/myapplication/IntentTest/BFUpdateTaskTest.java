@@ -36,8 +36,8 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
     public BFUpdateTaskTest(){
         super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
         // ensure the test accounts exist
-        User user0 = new User("user0000", "user0000", "user0000@example.com", "7800000000");
-        User user1 = new User("user0001", "user0001", "user0001@example.com", "7800000001");
+        User user0 = new User("KevinHP", "KevinHP", "KevinHP@example.com", "7800000000");
+        User user1 = new User("RiyaRiya", "RiyaRiya", "RiyaRiya@example.com", "7800000001");
         ElasticSearchUserController.AddUserTask addUserTask = new ElasticSearchUserController.AddUserTask();
         addUserTask.execute(user0, user1);
 
@@ -49,7 +49,7 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
             allTasks = getAllTasks.get();
             for(int i = 0; i < allTasks.getSize(); i++) {
                 Task task = allTasks.getTask(i);
-                if (task.getTaskRequester().equals("user0000")){
+                if (task.getTaskRequester().equals("KevinHP")){
                     Log.d("REQUESTCODE", task.getTaskName());
                     ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
                     deleteTask.execute(task);
@@ -67,7 +67,7 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
             bidList = getAllBids.get();
             for(int i = 0; i < bidList.size(); i++) {
                 Bid bid = bidList.get(i);
-                if (bid.getTaskRequester().equals("user0000") || bid.getTaskProvider().equals("user0001")){
+                if (bid.getTaskRequester().equals("KevinHP") || bid.getTaskProvider().equals("RiyaRiya")){
                     Log.d("REQUESTCODE", bid.getTaskName());
                     ElasticSearchBidController.DeleteBidTask deleteBid = new ElasticSearchBidController.DeleteBidTask();
                     deleteBid.execute(bid);
@@ -79,7 +79,7 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
         }
 
         // create the test viewed task
-        Task task = new Task("user0000", "House cleaning", "Square Feet: 2000, 3 floors, address: 11111St, 99Ave, NW");
+        Task task = new Task("KevinHP", "House cleaning", "Square Feet: 2000, 3 floors, address: 11111St, 99Ave, NW");
         ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
         addTasksTask.execute(task);
         try {
@@ -92,9 +92,9 @@ public class BFUpdateTaskTest extends ActivityInstrumentationTestCase2 {
     public void setUp() throws Exception{
         solo = new Solo(getInstrumentation(),getActivity());
 
-        // Login as user0000
-        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
+        // Login as KevinHP
+        solo.enterText((EditText) solo.getView(R.id.login_username), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "KevinHP");
         solo.clickOnButton("Login");
         assertTrue(solo.searchText("Logged In"));
     }

@@ -37,8 +37,8 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
         super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
 
         // ensure the test accounts exist
-        User user0 = new User("user0000", "user0000", "user0000@example.com", "7800000000");
-        User user1 = new User("user0001", "user0001", "user0001@example.com", "7800000001");
+        User user0 = new User("KevinHP", "KevinHP", "KevinHP@example.com", "7800000000");
+        User user1 = new User("RiyaRiya", "RiyaRiya", "RiyaRiya@example.com", "7800000001");
         ElasticSearchUserController.AddUserTask addUserTask = new ElasticSearchUserController.AddUserTask();
         addUserTask.execute(user0, user1);
 
@@ -50,7 +50,7 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
             allTasks = getAllTasks.get();
             for(int i = 0; i < allTasks.getSize(); i++) {
                 Task task = allTasks.getTask(i);
-                if (task.getTaskRequester().equals("user0000")){
+                if (task.getTaskRequester().equals("KevinHP")){
                     Log.d("REQUESTCODE", task.getTaskName());
                     ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
                     deleteTask.execute(task);
@@ -68,7 +68,7 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
             bidList = getAllBids.get();
             for(int i = 0; i < bidList.size(); i++) {
                 Bid bid = bidList.get(i);
-                if (bid.getTaskRequester().equals("user0000") || bid.getTaskProvider().equals("user0001")){
+                if (bid.getTaskRequester().equals("KevinHP") || bid.getTaskProvider().equals("RiyaRiya")){
                     Log.d("REQUESTCODE", bid.getTaskName());
                     ElasticSearchBidController.DeleteBidTask deleteBid = new ElasticSearchBidController.DeleteBidTask();
                     deleteBid.execute(bid);
@@ -83,19 +83,19 @@ public class BAAddTaskTest extends ActivityInstrumentationTestCase2 {
     public void setUp() throws Exception{
         solo = new Solo(getInstrumentation(),getActivity());
 
-        // Login as user0000
+        // Login as KevinHP
         MainActivity activity = (MainActivity)solo.getCurrentActivity();
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "KevinHP");
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("Logged In"));
     }
 
-    public void testStart() throws Exception{
-        Activity activity = getActivity();
-    }
+//    public void testStart() throws Exception{
+//        Activity activity = getActivity();
+//    }
 
     public void testAddTask(){
         solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);

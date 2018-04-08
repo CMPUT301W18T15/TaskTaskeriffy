@@ -31,8 +31,8 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
         super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
 
         // ensure the test accounts exist
-        User user0 = new User("user0000", "user0000", "user0000@example.com", "7800000000");
-        User user1 = new User("user0001", "user0001", "user0001@example.com", "7800000001");
+        User user0 = new User("KevinHP", "KevinHP", "KevinHP@example.com", "7800000000");
+        User user1 = new User("RiyaRiya", "RiyaRiya", "RiyaRiya@example.com", "7800000001");
         ElasticSearchUserController.AddUserTask addUserTask = new ElasticSearchUserController.AddUserTask();
         addUserTask.execute(user0, user1);
     }
@@ -40,19 +40,19 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
     public void setUp() throws Exception{
         solo = new Solo(getInstrumentation(),getActivity());
 
-        // Login as user0000
+        // Login as KevinHP
         MainActivity activity = (MainActivity)solo.getCurrentActivity();
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
-        solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
+        solo.enterText((EditText) solo.getView(R.id.login_username), "KevinHP");
+        solo.enterText((EditText) solo.getView(R.id.login_password), "KevinHP");
         solo.clickOnButton("Login");
         solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("Logged In"));
     }
 
-    public void testStart() throws Exception{
-        Activity activity = getActivity();
-    }
+//    public void testStart() throws Exception{
+//        Activity activity = getActivity();
+//    }
 
     public void testProviderUpdateProfile(){
         // get the navigation bar
@@ -69,7 +69,7 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
         // change the profile
         solo.clearEditText((EditText) solo.getView(R.id.emailAddressEdit));
         solo.clearEditText((EditText) solo.getView(R.id.phoneNumberEdit));
-        solo.enterText((EditText) solo.getView(R.id.emailAddressEdit), "user0000_changed@example.com");
+        solo.enterText((EditText) solo.getView(R.id.emailAddressEdit), "KevinHP_changed@example.com");
         solo.enterText((EditText) solo.getView(R.id.phoneNumberEdit), "7800009999");
         solo.clickOnButton("Save Information");
         solo.goBack();
@@ -78,7 +78,7 @@ public class ACUpdateProfileTest extends ActivityInstrumentationTestCase2 {
         drawerLayout.openDrawer(Gravity.LEFT);
         solo.clickOnMenuItem("My Account");
 
-        assertTrue(solo.searchText("user0000_changed@example.com"));
+        assertTrue(solo.searchText("KevinHP_changed@example.com"));
         assertTrue(solo.searchText("7800009999"));
 
         try {
