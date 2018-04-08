@@ -2,6 +2,7 @@ package com.example.heesoo.myapplication.entities;
 
 import android.annotation.SuppressLint;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
@@ -10,7 +11,7 @@ import java.util.Objects;
  * Created by manuelakm on 2018-03-12.
  */
 
-public class TaskList {
+public class TaskList implements Serializable {
 
     private ArrayList<Task> tasks;
 
