@@ -47,11 +47,11 @@ This activity is navigated to when the provider wants to find a new task that th
 
 public class FindNewTaskActivity extends AppCompatActivity {
     private TaskList tempTaskList;
-    private TaskList taskList;
+    private ArrayList<Task> taskList;
     private ListView listView;
     private Task selectedTask;
-    private ArrayList<String> searchResults;
-    private ArrayAdapter<String> adapter;
+    private ArrayList<Task> searchResults;
+    private ArrayAdapter<Task> adapter;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -85,9 +85,9 @@ public class FindNewTaskActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //final Object t = listView.getItemAtPosition(i);
-                //selectedTask = (Task) t;
-                selectedTask = taskList.getTask(i);
+                final Object t = listView.getItemAtPosition(i);
+                selectedTask = (Task) t;
+                //selectedTask = taskList.get(i);
 
                 AlertDialog.Builder popUp = new AlertDialog.Builder(FindNewTaskActivity.this);
                 popUp.setMessage("Would you like to see details about '"  + selectedTask.getTaskName() + "' ?");
@@ -178,16 +178,16 @@ public class FindNewTaskActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                TaskList tempList = new TaskList();
-                searchResults = new ArrayList<String>();
+                //TaskList tempList = new TaskList();
+                searchResults = new ArrayList<>();
 
-                for(int i = 0; i < taskList.getSize(); i++) {
+                for(int i = 0; i < taskList.size(); i++) {
 
-                    Task temp = taskList.getTask(i);
+                    Task temp = taskList.get(i);
 
                     if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
-                        tempList.addTask(temp);
-                        searchResults.add("Name: " + temp.getTaskName() +" \n Status: " + temp.getStatus());
+                        //tempList.addTask(temp);
+                        searchResults.add(temp);
                     }
                 }
 
@@ -206,7 +206,7 @@ public class FindNewTaskActivity extends AppCompatActivity {
         noTasksMessage.setVisibility(View.GONE);
 
         tempTaskList = new TaskList();
-        taskList = new TaskList();
+        taskList = new ArrayList<Task>();
 
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
         getAllTasks.execute("");
@@ -224,16 +224,17 @@ public class FindNewTaskActivity extends AppCompatActivity {
 
         for(int i = 0; i < tempTaskList.getSize(); i++){
             if ( !(tempTaskList.getTask(i).getTaskRequester().equals( SetPublicCurrentUser.getCurrentUser().getUsername())) ) {
-                taskList.addTask(tempTaskList.getTask(i));
+                taskList.add(tempTaskList.getTask(i));
                 displayedTasks.add("Name: " + tempTaskList.getTask(i).getTaskName() +" \n Status: " + tempTaskList.getTask(i).getStatus());
             }
         }
-        if (taskList.getSize() == 0) {
+
+        if (taskList.size() == 0) {
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("No Tasks available!");
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, displayedTasks);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         listView.setAdapter(adapter);
 
     }

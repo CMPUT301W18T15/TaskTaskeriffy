@@ -5,10 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -47,10 +51,11 @@ item in the list, the provider may view the details of the task and it's lowest 
 public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
 
     private TaskList tempTaskList;
-    private TaskList taskList;
+    private ArrayList<Task> taskList;
     private ListView listView;
     private Task selectedTask;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Task> adapter;
+    private ArrayList<Task> searchResults;
 
     private DrawerLayout drawerLayout;
     private TextView noTasksMessage;
@@ -72,10 +77,8 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //final Object t = listView.getItemAtPosition(i);
-                //selectedTask = (Task) t;
-                selectedTask = taskList.getTask(i);
-
+                final Object t = listView.getItemAtPosition(i);
+                selectedTask = (Task) t;
 
                 AlertDialog.Builder popUp = new AlertDialog.Builder(TaskProviderViewBiddedTaskListActivity.this);
                 popUp.setMessage("Would you like to see details about '" + selectedTask.getTaskName() + "' ?");
@@ -150,6 +153,44 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.item_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                //TaskList tempList = new TaskList();
+                searchResults = new ArrayList<>();
+
+                for(int i = 0; i < taskList.size(); i++) {
+
+                    Task temp = taskList.get(i);
+
+                    if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
+                        //tempList.addTask(temp);
+                        searchResults.add(temp);
+                    }
+                }
+
+                adapter = new ArrayAdapter<>(TaskProviderViewBiddedTaskListActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, searchResults);
+                listView.setAdapter(adapter);
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     // Objects.equals() is only accepted in new Api's
     @SuppressLint("NewApi")
     @Override
@@ -160,7 +201,7 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
 
         checkNetwork(this);
         tempTaskList = new TaskList();
-        taskList = new TaskList();
+        taskList = new ArrayList<>();
         ArrayList<String> displayedTasks = new ArrayList<>();
 
         ElasticSearchTaskController.GetAllTasks getAllTasks = new ElasticSearchTaskController.GetAllTasks();
@@ -180,18 +221,18 @@ public class TaskProviderViewBiddedTaskListActivity extends AppCompatActivity {
                     Bid pbid = tempTaskList.getTask(i).getBids().get(j);
 
                     if (pbid.getTaskProvider().equals(SetPublicCurrentUser.getCurrentUser().getUsername())){
-                        taskList.addTask(tempTaskList.getTask(i));
+                        taskList.add(tempTaskList.getTask(i));
                         displayedTasks.add("Name: "+tempTaskList.getTask(i).getTaskName()+" Status: " + tempTaskList.getTask(i).getStatus());
                     }
                 }
             }
         }
-        if (taskList.getSize() == 0){
+        if (taskList.size() == 0){
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("You have not bidded on any tasks!");
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, displayedTasks);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, taskList);
         listView.setAdapter(adapter);
 
     }
