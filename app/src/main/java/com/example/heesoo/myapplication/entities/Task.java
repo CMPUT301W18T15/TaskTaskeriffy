@@ -54,11 +54,11 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method returns the string that represents the username of the user that has
-     *     requested this activity
+     *     This methods returns the string that corresponds to the task requester associated
+     *     with with the task's
      * </p>
      *
-     * @return string that represents the User that has requested this task
+     * @return string that represents the username of the user that has requested this task
      */
     public String getTaskRequester(){
 
@@ -80,7 +80,7 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     A method that replaces the taskProvider attribute with the parameter provided
      * </p>
      * @param taskProvider string that represents the username of the user that has been assigned to
      *                     perform this activity
@@ -104,7 +104,7 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method sets the variable taskName to the string passed into the method.
+     *     A method that replaces the taskName attribute with the parameter provided
      * </p>
      * @param taskName string that represents the name given to this task
      */
@@ -126,7 +126,7 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     A method that replaces the description attribute with the parameter provided
      * </p>
      * @param taskDescription string that represents the description given to this task
      */
@@ -148,7 +148,7 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     A method that replaces the status attribute with the parameter provided
      * </p>
      * @param status string that represents the new status of the task
      */
@@ -170,7 +170,7 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     A method that replaces the id attribute with the parameter provided
      * </p>
      * @param id string that represents the unique id assigned to the task
      */
@@ -179,28 +179,54 @@ public class Task implements Serializable {
         this.id = id;
     }
 
+    /**
+     * <p>
+     *     A method that returns the Double object that represents the latitude associated with this task
+     * </p>
+     * @return Double that represents the latitude associated with this task
+     */
     public Double getLatitude() {
+
         return latitude;
     }
 
+    /**
+     * <p>
+     *     A method that replaces the latitude attribute with the parameter provided
+     * </p>
+     * @param latitude a Double object that represents the latitude associated with the task
+     */
     public void setLatitude(Double latitude) {
+
         this.latitude = latitude;
     }
 
-
+    /**
+     * <p>
+     *     A method that returns the Double object that represents the longitude associated with this task
+     * </p>
+     * @return Double that represents the longitude associated with this task
+     */
     public Double getLongitude() {
+
         return longitude;
     }
 
+    /**
+     * <p>
+     *     A method that replaces the longitude attribute with the parameter provided
+     * </p>
+     * @param longitude a Double object that represents the longitude associated with the task
+     */
     public void setLongitude(Double longitude) {
+
         this.longitude = longitude;
     }
 
     /**
      * <p>
-     *     This method adds a bid to the local ArrayList<Bid> that represents all the bids placed
-     *     on the task and changes the status of Task to "Bidded". This method also uses
-     *     elasticsearchcontroller to update the database.
+     *     This method adds a bid to the local BidList and changes the status of Task to "Bidded". This method also uses
+     *     ElasticSearchController to update the database.
      * </p>
      * @param bid a Bid that has been placed on this task
      */
@@ -214,9 +240,9 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method deletes the bid from the local ArrayList<Bid> that represents all the bids
-     *     placed on the task and changes the status to "Requested" if there are no other bids on
-     *     this task. This method also uses elasticsearchcontroller to update the database.
+     *     This method deletes the bid from the local BidList and changes the status to "Requested"
+     *     if there are no other bids on this task. This method also uses ElasticSearchController
+     *     to update the database.
      * </p>
      * @param receivedBid a Bid that is to be deleted from this task
      */
@@ -238,7 +264,7 @@ public class Task implements Serializable {
 
     /**
      *<p>
-     *     This method deletes all bids associated with this task from the ArrayList<Bid>
+     *     This method deletes all bids associated with this task from the BidList
      *</p>
      */
     public void deleteAllBids() {
@@ -248,9 +274,9 @@ public class Task implements Serializable {
 
     /**
      * <p>
-     *     This method returns an ArrayList<Bid> that represents all the bids associated with this task
+     *     This method returns an BidList that represents all the bids associated with this task
      * </p>
-     * @return ArrayList<Bid>< that represents all the bids associated with this task
+     * @return BidList that represents all the bids associated with this task
      */
     public BidList getBids(){
 
@@ -271,7 +297,7 @@ public class Task implements Serializable {
     /**
      * <p>
      *     This method adds a picture to the local ArrayList<Bitmap> that represents all the pictures placed
-     *     on the task. This method also uses elasticsearchcontroller to update the database.
+     *     on the task.
      * </p>
      * @param encodedPicture a Bitmap that has been placed on this task
      */
@@ -280,6 +306,12 @@ public class Task implements Serializable {
         pictures.add(encodedPicture);
     }
 
+    /**
+     * <p>
+     *     A method that returns the first picture associated with a task
+     * </p>
+     * @return a string that represents the image associated with the task
+     */
     public String getPicture() {
         return pictures.get(0);
     }
@@ -316,7 +348,7 @@ public class Task implements Serializable {
      * lowest bid placed on this particular task.
      *</p>
      * <pre>
-     *  @return minValue   the string conversion of the lowest bid placed on the given Task
+     *  @return minValue the string conversion of the lowest bid placed on the given Task
      * </pre>
      */
     public String getLowestBid() {
@@ -338,11 +370,25 @@ public class Task implements Serializable {
 
     }
 
+    /**
+     * <p>
+     *     A method that replaced the editing attribute with the parameter provided.
+     * </p>
+     * @param status a boolean value that represents whether it is currently being edited
+     */
     public void setEditStatus(Boolean status){
+
         this.editing = status;
     }
 
+    /**
+     * <p>
+     *     A method that returns whether a task is being edited currently or not
+     * </p>
+     * @return a boolean value that represents whether it is currently being edited
+     */
     public Boolean getEditStatus(){
+
         return editing;
     }
 }

@@ -78,7 +78,6 @@ public class TaskProviderViewAssignedTaskDetailActivity extends AppCompatActivit
         try {
             user = getUser.get();
         } catch (Exception e) {
-            //Log.d
         }
         Intent intent = new Intent(TaskProviderViewAssignedTaskDetailActivity.this, ViewProfileActivity.class);
         intent.putExtra("USER", user);

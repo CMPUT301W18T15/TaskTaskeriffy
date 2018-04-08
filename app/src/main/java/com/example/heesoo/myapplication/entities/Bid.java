@@ -45,9 +45,9 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method returns a string that corresponds to the name of the task that this bid is placed on.
+     *     This method returns a string object that corresponds to the name of the task that this bid is placed on.
      * </p>
-     * @return string that represents the name of this task
+     * @return string object that represents the name of this task
      */
     public String getTaskName(){
 
@@ -56,9 +56,9 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     This method replaces the taskName attribute with the parameter provided.
      * </p>
-     * @param taskName string that represents the name of the task that this bid is placed on.
+     * @param taskName string object that represents the name of the task that this bid is placed on.
      */
     public void setTaskName(String taskName){
 
@@ -67,8 +67,7 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method returns a string that represents the description of the task this bid is
-     *     placed on.
+     *     This method returns a string object that corresponds to the description of the task that this bid is placed on.
      * </p>
      * @return string that represents the description of the task this bid is placed on
      */
@@ -79,7 +78,7 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     This method replaces the taskDescription attribute with the parameter provided.
      * </p>
      * @param description string that represents the description of the task that this bid is placed on
      */
@@ -90,7 +89,7 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method returns a string that represents the status of this bid.
+     *     This method returns the string that corresponds to the status of this bid.
      * </p>
      * @return string that represents the status of this bid
      */
@@ -101,7 +100,7 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     This method replaces the value of the status attribute with the parameter provided.
      * </p>
      * @param status string that represents the status of this bid
      */
@@ -124,7 +123,7 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     This method replaces the value of the taskProvider attribute with the parameter provided.
      * </p>
      * @param taskProvider1 string that represents the username of the task provider that has placed this bid
      */
@@ -135,9 +134,9 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method returns the string that represents the unique id of this bid.
+     *     This method returns the string object that represents the unique id of this bid.
      * </p>
-     * @return string that represents the unique id of this bid
+     * @return string object that represents the unique id of this bid
      */
     public String getId(){
         
@@ -146,9 +145,9 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     This method replaces the value of the id attribute with the parameter provided.
      * </p>
-     * @param id string that represents the unique id of this bid
+     * @param id string object that represents the unique id of this bid
      */
     public void setId(String id) {
         
@@ -157,9 +156,9 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method returns the Float that represents the value of bid placed on this task
+     *     This method returns the Float object that represents the price of the bid placed on the task.
      * </p>
-     * @return Float that represents the price of the bid placed on a task
+     * @return Float object that represents the price of the bid placed on a task
      */
     public Float getBidPrice(){
 
@@ -168,9 +167,9 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     This method replaces the value of the bidPrice attribute with the parameter provided.
      * </p>
-     * @param bidPrice Float that represents the price of bid placed on a task
+     * @param bidPrice Float object that represents the price of bid placed on a task
      */
     public void setBidPrice(Float bidPrice){
 
@@ -179,10 +178,10 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method returns a string value that represents the user that requested the task this
-     *     bid belongs to.
+     *     This method returns a String object that represents the task requester's username.
      * </p>
-     * @return
+     *
+     * @return string object that represents the task requester's username
      */
     public String getTaskRequester() {
 
@@ -191,22 +190,25 @@ public class Bid implements Serializable {
 
     /**
      * <p>
-     *     This method replaces the local value of this variable with the value passed to the method.
+     *     This method replaces the value of the taskRequester attribute with the parameter provided.
      * </p>
-     * @param taskRequester string that represents the task requester
+     *
+     * @param taskRequester string object that represents the task requester's username
      */
     public void setTaskRequester(String taskRequester) {
 
         this.taskRequester = taskRequester;
     }
 
+    /**
+     * <p>
+     *     This method returns a Calendar object that represents the time of the bid's creation.
+     * </p>
+     *
+     * @return calender object that represents the bid's time of creation
+     */
     public Calendar getTimeStamp() {
 
         return timeStamp;
-    }
-
-    public void setTimeStamp(Calendar timeStamp) {
-
-        this.timeStamp = timeStamp;
     }
 }

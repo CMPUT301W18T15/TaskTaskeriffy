@@ -32,7 +32,7 @@ public class TaskList implements Serializable {
      * <p>
      *     This method adds the given Task to the local ArrayList<Task>
      * </p>
-     * @param t Task that is the task that must be added to the taskList
+     * @param t Task that must be added to the TaskList
      */
     public void addTask(Task t) {
 
@@ -41,9 +41,9 @@ public class TaskList implements Serializable {
 
     /**
      * <p>
-     *     This method removes the given task from the local ArrayList<Task>
+     *     This method removes the given task from the TaskList
      * </p>
-     * @param t Task that is the task that must be removed from the taskList
+     * @param t Task that must be removed from the TaskList
      */
     public void removeTask(Task t) {
 
@@ -56,7 +56,7 @@ public class TaskList implements Serializable {
      *     if the task does not exist
      * </p>
      * @param t Task that is to be returned from the TaskList
-     * @return Task that is returned from the method
+     * @return Task that is returned from the method (null if the task is not contained in the TqskList)
      */
     public Task getTask(Task t) {
 
@@ -87,20 +87,26 @@ public class TaskList implements Serializable {
      * </p>
      * @return TaskList that contains all the tasks with the status "Bidded"
      */
-    @SuppressLint("NewApi")
     public TaskList getBiddedTasks() {
 
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (Objects.equals(tasks.get(i).getStatus(), "Bidded")) {
+            if ( tasks.get(i).getStatus().equals("Bidded")) {
                 tl.addTask(tasks.get(i));
             }
         }
         return tl;
     }
 
+    /**
+     * <p>
+     *     This method adds all the tasks in the collection provided to this TaskList
+     * </p>
+     * @param t Collection of tasks that will be added to the TaskList
+     */
     public void addAll(Collection<Task> t) {
+
         tasks.addAll(t);
     }
 
@@ -110,19 +116,24 @@ public class TaskList implements Serializable {
      * </p>
      * @return TaskList that contains all the tasks with the status "Assigned"
      */
-    @SuppressLint("NewApi")
     public TaskList getAssignedTasks() {
 
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (Objects.equals(tasks.get(i).getStatus(), "Assigned")) {
+            if (tasks.get(i).getStatus().equals("Assigned") ) {
                 tl.addTask(tasks.get(i));
             }
         }
         return tl;
     }
 
+    /**
+     * <p>
+     *     The method that returns all the tasks that are available; i.e. with the statuses "Requested" or "Bidded"
+     * </p>
+     * @return TaskList that contains all the tasks with status "Requested" or "Bidded"
+     */
     public TaskList getAvailableTasks() {
 
         TaskList tl = new TaskList();
@@ -137,17 +148,16 @@ public class TaskList implements Serializable {
 
     /**
      * <p>
-     *     This method returns all the tasks in the list with the status "Completed"
+     *     The method returns all the tasks in the list with the status "Completed"
      * </p>
      * @return TaskList that contains all the tasks with the status "Completed"
      */
-    @SuppressLint("NewApi")
     public TaskList getCompletedTasks() {
 
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (Objects.equals(tasks.get(i).getStatus(), "Completed")) {
+            if ( tasks.get(i).getStatus().equals("Completed")) {
                 tl.addTask(tasks.get(i));
             }
         }
@@ -160,13 +170,12 @@ public class TaskList implements Serializable {
      * </p>
      * @return TaskList that contains all the tasks with the status "Accepted"
      */
-    @SuppressLint("NewApi")
     public TaskList getAcceptedTasks() {
 
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (Objects.equals(tasks.get(i).getStatus(), "Accepted")) {
+            if ( tasks.get(i).getStatus().equals("Accepted")) {
                 tl.addTask(tasks.get(i));
             }
         }
@@ -183,6 +192,11 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
+    /**
+     * <p>
+     *     The method that empties the TaskList
+     * </p>
+     */
     public void clear() {
         tasks.clear();
     }
