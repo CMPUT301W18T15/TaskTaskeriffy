@@ -103,15 +103,6 @@ public class BEDeleteTaskTest extends ActivityInstrumentationTestCase2 {
 //    }
 
     public void testDeleteTask(){
-//        // add sample task: user0000 task1
-//        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
-//        solo.clickOnButton("Add Task");
-//        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
-//        solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
-//        solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
-//        solo.clickOnButton("Save");
-//        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
-
         // click the list view in position 0
         // show the task details
         solo.clickInList(0);

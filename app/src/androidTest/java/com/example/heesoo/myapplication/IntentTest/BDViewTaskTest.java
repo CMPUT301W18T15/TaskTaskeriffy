@@ -105,24 +105,11 @@ public class BDViewTaskTest extends ActivityInstrumentationTestCase2 {
 //    }
 
     public void testViewTask(){
-//        // add sample task: user0000 task1
-//        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
-//        solo.clickOnButton("Add Task");
-//        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
-//        solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
-//        solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
-//        solo.clickOnButton("Save");
-//        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
-
         // click the list view in position 0
         // show the task details
         solo.clickInList(0);
         solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
         assertTrue(solo.searchText("House cleaning"));
-//        solo.goBack();
-//        // clear the garbage
-//        solo.clickInList(0);
-//        solo.clickOnButton("Delete Task");
 
         try {
             Thread.currentThread().sleep(1000);

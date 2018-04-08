@@ -38,13 +38,13 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
 
     public AAUserRegistrationTest(){
         super(com.example.heesoo.myapplication.login_activity.MainActivity.class);
-        //        // clear the database
-//        ElasticSearchClearDatabaseController deleteTask = new ElasticSearchClearDatabaseController();
-//        try {
-//            deleteTask.deleteIndex();
-//        } catch (Exception e) {
-//            Log.i("Error", "Fail to delete the database");
-//        }
+        // clear the database
+        ElasticSearchClearDatabaseController deleteTask0 = new ElasticSearchClearDatabaseController();
+        try {
+            deleteTask0.deleteIndex();
+        } catch (Exception e) {
+            Log.i("Error", "Fail to delete the database");
+        }
 
         // delete the created user
         User user0 = new User("user0000", "user0000", "user0000@example.com", "7800000000");
@@ -99,9 +99,9 @@ public class AAUserRegistrationTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void testStart() throws Exception{
-        Activity activity = getActivity();
-    }
+//    public void testStart() throws Exception{
+//        Activity activity = getActivity();
+//    }
 
     public void testClickRegister(){
         MainActivity activity = (MainActivity)solo.getCurrentActivity();

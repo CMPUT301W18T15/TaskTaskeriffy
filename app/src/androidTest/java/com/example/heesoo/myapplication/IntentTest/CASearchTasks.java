@@ -98,26 +98,6 @@ public class CASearchTasks extends ActivityInstrumentationTestCase2 {
 //    }
 
     public void testSearchTask(){
-//        // Login as user0000 Requester
-//        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
-//        solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
-//        solo.clickOnButton("Login");
-//        assertTrue(solo.searchText("Logged In"));
-//
-//        // add sample task: user0000 task1
-//        solo.clickOnButton("Add Task");
-//        solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
-//        solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
-//        solo.clickOnButton("Save");
-//        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
-//
-//        // back to login activity
-//        solo.goBack();
-//        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-        // Login as user0001 Provider
-//        solo.clearEditText((EditText) solo.getView(R.id.login_username));
-//        solo.clearEditText((EditText) solo.getView(R.id.login_password));
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0001");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");

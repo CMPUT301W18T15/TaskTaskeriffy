@@ -24,6 +24,7 @@ import com.robotium.solo.Solo;
 
 /**
  * Created by chengze on 2018/4/7.
+ * User Story 10.03.01 *map cannot displayed sometimes
  */
 
 public class FAViewTaskIn5km extends ActivityInstrumentationTestCase2 {

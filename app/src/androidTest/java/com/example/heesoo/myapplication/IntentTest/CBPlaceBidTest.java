@@ -102,26 +102,6 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
 //    }
 
     public void testPlaceBid(){
-//        // Login as user0000 Requester
-//        solo.enterText((EditText) solo.getView(R.id.login_username), "user0000");
-//        solo.enterText((EditText) solo.getView(R.id.login_password), "user0000");
-//        solo.clickOnButton("Login");
-//        assertTrue(solo.searchText("Logged In"));
-//
-//        // add sample task: user0000 task1
-//        solo.clickOnButton("Add Task");
-//        solo.enterText((EditText) solo.getView(R.id.taskName), "user0000 task1");
-//        solo.enterText((EditText) solo.getView(R.id.taskDescription), "user0000 task1 Description");
-//        solo.clickOnButton("Save");
-//        solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
-//
-//        // back to login activity
-//        solo.goBack();
-//        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-        // Login as user0001 Provider
-//        solo.clearEditText((EditText) solo.getView(R.id.login_username));
-//        solo.clearEditText((EditText) solo.getView(R.id.login_password));
         solo.enterText((EditText) solo.getView(R.id.login_username), "user0001");
         solo.enterText((EditText) solo.getView(R.id.login_password), "user0001");
         solo.clickOnButton("Login");
@@ -148,8 +128,6 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.clickInList(0);
 
         // get a dialog and choose Yes
-//        solo.clickOnButton("No");
-//        solo.assertCurrentActivity("Wrong Activity", FindNewTaskActivity.class);
         solo.clickOnButton("Yes");
         solo.assertCurrentActivity("Wrong Activity", PlaceBidOnTaskActivity.class);
 
@@ -180,8 +158,6 @@ public class CBPlaceBidTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnMenuItem("Tasks I have Bidded On");
         solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
 
-//        solo.clickOnButton("View bidded list");
-//        solo.assertCurrentActivity("Wrong Activity", TaskProviderViewBiddedTaskListActivity.class);
         solo.clickInList(0);
         solo.clickOnButton("Yes");
         solo.assertCurrentActivity("Wrong Activity", TaskProviderViewAssignedTaskDetailActivity.class);
