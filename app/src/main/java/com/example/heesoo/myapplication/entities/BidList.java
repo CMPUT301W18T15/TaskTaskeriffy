@@ -47,6 +47,15 @@ public class BidList implements Serializable {
         return bids.contains(b);
     }
 
+    public Bid bidByUsername(String username){
+        for(int i =0; i<this.size(); i++){
+            Bid bid = this.get(i);
+            String bidProvider = bid.getTaskProvider();
+            if(username.equals(bidProvider)) return bid;
+        }
+        return null;
+    }
+
     public int indexOf(Bid b) {
         return bids.indexOf(b);
     }

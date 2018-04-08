@@ -73,6 +73,7 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 newBidPrice = placeBidView.getText().toString();
                 float bidPrice;
+                Bid newBid, earlierBid;
 
                 Boolean editing = false;
                 Task currentTask;
@@ -93,9 +94,19 @@ public class PlaceBidOnTaskActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "The Requester is editing this task, please try to place bid later!", Toast.LENGTH_SHORT).show();
                 } else{
                     bidPrice = Float.parseFloat(newBidPrice);
-                    Bid newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetPublicCurrentUser.getCurrentUser().getUsername(), task.getTaskRequester());
-                    ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
-                    addBidsTask.execute(newBid);
+                    earlierBid = task.getBids().bidByUsername(SetPublicCurrentUser.getCurrentUser().getUsername());
+                    if(earlierBid!=null){
+                        task.deleteBid(earlierBid);
+                        newBid = earlierBid;
+                        newBid.setBidPrice(bidPrice);
+                        ElasticSearchBidController.EditBidTask editBid = new ElasticSearchBidController.EditBidTask();
+                        editBid.execute(newBid);
+                    }else {
+                        newBid = new Bid(task.getTaskName(), task.getTaskDescription(), bidPrice, SetPublicCurrentUser.getCurrentUser().getUsername(), task.getTaskRequester());
+                        ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
+                        addBidsTask.execute(newBid);
+                    }
+
                     task.addBid(newBid);
 
                     // offline behavior

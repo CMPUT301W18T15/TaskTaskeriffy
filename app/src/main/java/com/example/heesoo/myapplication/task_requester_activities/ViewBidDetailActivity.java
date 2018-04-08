@@ -133,7 +133,7 @@ public class ViewBidDetailActivity extends AppCompatActivity {
                 task.addBid(bid);
                 ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                 editTask.execute(task);
-                Toast.makeText(getApplicationContext(),"Task Declined", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Bid Declined", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
