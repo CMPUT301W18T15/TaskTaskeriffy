@@ -14,7 +14,8 @@ import java.io.ByteArrayOutputStream;
 
 public class ConvertImageActivity
 {
-// Code taken from https://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
+    /*Reference taken from https://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
+    on March 30, 2018 */
     public static Bitmap convert(String base64Str) throws IllegalArgumentException
     {
         byte[] decodedBytes = Base64.decode(

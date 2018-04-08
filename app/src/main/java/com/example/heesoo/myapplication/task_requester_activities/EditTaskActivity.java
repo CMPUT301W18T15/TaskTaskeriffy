@@ -197,7 +197,8 @@ public class EditTaskActivity extends AppCompatActivity {
 
                 Log.e("NEW","NEW"+ URI);
 
-                //TODO: Returns bitmap = null. Unsure how to fix. Critical for multiple photographs
+                /*TODO: Returns bitmap = null. All attempts have failed.
+                All underlying multiple photos functioanlity exist. This fix is critical for multiple photographs */
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(URI));
 
                 mImageView.setImageBitmap(bitmap);

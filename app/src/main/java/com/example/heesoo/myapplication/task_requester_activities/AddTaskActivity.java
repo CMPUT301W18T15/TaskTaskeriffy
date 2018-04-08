@@ -142,9 +142,6 @@ public class AddTaskActivity extends AppCompatActivity {
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                 startActivityForResult(intent, IMG_RESULT);
-
-                /* Another implementation is at Taken from https://stackoverflow.com/questions/12995185/android-taking-photos-and-saving-them-with-a-custom-name-to-a-custom-destinati
-                 on Mar 28, 2018. Opens camera to snap picture and store in external file*/
             }
         });
     }
@@ -157,7 +154,8 @@ public class AddTaskActivity extends AppCompatActivity {
             if (requestCode == IMG_RESULT && resultCode == RESULT_OK
                     && null != data) {
 
-
+                /*Reference taken from https://stackoverflow.com/questions/3401579/get-filename-and-path-from-uri-from-mediastore?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+                on April 4,2018 */
                 Uri URI = data.getData();
                 String[] FILE = { MediaStore.Images.Media.DATA };
 
