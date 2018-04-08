@@ -41,10 +41,9 @@ This activity is reached through the show assigned task list button on the dashb
 
 public class TaskRequesterViewAssignedTasksActivity extends AppCompatActivity {
 
-    private TaskList taskList; // the list of tasks that requester posted
+    private TaskList taskList;
     private ListView clickableList;
     private TaskList allTasks;
-    private ArrayAdapter<Task> taskAdapter;
     private TextView noTasksMessage;
 
     private DrawerLayout drawerLayout;
@@ -60,8 +59,6 @@ public class TaskRequesterViewAssignedTasksActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navView);
         noTasksMessage = findViewById(R.id.noTasksMessage);
 
-
-        // when click on list
         clickableList = findViewById(R.id.tasksListView);
         clickableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,13 +74,9 @@ public class TaskRequesterViewAssignedTasksActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }
@@ -150,7 +143,6 @@ public class TaskRequesterViewAssignedTasksActivity extends AppCompatActivity {
             noTasksMessage.setVisibility(View.VISIBLE);
             noTasksMessage.setText("None of your tasks are currently assigned to a provider!");
         }
-        //requesterAssignedTasksNames.add("NAME: GARBAGE STATUS: SURE");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, requesterAssignedTasksNames);

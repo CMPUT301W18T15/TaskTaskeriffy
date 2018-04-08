@@ -17,9 +17,14 @@ import com.example.heesoo.myapplication.entities.BidList;
 import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterViewBiddedTasksActivity;
 import com.example.heesoo.myapplication.shared_preferences.SetPublicCurrentUser;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.lang.Thread;
+
+/*
+This thread polls the bids in the database every 60 seconds, in order to notify the user when a
+new bid has been placed on their tasks. This thread is started in MainActivity, directly after
+ successfully signing in, and is terminated when the app is closed.
+ */
 
 public class NotificationThread extends Thread {
 

@@ -11,8 +11,9 @@ import com.example.heesoo.myapplication.task_requester_activities.ConvertImageAc
 
 import java.util.ArrayList;
 
-/**
- * Created by riyariya on 2018-03-29.
+/*
+This activity displays all the photos associated with a particular task. It is called in the following
+activities : PlaceBidOnActivity, TaskProviderViewAssignedTaskDetail, ShowTaskDetailActivity.
  */
 
 public class ShowPhotoActivity extends AppCompatActivity {

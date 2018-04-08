@@ -23,9 +23,6 @@ import com.example.heesoo.myapplication.R;
 
 import static com.example.heesoo.myapplication.task_requester_activities.ViewRequestedTasksActivity.checkNetwork;
 
-/**
- * Created by manuelakm on 2018-03-13.
- */
 
 /*
 This activity gives the user an interface to view their profile which contains information about their account such as
@@ -45,8 +42,6 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView EmailAddressView;
     private TextView PhoneNumberView;
     private TextView RatingView;
-
-
 
     private Button editButton;
 
@@ -70,13 +65,9 @@ public class ViewProfileActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }
@@ -110,20 +101,20 @@ public class ViewProfileActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     protected void onStart() {
-        // offline check
+
         checkNetwork(this);
         super.onStart();
-        User user_recieved = (User) getIntent().getSerializableExtra("USER");
+        User user_received = (User) getIntent().getSerializableExtra("USER");
         User user;
-        if (user_recieved == null) {
+        if (user_received == null) {
             user = SetPublicCurrentUser.getCurrentUser();
             editButton.setVisibility(View.VISIBLE);
         } else {
-            user = user_recieved;
+            user = user_received;
         }
-
 
         usernameView.setText(user.getUsername());
         EmailAddressView.setText(user.getEmailAddress());
@@ -136,18 +127,9 @@ public class ViewProfileActivity extends AppCompatActivity {
 
                 Intent edit_information = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(edit_information);
-                //finish();
             }
         });
 
-//        changeModeButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                setResult(RESULT_OK);
-//
-//                Intent change_mode = new Intent(getApplicationContext(), ChooseModeActivity.class);
-//                startActivity(change_mode);
-//            }
-//        });
     }
 
 }

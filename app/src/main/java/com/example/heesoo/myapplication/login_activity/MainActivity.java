@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText enter_password;
     private ElasticSearchUserController elasticSearchUserController;
 
-    // offline behavior
     private Context context = this;
     public static User user;
     private NotificationThread monitorBidsThread;
@@ -79,26 +78,30 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             user = getUserTask.get();
                         } catch (Exception e) {
-                            Log.i("Error", "The request for tweets failed in onStart");
+                            Log.i("ERROR", "The request for user from database failed");
                         }
 
-                        //offline
                         user.initializeOffline();
-
                         SetPublicCurrentUser.setCurrentUser(user);
+
                         if (pwd_str.equals(user.getPassword())) {
                             Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
 
                             monitorBidsThread.start();
                             startActivity(new Intent(MainActivity.this, ViewRequestedTasksActivity.class));
-                        } else {
+
+                        }
+                        else {
                             Toast.makeText(getApplicationContext(), "Password Does not Match", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
+                    }
+
+                    else {
                         Toast.makeText(getApplicationContext(), "Account Does not Exist", Toast.LENGTH_SHORT).show();
 
                     }
-            }else{
+            }
+            else{
                     Toast.makeText(getApplicationContext(), "Please fill in Username and Password", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -112,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        Log.d("ERROR", "ONDESTROY");
-//        monitorBidsThread.stop();
+        monitorBidsThread.stop();
     }
 
     private boolean checkEmpty(String username,String password) {

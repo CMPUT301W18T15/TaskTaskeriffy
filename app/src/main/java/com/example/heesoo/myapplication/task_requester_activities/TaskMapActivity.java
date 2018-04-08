@@ -26,6 +26,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+/*
+This activity allows the user to assign a location to a task by clicking on a location on the map. If
+the task already has a location specified, opening this activity will show a marker at the location
+that is associated with this task.
+ */
+
 public class TaskMapActivity extends AppCompatActivity
         implements OnMapReadyCallback {
 
@@ -36,9 +42,7 @@ public class TaskMapActivity extends AppCompatActivity
     private Task task;
     private String mode;
 
-    private static int MY_LOCATION_REQUEST_CODE = 1;
     private boolean LOCATION_PERMISSION_GRANTED = true;
-    private final LatLng mDefaultLocation = new LatLng(-34,151);
     private static final int DEFAULT_ZOOM = 15;
 
     @Override
@@ -63,11 +67,9 @@ public class TaskMapActivity extends AppCompatActivity
         enableMyLocation();
 
         if (task.getLatitude().equals(-1.0) && task.getLongitude().equals(-1.0)) {
-            Log.d("MapError", "NoLocation");
             getDeviceLocation();
         }
         else {
-            Log.d("MapError", "YesLocation");
             goToTaskLocation(task);
         }
 
@@ -93,7 +95,6 @@ public class TaskMapActivity extends AppCompatActivity
 
                                     ElasticSearchTaskController.EditTask editTask = new ElasticSearchTaskController.EditTask();
                                     editTask.execute(task);
-                                    // offline behavior
 
                                     for (int i = 0; i < MainActivity.user.getRequesterTasks().getSize(); i++) {
                                         Task changedTask = MainActivity.user.getRequesterTasks().getTask(i);
@@ -132,40 +133,19 @@ public class TaskMapActivity extends AppCompatActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            Log.d("MapError", "Have permission");
         } else {
-            // Show rationale and request permission.
         }
     }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode,
-//                                           @NonNull String permissions[],
-//                                           @NonNull int[] grantResults) {
-//        LOCATION_PERMISSION_GRANTED = false;
-//
-//        if (requestCode == MY_LOCATION_REQUEST_CODE) {
-//            // If request is cancelled, the result arrays are empty.
-//            if (grantResults.length > 0
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                LOCATION_PERMISSION_GRANTED = true;
-//            }
-//        }
-//        //updateLocationUI();
-//    }
 
     private void getDeviceLocation() {
         try {
             if (LOCATION_PERMISSION_GRANTED) {
-                Log.d("MapError", "Permission is granted");
 
                 mFusedLocationClient.getLastLocation()
                         .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                             @Override
                             public void onSuccess(Location location) {
                                 if (location != null) {
-                                    Log.d("MapError", "HERE");
-                                    Log.d("MapError", location.toString());
                                     mLastKnownLocation = location;
                                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                             new LatLng(mLastKnownLocation.getLatitude(),
@@ -181,7 +161,6 @@ public class TaskMapActivity extends AppCompatActivity
     }
 
     private void goToTaskLocation(Task t) {
-        Log.d("MapError", "In GOTO TasK Location");
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(t.getLatitude(), t.getLongitude()), DEFAULT_ZOOM));
         mMap.addMarker(new MarkerOptions().position(new LatLng(t.getLatitude(), t.getLongitude())).title("Task Location"));

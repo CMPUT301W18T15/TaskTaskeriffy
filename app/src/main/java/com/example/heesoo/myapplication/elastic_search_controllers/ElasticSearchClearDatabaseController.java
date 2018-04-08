@@ -9,11 +9,11 @@ import java.io.IOException;
 import io.searchbox.client.JestResult;
 import io.searchbox.indices.DeleteIndex;
 
-import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
-/**
- * Created by heesoopark on 2018-04-05.
+/*
+This class is how the program deletes entries from all indices from the database.
+It is used in in the intent tests.
  */
 
 public class ElasticSearchClearDatabaseController {
@@ -23,7 +23,6 @@ public class ElasticSearchClearDatabaseController {
     public void deleteIndex() throws IOException {
 
         String indexName = "cmput301w18t15";
-        //createIndex(indexName);
 
         verifySettings();
 
@@ -34,7 +33,6 @@ public class ElasticSearchClearDatabaseController {
 
     public void deleteTask() throws IOException {
         String indexName = "cmput301w18t15";
-        //createIndex(indexName);
 
         verifySettings();
 

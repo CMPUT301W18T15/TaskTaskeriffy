@@ -23,12 +23,9 @@ import com.example.heesoo.myapplication.task_requester_activities.TaskRequesterV
 import com.example.heesoo.myapplication.shared_preferences.SetPublicCurrentUser;
 
 /*
-This activity gives the user the option to edit their profile. The user can navigate to this activity through the
- "Edit Profile" button which is embedded in the ViewProfileActivity, when they are viewing their own profile.
- */
-
-/**
- * Created by manuelakm on 2018-03-13.
+This activity shows the user their statistics: rating, total earnings, total jobs done, total jobs
+requested etc... This activity can be accessed from the navigation bar of the app and is therefore
+called in all the main activities of our app (those that display lists of tasks).
  */
 
 public class MyStatisticsActivity extends AppCompatActivity {
@@ -78,13 +75,9 @@ public class MyStatisticsActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }

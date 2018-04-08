@@ -41,8 +41,8 @@ import java.util.ArrayList;
 
 /*
 This activity is navigated to when the provider wants to find a new task that they can bid on. It shows a list view of
- all the tasks that are in a requested or bidded state which are created by other users. BY clicking on a list item, the
- provider can navigate to a particular and see it's details.
+ all the tasks that are in a requested or bidded state which are created by other users. By clicking on a list item, the
+ provider can navigate to a particular task and see it's details.
  */
 
 public class FindNewTaskActivity extends AppCompatActivity {
@@ -87,7 +87,6 @@ public class FindNewTaskActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Object t = listView.getItemAtPosition(i);
                 selectedTask = (Task) t;
-                //selectedTask = taskList.get(i);
 
                 AlertDialog.Builder popUp = new AlertDialog.Builder(FindNewTaskActivity.this);
                 popUp.setMessage("Would you like to see details about '"  + selectedTask.getTaskName() + "' ?");
@@ -123,13 +122,9 @@ public class FindNewTaskActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         if ( menuItem.getItemId() == R.id.nav_myAccount ) {
                             startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         }
@@ -178,7 +173,6 @@ public class FindNewTaskActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                //TaskList tempList = new TaskList();
                 searchResults = new ArrayList<>();
 
                 for(int i = 0; i < taskList.size(); i++) {
@@ -186,7 +180,6 @@ public class FindNewTaskActivity extends AppCompatActivity {
                     Task temp = taskList.get(i);
 
                     if (temp.getTaskName().toLowerCase().contains(newText.toLowerCase())) {
-                        //tempList.addTask(temp);
                         searchResults.add(temp);
                     }
                 }
@@ -246,10 +239,8 @@ public class FindNewTaskActivity extends AppCompatActivity {
         }
 
         else if (requestCode == 1) {
-
             Bid bidPlaced = (Bid) i.getSerializableExtra("bidPlaced");
 
         }
-
     }
 }

@@ -31,7 +31,6 @@ delete the task or view the bidder's profile.
  */
 
 public class ViewBidDetailActivity extends AppCompatActivity {
-    private Button editTask;
     private Button deleteTask;
     private Button acceptBid;
     private Button declineBid;
@@ -169,7 +168,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
 
     public void bidderNameClicked(View view) {
 
-        //alter text of textview widget
         ElasticSearchUserController.GetUserTask getUser = new ElasticSearchUserController.GetUserTask();
         getUser.execute(bid.getTaskProvider());
         User user = new User();

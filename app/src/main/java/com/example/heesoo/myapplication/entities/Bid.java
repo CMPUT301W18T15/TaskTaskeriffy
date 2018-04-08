@@ -21,7 +21,7 @@ public class Bid implements Serializable {
     /**
      * <p>
      * A constructor that creates a new bid when given the following four parameters. The default value
-     * of a newly created bid's status is "Placed".
+     * of a newly created bid's status is "Placed" and the timeStamp is set to the current time.
      *</p>
      * <pre>
      * @parm taskProvider     a string that represents the unique username of the user than has bid on this task
@@ -177,11 +177,24 @@ public class Bid implements Serializable {
         this.bidPrice = bidPrice;
     }
 
+    /**
+     * <p>
+     *     This method returns a string value that represents the user that requested the task this
+     *     bid belongs to.
+     * </p>
+     * @return
+     */
     public String getTaskRequester() {
 
         return taskRequester;
     }
 
+    /**
+     * <p>
+     *     This method replaces the local value of this variable with the value passed to the method.
+     * </p>
+     * @param taskRequester string that represents the task requester
+     */
     public void setTaskRequester(String taskRequester) {
 
         this.taskRequester = taskRequester;

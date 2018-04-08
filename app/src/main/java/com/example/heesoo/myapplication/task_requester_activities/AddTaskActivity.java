@@ -53,10 +53,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private static int IMG_RESULT = 1;
     public String ImageDecode;
-    ImageView imageViewLoad;
-    Button LoadImage;
     Intent intent;
-    String[] FILE;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,8 +77,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 String name = taskName.getText().toString();
                 String description = taskDescription.getText().toString();
 
-
-                // Save all the fields
                     TaskConstraints taskConstraints = new TaskConstraints();
                     if (taskConstraints.checkEmpty(name, description)) {
                         if (taskConstraints.titleLength(name)) {
@@ -99,12 +94,9 @@ public class AddTaskActivity extends AppCompatActivity {
                                 }
                                 ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
                                 addTasksTask.execute(task);
-                                //Log.e("Task ID", task.getId());
-                                Log.d("ERROR", "ADDING TASK");
                                 MainActivity.user.addRequesterTasks(task);
 
                                 if (!checkNetwork(AddTaskActivity.this)) {
-                                    Log.d("ERROR", "ADDING OFFLINE TASK");
                                     MainActivity.needSync = true;
                                 }
 
@@ -116,7 +108,7 @@ public class AddTaskActivity extends AppCompatActivity {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                //Clear all the views
+
                                 taskName.getText().clear();
                                 taskDescription.getText().clear();
                                 new Handler().postDelayed(new Runnable() {

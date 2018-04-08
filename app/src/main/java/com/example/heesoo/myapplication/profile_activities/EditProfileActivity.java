@@ -22,10 +22,6 @@ This activity gives the user the option to edit their profile. The user can navi
  "Edit Profile" button which is embedded in the ViewProfileActivity, when they are viewing their own profile.
  */
 
-/**
- * Created by manuelakm on 2018-03-13.
- */
-
 public class EditProfileActivity extends AppCompatActivity {
 
     private EditText emailAddressEdit;
