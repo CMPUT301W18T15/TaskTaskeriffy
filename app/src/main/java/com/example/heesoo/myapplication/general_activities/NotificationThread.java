@@ -48,73 +48,86 @@ public class NotificationThread extends Thread {
         timeStamp = Calendar.getInstance();
         done = false;
 
-        while (!done) {
+        try {
 
-            ElasticSearchBidController.GetAllBids getAllBids = new ElasticSearchBidController.GetAllBids();
-            getAllBids.execute("");
+            while (!Thread.currentThread().interrupted()) {
 
-            allBids = new BidList();;
-            allBids.clear();
+                ElasticSearchBidController.GetAllBids getAllBids = new ElasticSearchBidController.GetAllBids();
+                getAllBids.execute("");
 
-            try {
-                allBids = getAllBids.get();
-            } catch (Exception e) {
-                Log.d("ERROR", "Oh no! Something went wrong while accessing the database");
-            }
+                allBids = new BidList();
+                ;
+                allBids.clear();
 
-            for (int i = 0; i < allBids.size(); i++) {
-                Bid bid = allBids.get(i);
+                try {
+                    allBids = getAllBids.get();
+                } catch (Exception e) {
+                    Log.d("ERROR", "Oh no! Something went wrong while accessing the database");
+                }
 
-                if (bid.getTaskRequester().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
+                for (int i = 0; i < allBids.size(); i++) {
+                    Bid bid = allBids.get(i);
 
-                    if (bid.getTimeStamp().after(timeStamp)) {
+                    if (bid.getTaskRequester().equals(SetPublicCurrentUser.getCurrentUser().getUsername())) {
 
-                        android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_FOREGROUND);
+                        if (bid.getTimeStamp().after(timeStamp)) {
+                            Log.d("ERROR","Bid has been placed");
 
-                        String channelID = "myChannelID";
-                        String channelName = "myChannelName";
-                        String channelDescription = "myChannelDescription";
+                            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_FOREGROUND);
 
-                        Intent intent = new Intent(context, TaskRequesterViewBiddedTasksActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+                            String channelID = "myChannelID";
+                            String channelName = "myChannelName";
+                            String channelDescription = "myChannelDescription";
 
-                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelID)
-                                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark_focused)
-                                .setContentTitle("TaskTaskeriffy")
-                                .setContentText("Someone bid on your '" + bid.getTaskName().toUpperCase() + "' task!")
-                                .setContentIntent(pendingIntent)
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                                .setAutoCancel(true);
+                            Intent intent = new Intent(context, TaskRequesterViewBiddedTasksActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelID)
+                                    .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark_focused)
+                                    .setContentTitle("TaskTaskeriffy")
+                                    .setContentText("Someone bid on your '" + bid.getTaskName().toUpperCase() + "' task!")
+                                    .setContentIntent(pendingIntent)
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                    .setAutoCancel(true);
 
-                            CharSequence name = channelName;
-                            String description = channelDescription;
-                            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-                            NotificationChannel channel = new NotificationChannel(channelID, name, importance);
-                            channel.setDescription(description);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                            myNotificationManager.createNotificationChannel(channel);
+                                CharSequence name = channelName;
+                                String description = channelDescription;
+                                int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                                NotificationChannel channel = new NotificationChannel(channelID, name, importance);
+                                channel.setDescription(description);
+
+                                myNotificationManager.createNotificationChannel(channel);
+                            }
+
+                            myNotificationManager.notify(01, mBuilder.build());
+
+                            android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+
                         }
-
-                        myNotificationManager.notify(01, mBuilder.build());
-
-                        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
-
                     }
+                }
+
+                timeStamp = Calendar.getInstance();
+
+                try {
+                    Thread.currentThread().sleep(60000);
+                } catch (Exception e) {
+
                 }
             }
 
-            timeStamp = Calendar.getInstance();
-
-            try {
-                Thread.currentThread().sleep(60000);
-            }
-            catch (Exception e) {
-
-            }
+                return;
         }
-
+        catch (Exception e) {
+        }
     }
+
+    public void cancel() {
+
+        interrupt();
+    }
+
 }

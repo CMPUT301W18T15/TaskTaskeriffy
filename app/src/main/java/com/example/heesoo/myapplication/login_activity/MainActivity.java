@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        monitorBidsThread.stop();
+        monitorBidsThread.cancel();
     }
 
     private boolean checkEmpty(String username,String password) {

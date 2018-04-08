@@ -139,7 +139,7 @@ public class TaskList implements Serializable {
         TaskList tl = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if ( (tasks.get(i).getStatus()).equals("Requested") && (tasks.get(i).getStatus()).equals("Bidded") ) {
+            if ( (tasks.get(i).getStatus()).equals("Requested") || (tasks.get(i).getStatus()).equals("Bidded") ) {
                 tl.addTask(tasks.get(i));
             }
         }
