@@ -3,6 +3,7 @@ package com.example.heesoo.myapplication.IntentTest;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -120,7 +121,9 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // TODO: Please TURN OFF the moblie data by hand, the robotium build-in method does not work as prospect
+
+        WifiManager wifiManager = (WifiManager)this.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager.setWifiEnabled(false);
         // set the mobile data status offline for testing
 
         //Add a task
@@ -159,8 +162,8 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
 
-        // TODO: Please TURN ON the moblie data by hand, the robotium build-in method does not work as prospect
-        // check whether the task is added or not
+        wifiManager.setWifiEnabled(true);
+
 
         solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("House and garden cleaning"));
@@ -175,40 +178,3 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
         solo.finishOpenedActivities();
     }
 }
-
-// 1. try to drag the menu bar down
-//        Display display = solo.getCurrentActivity().getWindowManager().getDefaultDisplay();
-//        int width = display.getWidth();
-//        int height = display.getHeight();
-//        solo.drag(width/2, width/2, height/100, height/2, 1);
-//        double LTExD = height/10.5;
-//        double LTEyD = width*3.5/6;
-//        float LTExF = (float) LTExD;
-//        float LTEyF = (float) LTEyD;
-//        solo.clickOnScreen(LTExF, LTEyF);
-
-// 2. try to use robotium method
-//        solo.setMobileData(false);
-
-// 3. try to use connectivityManager
-// https://stackoverflow.com/questions/14605607/how-to-call-setmobiledataenabled
-// https://github.com/linkedin/test-butler/blob/master/test-butler-app/src/main/java/com/linkedin/android/testbutler/ButlerService.java
-// https://stackoverflow.com/questions/27620976/android-instrumentation-test-offline-cases
-//    private void setMobileDataEnabled(Context context, boolean enabled) {
-//        try {
-//
-//            final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//            final Class conmanClass = Class.forName(conman.getClass().getName());
-//            final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
-//            iConnectivityManagerField.setAccessible(true);
-//            final Object iConnectivityManager = iConnectivityManagerField.get(conman);
-//            final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
-//            final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
-//            setMobileDataEnabledMethod.setAccessible(true);
-//
-//            setMobileDataEnabledMethod.invoke(iConnectivityManager, enabled);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
