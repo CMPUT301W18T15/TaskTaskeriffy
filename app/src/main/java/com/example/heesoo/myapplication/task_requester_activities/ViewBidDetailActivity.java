@@ -75,30 +75,6 @@ public class ViewBidDetailActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         checkNetwork(this);
-        deleteTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ElasticSearchTaskController.DeleteTask deleteTask = new ElasticSearchTaskController.DeleteTask();
-                deleteTask.execute(task);
-
-                BidList allBids = task.getBids();
-                for (int i = 0; i < allBids.size(); i++) {
-                    ElasticSearchBidController.DeleteBidTask deleteBidTask = new ElasticSearchBidController.DeleteBidTask();
-                    deleteBidTask.execute(allBids.get(i));
-                }
-                Toast.makeText(ViewBidDetailActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
-                Intent deleteTaskIntent = new Intent(getApplicationContext(), ViewRequestedTasksActivity.class);
-                deleteTaskIntent.putExtra("TaskDeleted", task);
-                setResult(Activity.RESULT_OK, deleteTaskIntent);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 1000);
-
-            }
-        });
-
 
         acceptBid.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -117,6 +93,9 @@ public class ViewBidDetailActivity extends AppCompatActivity {
                 task.addBid(bid);
                 task.acceptBid(bid.getTaskProvider());
                 Toast.makeText(getApplicationContext(),"Bid Accepted", Toast.LENGTH_SHORT).show();
+                Intent edited_task = new Intent(getApplicationContext(), ViewBidsOnTaskActivity.class);
+                edited_task.putExtra("TaskEdited", task);
+                setResult(Activity.RESULT_OK, edited_task);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -135,6 +114,9 @@ public class ViewBidDetailActivity extends AppCompatActivity {
                 editBid.execute(bid);
                 task.addBid(bid);
                 Toast.makeText(getApplicationContext(),"Bid Declined", Toast.LENGTH_SHORT).show();
+                Intent edited_task = new Intent(getApplicationContext(), ViewBidsOnTaskActivity.class);
+                edited_task.putExtra("TaskEdited", task);
+                setResult(Activity.RESULT_OK, edited_task);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

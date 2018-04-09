@@ -2,6 +2,7 @@ package com.example.heesoo.myapplication.task_requester_activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+import com.example.heesoo.myapplication.elastic_search_controllers.ElasticSearchUserController;
 import com.example.heesoo.myapplication.entities.Bid;
 import com.example.heesoo.myapplication.entities.BidList;
 import com.example.heesoo.myapplication.entities.Task;
@@ -48,7 +50,7 @@ public class ViewBidsOnTaskActivity extends AppCompatActivity {
 
                 bidinfo.putExtra("bid", bid);
                 bidinfo.putExtra("task", task);
-                startActivity(bidinfo);
+                startActivityForResult(bidinfo, 1);
             }
         });
     }
@@ -57,6 +59,7 @@ public class ViewBidsOnTaskActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         checkNetwork(this);
+
         bidList = new BidList();
         bidList = task.getBids();
 
@@ -72,5 +75,13 @@ public class ViewBidsOnTaskActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, bidNames);
         bidsView.setAdapter(adapter);
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent i) {
+        if (i != null && requestCode == 1) {
+            Task newTask = (Task) i.getSerializableExtra("TaskEdited");
+            task = newTask;
+
+        }
     }
 }
