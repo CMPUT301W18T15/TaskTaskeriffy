@@ -204,24 +204,24 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
     // https://stackoverflow.com/questions/14605607/how-to-call-setmobiledataenabled
     // https://github.com/linkedin/test-butler/blob/master/test-butler-app/src/main/java/com/linkedin/android/testbutler/ButlerService.java
     // https://stackoverflow.com/questions/27620976/android-instrumentation-test-offline-cases
-    private void setMobileDataEnabled(Context context, boolean enabled) {
-        try {
-
-            final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            final Class conmanClass = Class.forName(conman.getClass().getName());
-            final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
-            iConnectivityManagerField.setAccessible(true);
-            final Object iConnectivityManager = iConnectivityManagerField.get(conman);
-            final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
-            final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
-            setMobileDataEnabledMethod.setAccessible(true);
-
-            setMobileDataEnabledMethod.invoke(iConnectivityManager, enabled);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    private void setMobileDataEnabled(Context context, boolean enabled) {
+//        try {
+//
+//            final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//            final Class conmanClass = Class.forName(conman.getClass().getName());
+//            final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+//            iConnectivityManagerField.setAccessible(true);
+//            final Object iConnectivityManager = iConnectivityManagerField.get(conman);
+//            final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
+//            final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+//            setMobileDataEnabledMethod.setAccessible(true);
+//
+//            setMobileDataEnabledMethod.invoke(iConnectivityManager, enabled);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public void tearDown() throws Exception{
