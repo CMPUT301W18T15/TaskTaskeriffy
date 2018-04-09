@@ -97,8 +97,8 @@ public class DARequesterSeeAllTask extends ActivityInstrumentationTestCase2 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        task.addBid(bid);
         addBidsTask.execute(bid);
+        task.addBid(bid);
         task.acceptBid(bid.getTaskProvider());
     }
 

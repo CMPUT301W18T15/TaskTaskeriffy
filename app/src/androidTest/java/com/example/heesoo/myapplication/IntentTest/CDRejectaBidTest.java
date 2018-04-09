@@ -94,15 +94,14 @@ public class CDRejectaBidTest extends ActivityInstrumentationTestCase2 {
         Bid bid = new Bid("House and garden cleaning", "Square Feet: 2000, 3 floors, garden square feet: 200, address: 11111St, 99Ave, NW", 500f, "RiyaRiya", "KevinHP");
         ElasticSearchTaskController.AddTask addTasksTask = new ElasticSearchTaskController.AddTask();
         ElasticSearchBidController.AddBidsTask addBidsTask = new ElasticSearchBidController.AddBidsTask();
-        task.addBid(bid);
         addTasksTask.execute(task);
         try {
             Thread.currentThread().sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         addBidsTask.execute(bid);
+        task.addBid(bid);
     }
 
     public void setUp() throws Exception {
@@ -142,10 +141,10 @@ public class CDRejectaBidTest extends ActivityInstrumentationTestCase2 {
         solo.clickInList(0);
         solo.assertCurrentActivity("Wrong Activity", ViewBidDetailActivity.class);
 
-//        // decline bid
-//        // program will crash at this point
-//        solo.clickOnButton("declineBid");
-//        assertTrue(solo.searchText("Task Declined"));
+        // decline bid
+        // program will crash at this point
+        solo.clickOnButton("declineBid");
+        assertTrue(solo.searchText("Bid Declined"));
 
         try {
             Thread.currentThread().sleep(1000);

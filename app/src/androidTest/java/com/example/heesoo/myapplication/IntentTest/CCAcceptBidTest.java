@@ -96,8 +96,8 @@ public class CCAcceptBidTest extends ActivityInstrumentationTestCase2 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        task.addBid(bid);
         addBidsTask.execute(bid);
+        task.addBid(bid);
     }
 
     public void setUp() throws Exception{

@@ -93,9 +93,9 @@ public class DDRequesterSeeAssignedTask extends ActivityInstrumentationTestCase2
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        addBidsTask.execute(bid, bid2);
         task.addBid(bid);
         task2.addBid(bid2);
-        addBidsTask.execute(bid, bid2);
         task.acceptBid(bid.getTaskProvider());
     }
 
