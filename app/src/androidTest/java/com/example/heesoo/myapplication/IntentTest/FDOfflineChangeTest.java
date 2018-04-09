@@ -47,7 +47,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by echo on 2018-04-04.
- *
+ * User Story: 08.01.01
  */
 
 public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
@@ -114,34 +114,14 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
         assertTrue(solo.searchText("Logged In"));
     }
 
-
-
     public void testOfflineBehaviour (){
-
-
-        // turn off mobile data
-        //not working
-//
-//        ConnectivityManager dataManager=(ConnectivityManager)solo.getCurrentActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//        Method dataClass = ConnectivityManager.class.getDeclaredMethod(“setMobileDataEnabled”, boolean.class);
-//        dataClass.setAccessible(true);
-//        dataClass.invoke(dataManager, true);
-
-
-        // 1. try to drag the menu bar down
-//        Display display = solo.getCurrentActivity().getWindowManager().getDefaultDisplay();
-//        int width = display.getWidth();
-//        int height = display.getHeight();
-//        solo.drag(width/2, width/2, height/100, height/2, 1);
-//        double LTExD = height/10.5;
-//        double LTEyD = width*3.5/6;
-//        float LTExF = (float) LTExD;
-//        float LTEyF = (float) LTEyD;
-//        solo.clickOnScreen(LTExF, LTEyF);
-
-        // 2. try to use robotium method
-        solo.setMobileData(false);
+        try {
+            Thread.currentThread().sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // TODO: Please TURN OFF the moblie data by hand, the robotium build-in method does not work as prospect
+        // set the mobile data status offline for testing
 
         //Add a task
         // add new task page
@@ -153,10 +133,8 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.taskDescription), "Square Feet: 2000, 3 floors, address: 11111St, 99Ave, NW");
         solo.clickOnButton("Save");
 
-
         solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("House cleaning"));
-
 
         solo.clickInList(0);
         solo.assertCurrentActivity("Wrong Activity", ShowTaskDetailActivity.class);
@@ -176,19 +154,13 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
         solo.goBack();
 
         try {
-            Thread.currentThread().sleep(1000);
+            Thread.currentThread().sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
-        // then turn on the mobile data
-        // @ todo
-
-        //
-
-        // 2. try to use robotium method
-        solo.setMobileData(true);
+        // TODO: Please TURN ON the moblie data by hand, the robotium build-in method does not work as prospect
+        // check whether the task is added or not
 
         solo.assertCurrentActivity("Wrong Activity", ViewRequestedTasksActivity.class);
         assertTrue(solo.searchText("House and garden cleaning"));
@@ -199,11 +171,29 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
     }
+    public void tearDown() throws Exception{
+        solo.finishOpenedActivities();
+    }
+}
 
-    // 3. try to use connectivityManager
-    // https://stackoverflow.com/questions/14605607/how-to-call-setmobiledataenabled
-    // https://github.com/linkedin/test-butler/blob/master/test-butler-app/src/main/java/com/linkedin/android/testbutler/ButlerService.java
-    // https://stackoverflow.com/questions/27620976/android-instrumentation-test-offline-cases
+// 1. try to drag the menu bar down
+//        Display display = solo.getCurrentActivity().getWindowManager().getDefaultDisplay();
+//        int width = display.getWidth();
+//        int height = display.getHeight();
+//        solo.drag(width/2, width/2, height/100, height/2, 1);
+//        double LTExD = height/10.5;
+//        double LTEyD = width*3.5/6;
+//        float LTExF = (float) LTExD;
+//        float LTEyF = (float) LTEyD;
+//        solo.clickOnScreen(LTExF, LTEyF);
+
+// 2. try to use robotium method
+//        solo.setMobileData(false);
+
+// 3. try to use connectivityManager
+// https://stackoverflow.com/questions/14605607/how-to-call-setmobiledataenabled
+// https://github.com/linkedin/test-butler/blob/master/test-butler-app/src/main/java/com/linkedin/android/testbutler/ButlerService.java
+// https://stackoverflow.com/questions/27620976/android-instrumentation-test-offline-cases
 //    private void setMobileDataEnabled(Context context, boolean enabled) {
 //        try {
 //
@@ -222,9 +212,3 @@ public class FDOfflineChangeTest extends ActivityInstrumentationTestCase2 {
 //            e.printStackTrace();
 //        }
 //    }
-
-
-    public void tearDown() throws Exception{
-        solo.finishOpenedActivities();
-    }
-}
